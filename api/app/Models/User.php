@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstname', 'lastname', 'username', 'email', 'password', 'phone', 'statut', 'avatar', 'role_id',
+        'firstname', 'lastname', 'name', 'email', 'password', 'phone', 'statut', 'avatar', 'role_id',
     ];
 
 
@@ -41,9 +41,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function oauthAccessToken()
+    public function findForPassport($username)
     {
-        return $this->hasMany('\App\Models\OauthAccessToken');
+        return $this->where('name', $username)->first();
     }
     
 }
