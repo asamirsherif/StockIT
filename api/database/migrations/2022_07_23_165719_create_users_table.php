@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('phone', 192)->nullable();
             $table->integer('role_id')->nullable();
             $table->boolean('statut')->default(true);
+            $table->rememberToken();
             $table->timestamps(6);
             $table->softDeletes();
         });
