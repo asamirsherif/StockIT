@@ -49,41 +49,34 @@
     </li> -->
     <!--/ Language selection -->
 
-    <!-- User Dropdown -->
-    <li ngbDropdown class="nav-item dropdown-user">
-      <a
-        class="nav-link dropdown-toggle dropdown-user-link"
-        id="dropdown-user"
-        ngbDropdownToggle
-        id="navbarUserDropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        <div class="user-nav d-sm-flex d-none">
-          <span class="user-name font-weight-bolder">John Doe</span><span class="user-status">Sample</span>
-        </div>
-        <span class="avatar"
-          ><img
-            class="round"
-            src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
-            alt="avatar"
-            height="40"
-            width="40" /><span class="avatar-status-online"></span
-        ></span>
-      </a>
-      <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
-        <a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'user'" [class]="'mr-50'"></span> Profile</a
-        ><a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'mail'" [class]="'mr-50'"></span> Inbox</a
-        ><a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'check-square'" [class]="'mr-50'"></span> Task</a
-        ><a ngbDropdownItem [routerLink]="['/']"
-          ><span [data-feather]="'message-square'" [class]="'mr-50'"></span> Chats</a
-        >
-        <div class="dropdown-divider"></div>
-        <a ngbDropdownItem [routerLink]="['/pages/authentication/login-v2']"
-          ><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a
-        >
+<!-- User Dropdown -->
+<li ngbDropdown class="nav-item dropdown-user">
+  <a
+    class="nav-link dropdown-toggle dropdown-user-link"
+    id="dropdown-user"
+    ngbDropdownToggle
+    id="navbarUserDropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <ng-container *ngIf="this.currentUser">
+      <div class="user-nav d-sm-flex d-none">
+        <span class="user-name font-weight-bolder"
+          >{{ this.currentUser.firstName }} {{ this.currentUser.lastName }}</span
+        ><span class="user-status">{{ this.currentUser.role }}</span>
       </div>
-    </li>
-    <!--/ User Dropdown -->
+      <span class="avatar"
+        ><img
+          class="round"
+          src="assets/images/portrait/small/{{ this.currentUser.avatar }}"
+          alt="avatar"
+          height="40"
+          width="40"/><span class="avatar-status-online"></span
+      ></span>
+    </ng-container>
+  </a>
+</li>
+<!--/ User Dropdown -->
+
   </ul>
 </div>
