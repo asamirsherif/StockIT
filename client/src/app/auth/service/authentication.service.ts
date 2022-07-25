@@ -51,9 +51,9 @@ export class AuthenticationService {
    * @param password
    * @returns user
    */
-  login(email: string, password: string) {
+  login(username: string, password: string, client_id:number, client_secret:string, grant_type:string) {
     return this._http
-      .post<any>(`${environment.apiUrl}/users/authenticate`, { email, password })
+      .post<any>(`${environment.apiUrl}/oauth/token`, { username, password , client_id, client_secret, grant_type})
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response

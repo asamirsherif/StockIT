@@ -19,6 +19,9 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
+import {  ErrorInterceptor, JwtInterceptor } from 'app/auth/helpers'
+
 const appRoutes: Routes = [
   {
     path: 'pages',
@@ -62,6 +65,10 @@ const appRoutes: Routes = [
     SampleModule
   ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ]
 })
 export class AppModule {}
