@@ -45,5 +45,11 @@ class User extends Authenticatable
     {
         return $this->where('name', $username)->first();
     }
+
+    public function oauthAccessToken()
+    {
+        return $this->hasMany('\App\Models\OauthAccessToken');
+    }
+    
     
 }
