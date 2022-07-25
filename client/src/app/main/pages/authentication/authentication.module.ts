@@ -9,15 +9,29 @@ import { CoreCommonModule } from '@core/common.module';
 
 import { AuthLoginV2Component } from 'app/main/pages/authentication/auth-login-v2/auth-login-v2.component';
 
+import { SampleComponent } from 'app/main/sample/sample.component';
+import { HomeComponent } from 'app/main/sample/home.component';
+
 import { AuthGuard } from 'app/auth/helpers'
 import { Role } from 'app/auth/models'
+
+
 
 // routing
 const routes: Routes = [
   {
-    path: 'authentication/login-v2',
+    path: 'login',
     component: AuthLoginV2Component,
-    data: { animation: 'auth' },
+    data: { animation: 'auth' }
+  },
+  {
+    path: 'sample',
+    component: SampleComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
     canActivate: [AuthGuard]
   }
 ];

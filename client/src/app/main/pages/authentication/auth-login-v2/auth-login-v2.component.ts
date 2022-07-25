@@ -8,6 +8,7 @@ import { CoreConfigService } from '@core/services/config.service';
 
 import { first } from 'rxjs/operators'
 import { AuthenticationService } from 'app/auth/service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-auth-login-v2',
@@ -73,17 +74,15 @@ export class AuthLoginV2Component implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-
+    this.submitted = true
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-      return;
+      return
     }
-
     // Login
     this.loading = true
     this._authenticationService
-      .login(this.f.email.value, this.f.password.value)
+      .login(this.f.username.value, this.f.password.value, environment.client_id, environment.client_secret, environment.grant_type)
       .pipe(first())
       .subscribe(
         data => {
@@ -104,7 +103,7 @@ export class AuthLoginV2Component implements OnInit {
    */
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
 

@@ -20,7 +20,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
-import {  ErrorInterceptor, fakeBackendProvider, JwtInterceptor } from 'app/auth/helpers'
+import {  ErrorInterceptor, JwtInterceptor } from 'app/auth/helpers'
 
 const appRoutes: Routes = [
   {
@@ -68,8 +68,7 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class AppModule {}

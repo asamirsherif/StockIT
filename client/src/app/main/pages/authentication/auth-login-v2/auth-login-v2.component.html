@@ -34,20 +34,18 @@
 
         <form class="auth-login-form mt-2" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label class="form-label" for="login-email">Email</label>
+            <label class="form-label" for="login-username">UserName</label>
             <input
               type="text"
-              formControlName="email"
+              formControlName="username"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-              placeholder="admin@demo.com"
-              aria-describedby="login-email"
+              [ngClass]="{ 'is-invalid': submitted && f.usernameerrors }"
+              placeholder="username"
+              aria-describedby="login-username"
               autofocus=""
               tabindex="1"
             />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-              <div *ngIf="f.email.errors.required">Email is required</div>
-              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
             </div>
           </div>
           <div class="form-group">
