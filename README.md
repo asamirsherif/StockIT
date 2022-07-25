@@ -8,7 +8,7 @@ Using Laravel & Angular
 
 ### **1 - API**
 
-**(you must have PHP =<7.4 version in your machine)**
+**(you must have PHP >=7.4 version in your machine) - will be later upgraded**
 
 `1- Edit .env file with a working Database connection`
 
@@ -58,7 +58,7 @@ ng serve
 ```
 apiUrl: '{your_api_url}',
   client_id: {your_client_id},
-  client_secret: '{your_client_secret',
+  client_secret: '{your_client_secret}',
   grant_type: 'password'
 ```
 
