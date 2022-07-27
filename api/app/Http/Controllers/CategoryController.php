@@ -2,25 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
-use App\Http\Resources\CategoryCollection;
-use App\Http\Resources\CategoryResource;
+use App\Http\Resources\category\CategoryResource;
+use App\Http\Resources\category\CategoryCollection;
+use App\Http\Requests\Category\CategoryRequest;
 use App\Models\Category;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    use ResponseTrait;
+
+    private CategoryRepositoryInterface $categoryRepo;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepo)
+    {
+        $this->categoryRepo = $categoryRepo;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // 2 params => perPage & search
+        if ($request->filled('search')) {
+            $categories = $this->categoryRepo->multiSearch($request)
+            ->paginate($request->perPage);
+            $categories->appends(['search' => $request->search, 'perPage' => $request->perPage]);
+        } else
+            $categories = Category::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
 
-        // return CategoryResource::collection(Category::all());
+        return new CategoryCollection($categories);
 
-        return new CategoryCollection(Category::all());
     }
 
     /**
@@ -31,14 +49,22 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $categoryCreated = Category::create($request->all());
+        $created = $this->categoryRepo->create($request);
 
-        // dd($categoryCreated);
-
-        if($categoryCreated)
-            return new CategoryResource($categoryCreated);
+        if ($created)
+            return $this->succWithData(new CategoryResource($created));
         else
-            return "error in creating category";
+            return $this->errMsg("category not created!");
+
+        // ******************** //
+        // $categoryCreated = Category::create($request->all());
+
+        // // dd($categoryCreated);
+
+        // if($categoryCreated)
+        //     return new CategoryResource($categoryCreated);
+        // else
+        //     return "error in creating category";
     }
 
     /**
@@ -49,8 +75,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
-        return new CategoryResource($category);
+        return $this->categoryRepo->read($id);
+
+        // $category = Category::find($id);
+        // return new CategoryResource($category);
     }
 
     /**
@@ -62,11 +90,19 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
+
+        $updated = $this->categoryRepo->update($request, $id);
+        if ($updated)
+            return $this->succWithData(new CategoryResource($updated));
+        else
+            return $this->errMsg("category not updated!");
+
+
         // update db
-        $category = Category::find($id);
-        $category->update($request->all());
-        // return json
-        return new CategoryResource($category);
+        // $category = Category::find($id);
+        // $category->update($request->all());
+        // // return json
+        // return new CategoryResource($category);
     }
 
     /**
@@ -78,9 +114,14 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        $category->delete();
+        if(!$category)
+            return $this->errMsg('This category doesnt exist');
 
-        return "$category->name category deleted successfully";
+        $categoryDeleted = $this->categoryRepo->delete($id);
+        if($categoryDeleted)
+            return $this->succWithData(new CategoryResource($category), "category deleted successfully");
+        else
+            return $this->errMsg("category not deleted");
 
     }
 }

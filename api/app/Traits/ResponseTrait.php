@@ -32,7 +32,7 @@ trait ResponseTrait
 
     /**
      * when response is success msg with data
-     * @param array $data
+     * @param Resourse $data
      * @param String $msg
      * @return response
      */
