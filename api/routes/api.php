@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // category
 Route::apiResource('categories', 'App\Http\Controllers\CategoryController');
+
+// clients
+Route::apiResource('clients', 'App\Http\Controllers\ClientController');
