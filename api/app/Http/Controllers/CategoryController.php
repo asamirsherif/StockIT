@@ -75,7 +75,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return $this->categoryRepo->read($id);
+        $category = Category::find($id);
+        if(!$category)
+            return $this->errMsg('This category doesnt exist');
+        else
+            return $this->categoryRepo->read($id);
 
         // $category = Category::find($id);
         // return new CategoryResource($category);
