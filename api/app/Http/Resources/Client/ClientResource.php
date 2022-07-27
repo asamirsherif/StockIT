@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Client;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ClientResource extends JsonResource
 {
 
-    public static $wrap = false;
+    // public static $wrap = false;
 
     /**
      * Transform the resource into an array.

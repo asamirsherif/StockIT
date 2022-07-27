@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\category\CategoryResource;
-use App\Http\Resources\category\CategoryCollection;
+use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Category\CategoryCollection;
 use App\Http\Requests\Category\CategoryRequest;
 use App\Models\Category;
 use App\Repositories\Category\CategoryRepositoryInterface;
@@ -77,7 +77,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if(!$category)
-            return $this->errMsg('This category doesnt exist');
+            return $this->errMsg('This category doesn\'t exist');
         else
             return $this->categoryRepo->read($id);
 
@@ -119,7 +119,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if(!$category)
-            return $this->errMsg('This category doesnt exist');
+            return $this->errMsg('This category doesn\'t exist');
 
         $categoryDeleted = $this->categoryRepo->delete($id);
         if($categoryDeleted)

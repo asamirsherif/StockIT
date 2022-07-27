@@ -4,10 +4,13 @@ namespace App\Providers;
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
 use App\Repositories\Brand\BrandRepository;
 use App\Repositories\Brand\BrandRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Client\ClientRepository;
+use App\Repositories\Client\ClientRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppRepositoryProvider extends ServiceProvider
@@ -28,6 +31,11 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->when(CategoryController::class)
             ->needs(CategoryRepositoryInterface::class)
             ->give(CategoryRepository::class);
+
+        // client
+        $this->app->when(ClientController::class)
+            ->needs(ClientRepositoryInterface::class)
+            ->give(ClientRepository::class);
 
 
     }

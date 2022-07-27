@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Client;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ClientCollection extends ResourceCollection
 {
 
-    public static $wrap = false;
-    
+    // public static $wrap = false;
+
     /**
      * Transform the resource collection into an array.
      *

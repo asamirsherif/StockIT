@@ -2,23 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ClientRequest;
-use App\Http\Resources\ClientCollection;
-use App\Http\Resources\ClientResource;
+use App\Http\Requests\Client\ClientRequest;
+use App\Http\Resources\Client\ClientCollection;
+use App\Http\Resources\Client\ClientResource;
 use App\Models\Client;
+use App\Repositories\Client\ClientRepositoryInterface;
+use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+
+    use ResponseTrait;
+
+    private ClientRepositoryInterface $clientRepo;
+
+    public function __construct(ClientRepositoryInterface $clientRepo)
+    {
+        $this->clientRepo = $clientRepo;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->filled('search')) {
+            $clients = $this->clientRepo->multiSearch($request)
+            ->paginate($request->perPage);
+            $clients->appends(['search' => $request->search, 'perPage' => $request->perPage]);
+        } else
+            $clients = Client::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
+
+        return new ClientCollection($clients);
+
         // return new CategoryCollection(Category::all());
-        return new ClientCollection(Client::all());
+        // return new ClientCollection(Client::all());
     }
 
     /**
@@ -29,12 +50,21 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        $clientCreated = Client::create($request->all());
 
-        if($clientCreated)
-            return new ClientResource($clientCreated);
+        $clientCreated = $this->clientRepo->create($request);
+
+        if ($clientCreated)
+            return $this->succWithData(new ClientResource($clientCreated));
         else
-            return "error in creating client";
+            return $this->errMsg("client not created!");
+
+        //********************** */
+        // $clientCreated = Client::create($request->all());
+
+        // if($clientCreated)
+        //     return new ClientResource($clientCreated);
+        // else
+        //     return "error in creating client";
     }
 
     /**
@@ -46,7 +76,11 @@ class ClientController extends Controller
     public function show($id)
     {
         $client = Client::find($id);
-        return new ClientResource($client);
+
+        if(!$client)
+            return $this->errMsg('This client doesn\'t exist');
+        else
+            return $this->clientRepo->read($id);
     }
 
     /**
@@ -58,10 +92,11 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, $id)
     {
-        $client = Client::find($id);
-
-        $client->update($request->all());
-        return new ClientResource($client);
+        $clientUpdated = $this->clientRepo->update($request, $id);
+        if ($clientUpdated)
+        return $this->succWithData(new ClientResource($clientUpdated));
+        else
+        return $this->errMsg("client not updated!");
     }
 
     /**
@@ -73,8 +108,18 @@ class ClientController extends Controller
     public function destroy($id)
     {
         $client = Client::find($id);
-        $client->delete();
+        if(!$client)
+            return $this->errMsg('This client doesn\'t exist');
 
-        return "$client->name client deleted successfully";
+        $clientDeleted = $this->clientRepo->delete($id);
+        if($clientDeleted)
+            return $this->succWithData(new ClientResource($client), "client deleted successfully");
+        else
+            return $this->errMsg("client not deleted");
+
+        //******************** */
+        // $client = Client::find($id);
+        // $client->delete();
+        // return "$client->name client deleted successfully";
     }
 }
