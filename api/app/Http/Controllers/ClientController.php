@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRequest;
 use App\Http\Resources\ClientCollection;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
@@ -26,9 +27,14 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        //
+        $clientCreated = Client::create($request->all());
+
+        if($clientCreated)
+            return new ClientResource($clientCreated);
+        else
+            return "error in creating client";
     }
 
     /**
@@ -50,9 +56,12 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClientRequest $request, $id)
     {
-        //
+        $client = Client::find($id);
+
+        $client->update($request->all());
+        return new ClientResource($client);
     }
 
     /**
@@ -63,6 +72,9 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::find($id);
+        $client->delete();
+
+        return "$client->name client deleted successfully";
     }
 }
