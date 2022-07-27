@@ -3,8 +3,11 @@
 namespace App\Providers;
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\WarehouseController;
 use App\Repositories\Brand\BrandRepository;
 use App\Repositories\Brand\BrandRepositoryInterface;
+use App\Repositories\Warehouse\WarehouseRepository;
+use App\Repositories\Warehouse\WarehouseRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppRepositoryProvider extends ServiceProvider
@@ -21,7 +24,9 @@ class AppRepositoryProvider extends ServiceProvider
             ->needs(BrandRepositoryInterface::class)
             ->give(BrandRepository::class);
 
-            
+        $this->app->when(WarehouseController::class)
+            ->needs(WarehouseRepositoryInterface::class)
+            ->give(WarehouseRepository::class);
     }
 
     /**

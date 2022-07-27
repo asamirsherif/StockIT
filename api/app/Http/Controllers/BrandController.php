@@ -35,7 +35,7 @@ class BrandController extends Controller
                 ->paginate($request->perPage);
             $brands->appends(['search' => $request->search, 'perPage' => $request->perPage]);
         } else
-            $brands = Brand::paginate($request->perPage);
+            $brands = Brand::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
 
         return BrandResource::collection($brands);
     }
