@@ -33,10 +33,11 @@ class BrandController extends Controller
         if ($request->filled('search')) {
             $brands = $this->brandRepo->multiSearch($request)
                 ->paginate($request->perPage);
-            $brands->appends(['search' => $request->search, 'perPage' => $request->perPage]);
+            $brands->appends(['search' => $request->search]);
         } else
-            $brands = Brand::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
+            $brands = Brand::paginate($request->perPage);
 
+        $brands->appends(['perPage' => $request->perPage]);
         return BrandResource::collection($brands);
     }
 

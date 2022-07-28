@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\WarehouseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([], function () {
     Route::apiResource('brands', BrandController::class);
     Route::apiResource('warehouses', WarehouseController::class);
+    Route::apiResource("expensecategories",ExpenseCategoryController::class);
 });

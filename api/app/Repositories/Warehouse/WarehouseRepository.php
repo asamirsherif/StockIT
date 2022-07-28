@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class WarehouseRepository implements WarehouseRepositoryInterface
 {
-    use ImageTrait;
 
 
 
