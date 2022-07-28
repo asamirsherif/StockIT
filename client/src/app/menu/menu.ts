@@ -304,7 +304,7 @@ export const menu: CoreMenu[] = [
         title: 'System Settings',
         translate: 'System Settings',
         type: 'item',
-        url:'createquotation',
+        url:'system setting',
         icon: 'settings',
       },
       {
@@ -313,49 +313,49 @@ export const menu: CoreMenu[] = [
         translate: 'Group Permission',
         icon: 'key',
         type: 'item',
-        url: '#'
+        url: 'group permission'
       },{
         id: 'Warehouse',
         title: 'Warehouse',
         translate: 'Warehouse',
         icon: 'home',
         type: 'item',
-        url: '#'
+        url: 'warehouse'
       },{
         id: 'Category',
         title: 'Category',
         translate: 'Category',
         icon: 'file',
         type: 'item',
-        url: '#'
+        url: 'category'
       },{
         id: 'Brand',
         title: 'Brand',
         translate: 'Brand',
         icon: 'clipboard',
         type: 'item',
-        url: '#'
+        url: 'brand'
       },{
         id: 'Currency',
         title: 'Currency',
         translate: 'Currency',
         icon: 'dollar-sign',
         type: 'item',
-        url: '#'
+        url: 'currency'
       },{
         id: 'Unit',
         title: 'Unit',
         translate: 'Unit',
         icon: 'clipboard',
         type: 'item',
-        url: '#'
+        url: 'unit'
       },{
         id: 'Backup',
         title: 'Backup',
         translate: 'Backup',
         icon: 'shopping-bag',
         type: 'item',
-        url: '#'
+        url: 'backup'
       },
      
     ]
@@ -370,9 +370,40 @@ export const menu: CoreMenu[] = [
         id: 'Payments',
         title: 'Payments',
         translate: 'Payments',
-        type: 'item',
-        url:'createquotation',
+        type: 'collapsible',
         icon: 'credit-card',
+        children: [
+          {
+            id: 'Purchases',
+            title: 'Purchases',
+            translate: 'Purchases',
+            type: 'item',
+            url:'purchases',
+            icon: 'credit-card',
+          },
+          {
+            id: 'Sales',
+            title: 'Sales',
+            translate: 'Sales',
+            icon: 'credit-card',
+            type: 'item',
+            url: 'sales'
+          },{
+            id: 'Sales Return',
+            title: 'Sales Return',
+            translate: 'Sales Return',
+            icon: 'credit-card',
+            type: 'item',
+            url: 'sales return'
+          },{
+            id: 'Purchases Return',
+            title: 'Purchases Return',
+            translate: 'Purchases Return',
+            icon: 'credit-card',
+            type: 'item',
+            url: 'purchases return'
+          }
+        ]
       },
       {
         id: 'Profit And Loss',
@@ -380,49 +411,49 @@ export const menu: CoreMenu[] = [
         translate: 'Profit And Loss',
         icon: 'eye',
         type: 'item',
-        url: '#'
+        url: 'profit and loss'
       },{
         id: 'Product Quantity Alerts',
         title: 'Product Quantity Alerts',
         translate: 'Product Quantity Alerts',
         icon: 'credit-card',
         type: 'item',
-        url: '#'
+        url: 'product quantity alerts'
       },{
         id: 'Warehouse Report',
         title: 'Warehouse Report',
         translate: 'Warehouse Report',
         icon: 'slash',
         type: 'item',
-        url: '#'
+        url: 'warehouse report'
       },{
         id: 'Sale Report',
         title: 'Sale Report',
         translate: 'Sale Report',
         icon: 'trending-up',
         type: 'item',
-        url: '#'
+        url: 'sale report'
       },{
         id: 'Purchase Report',
         title: 'Purchase Report',
         translate: 'Purchase Report',
         icon: 'bar-chart',
         type: 'item',
-        url: '#'
+        url: 'purchase report'
       },{
         id: 'Customer Report',
         title: 'Customer Report',
         translate: 'Customer Report',
         icon: 'bar-chart',
         type: 'item',
-        url: '#'
+        url: 'customer report'
       },{
         id: 'Suplplier Report',
         title: 'Suplplier Report',
         translate: 'Suplplier Report',
         icon: 'slash',
         type: 'item',
-        url: '#'
+        url: 'suplplier report'
       },
      
     ]
@@ -432,6 +463,6 @@ export const menu: CoreMenu[] = [
     translate: 'Doc',
     type: 'item',
     icon: 'file-text',
-    url: '#'
+    url: 'doc'
   },
 ]
