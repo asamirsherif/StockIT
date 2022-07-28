@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstname', 'lastname', 'name', 'email', 'password', 'phone', 'statut', 'avatar', 'role_id',
+        'firstname', 'lastname', 'username', 'email', 'password', 'phone', 'status', 'avatar', 'role_id',
     ];
 
 
@@ -43,12 +43,30 @@ class User extends Authenticatable
 
     public function findForPassport($username)
     {
-        return $this->where('name', $username)->first();
+        return $this->where('username', $username)->first();
     }
 
     public function oauthAccessToken()
     {
         return $this->hasMany('\App\Models\OauthAccessToken');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function assignRole(Role $role)
+    {
+        return $this->roles()->save($role);
+    }
+
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+        return !!$role->intersect($this->roles)->count();
     }
     
     
