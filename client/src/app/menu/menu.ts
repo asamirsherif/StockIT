@@ -63,7 +63,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Adjustment',
         translate: 'Create Adjustment',
         type: 'item',
-        url:'createproduct',
+        url:'createadjustment',
         icon: 'file',
       },
       {
@@ -72,7 +72,7 @@ export const menu: CoreMenu[] = [
         translate: 'Adjustment List',
         icon: 'align-justify',
         type: 'item',
-        url: '#'
+        url: 'listadjustment'
       },
      
     ]
@@ -88,7 +88,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Transfer',
         translate: 'Create Transfer',
         type: 'item',
-        url:'createproduct',
+        url:'#',
         icon: 'file',
       },
       {
@@ -114,7 +114,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Expenses',
         translate: 'Create Expenses',
         type: 'item',
-        url:'createexpenses',
+        url:'#',
         icon: 'file',
       },
       {

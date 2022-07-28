@@ -23,7 +23,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import {  ErrorInterceptor, JwtInterceptor } from 'app/auth/helpers';
 import { CreateproductComponent } from './main/products/createproduct/createproduct.component';
 import { ProductlistComponent } from './main/products/productlist/productlist.component';
-import { PrintbarcodeComponent } from './main/products/printbarcode/printbarcode.component'
+import { PrintbarcodeComponent } from './main/products/printbarcode/printbarcode.component';
+import { CreateadjustmentComponent } from './main/Adjustment/createadjustment/createadjustment.component';
+import { ListadjustmentComponent } from './main/Adjustment/listadjustment/listadjustment.component'
 
 const appRoutes: Routes = [
   {
@@ -43,6 +45,12 @@ const appRoutes: Routes = [
   },{
     path: 'printbarcode',
     loadChildren: () => import('./main/products/printbarcode/printbarcode.module').then(m => m.CreateproductModule)
+  },{
+    path: 'createadjustment',
+    loadChildren: () => import('./main/Adjustment/createadjustment/createadjustment.module').then(m => m.CreateadjustmentModule)
+  },{
+    path: 'listadjustment',
+    loadChildren: () => import('./main/Adjustment/listadjustment/listadjustment.module').then(m => m.ListadjustmentModule)
   },
   {
     path: '**',
