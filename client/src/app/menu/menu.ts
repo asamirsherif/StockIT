@@ -88,7 +88,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Transfer',
         translate: 'Create Transfer',
         type: 'item',
-        url:'#',
+        url:'createtransfer',
         icon: 'file',
       },
       {
@@ -97,7 +97,7 @@ export const menu: CoreMenu[] = [
         translate: 'Transfer List',
         icon: 'align-justify',
         type: 'item',
-        url: '#'
+        url: 'transferlist'
       },
      
     ]
@@ -114,7 +114,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Expenses',
         translate: 'Create Expenses',
         type: 'item',
-        url:'#',
+        url:'createexpenses',
         icon: 'file',
       },
       {
@@ -123,7 +123,7 @@ export const menu: CoreMenu[] = [
         translate: 'Expenses List',
         icon: 'align-justify',
         type: 'item',
-        url: '#'
+        url: 'expenseslist'
       },
       {
         id: 'Expenses Category',
@@ -147,7 +147,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Quotations',
         translate: 'Create Quotations',
         type: 'item',
-        url:'createquotation',
+        url:'createquotations',
         icon: 'file',
       },
       {
@@ -156,7 +156,7 @@ export const menu: CoreMenu[] = [
         translate: 'Quotations List',
         icon: 'align-justify',
         type: 'item',
-        url: '#'
+        url: 'quotationslist'
       },
      
     ]
@@ -172,7 +172,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Purchases',
         translate: 'Create Purchases',
         type: 'item',
-        url:'createquotation',
+        url:'createquotations',
         icon: 'file',
       },
       {
@@ -181,7 +181,7 @@ export const menu: CoreMenu[] = [
         translate: 'Purchases List',
         icon: 'align-justify',
         type: 'item',
-        url: '#'
+        url: 'purchaseslist'
       },
      
     ]
@@ -197,7 +197,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Sales',
         translate: 'Create Sales',
         type: 'item',
-        url:'createquotation',
+        url:'createsales',
         icon: 'file',
       },
       {
@@ -206,7 +206,7 @@ export const menu: CoreMenu[] = [
         translate: 'Sales List',
         icon: 'align-justify',
         type: 'item',
-        url: '#'
+        url: 'saleslist'
       },
      
     ]
@@ -222,7 +222,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Return',
         translate: 'Create Return',
         type: 'item',
-        url:'createquotation',
+        url:'createreturn',
         icon: 'file',
       },
       {
@@ -231,7 +231,7 @@ export const menu: CoreMenu[] = [
         translate: 'Return List',
         icon: 'align-justify',
         type: 'item',
-        url: '#'
+        url: 'returnlist'
       },
      
     ]
@@ -247,7 +247,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Return',
         translate: 'Create Return',
         type: 'item',
-        url:'createquotation',
+        url:'createreturns',
         icon: 'file',
       },
       {
@@ -256,7 +256,7 @@ export const menu: CoreMenu[] = [
         translate: 'Return List',
         icon: 'align-justify',
         type: 'item',
-        url: '#'
+        url: 'returnslist'
       },
      
     ]
@@ -268,11 +268,11 @@ export const menu: CoreMenu[] = [
     icon: 'users',
     children: [
       {
-        id: 'Create List',
-        title: 'Create List',
-        translate: 'Create List',
+        id: 'Customer List',
+        title: 'Customer List',
+        translate: 'Customer List',
         type: 'item',
-        url:'createquotation',
+        url:'customerlist',
         icon: 'user',
       },
       {
@@ -281,14 +281,14 @@ export const menu: CoreMenu[] = [
         translate: 'Supplier List',
         icon: 'user',
         type: 'item',
-        url: '#',
+        url: 'supplierlist',
       },{
         id: 'User List',
         title: 'User List',
         translate: 'User List',
         icon: 'user',
         type: 'item',
-        url: '#',
+        url: 'userlist',
       },
      
     ]

@@ -44,7 +44,25 @@ import { CategoryComponent } from './main/settings/category/category.component';
 import { BrandComponent } from './main/settings/brand/brand.component';
 import { CurrencyComponent } from './main/settings/currency/currency.component';
 import { UnitComponent } from './main/settings/unit/unit.component';
-import { BackupComponent } from './main/settings/backup/backup.component'
+import { BackupComponent } from './main/settings/backup/backup.component';
+import { CreatetransferComponent } from './main/transfer/createtransfer/createtransfer.component';
+import { TransferlistComponent } from './main/transfer/transferlist/transferlist.component';
+import { CreateexpensesComponent } from './main/expenses/createexpenses/createexpenses.component';
+import { ExpenseslistComponent } from './main/expenses/expenseslist/expenseslist.component';
+import { ExpensecategoryComponent } from './main/expenses/expensecategory/expensecategory.component';
+import { CreatequotationsComponent } from './main/quotations/createquotations/createquotations.component';
+import { QuotationslistComponent } from './main/quotations/quotationslist/quotationslist.component';
+import { CreatepurchasesComponent } from './main/Purchases/createpurchases/createpurchases.component';
+import { PurchaseslistComponent } from './main/Purchases/purchaseslist/purchaseslist.component';
+import { CreatesalesComponent } from './main/sales/createsales/createsales.component';
+import { SaleslistComponent } from './main/sales/saleslist/saleslist.component';
+import { CreatereturnComponent } from './main/salesReturn/createreturn/createreturn.component';
+import { ReturnlistComponent } from './main/salesReturn/returnlist/returnlist.component';
+import { CreatereturnsComponent } from './main/purchasesReturn/createreturns/createreturns.component';
+import { ReturnslistComponent } from './main/purchasesReturn/returnslist/returnslist.component';
+import { CustomerlistComponent } from './main/people/customerlist/customerlist.component';
+import { SupplierlistComponent } from './main/people/supplierlist/supplierlist.component';
+import { UserlistComponent } from './main/people/userlist/userlist.component'
 
 const appRoutes: Routes = [
   {
@@ -127,6 +145,79 @@ const appRoutes: Routes = [
   },{
     path: 'backup',
     loadChildren: () => import('./main/settings/backup/backup.module').then(m => m.BackupModule)
+  },
+  {
+    path: 'createtransfer',
+    loadChildren: () => import('./main/transfer/createtransfer/createtransfer.module').then(m => m.CreatetransferModule)
+  },
+  {
+    path: 'transferlist',
+    loadChildren: () => import('./main/transfer/transferlist/transferlist.module').then(m => m.TransferlistModule)
+  },
+  {
+    path: 'createexpenses',
+    loadChildren: () => import('./main/expenses/createexpenses/createexpenses.module').then(m => m.CreateexpensesModule )
+      
+  },
+  {
+    path: 'expenseslist',
+    loadChildren: () => import('./main/expenses/expenseslist/expenseslist.module').then(m => m.ExpenseslistModule)
+  },
+  {
+    path: 'expensescategory',
+    loadChildren: () => import('./main/expenses/expensecategory/expensescategory.module').then(m => m.ExpensecategoryModule)
+  },
+  {
+    path: 'createquotations',
+    loadChildren: () => import('./main/quotations/createquotations/createquotations.module').then(m => m.CreatequotationsModule)
+  },
+  {
+    path: 'quotationslist',
+    loadChildren: () => import('./main/quotations/quotationslist/quotationslist.module').then(m => m.QuotationslistModule)
+  },
+  {
+    path: 'createpusrchases',
+    loadChildren: () => import('./main/Purchases/createpurchases/createpurchases.module').then(m => m.CreatepurchasesModule)
+  },
+  {
+    path: 'purchaseslist',
+    loadChildren: () => import('./main/Purchases/purchaseslist/purchaseslist.module').then(m => m.PurchaseslistModule)
+  },
+  {
+    path: 'createsales',
+    loadChildren: () => import('./main/sales/createsales/createsales.module').then(m => m.CreatesalesModule)
+  },
+  {
+    path: 'saleslist',
+    loadChildren: () => import('./main/sales/saleslist/saleslist.module').then(m => m.SaleslistModule)
+  },
+  {
+    path: 'createreturn',
+    loadChildren: () => import('./main/salesReturn/createreturn/createreturn.module').then(m => m.CreatereturnModule)
+  },
+  {
+    path: 'returnlist',
+    loadChildren: () => import('./main/salesReturn/returnlist/returnlist.module').then(m => m.ReturnlistModule)
+  },
+  {
+    path: 'createreturns',
+    loadChildren: () => import('./main/purchasesReturn/createreturns/createreturns.module').then(m => m.CreatereturnsModule)
+  },
+  {
+    path: 'returnslist',
+    loadChildren: () => import('./main/purchasesReturn/returnslist/returnslist.module').then(m => m.ReturnslistModule)
+  },
+  {
+    path: 'customerlist',
+    loadChildren: () => import('./main/people/customerlist/customerlist.module').then(m => m.CustomerlistModule)
+  },
+  {
+    path: 'supplierlist',
+    loadChildren: () => import('./main/people/supplierlist/supplierlist.module').then(m => m.SupplierlistModule)
+  },
+  {
+    path: 'userlist',
+    loadChildren: () => import('./main/people/userlist/userlist.module').then(m => m.UserlistModule)
   },
   {
     path: '**',
