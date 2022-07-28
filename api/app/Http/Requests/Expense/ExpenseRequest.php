@@ -25,10 +25,10 @@ class ExpenseRequest extends FormRequest
     {
         return [
             'date' => 'required|date',
-            'warehouse_id' => 'required',
-            'expense_category_id' => 'required',
+            'warehouse_id' => 'required|integer',
+            'expense_category_id' => 'required|integer',
             'details' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|numeric',
         ];
     }
 }

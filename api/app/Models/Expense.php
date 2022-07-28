@@ -13,8 +13,33 @@ class Expense extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $casts = [
+        'user_id' => 'integer',
+        'expense_category_id' => 'integer',
+        'warehouse_id' => 'integer',
+        'amount' => 'double',
+    ];
+
+
+    //for filter
     public function scopeFilter(Builder $builder, Request $request)
     {
         return (new ExpenseFilter($request))->filter($builder);
+    }
+
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
+
+    public function expense_category()
+    {
+        return $this->belongsTo(ExpenseCategory::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -8,13 +8,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ExpenseCategory extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = "expense_categories";
 
-    protected $fillable = [
-        "user_id","name","description"
+    protected $casts = [
+        'user_id' => 'integer',
     ];
 
-    
+
+    protected $fillable = [
+        "user_id", "name", "description"
+    ];
+
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

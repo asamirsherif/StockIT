@@ -20,7 +20,7 @@ class ExpenseResource extends JsonResource
             "ref" => $this->Ref,
             "details" => $this->details,
             "amount" => $this->amount,
-            "user_id" => $this->user_id,
+            "user_id" => $this->user->name,
             "expense_category_id" => $this->expense_category_id,
             "warehouse_id" => $this->warehouse_id
         ];

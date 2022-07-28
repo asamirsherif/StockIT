@@ -76,6 +76,8 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, $id)
     {
+        if (!$this->brandRepo->read($id))
+            return $this->errMsg("This brand dose not exist!");
         $updated = $this->brandRepo->update($request, $id);
         if ($updated)
             return $this->succWithData(new BrandResource($updated));

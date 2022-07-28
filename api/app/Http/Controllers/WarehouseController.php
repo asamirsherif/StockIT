@@ -58,12 +58,16 @@ class WarehouseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Warehouse  $warehouse
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Warehouse $warehouse)
+    public function show(int $id)
     {
-        //
+        $warehouse = $this->warehouseRepo->read($id);
+        if ($warehouse)
+            return $this->succWithData(new WarehouseResource($warehouse));
+        else
+            return $this->errMsg("this warehouse does not exist");
     }
 
     /**

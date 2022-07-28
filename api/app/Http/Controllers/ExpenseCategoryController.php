@@ -58,12 +58,16 @@ class ExpenseCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ExpenseCategory  $expenseCategory
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ExpenseCategory $expenseCategory)
+    public function show(int $id)
     {
-        //
+        $expenseCategory = $this->expCatRepo->read($id);
+        if ($expenseCategory)
+            return $this->succWithData(new ExpenseCategoryResource($expenseCategory));
+        else
+            return $this->errMsg("this Expesnse Category dose not exist");
     }
 
     /**
@@ -74,6 +78,8 @@ class ExpenseCategoryController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!$this->expCatRepo->read($id))
+            return $this->errMsg("this Expense category does not exist!");
         $updated = $this->expCatRepo->update($request, $id);
         if ($updated)
             return $this->succWithData(new ExpenseCategoryResource($updated), "Expense category updated");
