@@ -14,6 +14,9 @@ import { HomeComponent } from 'app/main/sample/home.component';
 
 import { AuthGuard } from 'app/auth/helpers'
 import { Role } from 'app/auth/models'
+import { CreateproductComponent } from 'app/main/products/createproduct/createproduct.component';
+import { PrintbarcodeComponent } from 'app/main/products/printbarcode/printbarcode.component';
+import { ProductlistComponent } from 'app/main/products/productlist/productlist.component';
 
 
 
@@ -27,6 +30,18 @@ const routes: Routes = [
   {
     path: 'sample',
     component: SampleComponent,
+    canActivate: [AuthGuard]
+  },{
+    path: 'createproduct',
+    component: CreateproductComponent,
+    canActivate: [AuthGuard]
+  },{
+    path: 'printbarcode',
+    component: PrintbarcodeComponent,
+    canActivate: [AuthGuard]
+  },{
+    path: 'productlist',
+    component: ProductlistComponent,
     canActivate: [AuthGuard]
   },
   {

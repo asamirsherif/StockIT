@@ -20,7 +20,10 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
-import {  ErrorInterceptor, JwtInterceptor } from 'app/auth/helpers'
+import {  ErrorInterceptor, JwtInterceptor } from 'app/auth/helpers';
+import { CreateproductComponent } from './main/products/createproduct/createproduct.component';
+import { ProductlistComponent } from './main/products/productlist/productlist.component';
+import { PrintbarcodeComponent } from './main/products/printbarcode/printbarcode.component'
 
 const appRoutes: Routes = [
   {
@@ -31,6 +34,15 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+  },{
+    path: 'createproduct',
+    loadChildren: () => import('./main/products/createproduct/createproduct.module').then(m => m.CreateproductModule)
+  },{
+    path: 'productlist',
+    loadChildren: () => import('./main/products/productlist/productlist.module').then(m => m.CreateproductModule)
+  },{
+    path: 'printbarcode',
+    loadChildren: () => import('./main/products/printbarcode/printbarcode.module').then(m => m.CreateproductModule)
   },
   {
     path: '**',
