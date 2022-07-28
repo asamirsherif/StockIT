@@ -5,12 +5,15 @@ namespace App\Providers;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\UnitController;
 use App\Repositories\Brand\BrandRepository;
 use App\Repositories\Brand\BrandRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Client\ClientRepository;
 use App\Repositories\Client\ClientRepositoryInterface;
+use App\Repositories\Unit\UnitRepository;
+use App\Repositories\Unit\UnitRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppRepositoryProvider extends ServiceProvider
@@ -36,6 +39,11 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->when(ClientController::class)
             ->needs(ClientRepositoryInterface::class)
             ->give(ClientRepository::class);
+
+        // unit
+        $this->app->when(UnitController::class)
+            ->needs(UnitRepositoryInterface::class)
+            ->give(UnitRepository::class);
 
 
     }

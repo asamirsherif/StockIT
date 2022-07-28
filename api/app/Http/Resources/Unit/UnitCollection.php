@@ -14,6 +14,8 @@ class UnitCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'units' => $this->collection
+        ];
     }
 }

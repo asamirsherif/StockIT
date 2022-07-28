@@ -25,6 +25,9 @@ Route::apiResource('categories', 'App\Http\Controllers\CategoryController');
 // clients
 Route::apiResource('clients', 'App\Http\Controllers\ClientController');
 
+// units
+Route::apiResource('units', 'App\Http\Controllers\UnitController');
+
 
 Route::group([], function () {
     Route::apiResource('brands', BrandController::class);

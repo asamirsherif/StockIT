@@ -13,7 +13,7 @@ class UnitRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UnitRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required','unique:units,name', 'string', 'min:3'],
+            'ShortName' => ['required', 'unique:units,ShortName', 'string'],
+            'base_unit' => ['string'],
+            'operator' => ['required'],
+            'operator_value' => ['required', 'numeric'],
         ];
     }
 }
