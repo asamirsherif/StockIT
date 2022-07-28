@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\WarehouseController;
 use App\Repositories\Brand\BrandRepository;
 use App\Repositories\Brand\BrandRepositoryInterface;
+use App\Repositories\Expense\ExpenseRepository;
+use App\Repositories\Expense\ExpenseRepositoryInterface;
 use App\Repositories\ExpenseCategory\ExpenseCategoryRepository;
 use App\Repositories\ExpenseCategory\ExpenseCategoryRepositoryInterface;
 use App\Repositories\Warehouse\WarehouseRepository;
@@ -36,6 +39,11 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->when(ExpenseCategoryController::class)
             ->needs(ExpenseCategoryRepositoryInterface::class)
             ->give(ExpenseCategoryRepository::class);
+
+        //for Expense
+        $this->app->when(ExpenseController::class)
+            ->needs(ExpenseRepositoryInterface::class)
+            ->give(ExpenseRepository::class);
     }
 
     /**
