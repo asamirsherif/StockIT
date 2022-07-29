@@ -25,7 +25,7 @@ class CreateQuotationsTable extends Migration
             $table->double('discount')->nullable()->default(0);
             $table->double('shipping')->nullable()->default(0);
             $table->double('GrandTotal');
-            $table->string('statut', 192);
+            $table->string('status', 192);
             $table->text('notes')->nullable();
             $table->timestamps(6);
             $table->softDeletes();

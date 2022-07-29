@@ -25,7 +25,9 @@
       <li
         core-menu-vertical-item
         [item]="item"
-        *ngIf="item.type == 'item'"
+        *ngIf="
+          item.type == 'item' && (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
+        "
         [ngClass]="{ disabled: item.disabled === true }"
         [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
         [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
@@ -33,7 +35,15 @@
         <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
       </li>
       <!-- collapsible -->
-      <li core-menu-vertical-collapsible *ngIf="item.type == 'collapsible'" [item]="item" class="nav-item has-sub"></li>
+      <li
+        core-menu-vertical-collapsible
+        *ngIf="
+          item.type == 'collapsible' &&
+          (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
+        "
+        [item]="item"
+        class="nav-item has-sub"
+      ></li>
     </ng-container>
   </ul>
 </ng-container>
