@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\CurrencyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -51,4 +52,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource("expensecategories", ExpenseCategoryController::class);
     Route::resource("expenses", ExpenseController::class);
 
+    Route::resource('currencies', CurrencyController::class);
+
 });
+

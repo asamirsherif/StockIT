@@ -14,6 +14,9 @@ use App\Repositories\ExpenseCategory\ExpenseCategoryRepository;
 use App\Repositories\ExpenseCategory\ExpenseCategoryRepositoryInterface;
 use App\Repositories\Warehouse\WarehouseRepository;
 use App\Repositories\Warehouse\WarehouseRepositoryInterface;
+use App\Http\Controllers\CurrencyController;
+use App\Repositories\Currency\CurrencyRepository;
+use App\Repositories\Currency\CurrencyRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppRepositoryProvider extends ServiceProvider
@@ -30,6 +33,7 @@ class AppRepositoryProvider extends ServiceProvider
             ->needs(BrandRepositoryInterface::class)
             ->give(BrandRepository::class);
 
+
         //for warehouse
         $this->app->when(WarehouseController::class)
             ->needs(WarehouseRepositoryInterface::class)
@@ -44,6 +48,12 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->when(ExpenseController::class)
             ->needs(ExpenseRepositoryInterface::class)
             ->give(ExpenseRepository::class);
+        // for currency
+        $this->app->when(CurrencyController::class)
+            ->needs(CurrencyRepositoryInterface::class)
+            ->give(CurrencyRepository::class);
+
+
     }
 
     /**
