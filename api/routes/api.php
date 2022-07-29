@@ -29,6 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     // -------------- USERS ---------------- \\
@@ -53,6 +54,12 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource("expenses", ExpenseController::class);
 
     Route::resource('currencies', CurrencyController::class);
+
+    // category
+    Route::reesource('categories', 'App\Http\Controllers\CategoryController');
+
+    // clients
+    Route::reesource('clients', 'App\Http\Controllers\ClientController');
 
 });
 
