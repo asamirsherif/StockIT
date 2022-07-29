@@ -20,7 +20,7 @@ class Is_Active
         $response = $next($request);
         //If the status is not approved redirect to login 
         if(Auth::check() && !Auth::user()->status){
-            return redirect('/api/logout')->with('erro_login', 'Your User is no longer active, Contact the admin');
+            return redirect('/api/logout')->with('error_login', 'Your User is no longer active, Contact the admin');
         }
         return $response;
     }
