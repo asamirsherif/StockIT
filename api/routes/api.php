@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\CurrencyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -24,6 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     // -------------- USERS ---------------- \\
@@ -42,5 +48,18 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get('getRoleswithoutpaginate', [PermissionController::Class, 'getRoleswithoutpaginate']);
     Route::post('roles/delete/by_selection', [PermissionController::Class,'delete_by_selection']);
 
+    Route::resource('brands', BrandController::class);
+    Route::resource('warehouses', WarehouseController::class);
+    Route::resource("expensecategories", ExpenseCategoryController::class);
+    Route::resource("expenses", ExpenseController::class);
+
+    Route::resource('currencies', CurrencyController::class);
+
+    // category
+    Route::reesource('categories', 'App\Http\Controllers\CategoryController');
+
+    // clients
+    Route::reesource('clients', 'App\Http\Controllers\ClientController');
 
 });
+
