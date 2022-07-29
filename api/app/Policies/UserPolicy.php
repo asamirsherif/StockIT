@@ -28,7 +28,7 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user)
     {
         $permission = Permission::where('name', 'users_view')->first();
         return $user->hasRole($permission->roles);
