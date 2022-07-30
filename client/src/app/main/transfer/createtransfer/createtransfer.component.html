@@ -1,1 +1,129 @@
-<p>createtransfer works!</p>
+<body>
+    <h2>Create Transfer
+    </h2>
+    <hr>
+    <div class="col-md-12 row">
+       
+        <div class="form-group col-md-4">
+            <label class="col-md-4 control-label " for="category">Date</label>
+            <div class="col-md-12 ">
+                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label " for="category">Form Warehouse</label>
+            <div class="col-md-12 ">
+                <select class="form-select col-md-12 " aria-label="Default select example">
+                    <option selected>Choose Warehouse</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label " for="category">To Warehouse</label>
+            <div class="col-md-12 ">
+                <select class="form-select col-md-12 " aria-label="Default select example">
+                    <option selected>Choose Warehouse</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label class="col-md-4 control-label" for="product">Product</label>
+        <div class="col-md-12 row">
+            <span class="switch-icon-left col-md-1 icon "><i data-feather="search"></i></span>
+            <input class="form-control form-control col-md-11" type="text" placeholder="Search Product by name"
+                aria-label="Search">
+        </div>
+    </div>
+    <table class="table col-md-11">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Net Unit Code </th>
+                <th scope="col">Stock</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Tax</th>
+                <th scope="col">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table col-md-4  tab">
+        <tbody class="table-group-divider">
+            <tr>
+                <td>Order Tax</td>
+                <td>(%0.00)ريال</td>
+            </tr>
+            <tr>
+                <td>Discount</td>
+                <td>0.00 ريال</td>
+            </tr>
+            <tr>
+                <td>Shipping</td>
+                <td>0.00 ريال</td>
+            </tr>
+            <tr>
+                <td>Grand Total</td>
+                <td>0.00 ريال</td>
+            </tr>
+        </tbody>
+    </table>
+<div class="col-md-12 row">
+    <div class="form-group col-md-4">
+        <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
+        <div class="col-md-12">
+            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
+                type="text">
+        </div>
+    </div>
+
+    <div class="form-group col-md-4">
+        <label class="col-md-8 control-label" for="ordertax">Discount</label>
+        <div class="col-md-12">
+            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
+                type="text">
+        </div>
+    </div>
+
+    <div class="form-group col-md-4">
+        <label class="col-md-8 control-label" for="ordertax">Shipping</label>
+        <div class="col-md-12">
+            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
+                type="text">
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-8 control-label " for="status">Status</label>
+        <div class="col-md-12 ">
+            <select class="form-select col-md-12 " aria-label="Default select example">
+                <option selected>Completed</option>
+            </select>
+        </div>
+    </div>
+</div>
+    <div class="form-group col-md-12 ">
+        <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
+        <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="form-group col-md-12">
+        <div class="col-md-4">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+</body>
+
