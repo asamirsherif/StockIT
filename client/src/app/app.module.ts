@@ -176,7 +176,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/quotations/quotationslist/quotationslist.module').then(m => m.QuotationslistModule)
   },
   {
-    path: 'createpusrchases',
+    path: 'createpurchases',
     loadChildren: () => import('./main/Purchases/createpurchases/createpurchases.module').then(m => m.CreatepurchasesModule)
   },
   {

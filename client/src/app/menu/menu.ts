@@ -172,7 +172,7 @@ export const menu: CoreMenu[] = [
         title: 'Create Purchases',
         translate: 'Create Purchases',
         type: 'item',
-        url:'createquotations',
+        url:'createpurchases',
         icon: 'file',
       },
       {
