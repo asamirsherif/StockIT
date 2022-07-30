@@ -1,1 +1,57 @@
-<p>userlist works!</p>
+<body>
+    <h2>Users management
+    </h2>
+    <hr>
+    <div class="container row">
+        <div class="col-md-6">
+            <form class="form-inline col-md-12 mb-1">
+                <span class="switch-icon-left"><i data-feather="search"></i></span>
+                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search">
+            </form>
+        </div>
+        <div class="col-md-6 ">
+            <button type="button" class="btn btn-outline-primary "><i data-feather="filter"></i>Filter</button>
+            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
+            <button type="button" class="btn btn-secondary"><i data-feather="plus-circle"></i>Create</button>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">last Name</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">phone</th>
+                <th scope="col">status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>kjdlk</td>
+                <td>jkkkfr</td>
+                <td>019393</td>
+                <td>s@s.com</td>
+                <td>12dff</td>
+                <td>
+                    <div class="toggle-btn">
+                        <div class="inner-circle"></div>
+                    </div>
+                </td>
+                <td><i data-feather="edit" class="btn-outline-success"></i></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>$(document).ready(function(){
+
+        $('.toggle-btn').click(function() {
+        $(this).toggleClass('active').siblings().removeClass('active');
+        });
+        
+        });</script>
+</body>
+
+
