@@ -26,7 +26,7 @@ class UnitRequest extends FormRequest
         return [
             'name' => ['required','unique:units,name', 'string', 'min:3'],
             'ShortName' => ['required', 'unique:units,ShortName', 'string'],
-            'base_unit' => ['string'],
+            'base_unit' => ['integer'],
             'operator' => ['required'],
             'operator_value' => ['required', 'numeric'],
         ];
