@@ -1,1 +1,52 @@
-<p>printbarcode works!</p>
+<body>
+    <h2>Print Barcode</h2>
+    <hr>
+    <div class="form-group col-md-7">
+        <label class="col-md-8 control-label " for="category">Warehouse</label>
+        <div class="col-md-12 ">
+            <select class="form-select col-md-12 " aria-label="Default select example">
+                <option selected>Choose Warehouse</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label class="col-md-4 control-label" for="product">Product</label>
+        <div class="col-md-12 row">
+            <span class="switch-icon-left col-md-1 icon "><i data-feather="search"></i></span>
+            <input class="form-control form-control col-md-11" type="text" placeholder="Search Product by name"
+                aria-label="Search">
+        </div>
+    </div>
+    <table class="table col-md-11">
+        <thead>
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Code Product</th>
+                <th scope="col">Quantity</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>tshirt</td>
+                <td>12345</td>
+                <td>tshirt</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="form-group col-md-12">
+        <label class="col-md-5 control-label " for="Paper size">Paper Size</label>
+        <div class="col-md-12 ">
+            <select class="form-select col-md-12 " aria-label="Default select example">
+                <option selected>Paper Size</option>
+                <option selected>40 Paper </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-8 ">
+        <button type="button" class="btn btn-outline-primary "><i data-feather="upload"></i>Update</button>
+        <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>Reset</button>
+        <button type="button" class="btn btn-outline-secondary "><i data-feather="printer"></i>Print</button>
+    </div>
+</body>
