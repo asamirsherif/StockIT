@@ -37,21 +37,17 @@
                 <td>s@s.com</td>
                 <td>12dff</td>
                 <td>
-                    <div class="toggle-btn">
-                        <div class="inner-circle"></div>
-                    </div>
+                    <div class="custom-control custom-switch custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" />
+                        <label class="custom-control-label" for="customSwitch1"></label>
+                      </div>
+                   
                 </td>
-                <td><i data-feather="edit" class="btn-outline-success"></i></td>
+                <td><i data-feather="edit" class="btn-outline-success" [size]="24"></i></td>
             </tr>
         </tbody>
     </table>
-    <script>$(document).ready(function(){
-
-        $('.toggle-btn').click(function() {
-        $(this).toggleClass('active').siblings().removeClass('active');
-        });
-        
-        });</script>
+   
 </body>
 
 
