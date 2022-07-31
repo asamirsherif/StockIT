@@ -52,7 +52,16 @@ class PermissionSeeder extends Seeder
 		[
 			'id'    => 9,
 			'name'  => 'permissions_add',
-		])
+		],
+		[
+			'id'    => 10,
+			'name'  => 'brand_view',
+		],
+		[
+			'id'    => 11,
+			'name'  => 'brand_add',
+		]
+		)
 	);
     }
 }

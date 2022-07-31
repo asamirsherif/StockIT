@@ -29,7 +29,7 @@ class ExpenseRepository implements ExpenseRepositoryInterface
             $expense->details = $request->details;
             $expense->amount = $request->amount;
 
-            $expense->user_id = 1;
+            $expense->user_id = Auth::user()->id;
             $expense->save();
         }, 10);
 
