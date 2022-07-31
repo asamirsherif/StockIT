@@ -17,7 +17,7 @@ class UnitResource extends JsonResource
         return [
             'name' => $this->name,
             'ShortName'      => $this->ShortName,
-            'base_unit'      => $this->base_unit,
+            'base_unit'      => $this->baseunit? $this->baseunit->name: "-",
             'operator'       => $this->operator,
             'operator_value' => $this->operator_value,
             'created_at'     => $this->created_at,
