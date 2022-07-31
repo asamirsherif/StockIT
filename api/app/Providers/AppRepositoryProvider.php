@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\AdjustmentController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UnitController;
+use App\Repositories\Adjustment\AdjustmentRepository;
+use App\Repositories\Adjustment\AdjustmentRepositoryInterface;
 use App\Repositories\Brand\BrandRepository;
 use App\Repositories\Brand\BrandRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
@@ -44,6 +47,11 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->when(UnitController::class)
             ->needs(UnitRepositoryInterface::class)
             ->give(UnitRepository::class);
+
+        // adjustment
+        $this->app->when(AdjustmentController::class)
+            ->needs(AdjustmentRepositoryInterface::class)
+            ->give(AdjustmentRepository::class);
 
 
     }
