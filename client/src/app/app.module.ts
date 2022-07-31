@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import 'hammerjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
@@ -229,7 +229,8 @@ const appRoutes: Routes = [
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: 'enabled', // Add options right here
