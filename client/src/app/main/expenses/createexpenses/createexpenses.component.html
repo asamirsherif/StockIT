@@ -35,7 +35,7 @@
                 <div id="amount"
                 *ngIf="createexpence.controls['amount'].touched &&createexpence.controls['amount'].invalid"
                 class="form-text text-danger">
-                <small *ngIf="createproduct.controls['amount'].errors?.['required']">This field is
+                <small *ngIf="createexpence.controls['amount'].errors?.['required']">This field is
                     required</small>
             </div>
             </div>
@@ -46,7 +46,7 @@
             <div id="note"
             *ngIf="createexpence.controls['note'].touched &&createexpence.controls['note'].invalid"
             class="form-text text-danger">
-            <small *ngIf="createproduct.controls['note'].errors?.['required']">This field is
+            <small *ngIf="createexpence.controls['note'].errors?.['required']">This field is
                 required</small>
         </div>
         </div>

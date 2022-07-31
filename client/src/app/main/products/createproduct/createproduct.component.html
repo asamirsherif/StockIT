@@ -8,8 +8,7 @@
             <div class="col-md-12">
                 <input id="product_name" name="productname" placeholder="PRODUCT NAME" class="form-control input-md"
                     required type="text" formControlName="productname">
-                <div id="productname"
-                    *ngIf="createproduct.controls['productname'].touched &&createproduct.controls['productname'].invalid"
+                <div id="productname" *ngIf="createproduct.controls['productname'].touched &&createproduct.controls['productname'].invalid"
                     class="form-text text-danger">
                     <small *ngIf="createproduct.controls['productname'].errors?.['required']">This field is
                         required</small>

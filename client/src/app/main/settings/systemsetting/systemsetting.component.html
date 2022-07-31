@@ -1,7 +1,7 @@
 <h2>System settings</h2>
 <hr>
 
-<form class="row col-md-12">
+<form class="row col-md-12" [formGroup]="systemsetting" (ngSubmit)="formSubmit()">
     <div class="col-md-12 p-1 m-0 mb-2" style="background-color: #f7f7f8; border-radius: 20px;">System Settings</div>
     <div class="col-md-12 row">
         <div class="form-group col-md-4">
@@ -9,133 +9,166 @@
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
                     <option selected>US Dollar</option>
-                  </select>
+                </select>
             </div>
         </div>
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="email">Default Email</label>
-        <div class="col-md-12">
-            <input id="email" name="email" placeholder="admin@admin.com" class="form-control input-md" required=""
-                type="email">
-        </div>
-    </div>
-
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label " for="logo">Change Logo</label>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="email">Default Email</label>
             <div class="col-md-12">
-                <input id="file" name="file"  class="form-control input-md" required=""
-                    type="file">
+                <input id="email" name="email" placeholder="admin@admin.com" class="form-control input-md" required=""
+                    type="email" formControlName="email">
+                <div id="email"
+                    *ngIf="systemsetting.controls['email'].touched &&systemsetting.controls['email'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsetting.controls['email'].errors?.['required']">This field is
+                        required</small>
+                </div>
             </div>
-    </div>
-
-    
-
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="companyName">Company Name</label>
-        <div class="col-md-12">
-            <input id="companyName" name="companyName" placeholder="smartvalied" class="form-control input-md" required=""
-                type="text">
         </div>
-    </div>
-    
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="companyPhone">Company Phone</label>
-        <div class="col-md-12">
-            <input id="companyPhone" name="companyPhone" placeholder="01019589457" class="form-control input-md" required=""
-                type="phone">
+
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label " for="logo">Change Logo</label>
+            <div class="col-md-12">
+                <input id="file" name="file" class="form-control input-md" required="" type="file">
+            </div>
         </div>
-    </div>
-    
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="develobedBy">Developed by</label>
-        <div class="col-md-12">
-            <input id="develobedBy" name="develobedBy" placeholder="Smartveld Systems" class="form-control input-md" required=""
-                type="text">
+
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="companyName">Company Name</label>
+            <div class="col-md-12">
+                <input id="companyName" name="companyName" placeholder="smartvalied" class="form-control input-md"
+                    required="" type="text" formControlName="companyname">
+                <div id="companyname"
+                    *ngIf="systemsetting.controls['companyname'].touched &&systemsetting.controls['companyname'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsetting.controls['companyname'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="footer">footer</label>
-        <div class="col-md-12">
-            <input id="footer" name="footer" placeholder="Smartveld - Ultimate Inventory With POS" class="form-control input-md" required=""
-                type="text">
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="companyPhone">Company Phone</label>
+            <div class="col-md-12">
+                <input id="companyPhone" name="phone" placeholder="01019589457" class="form-control input-md"
+                    required="" type="phone"formControlName="phone" >
+                <div id="phone"
+                    *ngIf="systemsetting.controls['phone'].touched &&systemsetting.controls['phone'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsetting.controls['phone'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="defultCustomer">Default Customer</label>
-        <div class="col-md-12">
-            <select class="form-select col-md-12 " aria-label="Default select example">
-                <option selected>Walk-In-Customer</option>
-              </select>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="develobedBy">Developed by</label>
+            <div class="col-md-12">
+                <input id="develobedBy" name="develobedBy" placeholder="Smartveld Systems" class="form-control input-md"
+                    required="" type="text" formControlName="developby">
+                <div id="developby"
+                    *ngIf="systemsetting.controls['developby'].touched &&systemsetting.controls['developby'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsetting.controls['developby'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="warehouse">Default Warehouse</label>
-        <div class="col-md-12">
-            <select class="form-select col-md-12 " aria-label="Default select example">
-                <option selected>choose warehouse</option>
-              </select>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="footer">footer</label>
+            <div class="col-md-12">
+                <input id="footer" name="footer" placeholder="Smartveld - Ultimate Inventory With POS"
+                    class="form-control input-md" required="" type="text" formControlName="footer">
+                <div id="footer"
+                    *ngIf="systemsetting.controls['footer'].touched &&systemsetting.controls['footer'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsetting.controls['footer'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group col-md-12">
-        <label class="col-md-8 control-label" for="address">Address</label>
-        <div class="col-md-12">
-            <textarea class="form-control" placeholder="المدينة المنورة، السعودية" id="address" rows="3"></textarea>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="defultCustomer">Default Customer</label>
+            <div class="col-md-12">
+                <select class="form-select col-md-12 " aria-label="Default select example">
+                    <option selected>Walk-In-Customer</option>
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group col-md-12">
-        <div class="col-md-4">
-            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="warehouse">Default Warehouse</label>
+            <div class="col-md-12">
+                <select class="form-select col-md-12 " aria-label="Default select example">
+                    <option selected>choose warehouse</option>
+                </select>
+            </div>
         </div>
+
+        <div class="form-group col-md-12">
+            <label class="col-md-8 control-label" for="address">Address</label>
+            <div class="col-md-12">
+                <textarea class="form-control" placeholder="المدينة المنورة، السعودية" id="address" rows="3"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
     </div>
-
-    
-
-
-   </div>
 </form>
 
 <br><br>
-<form class="row col-md-12">
+<form class="row col-md-12" [formGroup]="PaymentGateway" (ngSubmit)="paymentSubmit()">
     <div class="col-md-12 p-1 m-0 mb-2" style="background-color: #f7f7f8; border-radius: 20px;">Payment Gateway</div>
-   
 
     <div class="form-group col-md-6">
         <label class="col-md-8 control-label" for="stripe-key">STRIPE_KEY</label>
         <div class="col-md-12">
-            <input id="stripe-key" name="stripe-key" placeholder="please leave this field blank if you haven't change it" class="form-control input-md" required=""
-                type="password">
+            <input id="stripe-key" name="stripe-key"
+                placeholder="please leave this field blank if you haven't change it" class="form-control input-md"
+                required="" type="password" formControlName="stripe">
+            <div id="stripe" *ngIf="PaymentGateway.controls['stripe'].touched &&PaymentGateway.controls['stripe'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="PaymentGateway.controls['stripe'].errors?.['required']">This field is
+                    required</small>
+            </div>
         </div>
     </div>
 
     <div class="form-group col-md-6">
         <label class="col-md-8 control-label " for="stripe-secret">STRIPE_SECRET</label>
-            <div class="col-md-12">
-                <input id="stripe-secret" name="stripe-secret" placeholder="please leave this field blank if you haven't change it" class="form-control input-md" required=""
-                    type="password">
+        <div class="col-md-12">
+            <input id="stripe-secret" name="stripe-secret"
+                placeholder="please leave this field blank if you haven't change it" class="form-control input-md"
+                required="" type="password" formControlName="stripesecret">
+            <div id="stripesecret" *ngIf="PaymentGateway.controls['stripesecret'].touched &&PaymentGateway.controls['stripesecret'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="PaymentGateway.controls['stripesecret'].errors?.['required']">This field is
+                    required</small>
             </div>
+        </div>
     </div>
 
     <div class="custom-control custom-switch custom-control-inline mb-1">
         <input type="checkbox" class="custom-control-input" id="customSwitch1" />
         <label class="custom-control-label" for="customSwitch1">Delete Stripe API keys</label>
-      </div>
-      
-  
+    </div>
 
     <div class="form-group col-md-12">
         <div class="col-md-4">
             <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
         </div>
-    </div>   
+    </div>
 </form>
 <br><br>
-<form class="row col-md-12">
+<form class="row col-md-12" [formGroup]="smsconfi" (ngSubmit)="smsSubmit()">
     <div class="col-md-12 p-1 m-0 mb-2" style="background-color: #f7f7f8; border-radius: 20px;">SMS Configuration</div>
     <div class="col-md-12 row">
         <div class="form-group col-md-6">
@@ -143,108 +176,147 @@
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
                     <option selected>Twilio</option>
-                  </select>
+                </select>
             </div>
         </div>
 
-    <div class="form-group col-md-6">
-        <label class="col-md-8 control-label" for="Twilio-sid">TWILIO_SID</label>
-        <div class="col-md-12">
-            <input id="Twilio-sid" name="Twilio-sid"  class="form-control input-md" required=""
-                type="text">
+        <div class="form-group col-md-6">
+            <label class="col-md-8 control-label" for="Twilio-sid">TWILIO_SID</label>
+            <div class="col-md-12">
+                <input id="Twiliosid" name="Twiliosid" class="form-control input-md" required="" type="text" formControlName="Twiliosid">
+                <div id="Twiliosid"
+                    *ngIf="smsconfi.controls['Twiliosid'].touched &&smsconfi.controls['Twilio-sid'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="smsconfi.controls['Twiliosid'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
         </div>
-    </div> 
 
-    <div class="form-group col-md-6">
-        <label class="col-md-8 control-label" for="twilio-token">TWILIO_TOKEN</label>
-        <div class="col-md-12">
-            <input id="twilio-token" name="twilio-token"placeholder="please leave this field blank if you haven't change it" class="form-control input-md" required=""
-                type="text">
+        <div class="form-group col-md-6">
+            <label class="col-md-8 control-label" for="twilio-token">TWILIO_TOKEN</label>
+            <div class="col-md-12">
+                <input id="twiliotoken" name="twiliotoken"
+                    placeholder="please leave this field blank if you haven't change it" class="form-control input-md"
+                    required="" type="text" formControlName="twiliotoken">
+                <div id="twiliotoken"
+                    *ngIf="smsconfi.controls['twiliotoken'].touched &&smsconfi.controls['twiliotoken'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="smsconfi.controls['twiliotoken'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
         </div>
+
+        <div class="form-group col-md-6">
+            <label class="col-md-8 control-label" for="twilio-from">TWILIO_FROM</label>
+            <div class="col-md-12">
+                <input id="twiliofrom" name="twiliofrom" class="form-control input-md" required="" type="text" formControlName="twiliofrom">
+
+                <div id="twiliofrom"
+                    *ngIf="smsconfi.controls['twiliofrom'].touched &&smsconfi.controls['twiliofrom'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="smsconfi.controls['twiliofrom'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
     </div>
-    
-    <div class="form-group col-md-6">
-        <label class="col-md-8 control-label" for="twilio-from">TWILIO_FROM</label>
-        <div class="col-md-12">
-            <input id="twilio-from" name="twilio-from"  class="form-control input-md" required=""
-                type="text">
-        </div>
-    </div>
-
-    <div class="form-group col-md-12">
-        <div class="col-md-4">
-            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-
-    
-
-
-   </div>
 </form>
 
 <br><br>
 
-<form class="row col-md-12">
+<form class="row col-md-12" [formGroup]="smtpconfi" (ngSubmit)="SmtpSubmit()">
     <div class="col-md-12 p-1 m-0 mb-2" style="background-color: #f7f7f8; border-radius: 20px;">SMTP Configuration</div>
     <div class="col-md-12 row">
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label" for="host">HOST</label>
             <div class="col-md-12">
-                <input id="host" name="host" placeholder="HOST" class="form-control input-md" required=""
-                    type="text">
+                <input id="host" name="host" placeholder="HOST" class="form-control input-md" required="" type="text"formControlName="host" >
+                <div id="host"
+                    *ngIf="smtpconfi.controls['host'].touched &&smtpconfi.controls['host'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="smtpconfi.controls['host'].errors?.['required']">This field is
+                        required</small>
+                </div>
             </div>
-        </div> 
-
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="port">PORT</label>
-        <div class="col-md-12">
-            <input id="port" name="port" placeholder="PORT" class="form-control input-md" required=""
-                type="text">
         </div>
-    </div> 
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="username">Username</label>
-        <div class="col-md-12">
-            <input id="username" name="username" placeholder="test" class="form-control input-md" required=""
-                type="text">
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="port">PORT</label>
+            <div class="col-md-12">
+                <input id="port" name="port" placeholder="PORT" class="form-control input-md" required="" type="text" formControlName="port">
+                <div id="port"
+                    *ngIf="smtpconfi.controls['port'].touched &&smtpconfi.controls['port'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="smtpconfi.controls['port'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
         </div>
+
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="username">Username</label>
+            <div class="col-md-12">
+                <input id="username" name="username" placeholder="test" class="form-control input-md" required=""
+                    type="text" formControlName="username">
+                <div id="username"
+                    *ngIf="smtpconfi.controls['username'].touched &&smtpconfi.controls['username'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="smtpconfi.controls['username'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="password">Password</label>
+            <div class="col-md-12">
+                <input id="password" name="password" placeholder="test" class="form-control input-md" required=""
+                    type="password" formControlName="password">
+                <div id="password"
+                    *ngIf="smtpconfi.controls['password'].touched &&smtpconfi.controls['password'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="smtpconfi.controls['password'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="encryption">Encryption</label>
+            <div class="col-md-12">
+                <input id="encryption" name="encryption" placeholder="tls" class="form-control input-md" required=""
+                    type="text" formControlName="encryption">
+                <div id="encryption"
+                    *ngIf="smtpconfi.controls['encryption'].touched &&smtpconfi.controls['encryption'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="smtpconfi.controls['encryption'].errors?.['required']">This field is
+                        required</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
     </div>
-    
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="password">Password</label>
-        <div class="col-md-12">
-            <input id="password" name="password" placeholder="test"  class="form-control input-md" required=""
-                type="password">
-        </div>
-    </div>
-
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="encryption">Encryption</label>
-        <div class="col-md-12">
-            <input id="encryption" name="encryption" placeholder="tls"  class="form-control input-md" required=""
-                type="text">
-        </div>
-    </div>
-
-    <div class="form-group col-md-12">
-        <div class="col-md-4">
-            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-
-   </div>
 </form>
 
 <br><br>
 
 <form class="row col-md-12">
     <div class="col-md-12 p-1 m-0 mb-2" style="background-color: #f7f7f8; border-radius: 20px;">Clear Cache</div>
-    
-
-    
-    
 
     <div class="form-group col-md-12 ">
         <div class="col-md-4">
@@ -252,7 +324,5 @@
         </div>
     </div>
 
-   
 </form>
-
 
