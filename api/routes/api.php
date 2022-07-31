@@ -33,33 +33,35 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     // -------------- USERS ---------------- \\
-    Route::resource('users', UserController::Class);
+    Route::apiResource('users', UserController::Class);
     Route::get('GetUserAuth', [UserController::Class,'getUserAuth']);
     Route::get("/GetPermissions", [UserController::Class,'GetPermissions']);
     Route::get('users/Get_Info/Profile', [UserController::Class,'GetInfoProfile']);
     Route::put('updateProfile/{id}', [UserController::Class,'updateProfile']);
     Route::post('logout', [UserController::Class,'logoutApi']);
     
-
     // ------------- Permission --------------- \\
 
-    Route::resource('roles', PermissionController::Class);
+    Route::apiResource('roles', PermissionController::Class);
     Route::post('roles/check/Create_page', [PermissionController::Class , 'Check_Create_Page']);
     Route::get('getRoleswithoutpaginate', [PermissionController::Class, 'getRoleswithoutpaginate']);
     Route::post('roles/delete/by_selection', [PermissionController::Class,'delete_by_selection']);
 
-    Route::resource('brands', BrandController::class);
-    Route::resource('warehouses', WarehouseController::class);
-    Route::resource("expensecategories", ExpenseCategoryController::class);
-    Route::resource("expenses", ExpenseController::class);
+    Route::apiResource('brands', BrandController::class);
 
-    Route::resource('currencies', CurrencyController::class);
+    Route::apiResource('warehouses', WarehouseController::class);
+
+    Route::apiResource("expensecategories", ExpenseCategoryController::class);
+    
+    Route::apiResource("expenses", ExpenseController::class);
+
+    Route::apiResource('currencies', CurrencyController::class);
 
     // category
-    Route::reesource('categories', 'App\Http\Controllers\CategoryController');
+    Route::apiResource('categories', 'App\Http\Controllers\CategoryController');
 
     // clients
-    Route::reesource('clients', 'App\Http\Controllers\ClientController');
+    Route::apiResource('clients', 'App\Http\Controllers\ClientController');
 
 });
 
