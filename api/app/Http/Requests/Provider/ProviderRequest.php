@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Adjustment;
+namespace App\Http\Requests\Provider;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdjustmentRequest extends FormRequest
+class ProviderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,12 @@ class AdjustmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer'],
-            'date' => ['required', 'date'],
-            'warehouse_id' => ['required', 'integer'],
-            'items' => ['required', 'numeric'],
-            'notes' => ['string', 'min:5'],
-
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|digits:11',
+            'country' => 'required',
+            'city' => 'required',
+            'address' => 'required',
         ];
     }
 }

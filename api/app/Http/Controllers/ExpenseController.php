@@ -36,7 +36,8 @@ class ExpenseController extends Controller
         $expenses->appends([
             "ref" => $request->ref, "date" => $request->date,
             "warehouse_id" => $request->warehouse_id,
-            "expense_category_id" => $request->expense_category_id
+            "expense_category_id" => $request->expense_category_id,
+            'perPage' => $request->perPage
         ]);
 
         return ExpenseResource::collection($expenses);

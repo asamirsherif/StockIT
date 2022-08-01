@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
+use App\Http\Controllers\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,13 +32,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::middleware([])->group(function () { // 'auth:api', 'Is_Active'
 
-// units
-Route::apiResource('units', 'App\Http\Controllers\UnitController');
-
-// adjustments
-Route::apiResource('adjustments', 'App\Http\Controllers\AdjustmentController');
+Route::middleware([])->group(function () {
 
     // -------------- USERS ---------------- \\
     Route::apiResource('users', UserController::class);
@@ -70,7 +66,14 @@ Route::apiResource('adjustments', 'App\Http\Controllers\AdjustmentController');
     // clients
     Route::apiResource('clients', 'App\Http\Controllers\ClientController');
 
+    // units
+    Route::apiResource('units', 'App\Http\Controllers\UnitController');
+
+    // adjustments
+    Route::apiResource('adjustments', 'App\Http\Controllers\AdjustmentController');
+
     Route::get('sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
-});
+    Route::apiResource('providers',ProviderController::class);
 
+});

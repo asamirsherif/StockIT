@@ -23,7 +23,7 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             $adjustment->user_id      = $request->user_id;
             $adjustment->warehouse_id = $request->warehouse_id;
             $adjustment->date         = $request->date;
-            $adjustment->Ref          = $request->Ref;
+            $adjustment->Ref          = $this->makeCode();
             $adjustment->items        = $request->items;
             $adjustment->notes        = $request->notes;
 
@@ -41,7 +41,6 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             $adjustment->user_id = $request->user_id ? $request->user_id : $adjustment->user_id;
             $adjustment->warehouse_id = $request->warehouse_id ? $request->warehouse_id : $adjustment->warehouse_id;
             $adjustment->date = $request->date ? $request->date : $adjustment->date;
-            $adjustment->Ref = $request->Ref ? $request->Ref : $adjustment->Ref;
             $adjustment->items = $request->items ? $request->items : $adjustment->items;
             $adjustment->notes = $request->notes ? $request->notes : $adjustment->notes;
 
@@ -69,5 +68,20 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
         });
 
         return $adjustments;
+    }
+
+    public function makeCode(): string
+    {
+        $last = Adjustment::latest()->first();
+
+        if ($last) {
+            $item = $last->Ref;
+            $nwMsg = explode("_", $item);
+            $inMsg = $nwMsg[1] + 1;
+            $code = $nwMsg[0] . '_' . $inMsg;
+        } else {
+            $code = 'AD_1111';
+        }
+        return $code;
     }
 }
