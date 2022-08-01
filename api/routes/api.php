@@ -28,6 +28,9 @@ Route::apiResource('clients', 'App\Http\Controllers\ClientController');
 // units
 Route::apiResource('units', 'App\Http\Controllers\UnitController');
 
+// adjustments
+Route::apiResource('adjustments', 'App\Http\Controllers\AdjustmentController');
+
 
 Route::group([], function () {
     Route::apiResource('brands', BrandController::class);
