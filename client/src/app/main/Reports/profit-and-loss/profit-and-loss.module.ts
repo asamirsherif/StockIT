@@ -7,6 +7,7 @@ import { CoreCommonModule } from '@core/common.module';
 import { ProfitAndLossComponent } from './profit-and-loss.component';
 
 
+
 const routes = [
   {
     path: '',

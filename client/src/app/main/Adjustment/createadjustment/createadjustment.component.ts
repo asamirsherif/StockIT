@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./createadjustment.component.scss']
 })
 export class CreateadjustmentComponent implements OnInit {
-
-  constructor() { }
-
+ 
+  constructor() {}
   ngOnInit(): void {
   }
-
+ 
 }
