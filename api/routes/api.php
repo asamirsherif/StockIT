@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     // clients
     Route::apiResource('clients', 'App\Http\Controllers\ClientController');
+
+    Route::get('sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 });
 
