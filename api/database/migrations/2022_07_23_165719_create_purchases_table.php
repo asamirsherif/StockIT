@@ -26,8 +26,8 @@ class CreatePurchasesTable extends Migration
             $table->double('shipping')->nullable()->default(0);
             $table->double('GrandTotal');
             $table->double('paid_amount')->default(0);
-            $table->string('statut', 191);
-            $table->string('payment_statut', 192);
+            $table->string('status', 191);
+            $table->string('payment_status', 192);
             $table->text('notes')->nullable();
             $table->timestamps(6);
             $table->softDeletes();

@@ -30,7 +30,7 @@ class ClientRequest extends FormRequest
             'country'   => ['required'],
             'city'      => ['required'],
             'phone'     => ['required', 'unique:clients,phone', 'regex:/^01[0125][0-9]{8}$/'],
-            'adresse'   => ['required']
+            'address'   => ['required']
         ];
     }
 

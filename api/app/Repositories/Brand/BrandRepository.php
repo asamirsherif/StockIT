@@ -28,8 +28,7 @@ class BrandRepository implements BrandRepositoryInterface
             $brand->description = $request->description;
             $brand->image = $this->uploadImage($request, "/images/brands/");
             $brand->save();
-        }, 3);
-
+        }, 10);
 
         return $brand;
     }
@@ -42,7 +41,7 @@ class BrandRepository implements BrandRepositoryInterface
             $brand->description = $request->description ? $request->description : $brand->description;
             $brand->image = $this->updateImage($request, $brand->image, "/images/brands/");
             $brand->save();
-        }, 3);
+        }, 10);
 
         return $brand;
     }

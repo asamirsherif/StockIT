@@ -1,0 +1,47 @@
+<body>
+    <h2>Quotations List </h2>
+    <hr>
+    <div class="container row">
+        <div class="col-md-6">
+            <form class="form-inline col-md-12 mb-1">
+                <span class="switch-icon-left"><i data-feather="search"></i></span>
+                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search">
+            </form>
+        </div>
+        <div class="col-md-6 ">
+            <button type="button" class="btn btn-outline-primary "><i data-feather="filter"></i>Filter</button>
+            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
+            <button type="button" class="btn btn-secondary"><i data-feather="plus-circle"></i>Create</button>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Reference</th>
+                <th scope="col"> Customer</th>   
+                <th scope="col"> Warehouse</th>
+                <th scope="col"> Status</th>
+                <th scope="col"> Grand Total</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>2022-7-22</td>
+                <td>EXP</td>
+                <td>fff</td>
+                <td>10</td>
+                <td><button type="button" class="btn btn-outline-primary">pending</button></td>
+                <td>reee</td>
+                <td><i data-feather="eye" class="btn-outline-primary" [size]="24"></i><i data-feather="edit"
+                        class="btn-outline-success" [size]="24"></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+
+

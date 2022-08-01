@@ -29,14 +29,17 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Brand::class);
+
         //we have 2 request .. perPage & search
         if ($request->filled('search')) {
             $brands = $this->brandRepo->multiSearch($request)
                 ->paginate($request->perPage);
-            $brands->appends(['search' => $request->search, 'perPage' => $request->perPage]);
+            $brands->appends(['search' => $request->search]);
         } else
             $brands = Brand::paginate($request->perPage);
 
+        $brands->appends(['perPage' => $request->perPage]);
         return BrandResource::collection($brands);
     }
 
@@ -48,6 +51,8 @@ class BrandController extends Controller
      */
     public function store(BrandRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'create', Brand::class);
+
         $created = $this->brandRepo->create($request);
         if ($created)
             return $this->succWithData(new BrandResource($created));
@@ -75,6 +80,8 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, $id)
     {
+        if (!$this->brandRepo->read($id))
+            return $this->errMsg("This brand dose not exist!");
         $updated = $this->brandRepo->update($request, $id);
         if ($updated)
             return $this->succWithData(new BrandResource($updated));
