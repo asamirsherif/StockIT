@@ -4,6 +4,7 @@ namespace App\Filters\Expense;
 
 use App\Filters\DateFilter;
 use App\Filters\FilterAbstract;
+use App\Filters\RefFilter;
 use App\Filters\WarehouseIDFilter;
 
 class ExpenseFilter extends FilterAbstract
