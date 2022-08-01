@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::middleware(['auth:api', 'Is_Active'])->group(function () {
+Route::middleware([])->group(function () {
 
     // -------------- USERS ---------------- \\
     Route::apiResource('users', UserController::Class);
@@ -62,6 +63,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     // clients
     Route::apiResource('clients', 'App\Http\Controllers\ClientController');
+
+    Route::apiResource('providers',ProviderController::class);
 
 });
 
