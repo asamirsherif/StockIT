@@ -105,7 +105,7 @@ class AdjustmentController extends Controller
         $adjustment = Adjustment::find($id);
 
         if(!$adjustment)
-        return $this->errMsg('This adjustment doesn\'t exist');
+            return $this->errMsg('This adjustment doesn\'t exist');
 
         $adjustmentDeleted = $this->adjustmentRepo->delete($id);
 
