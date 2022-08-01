@@ -31,7 +31,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::middleware(['auth:api', 'Is_Active'])->group(function () {
+Route::middleware([])->group(function () { // 'auth:api', 'Is_Active'
 
 // units
 Route::apiResource('units', 'App\Http\Controllers\UnitController');

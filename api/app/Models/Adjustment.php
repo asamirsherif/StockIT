@@ -21,8 +21,8 @@ class Adjustment extends Model
     }
 
     // warehouse_id relation
-    // public function warehouse()
-    // {
-    //     return $this->belongsTo(Warehouse::class);
-    // }
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
 }
