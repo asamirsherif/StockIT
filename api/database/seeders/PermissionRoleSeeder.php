@@ -6,73 +6,23 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class PermissionRoleSeeder extends Seeder
-{
+{	
     /**
      * Run the database seeds.
      *
      * @return void
      */
     public function run()
-    {
-        // Insert some stuff
-    DB::table('permission_role')->insert(
-		array(
-			[
-				'id'            => 1,
-				'permission_id' => 1,
-				'role_id'       => 1,
-			],
-			[
-				'id'            => 2,
-				'permission_id' => 2,
-				'role_id'       => 1,
-			],
-			[
-				'id'            => 3,
-				'permission_id' => 3,
-				'role_id'       => 1,
-			],
-			[
-				'id'            => 4,
-				'permission_id' => 4,
-				'role_id'       => 1,
-			],
-			[
-				'id'            => 5,
-				'permission_id' => 5,
-				'role_id'       => 1,
-			],
-			[
-				'id'            => 6,
-				'permission_id' => 6,
-				'role_id'       => 1,
-			],
-			[
-				'id'            => 7,
-				'permission_id' => 7,
-				'role_id'       => 1,
-			],
-			[
-				'id'            => 8,
-				'permission_id' => 8,
-				'role_id'       => 1,
-			],
-			[
-				'id'            => 9,
-				'permission_id' => 9,
-				'role_id'       => 1,
-            ],
-			[
-				'id'            => 10,
-				'permission_id' => 10,
-				'role_id'       => 1,
-            ],
-			[
-				'id'            => 11,
-				'permission_id' => 11,
-				'role_id'       => 1,
-            ],)
-            );
+    {	
+		$length = 83; //Number of Permissions in Permissions Seeder
+        $seeder_data = array();
+		for($i = 1; $i < $length+1 ; $i++){
+				array_push($seeder_data,['id' => $i, 'permission_id'=> $i , 'role_id' => '1']);
+        }
 
+        // Insert some stuff
+    	DB::table('permission_role')->insert(
+			$seeder_data
+        );
     } 
 }
