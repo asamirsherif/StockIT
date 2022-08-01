@@ -6,6 +6,7 @@ use App\Models\Expense;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ExpenseRepository implements ExpenseRepositoryInterface
@@ -23,15 +24,15 @@ class ExpenseRepository implements ExpenseRepositoryInterface
         $expense = new Expense();
         DB::transaction(function () use ($request, $expense) {
             $expense->date = $request->date;
-            $expense->Ref = $request->ref;
+            $expense->Ref = $this->makeCode();
             $expense->warehouse_id = $request->warehouse_id;
             $expense->expense_category_id = $request->expense_category_id;
             $expense->details = $request->details;
             $expense->amount = $request->amount;
 
-            $expense->user_id = Auth::user()->id;
+            $expense->user_id = 1;
             $expense->save();
-        }, 10);
+        }, 3);
 
         return $expense;
     }
@@ -48,7 +49,7 @@ class ExpenseRepository implements ExpenseRepositoryInterface
             $expense->amount = $request->amount ? $request->amount : $expense->amount;
 
             $expense->save();
-        }, 10);
+        }, 3);
 
         return $expense;
     }
@@ -58,14 +59,31 @@ class ExpenseRepository implements ExpenseRepositoryInterface
         return $this->read($id)->delete();
     }
 
+
+
     public function multiSearch(Request $request): Builder
     {
-        $expenses = Expense::where(function ($q) use ($request) {
+        $expenses = Expense::filter($request)->where(function ($q) use ($request) {
             return $q->where('Ref', 'LIKE', "%" . $request->search . "%")
                 ->orWhere('date', 'LIKE', "%" . $request->search . "%")
                 ->orWhere('details', 'LIKE', "%" . $request->search . "%");
         });
 
         return $expenses;
+    }
+
+    public function makeCode(): string
+    {
+        $last = Expense::latest('id')->first();
+
+        if ($last) {
+            $item = $last->Ref;
+            $nwMsg = explode("_", $item);
+            $inMsg = $nwMsg[1] + 1;
+            $code = $nwMsg[0] . '_' . $inMsg;
+        } else {
+            $code = 'EXP_1111';
+        }
+        return $code;
     }
 }

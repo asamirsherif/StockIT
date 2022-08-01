@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filters\Expense;
+namespace App\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 

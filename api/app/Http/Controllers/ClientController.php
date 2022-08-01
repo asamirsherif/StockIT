@@ -94,9 +94,9 @@ class ClientController extends Controller
     {
         $clientUpdated = $this->clientRepo->update($request, $id);
         if ($clientUpdated)
-        return $this->succWithData(new ClientResource($clientUpdated));
+            return $this->succWithData(new ClientResource($clientUpdated));
         else
-        return $this->errMsg("client not updated!");
+            return $this->errMsg("client not updated!");
     }
 
     /**
