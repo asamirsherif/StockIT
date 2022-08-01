@@ -1,0 +1,72 @@
+select{
+    border-radius: 5px;
+    padding: 7px;
+    border: 1px gainsboro solid;
+}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+
+
+.center {
+	width: 100%;
+	height: 260px;
+	border-radius: 3px;
+	background: #fff;
+	display: flex;
+    margin-top: 50px;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: column;
+}
+
+.title {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #999;
+	text-align: center;
+}
+
+h1 {
+	font-size: 16px;
+	font-weight: 300;
+	color: #666;
+}
+
+.dropzone {
+	width: 100px;
+	height: 80px;
+	border: 1px dashed #999;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.upload-icon {
+	margin: 25px 2px 2px 2px;
+}
+
+.upload-input {
+	position: relative;
+	top: -62px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+.btn {
+	display: block;
+	width: 140px;
+	height: 40px;
+	background: darkmagenta;
+	color: #fff;
+	border-radius: 3px;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+form{
+    background: #fff;
+    border-radius: 20px;
+    margin:3px ;
+    padding-top: 10px;
+}
+

@@ -21,7 +21,7 @@ class CreateProvidersTable extends Migration
             $table->string('phone', 192);
             $table->string('country', 191);
             $table->string('city', 191);
-            $table->string('adresse', 191);
+            $table->string('address', 191);
             $table->timestamps(6);
             $table->softDeletes();
         });

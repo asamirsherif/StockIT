@@ -1,0 +1,65 @@
+<body>
+    <h2>Create Expence
+    </h2>
+    <hr>
+    <form class="row col-md-12" [formGroup]="createexpence" (ngSubmit)="formSubmit()">
+    <div class="col-md-12 row">
+       
+        <div class="form-group col-md-4">
+            <label class="col-md-4 control-label " for="category">Date</label>
+            <div class="col-md-12 ">
+                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
+                
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label " for="category"> Warehouse</label>
+            <div class="col-md-12 ">
+                <select class="form-select col-md-12 " aria-label="Default select example">
+                    <option selected>Choose Warehouse</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label " for="category">Expence Warehouse</label>
+            <div class="col-md-12 ">
+                <select class="form-select col-md-12 " aria-label="Default select example">
+                    <option selected>Choose Warehouse</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="col-md-4 control-label " for="amount">Amount</label>
+            <div class="col-md-12 ">
+                <input class="form-control form-control col-md-11" type="text" placeholder="Amount" aria-label="Date" id="amount" name="amount" formControlName="amount">
+                <div id="amount"
+                *ngIf="createexpence.controls['amount'].touched &&createexpence.controls['amount'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createexpence.controls['amount'].errors?.['required']">This field is
+                    required</small>
+            </div>
+            </div>
+        </div>
+        <div class="form-group col-md-8 ">
+            <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
+            <textarea class="form-control " id="note" rows="3" formControlName="note" name="note"></textarea>
+            <div id="note"
+            *ngIf="createexpence.controls['note'].touched &&createexpence.controls['note'].invalid"
+            class="form-text text-danger">
+            <small *ngIf="createexpence.controls['note'].errors?.['required']">This field is
+                required</small>
+        </div>
+        </div>
+    </div>
+    
+
+    
+    <div class="form-group col-md-12">
+        <div class="col-md-4">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+</body>
+
+
