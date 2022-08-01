@@ -26,7 +26,7 @@ class ClientRepository implements ClientRepositoryInterface
             $client->country = $request->country;
             $client->city    = $request->city;
             $client->phone   = $request->phone;
-            $client->adresse = $request->adresse;
+            $client->address = $request->address;
 
             $client->save();
         }, 3);
@@ -45,7 +45,7 @@ class ClientRepository implements ClientRepositoryInterface
             $client->country = $request->country ? $request->country : $client->country;
             $client->city = $request->city ? $request->city : $client->city;
             $client->phone = $request->phone ? $request->phone : $client->phone;
-            $client->adresse = $request->adresse ? $request->adresse : $client->adresse;
+            $client->address = $request->address ? $request->address : $client->address;
 
             $client->save();
     }, 3);

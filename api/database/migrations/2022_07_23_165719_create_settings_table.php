@@ -19,7 +19,7 @@ class CreateSettingsTable extends Migration
             $table->integer('currency_id')->nullable()->index('currency_id');
             $table->string('CompanyName', 191);
             $table->string('CompanyPhone', 191);
-            $table->string('CompanyAdress', 191);
+            $table->string('CompanyAddress', 191);
             $table->string('logo', 191)->nullable();
             $table->timestamps(6);
             $table->softDeletes();
