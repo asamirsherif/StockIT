@@ -1,9 +1,12 @@
-<h2> Pills</h2>
-<section>
+<h2> Profit And Loss</h2>
+<hr>
+<br>
+<div class="conatiner" style="border-color:1px solid white;">
+
   
     <ul ngbNav #nav="ngbNav" class="nav nav-pills">
       <li ngbNavItem>
-        <a ngbNavLink>Home</a>
+        <a ngbNavLink>Range</a>
         <ng-template ngbNavContent>
           <p>
             Pastry gummi bears sweet roll candy canes topping ice cream. Candy canes fruitcake cookie carrot
@@ -15,7 +18,7 @@
         </ng-template>
       </li>
       <li ngbNavItem>
-        <a ngbNavLink>Profile</a>
+        <a ngbNavLink>Week</a>
         <ng-template ngbNavContent>
           <p>
             Pudding candy canes sugar plum cookie chocolate cake powder croissant. Carrot cake tiramisu danish
@@ -26,19 +29,33 @@
           </p>
         </ng-template>
       </li>
-      <li ngbNavItem [disabled]="true">
-        <a href="javascript:void(0)" ngbNavLink>Disabled</a>
+      
+      <li ngbNavItem>
+        <a ngbNavLink>Month</a>
         <ng-template ngbNavContent>
           <p>
-            Cake croissant lemon drops gummi bears carrot cake biscuit cupcake croissant. Macaroon lemon drops
-            muffin jelly sugar plum chocolate cupcake danish icing. Soufflé tootsie roll lemon drops sweet
-            roll cake icing cookie halvah cupcake.Chupa chups pie jelly pie tootsie roll dragée cookie
-            caramels sugar plum. Jelly oat cake wafer pie cupcake chupa chups jelly-o gingerbread.
+            Chocolate croissant cupcake croissant jelly donut. Cheesecake toffee apple pie chocolate bar
+            biscuit tart croissant. Lemon drops danish cookie. Oat cake macaroon icing tart lollipop cookie
+            sweet bear claw. Toffee jelly-o pastry cake dessert chocolate bar jelly beans fruitcake. Dragée
+            sweet fruitcake dragée biscuit halvah wafer gingerbread dessert. Gummies fruitcake brownie gummies
+            tart pudding.
           </p>
         </ng-template>
       </li>
       <li ngbNavItem>
-        <a ngbNavLink>About</a>
+        <a ngbNavLink>Quarter</a>
+        <ng-template ngbNavContent>
+          <p>
+            Chocolate croissant cupcake croissant jelly donut. Cheesecake toffee apple pie chocolate bar
+            biscuit tart croissant. Lemon drops danish cookie. Oat cake macaroon icing tart lollipop cookie
+            sweet bear claw. Toffee jelly-o pastry cake dessert chocolate bar jelly beans fruitcake. Dragée
+            sweet fruitcake dragée biscuit halvah wafer gingerbread dessert. Gummies fruitcake brownie gummies
+            tart pudding.
+          </p>
+        </ng-template>
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink>Year</a>
         <ng-template ngbNavContent>
           <p>
             Chocolate croissant cupcake croissant jelly donut. Cheesecake toffee apple pie chocolate bar
@@ -51,9 +68,153 @@
       </li>
     </ul>
     <div [ngbNavOutlet]="nav" class="mt-1"></div>
+    <hr>
+    <div class="d-flex justify-content-around ">
+        <button id="singleebutton" name="singlebutton" class="btn btn-outline-primary ">Reset Ranges</button>
+        <button id="singleebutton" name="singlebutton" class="btn btn-primary ">Submit</button>
+    </div>
+
+</div>
+<br><br>
+<div class="container">
+<div class="col-md-12 row text-center">
+    
+    <div class="col-md-4">
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">0 Sales</h5>
+              <p class="card-title">0.00 ريال</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-2 ">
+          <div class="row g-0">
+            <div class="col-md-12 p-2">
+              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            </div>
+            <div class="col-md-12 ">
+              <div class="card-body">
+                <h5 class="card-text ">0 Purchases</h5>
+                <p class="card-title">0.00 ريال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-2 ">
+          <div class="row g-0">
+            <div class="col-md-12 p-2">
+              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            </div>
+            <div class="col-md-12 ">
+              <div class="card-body">
+                <h5 class="card-text ">0 Sales return</h5>
+                <p class="card-title">0.00 ريال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-2 ">
+          <div class="row g-0">
+            <div class="col-md-12 p-2">
+              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            </div>
+            <div class="col-md-12 ">
+              <div class="card-body">
+                <h5 class="card-text ">0 Purchases return</h5>
+                <p class="card-title">0.00 ريال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-2 ">
+          <div class="row g-0">
+            <div class="col-md-12 p-2">
+              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            </div>
+            <div class="col-md-12 ">
+              <div class="card-body">
+                <h5 class="card-text ">Expenses</h5>
+                <p class="card-title">0.00 ريال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-2 ">
+          <div class="row g-0">
+            <div class="col-md-12 p-2">
+              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            </div>
+            <div class="col-md-12 ">
+              <div class="card-body">
+                <h5 class="card-text ">Profit</h5>
+                <p class="card-title">0.00 ريال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-2 ">
+          <div class="row g-0">
+            <div class="col-md-12 p-2">
+              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            </div>
+            <div class="col-md-12 ">
+              <div class="card-body">
+                <h5 class="card-text ">Paiements Received</h5>
+                <p class="card-title">0.00 ريال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-2 ">
+          <div class="row g-0">
+            <div class="col-md-12 p-2">
+              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            </div>
+            <div class="col-md-12 ">
+              <div class="card-body">
+                <h5 class="card-text ">Paiements Sent</h5>
+                <p class="card-title">0.00 ريال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-2 ">
+          <div class="row g-0">
+            <div class="col-md-12 p-2">
+              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            </div>
+            <div class="col-md-12 ">
+              <div class="card-body">
+                <h5 class="card-text ">Paiements Net</h5>
+                <p class="card-title">0.00 ريال</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       
-    </section>
-    <footer></footer>
-    <section class="charts-container">
-        <canvas id="pieChart"></canvas>
-    </section>
+    
+  </div>
+</div>
