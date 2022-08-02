@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,5 +76,8 @@ Route::middleware([])->group(function () {
     Route::get('sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
     Route::apiResource('providers',ProviderController::class);
+
+    // purchase
+    Route::apiResource('purchases', PurchaseController::class);
 
 });
