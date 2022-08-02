@@ -13,7 +13,7 @@ class PurchaseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class PurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => ['required', 'integer'],
+            'date' => ['date'],
+            'provider_id' => ['required', 'integer'],
+            'warehouse_id' => ['required', 'integer'],
+            'status' => ['string'],
+            'payment_status' => ['string'],
+            'notes' => ['min:5'],
+
         ];
     }
 }
