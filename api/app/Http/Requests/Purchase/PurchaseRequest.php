@@ -29,7 +29,7 @@ class PurchaseRequest extends FormRequest
             'provider_id' => ['required', 'integer'],
             'warehouse_id' => ['required', 'integer'],
             'status' => ['string'],
-            'payment_status' => ['string'],
+            // 'payment_status' => ['string'],
             'notes' => ['min:5'],
 
         ];
