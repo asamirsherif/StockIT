@@ -23,4 +23,21 @@ class Purchase extends Model
     {
         return (new PurchaseFilter($request))->filter($builder);
     }
+
+    // user_id relation
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    // warehouse_id relation
+    public function warehouse()
+    {
+        return $this->belongsTo(warehouse::class);
+    }
+
+    // provider_id relation
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class);
+    }
 }
