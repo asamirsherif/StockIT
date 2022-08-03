@@ -21,9 +21,7 @@
       <!-- item -->
       <li
         core-menu-horizontal-item
-        *ngIf="
-          item.type == 'item' && (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-        "
+        *ngIf="item.type == 'item'"
         [item]="item"
         [ngClass]="{ disabled: item.disabled === true }"
         [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
@@ -34,10 +32,7 @@
       <!-- collapsible -->
       <li
         core-menu-horizontal-collapsible
-        *ngIf="
-          item.type == 'collapsible' &&
-          (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-        "
+        *ngIf="item.type == 'collapsible'"
         [item]="item"
         class="dropdown dropdown-submenu"
       ></li>
