@@ -19,6 +19,7 @@ class UnitController extends Controller
     public function __construct(UnitRepositoryInterface $unitRepo)
     {
         $this->unitRepo = $unitRepo;
+        $this->authorizeForUser($request->user('api'), 'view', Unit::class);
     }
     /**
      * Display a listing of the resource.

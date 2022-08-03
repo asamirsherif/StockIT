@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -23,7 +23,7 @@ class BrandPolicy
 
     public function view(User $user)
     {
-        $permission = Permission::where('name', 'brand')->first();
+        $permission = Permission::where('name', 'category')->first();
         return $user->hasRole($permission->roles);
     }
 

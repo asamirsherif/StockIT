@@ -24,6 +24,7 @@ class CurrencyController extends Controller
 
     public function __construct(CurrencyRepositoryInterface $currencyRepo)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
         $this->currencyRepo = $currencyRepo;
     }
 

@@ -19,7 +19,8 @@ class BrandController extends Controller
     private BrandRepositoryInterface $brandRepo;
 
     public function __construct(BrandRepositoryInterface $brandRepo)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Brand::class);
         $this->brandRepo = $brandRepo;
     }
     /**
@@ -29,8 +30,6 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorizeForUser($request->user('api'), 'view', Brand::class);
-
         //we have 2 request .. perPage & search
         if ($request->filled('search')) {
             $brands = $this->brandRepo->multiSearch($request)
@@ -51,8 +50,6 @@ class BrandController extends Controller
      */
     public function store(BrandRequest $request)
     {
-        $this->authorizeForUser($request->user('api'), 'create', Brand::class);
-
         $created = $this->brandRepo->create($request);
         if ($created)
             return $this->succWithData(new BrandResource($created));

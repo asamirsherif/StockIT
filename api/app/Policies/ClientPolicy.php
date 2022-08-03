@@ -2,11 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Permission;
+use App\Models\Client;
 use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class ClientPolicy
 {
     use HandlesAuthorization;
 
@@ -25,12 +26,12 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user)
     {
-        $permission = Permission::where('name', 'users_view')->first();
+        $permission = Permission::where('name', 'customers_view')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -42,7 +43,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        $permission = Permission::where('name', 'users_add')->first();
+        $permission = Permission::where('name', 'customers_add')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -50,12 +51,12 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user)
     {
-        $permission = Permission::where('name', 'users_edit')->first();
+        $permission = Permission::where('name', 'customers_edit')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -63,12 +64,12 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user)
     {
-        $permission = Permission::where('name', 'users_delete')->first();
+        $permission = Permission::where('name', 'customers_delete')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -76,10 +77,10 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user)
+    public function restore(User $user, Client $client)
     {
         //
     }
@@ -88,10 +89,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, Client $client)
     {
         //
     }

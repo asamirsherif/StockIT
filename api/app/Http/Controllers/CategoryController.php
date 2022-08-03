@@ -18,7 +18,8 @@ class CategoryController extends Controller
     private CategoryRepositoryInterface $categoryRepo;
 
     public function __construct(CategoryRepositoryInterface $categoryRepo)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Category::class);
         $this->categoryRepo = $categoryRepo;
     }
 

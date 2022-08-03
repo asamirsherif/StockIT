@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Permission;
+use App\Models\ExpenseCategory;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class ExpenseCategoryPolicy
 {
     use HandlesAuthorization;
 
@@ -25,12 +25,12 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user)
     {
-        $permission = Permission::where('name', 'users_view')->first();
+        $permission = Permission::where('name', 'category_expense_view')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -42,7 +42,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        $permission = Permission::where('name', 'users_add')->first();
+        $permission = Permission::where('name', 'category_expense_add')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -50,12 +50,12 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user)
     {
-        $permission = Permission::where('name', 'users_edit')->first();
+        $permission = Permission::where('name', 'category_expense_edit')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -63,12 +63,12 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user)
     {
-        $permission = Permission::where('name', 'users_delete')->first();
+        $permission = Permission::where('name', 'category_expense_delete')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -76,7 +76,7 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user)
@@ -88,10 +88,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user)
     {
         //
     }
