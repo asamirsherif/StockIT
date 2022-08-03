@@ -2,10 +2,10 @@
 
 namespace App\Filters;
 
-class EmailFilter
+class BrandIDFilter
 {
     public function filter($builder, $value)
     {
-        return $builder->orWhere('email', $value);
+        return $builder->orWhere('brand_id', $value);
     }
 }

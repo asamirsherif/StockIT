@@ -19,6 +19,8 @@ use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Client\ClientRepository;
 use App\Repositories\Client\ClientRepositoryInterface;
+use App\Repositories\Product\ProductRepository;
+use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Provider\ProviderRepository;
 use App\Repositories\Provider\ProviderRepositoryInterface;
 use App\Repositories\Unit\UnitRepository;
@@ -72,6 +74,10 @@ class AppRepositoryProvider extends ServiceProvider
 
         //provider
         $this->app->bind(ProviderRepositoryInterface::class, ProviderRepository::class);
+
+
+        //product
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
     }
 
     /**

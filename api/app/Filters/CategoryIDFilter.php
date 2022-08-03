@@ -2,10 +2,9 @@
 
 namespace App\Filters;
 
-class EmailFilter
-{
+class CategoryIDFilter {
     public function filter($builder, $value)
     {
-        return $builder->orWhere('email', $value);
+        return $builder->orWhere('category_id', $value);
     }
 }

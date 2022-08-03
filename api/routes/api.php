@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
 
@@ -37,18 +38,18 @@ Route::middleware([])->group(function () {
 
     // -------------- USERS ---------------- \\
     Route::apiResource('users', UserController::class);
-    Route::get('GetUserAuth', [UserController::class,'getUserAuth']);
-    Route::get("/GetPermissions", [UserController::class,'GetPermissions']);
-    Route::get('users/Get_Info/Profile', [UserController::class,'GetInfoProfile']);
-    Route::put('updateProfile/{id}', [UserController::class,'updateProfile']);
-    Route::post('logout', [UserController::class,'logoutApi']);
+    Route::get('GetUserAuth', [UserController::class, 'getUserAuth']);
+    Route::get("/GetPermissions", [UserController::class, 'GetPermissions']);
+    Route::get('users/Get_Info/Profile', [UserController::class, 'GetInfoProfile']);
+    Route::put('updateProfile/{id}', [UserController::class, 'updateProfile']);
+    Route::post('logout', [UserController::class, 'logoutApi']);
 
     // ------------- Permission --------------- \\
 
     Route::apiResource('roles', PermissionController::class);
-    Route::post('roles/check/Create_page', [PermissionController::class , 'Check_Create_Page']);
+    Route::post('roles/check/Create_page', [PermissionController::class, 'Check_Create_Page']);
     Route::get('getRoleswithoutpaginate', [PermissionController::class, 'getRoleswithoutpaginate']);
-    Route::post('roles/delete/by_selection', [PermissionController::class,'delete_by_selection']);
+    Route::post('roles/delete/by_selection', [PermissionController::class, 'delete_by_selection']);
 
     Route::apiResource('brands', BrandController::class);
 
@@ -74,6 +75,9 @@ Route::middleware([])->group(function () {
 
     Route::get('sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
-    Route::apiResource('providers',ProviderController::class);
+    //providers
+    Route::apiResource('providers', ProviderController::class);
 
+    //products
+    Route::apiResource('products', ProductController::class);
 });
