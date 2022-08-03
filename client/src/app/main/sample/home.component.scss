@@ -2,6 +2,7 @@
     height: 100px;
     text-align: center;
 }
+
 .sec1,.sec2{
     background: white;
     border-radius: 20px;
@@ -17,10 +18,14 @@
    display: block;
    margin-left: 25%;
 }
+.sec3:hover{
+    transform: scale(1.1, 1.1);
+}
 .sec5{
     background: white;
     border-radius: 20px;
 }
 table{
     border-radius: 20px;
+    text-align: center;
 }

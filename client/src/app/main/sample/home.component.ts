@@ -80,18 +80,18 @@ export class HomeComponent implements OnInit {
       data: {
         labels: ['jan', 'feb', 'mar', 'april','mai','jun','jul','oct','sep','oct','nov','dec'],
         datasets: [{
-          label: 'Sales',
-          data: [ 0,0,4000,0,0,0,8000],
-          backgroundColor: ["#DCE2FF"],
+          label: 'Payment Sales',
+          data: [ 0,0,0,0,0,8000,0,0,0,0],
+          backgroundColor: ["red"],
           borderWidth: 1,
-          borderColor: '#fff'
+          borderColor: 'red'
         },
         {
-          label: 'Purchases',
-          data: [ 0,0,,0,0,0, 11000],
+          label: 'Payment Recived',
+          data: [ 0,0,100,0,0,0,0],
           backgroundColor: [ "#86899C"],
           borderWidth: 1,
-          borderColor: '#fff'
+          borderColor: 'orange'
         }]
       },
       options: {
@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: 'This Week Sales & Purchases'
+            text: 'Payment Sent & Received'
           }
         },
       }
