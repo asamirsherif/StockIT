@@ -14,7 +14,7 @@ class PermissionRoleSeeder extends Seeder
      */
     public function run()
     {	
-		$length = 83; //Number of Permissions in Permissions Seeder
+		$length = 87; //Number of Permissions in Permissions Seeder
         $seeder_data = array();
 		for($i = 1; $i < $length+1 ; $i++){
 				array_push($seeder_data,['id' => $i, 'permission_id'=> $i , 'role_id' => '1']);
