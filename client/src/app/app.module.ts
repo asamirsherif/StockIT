@@ -64,6 +64,7 @@ import { ReturnslistComponent } from './main/purchasesReturn/returnslist/returns
 import { CustomerlistComponent } from './main/people/customerlist/customerlist.component';
 import { SupplierlistComponent } from './main/people/supplierlist/supplierlist.component';
 import { UserlistComponent } from './main/people/userlist/userlist.component'
+import { ProfitAndLossModule } from './main/Reports/profit-and-loss/profit-and-loss.module';
 
 const appRoutes: Routes = [
   {
@@ -251,7 +252,8 @@ const appRoutes: Routes = [
 
     // App modules
     LayoutModule,
-    SampleModule
+    SampleModule,
+    ProfitAndLossModule
   ],
 
   bootstrap: [AppComponent],
