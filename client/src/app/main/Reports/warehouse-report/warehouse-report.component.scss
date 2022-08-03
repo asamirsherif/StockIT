@@ -2,5 +2,20 @@ select{
     border-radius: 5px;
     padding: 7px;
     border: 1px gainsboro solid;
-    width: 170px; 
+    width: 260px; 
+}
+li{
+    display:flex;
+    margin: auto;
+}
+button{
+    margin-left: 5px;
+}
+table{
+    margin-top: 30px;
+}
+body{
+    border-radius: 20px;
+    padding: 20px;
+    background: white;
 }
