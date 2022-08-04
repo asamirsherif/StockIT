@@ -150,6 +150,10 @@ class PurchaseRepository implements PurchaseRepositoryInterface
 
     public function updatePurchaseDateails(Request $request, $id): array
     {
+        // delete old one
+        $this->deletePurchaseDateails($request, $id);
+
+        // begin of update
         $purchase = $this->read($id);
         $purchaseDetails = [];
         foreach ($request->purchaseDetails as $purchDetail) {
@@ -172,5 +176,18 @@ class PurchaseRepository implements PurchaseRepositoryInterface
             $purchaseDetails[] = $purchaseDetailModel;
         }
         return $purchaseDetails;
+    }
+
+    // delete fun
+    public function deletePurchaseDateails(Request $request, int $id): bool
+    {
+        $purchaseDetails = $this->read($id)->purchaseDetails()->get('purchase_id')->toArray();
+        foreach($purchaseDetails as $purchDetail) {
+            $purchDetail = $purchDetail['purchase_id'];
+            if(!in_array($purchDetail, $request->purchaseDetails)) {
+                $this->read($id)->purchaseDetails()->where('purchase_id', $purchDetail)->delete();
+            }
+        }
+        return true;
     }
 }

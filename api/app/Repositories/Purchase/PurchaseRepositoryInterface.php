@@ -13,4 +13,5 @@ interface PurchaseRepositoryInterface extends CrudInterface, MultiSearchInterfac
     public function createPurchaseDateails(Request $request, int $id): array;
     public function addProductWarehouse(Request $request);
     public function updatePurchaseDateails(Request $request, int $id): array;
+    public function deletePurchaseDateails(Request $request, int $id): bool;
 }
