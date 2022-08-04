@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Purchase;
 
+use App\Http\Resources\Provider\ProviderResource;
+use App\Http\Resources\Warehouse\WarehouseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PurchaseResource extends JsonResource
@@ -15,11 +17,12 @@ class PurchaseResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'             => $this->id,
             'user_id'        => $this->user_id,
             'date'           => $this->date,
             'Ref'            => $this->Ref,
-            'provider_id'    => $this->provider_id,
-            'warehouse_id'   => $this->warehouse_id,
+            'provider'       => new ProviderResource($this->provider),
+            'warehouse'      => new WarehouseResource($this->warehouse),
             'tax_rate'       => $this->tax_rate,
             'TaxNet'         => $this->TaxNet,
             'discount'       => $this->discount,
@@ -29,9 +32,6 @@ class PurchaseResource extends JsonResource
             'status'         => $this->status,
             'payment_status' => $this->payment_status,
             'notes'          => $this->notes,
-            'created_at'     => $this->created_at,
-            'updated_at'     => $this->updated_at,
-            'deleted_at'     => $this->deleted_at,
 
         ];
     }

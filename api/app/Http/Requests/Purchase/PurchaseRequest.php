@@ -24,13 +24,13 @@ class PurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer'],
-            'date' => ['date'],
-            'provider_id' => ['required', 'integer'],
-            'warehouse_id' => ['required', 'integer'],
-            'status' => ['string'],
-            // 'payment_status' => ['string'],
-            'notes' => ['min:5'],
+            'user_id'           => ['required', 'integer'],
+            'date'              => ['date'],
+            'provider_id'       => ['required', 'integer'],
+            'warehouse_id'      => ['required', 'integer'],
+            'status'            => ['string'],
+            'notes'             => ['min:5'],
+            'purchaseDetails.*'   => ['required']
 
         ];
     }

@@ -9,5 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 interface PurchaseRepositoryInterface extends CrudInterface, MultiSearchInterface, CodeableInterface {
-    //
+
+    public function createPurchaseDateails(Request $request, int $id): array;
+    public function addProductWarehouse(Request $request);
 }
