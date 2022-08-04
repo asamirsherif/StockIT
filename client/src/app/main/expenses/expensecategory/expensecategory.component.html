@@ -22,7 +22,7 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12">
+                    <form class="row col-md-12" [formGroup]="createcategory" (ngSubmit)="formSubmit()">
                         <div class="col-md-12 row">
                             <div class="form-group col-md-12">
                                 <label class="col-md-4 control-label " for="Category Name">Category Name</label>
@@ -30,6 +30,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Category Name" aria-label="Date" id="CategoryName"
                                         name="CategoryName" formControlName="CategoryName">
+                                        <div id="CategoryName" *ngIf="createcategory.controls['CategoryName'].touched &&createcategory.controls['CategoryName'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcategory.controls['CategoryName'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>    
                                 </div>
                             </div>
                             <div class="form-group col-md-12 ">

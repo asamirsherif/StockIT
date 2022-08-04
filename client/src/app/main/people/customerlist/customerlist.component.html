@@ -24,13 +24,18 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12">
+                    <form class="row col-md-12" [formGroup]="createcustomer" (ngSubmit)="formSubmit()">
                             <div class="form-group col-md-6">
                                 <label class="col-md-12 control-label " for="CustomerName">Customer Name</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Customer Name" aria-label="Date" id="CustomerName"
                                         name="CustomerName" formControlName="CustomerName">
+                                        <div id="CustomerName" *ngIf="createcustomer.controls['CustomerName'].touched &&createcustomer.controls['CustomerName'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcustomer.controls['CustomerName'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>    
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -39,6 +44,11 @@
                                     <input class="form-control form-control col-md-12" type="email"
                                         placeholder="email" aria-label="Date" id="email"
                                         name="email" formControlName="email">
+                                        <div id="email" *ngIf="createcustomer.controls['email'].touched &&createcustomer.controls['email'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcustomer.controls['email'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>    
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -47,6 +57,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="phone" aria-label="Date" id="phone"
                                         name="phone" formControlName="phone">
+                                        <div id="phone" *ngIf="createcustomer.controls['phone'].touched &&createcustomer.controls['phone'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcustomer.controls['phone'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>   
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -55,6 +70,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="country" aria-label="Date" id="country"
                                         name="country" formControlName="country">
+                                        <div id="country" *ngIf="createcustomer.controls['country'].touched &&createcustomer.controls['country'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcustomer.controls['country'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>    
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -63,6 +83,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="city" aria-label="Date" id="city"
                                         name="city" formControlName="city">
+                                        <div id="city" *ngIf="createcustomer.controls['city'].touched &&createcustomer.controls['city'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcustomer.controls['city'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>   
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -71,6 +96,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="address" aria-label="Date" id="address"
                                         name="address" formControlName="address">
+                                        <div id="address" *ngIf="createcustomer.controls['address'].touched &&createcustomer.controls['address'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcustomer.controls['address'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>   
                                 </div>
                             </div>
 
