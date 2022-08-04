@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Purchase;
 
+use App\Models\ProductWarehouse;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -103,5 +104,47 @@ class PurchaseRepository implements PurchaseRepositoryInterface
             $code = 'PR_1111';
         }
         return $code;
+    }
+
+    public function createPurchaseDateails(Request $request, $id): array
+    {
+        $purchase = $this->read($id);
+        $purchaseDetails = [];
+        foreach ($request->purchaseDetails as $purchDetail) {
+            $purchaseDetailModel = $purchase->purchaseDetails();
+            DB::transaction(function() use ($purchaseDetailModel, $purchDetail, $id) {
+                $purchaseDetailModel->create([
+                    'purchase_id' => $id,
+                    'product_id' => $purchDetail['product_id'],
+                    'quantity' => $purchDetail['quantity'],
+                    'cost' => $purchDetail['cost'],
+                    'purchase_unit_id' => $purchDetail['purchase_unit_id'],
+                    'TaxNet' => $purchDetail['TaxNet'],
+                    'tax_method' => $purchDetail['tax_method'],
+                    'discount' => $purchDetail['discount'],
+                    'discount_method' => $purchDetail['discount_method'],
+                    'product_variant_id' => isset($purchDetail['product_variant_id'])?$purchDetail['product_variant_id'] : null,
+                    'total' => $purchDetail['total'],
+                ]);
+            }, 3);
+            $purchaseDetails[] = $purchaseDetailModel;
+        }
+
+        return $purchaseDetails;
+    }
+
+    public function addProductWarehouse(Request $request)
+    {
+        foreach ($request->purchaseDetails as $purchDetail) {
+            $productWarehouseModel= new ProductWarehouse();
+            DB::transaction(function() use ($productWarehouseModel, $purchDetail, $request) {
+                $productWarehouseModel->create([
+                    'product_id' => $purchDetail['product_id'],
+                    'warehouse_id' => $request['warehouse_id'],
+                    'product_variant_id' => isset($purchDetail['product_variant_id'])?$purchDetail['product_variant_id']: null,
+                    'qte' => $purchDetail['quantity'],
+                ]);
+            }, 3);
+        }
     }
 }
