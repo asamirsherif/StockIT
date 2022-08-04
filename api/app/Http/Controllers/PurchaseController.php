@@ -83,7 +83,8 @@ class PurchaseController extends Controller
         if(!$purchase)
             return $this->errMsg('This purchase doesn\'t exist');
         else
-            return $this->purchaseRepo->read($id);
+            // return $this->purchaseRepo->read($id);
+            return $this->succWithData(new PurchaseResource($purchase), "purchase details");
     }
 
     /**
@@ -95,7 +96,19 @@ class PurchaseController extends Controller
      */
     public function update(PurchaseRequest $request, $id)
     {
-        //
+        $purchase = Purchase::find($id);
+
+        if(!$purchase)
+            return $this->errMsg('This purchase doesn\'t exist');
+
+        $purchaseUpdated = $this->purchaseRepo->update($request, $id);
+
+        $this->purchaseRepo->updatePurchaseDateails($request, $purchaseUpdated->id);
+
+        if($purchaseUpdated)
+            return $this->succWithData(new PurchaseResource($purchaseUpdated), "purchase updated successfully");
+        else
+            return $this->errMsg("purchase doesn\'t updated");
     }
 
     /**

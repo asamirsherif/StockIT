@@ -147,4 +147,30 @@ class PurchaseRepository implements PurchaseRepositoryInterface
             }, 3);
         }
     }
+
+    public function updatePurchaseDateails(Request $request, $id): array
+    {
+        $purchase = $this->read($id);
+        $purchaseDetails = [];
+        foreach ($request->purchaseDetails as $purchDetail) {
+            $purchaseDetailModel = $purchase->purchaseDetails();
+            DB::transaction(function() use ($purchaseDetailModel, $purchDetail, $id) {
+                $purchaseDetailModel->updateOrCreate([
+                    'purchase_id' => $id,
+                    'product_id' => $purchDetail['product_id'],
+                    'quantity' => $purchDetail['quantity'],
+                    'cost' => $purchDetail['cost'],
+                    'purchase_unit_id' => $purchDetail['purchase_unit_id'],
+                    'TaxNet' => $purchDetail['TaxNet'],
+                    'tax_method' => $purchDetail['tax_method'],
+                    'discount' => $purchDetail['discount'],
+                    'discount_method' => $purchDetail['discount_method'],
+                    'product_variant_id' => isset($purchDetail['product_variant_id'])? $purchDetail['product_variant_id']: null,
+                    'total' => $purchDetail['total'],
+                ]);
+            }, 3);
+            $purchaseDetails[] = $purchaseDetailModel;
+        }
+        return $purchaseDetails;
+    }
 }
