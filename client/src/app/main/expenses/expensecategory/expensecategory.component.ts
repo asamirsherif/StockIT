@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-expensecategory',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpensecategoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) {
+    
+   }
+   openModal(contentModal) {
+    this.modalService.open(contentModal);}
 
   ngOnInit(): void {
   }
-
+ 
 }
+
