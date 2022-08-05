@@ -11,7 +11,43 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <button type="button" class="btn btn-primary"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-primary" (click)="openModal(contentModal)"><i data-feather="plus-circle"></i>Create</button>
+               <!-- Modal -->
+               <ng-template #contentModal let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Create</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class="col-md-12">
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12 control-label " for="Category Code">Category Code</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Category Code" aria-label="Date" id="CategoryCode"
+                                        name="CategoryCode" formControlName="CategoryCode">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12 control-label " for="CategoryName">Category Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Category Name" aria-label="Date" id="CategoryName"
+                                        name="CategoryName" formControlName="CategoryName">
+                                </div>
+                            </div>
+                         
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </ng-template>
         </div>
     </div>
     <table class="table">
