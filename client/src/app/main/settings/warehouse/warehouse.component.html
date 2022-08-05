@@ -21,13 +21,18 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12">
+                    <form class="row col-md-12" [formGroup]="createwarehous" (ngSubmit)="formSubmit()">
                             <div class="form-group col-md-6">
                                 <label class="col-md-12 control-label " for="Name"> Name</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Name" aria-label="Date" id="Name"
                                         name="Name" formControlName="Name">
+                                        <div id="Name" *ngIf="createwarehous.controls['Name'].touched &&createwarehous.controls['Name'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['Name'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>        
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -36,6 +41,11 @@
                                     <input class="form-control form-control col-md-12" type="email"
                                         placeholder="email" aria-label="Date" id="email"
                                         name="email" formControlName="email">
+                                        <div id="email" *ngIf="createwarehous.controls['email'].touched &&createwarehous.controls['email'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['email'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>      
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -44,6 +54,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="phone" aria-label="Date" id="phone"
                                         name="phone" formControlName="phone">
+                                        <div id="phone" *ngIf="createwarehous.controls['phone'].touched &&createwarehous.controls['phone'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['phone'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>      
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -52,6 +67,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="country" aria-label="Date" id="country"
                                         name="country" formControlName="country">
+                                        <div id="country" *ngIf="createwarehous.controls['country'].touched &&createwarehous.controls['country'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['country'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>         
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -60,6 +80,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="city" aria-label="Date" id="city"
                                         name="city" formControlName="city">
+                                        <div id="city" *ngIf="createwarehous.controls['city'].touched &&createwarehous.controls['city'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['city'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>     
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
