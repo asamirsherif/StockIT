@@ -21,21 +21,31 @@
                         </button>
                     </div>
                     <div class="modal-body centered">
-                        <form class=" col-md-12">
-                                <div class="form-group col-md-12">
-                                    <label class="col-md-12 control-label " for="Name Unit">Name Unit</label>
-                                    <div class="col-md-12 ">
-                                        <input class="form-control form-control col-md-12" type="text"
-                                            placeholder="Name Unit" aria-label="Date" id="CurrencyCode"
-                                            name="NameUnit" formControlName="NameUnit">
-                                    </div>
-                                </div>
+                        <form class=" col-md-12" [formGroup]="createunit" (ngSubmit)="formSubmit()">
                                 <div class="form-group col-md-12">
                                     <label class="col-md-12 control-label " for="Name Unit">Name Unit</label>
                                     <div class="col-md-12 ">
                                         <input class="form-control form-control col-md-12" type="text"
                                             placeholder="Name Unit" aria-label="Date" id="NameUnit"
                                             name="NameUnit" formControlName="NameUnit">
+                                            <div id="NameUnit" *ngIf="createunit.controls['NameUnit'].touched &&createunit.controls['NameUnit'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createunit.controls['NameUnit'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Short Name">Short Name</label>
+                                    <div class="col-md-12 ">
+                                        <input class="form-control form-control col-md-12" type="text"
+                                            placeholder="Short Name" aria-label="Date" id="ShortName"
+                                            name="ShortName" formControlName="ShortName">
+                                            <div id="ShortName" *ngIf="createunit.controls['ShortName'].touched &&createunit.controls['ShortName'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createunit.controls['ShortName'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12">

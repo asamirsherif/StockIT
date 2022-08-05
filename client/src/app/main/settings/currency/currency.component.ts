@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-currency',
@@ -7,12 +8,20 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./currency.component.scss']
 })
 export class CurrencyComponent implements OnInit {
-
-  constructor(private modalService: NgbModal) { }
+  createcurrency:FormGroup;
+  constructor(private modalService: NgbModal ,private fb:FormBuilder) { 
+    this.createcurrency = new FormGroup({
+      CurrencyCode: new FormControl('', Validators.required),
+      CurrencyName: new FormControl('', Validators.required),
+      Symbol: new FormControl('', Validators.required)})
+  }
   openModal(contentModal) {
     this.modalService.open(contentModal);
     }
   ngOnInit(): void {
   }
+  formSubmit() {
+    console.log(this.createcurrency);
+  } 
 
 }

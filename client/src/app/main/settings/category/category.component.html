@@ -21,13 +21,18 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="col-md-12">
-                            <div class="form-group col-md-12">
+                    <form class="col-md-12" [formGroup]="createcategory" (ngSubmit)="formSubmit()">
+                            <div class="form-group col-md-12" >
                                 <label class="col-md-12 control-label " for="Category Code">Category Code</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Category Code" aria-label="Date" id="CategoryCode"
                                         name="CategoryCode" formControlName="CategoryCode">
+                                        <div id="CategoryCode" *ngIf="createcategory.controls['CategoryCode'].touched &&createcategory.controls['CategoryCode'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcategory.controls['CategoryCode'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>     
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
@@ -36,6 +41,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Category Name" aria-label="Date" id="CategoryName"
                                         name="CategoryName" formControlName="CategoryName">
+                                        <div id="CategoryName" *ngIf="createcategory.controls['CategoryName'].touched &&createcategory.controls['CategoryName'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcategory.controls['CategoryName'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>
                                 </div>
                             </div>
                          
