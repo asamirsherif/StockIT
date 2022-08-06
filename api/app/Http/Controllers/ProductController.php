@@ -113,9 +113,16 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-
         if (!$product)
             return $this->errMsg("Product dose not exist!");
+
+        $variants = $product->productVariants;
+
+        if (count($variants) > 0) {
+            $request = new Request(['variants' => []]);
+            $this->proRepo->deleteVariants($request, $id);
+        }
+
 
         $deleted = $this->proRepo->delete($id);
         if ($deleted)

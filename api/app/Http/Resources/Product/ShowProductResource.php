@@ -63,6 +63,7 @@ class ShowProductResource extends JsonResource
             'name' => $this->name,
             'type_barcode' => $this->Type_barcode,
             'brand' => $this->brand?->name ? $this->brand->name : "N/D",
+            'variants' => ProductVariantResource::collection($this->productVariants),
             'unit' => new UnitResource($this->unit),
             'unitPurchase' => new UnitResource($this->unitPurchase),
             'unitSale' => new UnitResource($this->unitSale),
