@@ -18,7 +18,7 @@ Using Laravel & Angular
 cd api
 composer install
 npm install
-php artisan migrate
+php artisan migrate --seed
 php aritsan passport:install
 
 ```
