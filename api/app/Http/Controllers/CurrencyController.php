@@ -10,6 +10,7 @@ use App\Models\Currency;
 use App\Repositories\Currency\CurrencyRepositoryInterface;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
+use App\Models\Permission;
 
 
 
@@ -26,6 +27,8 @@ class CurrencyController extends Controller
     {
         
         $this->currencyRepo = $currencyRepo;
+        // $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
     }
 
 

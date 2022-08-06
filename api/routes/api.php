@@ -14,6 +14,7 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SalesReturnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,5 +89,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     // sale
     Route::apiResource('sale',SaleController::class);
 
+    //SalesReturn
+    Route::apiResource('salesReturn', SalesReturnController::class);
 
 });

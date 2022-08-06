@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Currency;
+namespace App\Http\Requests\SalesReturn;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class CurrencyRequest extends FormRequest
+class SalesReturnRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +24,11 @@ class CurrencyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', Rule::unique('currencies')->whereNull('deleted_at'), 'min:2', 'max:192'],
+
+            'client_id' => 'required',
+            'warehouse_id' => 'required',
+            'status' => 'required',
+            // 'notes' => ['string', 'min:5'],
         ];
     }
 }
