@@ -24,6 +24,7 @@ class CurrencyController extends Controller
 
     public function __construct(CurrencyRepositoryInterface $currencyRepo)
     {
+        
         $this->currencyRepo = $currencyRepo;
     }
 
@@ -35,7 +36,9 @@ class CurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
         if ($request->filled('search')) {
             $currencies = $this->currencyRepo->multiSearch($request)
                 ->paginate($request->perPage);
@@ -54,7 +57,9 @@ class CurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CurrencyRequest $request)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
         $created = $this->currencyRepo->create($request);
         if ($created)
             return $this->succWithData(new CurrencyResource($created));
@@ -69,7 +74,9 @@ class CurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
         $this->currencyRepo->read($id);
     }
 
@@ -81,7 +88,9 @@ class CurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCurrencyRequest $request, $id)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
         $updated = $this->currencyRepo->update($request, $id);
         if ($updated)
             return $this->succWithData(new CurrencyResource($updated));
@@ -96,7 +105,9 @@ class CurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+        
         $currency = Currency::find($id);
         if (!$currency)
             return $this->errMsg("This Currency doesnt exist");

@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::middleware([])->group(function () {
+Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     // -------------- USERS ---------------- \\
     Route::apiResource('users', UserController::class);
@@ -74,6 +75,7 @@ Route::middleware([])->group(function () {
     // adjustments
     Route::apiResource('adjustments', 'App\Http\Controllers\AdjustmentController');
 
+    //Sanctum csrf test
     Route::get('sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
     //providers
@@ -83,5 +85,8 @@ Route::middleware([])->group(function () {
     Route::apiResource('products', ProductController::class);
     // purchase
     Route::apiResource('purchases', PurchaseController::class);
+    // sale
+    Route::apiResource('sale',SaleController::class);
+
 
 });
