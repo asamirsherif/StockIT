@@ -2,25 +2,23 @@
 
 namespace App\Models;
 
-use App\Filters\Adjustment\AdjustmentFilter;
+use App\Filters\SalesReturn\SalesReturnFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
-class Adjustment extends Model
+class SalesReturn extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table= "sale_returns";
 
-    protected $fillable = [
-        'user_id', 'date', 'Ref', 'warehouse_id', 'items', 'notes'
-    ];
 
-    // filteration
-    public function scopeFilter(Builder $builder, Request $request) {
+     // filteration
+     public function scopeFilter(Builder $builder, Request $request) {
 
-        return (new AdjustmentFilter($request))->filter($builder);
+        return (new SalesReturnFilter($request))->filter($builder);
     }
 
     // user_id relation
@@ -32,5 +30,18 @@ class Adjustment extends Model
     public function warehouse()
     {
         return $this->belongsTo(Warehouse::class);
+
+    }
+    // client_id relation
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+
+    }
+
+    public function details()
+    {
+        return $this->hasMany(SaleReturnDetails::class);
     }
 }

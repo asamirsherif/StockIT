@@ -21,6 +21,8 @@ use App\Repositories\Client\ClientRepository;
 use App\Repositories\Client\ClientRepositoryInterface;
 use App\Repositories\Provider\ProviderRepository;
 use App\Repositories\Provider\ProviderRepositoryInterface;
+use App\Repositories\Sales_return\Sales_returnRepository;
+use App\Repositories\Sales_return\Sales_returnRepositoryInterface;
 use App\Repositories\Unit\UnitRepository;
 use App\Repositories\Unit\UnitRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -72,6 +74,11 @@ class AppRepositoryProvider extends ServiceProvider
 
         //provider
         $this->app->bind(ProviderRepositoryInterface::class, ProviderRepository::class);
+
+
+        //SalesReturn
+         //provider
+         $this->app->bind(Sales_returnRepositoryInterface::class, Sales_returnRepository::class);
     }
 
     /**
