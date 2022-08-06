@@ -23,6 +23,8 @@ use App\Repositories\Product\ProductRepository;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Provider\ProviderRepository;
 use App\Repositories\Provider\ProviderRepositoryInterface;
+use App\Repositories\Purchase\PurchaseRepository;
+use App\Repositories\Purchase\PurchaseRepositoryInterface;
 use App\Repositories\Unit\UnitRepository;
 use App\Repositories\Unit\UnitRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -78,6 +80,8 @@ class AppRepositoryProvider extends ServiceProvider
 
         //product
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        // purchase
+        $this->app->bind(PurchaseRepositoryInterface::class, PurchaseRepository::class);
     }
 
     /**
