@@ -15,5 +15,8 @@ class Warehouse extends Model
         "name", "city", "mobile", "zip", "email", "country"
     ];
 
-    
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }
