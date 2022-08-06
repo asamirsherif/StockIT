@@ -79,7 +79,7 @@ class PermissionSeeder extends Seeder
 
 
 		$all_permissions = array(); 
-    	array_push($all_permissions,...$user,...$roles,...$settings,...$product,...$expense,...$transfer,
+    	array_push($all_permissions,...$user,...$roles,...$settings,...$product,...$expense,...$category_expense,...$transfer,
 									...$adjustment,...$sales,...$sales_return,...$purchases,...$quotation,
 									...$purchases_return,...$customers,...$supplier,...$purchases_payment,
 									...$return_payment,...$reports,...$extra);

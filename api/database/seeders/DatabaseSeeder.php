@@ -22,6 +22,19 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             UserRoleSeeder::class,
             PermissionRoleSeeder::class,
+            WarehouseSeeder::class,
         ]);
+
+        // Development Only Seeders :
+        if (env('APP_ENV') =='local'){
+            $this->call([
+            CategorySeeder::class,
+            ProductSeeder::class,
+            SaleSeeder::class,
+            SaleDetailSeeder::class
+
+        ]);
+        }
+
     }
 }
