@@ -34,7 +34,8 @@ class ExpenseController extends Controller
             $expenses = Expense::filter($request)->paginate($request->perPage);
 
         $expenses->appends([
-            "ref" => $request->ref, "date" => $request->date,
+            "ref" => $request->ref,
+            "date" => $request->date,
             "warehouse_id" => $request->warehouse_id,
             "expense_category_id" => $request->expense_category_id,
             'perPage' => $request->perPage
