@@ -65,6 +65,7 @@ import { CustomerlistComponent } from './main/people/customerlist/customerlist.c
 import { SupplierlistComponent } from './main/people/supplierlist/supplierlist.component';
 import { UserlistComponent } from './main/people/userlist/userlist.component'
 import { ProfitAndLossModule } from './main/Reports/profit-and-loss/profit-and-loss.module';
+import { CreatepermissionComponent } from './main/setting/permission/createpermission/createpermission.component';
 
 const appRoutes: Routes = [
   {
@@ -222,13 +223,17 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/people/userlist/userlist.module').then(m => m.UserlistModule)
   },
   {
+    path: 'createpermission',
+    loadChildren: () => import('./main/setting/permission/createpermission/createpermission.module').then(m => m.CreatepermissionModule)
+  },
+  {
     path: '**',
     redirectTo: '/pages/miscellaneous/error' //Error 404 - Page not found
   }
 ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,],
   imports: [
     BrowserModule,
     BrowserAnimationsModule, FormsModule,

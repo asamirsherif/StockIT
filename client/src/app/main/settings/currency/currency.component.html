@@ -11,7 +11,66 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <button type="button" class="btn btn-primary"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-primary" (click)="openModal(contentModal)"><i data-feather="plus-circle"></i>Create</button>
+               <!-- Modal -->
+               <ng-template #contentModal let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Create</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class=" col-md-12" [formGroup]="createcurrency" (ngSubmit)="formSubmit()">
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12 control-label " for="Currency Code">Currency Code</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Currency Code" aria-label="Date" id="CurrencyCode"
+                                        name="CurrencyCode" formControlName="CurrencyCode">
+                                        <div id="CurrencyCode" *ngIf="createcurrency.controls['CurrencyCode'].touched &&createcurrency.controls['CurrencyCode'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcurrency.controls['CurrencyCode'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12 control-label " for="Currency Name">Currency Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="Currency Name"
+                                        placeholder="Currency Name" aria-label="Date" id="CurrencyName"
+                                        name="CurrencyName" formControlName="CurrencyName">
+                                        <div id="CurrencyName" *ngIf="createcurrency.controls['CurrencyName'].touched &&createcurrency.controls['CurrencyName'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcurrency.controls['CurrencyName'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12 control-label " for="Symbol">Symbol</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Symbol" aria-label="Date" id="Symbol"
+                                        name="Symbol" formControlName="Symbol">
+                                        <div id="Symbol" *ngIf="createcurrency.controls['Symbol'].touched &&createcurrency.controls['Symbol'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcurrency.controls['Symbol'].errors?.['required']">This field is
+                                            required</small>
+                                    </div> 
+                                </div>
+                            </div>
+                       
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </ng-template>
         </div>
     </div>
     <table class="table">

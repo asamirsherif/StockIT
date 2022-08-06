@@ -14,7 +14,105 @@
             <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
             <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
             <button type="button" class="btn btn-primary "><i data-feather="download"></i>Import Products</button>
-            <button type="button" class="btn btn-secondary"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-secondary" (click)="openModal(contentModal)"><i data-feather="plus-circle"></i>Create</button>
+            <!-- Modal -->
+            <ng-template #contentModal let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Create</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class="row col-md-12"[formGroup]="createsuplier" (ngSubmit)="formSubmit()">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label " for="SupplierName">Supplier Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Supplier Name" aria-label="Date" id="SupplierName"
+                                        name="SupplierName" formControlName="SupplierName">
+                                        <div id="SupplierName" *ngIf="createsuplier.controls['SupplierName'].touched &&createsuplier.controls['SupplierName'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createsuplier.controls['SupplierName'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>   
+                                    </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Email">Email</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="email"
+                                        placeholder="email" aria-label="Date" id="email"
+                                        name="email" formControlName="email">
+                                        <div id="email" *ngIf="createsuplier.controls['email'].touched &&createsuplier.controls['email'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createsuplier.controls['email'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>       
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="phone">Phone</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="phone" aria-label="Date" id="phone"
+                                        name="phone" formControlName="phone">
+                                        <div id="phone" *ngIf="createsuplier.controls['phone'].touched &&createsuplier.controls['phone'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createsuplier.controls['phone'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>      
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Country">Country</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="country" aria-label="Date" id="country"
+                                        name="country" formControlName="country">
+                                        <div id="country" *ngIf="createsuplier.controls['country'].touched &&createsuplier.controls['country'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createsuplier.controls['country'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>      
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="city">City</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="city" aria-label="Date" id="city"
+                                        name="city" formControlName="city">
+                                        <div id="city" *ngIf="createsuplier.controls['city'].touched &&createsuplier.controls['city'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createsuplier.controls['city'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>       
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="address">Address</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="address" aria-label="Date" id="address"
+                                        name="address" formControlName="address">
+                                        <div id="address" *ngIf="createsuplier.controls['address'].touched &&createsuplier.controls['address'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createsuplier.controls['address'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>      
+                                </div>
+                            </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </ng-template>
         </div>
     </div>
     <table class="table">
