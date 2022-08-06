@@ -24,6 +24,8 @@ use App\Repositories\Provider\ProviderRepositoryInterface;
 use App\Repositories\Unit\UnitRepository;
 use App\Repositories\Unit\UnitRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Sale\SaleRepositoryInterface;
+use App\Repositories\Sale\SaleRepository;
 
 class AppRepositoryProvider extends ServiceProvider
 {
@@ -72,6 +74,9 @@ class AppRepositoryProvider extends ServiceProvider
 
         //provider
         $this->app->bind(ProviderRepositoryInterface::class, ProviderRepository::class);
+
+        //Sale
+        $this->app->bind(SaleRepositoryInterface::class, SaleRepository::class);
     }
 
     /**
