@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductWarehouseSearchController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PurchaseController;
@@ -84,4 +85,9 @@ Route::middleware([])->group(function () {
     // purchase
     Route::apiResource('purchases', PurchaseController::class);
 
+    //product warehouse search
+    Route::get('purchesProductSearch', [ProductWarehouseSearchController::class, 'purchaseSearch']);
+
+    // sale prodcut warehouse search
+    Route::get('saleProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'saleSearch']);
 });
