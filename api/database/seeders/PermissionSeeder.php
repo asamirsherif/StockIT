@@ -23,13 +23,16 @@ class PermissionSeeder extends Seeder
 		$roles = ['permissions_add','permissions_view','permissions_edit','permissions_delete'];
 
 		// Settings ( Brands - warehouse - category - currency - unit - settings)
-		$brand = ['brand','warehouse','category','currency','unit','setting_system'];
+		$settings = ['brand','warehouse','category','currency','unit','setting_system'];
 
 		// Products
 		$product = ['products_add','products_view','products_edit','products_delete','barcode_view'];
 
 		// Expense
 		$expense = ['expense_add','expense_view','expense_edit','expense_delete'];
+
+		// Category Expense
+		$category_expense = ['category_expense_add','category_expense_view','category_expense_edit','category_expense_delete'];
 
 		// Transfer 
 		$transfer = ['transfer_add','transfer_view','transfer_edit','transfer_delete'];
@@ -76,7 +79,7 @@ class PermissionSeeder extends Seeder
 
 
 		$all_permissions = array(); 
-    	array_push($all_permissions,...$user,...$roles,...$brand,...$product,...$expense,...$transfer,
+    	array_push($all_permissions,...$user,...$roles,...$settings,...$product,...$expense,...$category_expense,...$transfer,
 									...$adjustment,...$sales,...$sales_return,...$purchases,...$quotation,
 									...$purchases_return,...$customers,...$supplier,...$purchases_payment,
 									...$return_payment,...$reports,...$extra);
@@ -91,7 +94,7 @@ class PermissionSeeder extends Seeder
 
 
        // Insert some stuff
-	DB::table('permissions')->insert(
+		DB::table('permissions')->insert(
 		$seeder_data
 	);
     }

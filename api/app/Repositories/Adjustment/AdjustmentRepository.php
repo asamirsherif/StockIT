@@ -63,8 +63,8 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
     public function multiSearch(Request $request): Builder
     {
         $adjustments = Adjustment::filter($request)->where(function ($q) use ($request) {
-            return $q->where('name', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('ShortName', 'LIKE', "%" . $request->search . "%");
+            return $q->where('date', 'LIKE', "%" . $request->search . "%")
+                ->orWhere('Ref', 'LIKE', "%" . $request->search . "%");
         });
 
         return $adjustments;

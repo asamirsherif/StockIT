@@ -11,7 +11,100 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <button type="button" class="btn btn-primary"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-primary" (click)="openModal(contentModal)" ><i data-feather="plus-circle"></i>Create</button>
+             <!-- Modal -->
+             <ng-template #contentModal let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Create</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class="row col-md-12" [formGroup]="createwarehous" (ngSubmit)="formSubmit()">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label " for="Name"> Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Name" aria-label="Date" id="Name"
+                                        name="Name" formControlName="Name">
+                                        <div id="Name" *ngIf="createwarehous.controls['Name'].touched &&createwarehous.controls['Name'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['Name'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>        
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Email">Email</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="email"
+                                        placeholder="email" aria-label="Date" id="email"
+                                        name="email" formControlName="email">
+                                        <div id="email" *ngIf="createwarehous.controls['email'].touched &&createwarehous.controls['email'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['email'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>      
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="phone">Phone</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="phone" aria-label="Date" id="phone"
+                                        name="phone" formControlName="phone">
+                                        <div id="phone" *ngIf="createwarehous.controls['phone'].touched &&createwarehous.controls['phone'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['phone'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>      
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Country">Country</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="country" aria-label="Date" id="country"
+                                        name="country" formControlName="country">
+                                        <div id="country" *ngIf="createwarehous.controls['country'].touched &&createwarehous.controls['country'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['country'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>         
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="city">City</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="city" aria-label="Date" id="city"
+                                        name="city" formControlName="city">
+                                        <div id="city" *ngIf="createwarehous.controls['city'].touched &&createwarehous.controls['city'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createwarehous.controls['city'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>     
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label" for="Zip Code">Zip Code</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Zip Code" aria-label="Date" id="Zip Code"
+                                        name="Zip Code" formControlName="Zip Code">
+                                </div>
+                            </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </ng-template>
         </div>
     </div>
     <table class="table">

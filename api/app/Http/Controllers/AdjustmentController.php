@@ -31,22 +31,11 @@ class AdjustmentController extends Controller
         if ($request->filled('search')) {
             $adjustments = $this->adjustmentRepo->multiSearch($request)
                                 ->paginate($request->perPage);
-            $adjustments->appends('search', $request->search);
 
-            // $adjustments->appends(['search' => $request->search, 'perPage' => $request->perPage]);
+            $adjustments->appends(['search' => $request->search, 'perPage' => $request->perPage]);
         } else
-            // $adjustments = Adjustment::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
+            $adjustments = Adjustment::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
 
-            $adjustments = Adjustment::filter($request)->paginate($request->perPage);
-
-            $adjustments->appends([
-                'user_id' => $request->user_id,
-                'warehouse_id' => $request->warehouse_id,
-                'ref' => $request->ref,
-                'date' => $request->date,
-                'perPage' => $request->perPage
-
-            ]);
             return new AdjustmentCollection($adjustments);
     }
 
@@ -74,14 +63,12 @@ class AdjustmentController extends Controller
      */
     public function show($id)
     {
+        $adjustment = $this->adjustmentRepo->read($id);
 
-        $adjustment = Adjustment::find($id);
-
-        if(!$adjustment)
-            return $this->errMsg('This adjustment doesn\'t exist');
+        if($adjustment)
+            return $this->succWithData(new AdjustmentResource($adjustment), "Adjustment found");
         else
-            return $this->adjustmentRepo->read($id);
-
+            return $this->errMsg('This adjustment doesn\'t exist');
     }
 
     /**

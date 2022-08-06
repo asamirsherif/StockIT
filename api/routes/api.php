@@ -9,8 +9,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SalesReturnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,22 +37,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::middleware([])->group(function () {
+Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     // -------------- USERS ---------------- \\
     Route::apiResource('users', UserController::class);
-    Route::get('GetUserAuth', [UserController::class,'getUserAuth']);
-    Route::get("/GetPermissions", [UserController::class,'GetPermissions']);
-    Route::get('users/Get_Info/Profile', [UserController::class,'GetInfoProfile']);
-    Route::put('updateProfile/{id}', [UserController::class,'updateProfile']);
-    Route::post('logout', [UserController::class,'logoutApi']);
+    Route::get('GetUserAuth', [UserController::class, 'getUserAuth']);
+    Route::get("/GetPermissions", [UserController::class, 'GetPermissions']);
+    Route::get('users/Get_Info/Profile', [UserController::class, 'GetInfoProfile']);
+    Route::put('updateProfile/{id}', [UserController::class, 'updateProfile']);
+    Route::post('logout', [UserController::class, 'logoutApi']);
 
     // ------------- Permission --------------- \\
 
     Route::apiResource('roles', PermissionController::class);
-    Route::post('roles/check/Create_page', [PermissionController::class , 'Check_Create_Page']);
+    Route::post('roles/check/Create_page', [PermissionController::class, 'Check_Create_Page']);
     Route::get('getRoleswithoutpaginate', [PermissionController::class, 'getRoleswithoutpaginate']);
-    Route::post('roles/delete/by_selection', [PermissionController::class,'delete_by_selection']);
+    Route::post('roles/delete/by_selection', [PermissionController::class, 'delete_by_selection']);
 
     Route::apiResource('brands', BrandController::class);
 
@@ -72,8 +76,20 @@ Route::middleware([])->group(function () {
     // adjustments
     Route::apiResource('adjustments', 'App\Http\Controllers\AdjustmentController');
 
+    //Sanctum csrf test
     Route::get('sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
-    Route::apiResource('providers',ProviderController::class);
+    //providers
+    Route::apiResource('providers', ProviderController::class);
+
+    //products
+    Route::apiResource('products', ProductController::class);
+    // purchase
+    Route::apiResource('purchases', PurchaseController::class);
+    // sale
+    Route::apiResource('sale',SaleController::class);
+
+    //SalesReturn
+    Route::apiResource('salesReturn', SalesReturnController::class);
 
 });
