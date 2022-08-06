@@ -23,8 +23,7 @@ use App\Http\Resources\Sale\ShowSaleResource;
 use App\Traits\ResponseTrait;
 use App\Repositories\Sale\SaleRepositoryInterface;
 use App\Repositories\Sale\SaleRepository;
-use App\Http\Resources\Unit\UnitResource;
-// use App\Http\Resources\Product\ProductResource;
+
 
 class SaleController extends Controller
 {
