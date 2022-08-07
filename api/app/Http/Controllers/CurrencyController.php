@@ -70,7 +70,11 @@ class CurrencyController extends Controller
      */
     public function show($id)
     {
-        $this->currencyRepo->read($id);
+        $currency = Currency::find($id);
+        if($currency)
+            return $this->succWithData(new CurrencyResource($currency),'currency found');
+        else
+            return $this->errMsg('currency not exist!');
     }
 
     /**
