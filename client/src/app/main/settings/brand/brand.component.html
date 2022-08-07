@@ -21,23 +21,28 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="col-md-12" [formGroup]="createbrand" (ngSubmit)="formSubmit()">
+                    <form class="col-md-12" [formGroup]="createbrand" (ngSubmit)="AddBrand()">
                             <div class="form-group col-md-12">
                                 <label class="col-md-12 control-label " for="Brand Name">Brand Name</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Brand Name" aria-label="Date" id="BrandName"
-                                        name="BrandName" formControlName="BrandName">
-                                        <div id="BrandName" *ngIf="createbrand.controls['BrandName'].touched &&createbrand.controls['BrandName'].invalid"
+                                        placeholder="Brand Name" aria-label="Date" id="name"
+                                        name="name" formControlName="name">
+                                        <div id="BrandName" *ngIf="createbrand.controls['name'].touched &&createbrand.controls['name'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="createbrand.controls['BrandName'].errors?.['required']">This field is
+                                        <small *ngIf="createbrand.controls['name'].errors?.['required']">This field is
                                             required</small>
                                     </div>     
                                 </div>
                             </div>
                             <div class="form-group col-md-12 ">
                                 <label for="exampleFormControlTextarea1" class="form-label ">Brand Description</label>
-                                <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea class="form-control " id="description" name="description" rows="3" formControlName="description"></textarea>
+                                <div id="description" *ngIf="createbrand.controls['description'].touched &&createbrand.controls['description'].invalid"
+                                class="form-text text-danger">
+                                <small *ngIf="createbrand.controls['description'].errors?.['required']">This field is
+                                    required</small>
+                            </div>    
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="col-md-12 control-label " for="Brand Image">Brand Image</label>
@@ -45,6 +50,11 @@
                                     <input class="form-control form-control col-md-12" type="file"
                                         placeholder="image" aria-label="Date" id="image"
                                         name="image" formControlName="image">
+                                        <div id="image" *ngIf="createbrand.controls['image'].touched &&createbrand.controls['image'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createbrand.controls['image'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>        
                                 </div>
                             </div>
                           
