@@ -22,33 +22,33 @@ import { User, Role } from 'app/auth/models';
 
 // Users with role
 const users: User[] = [
-  {
-    id: 1,
-    email: 'admin@demo.com',
-    password: 'admin',
-    firstName: 'John',
-    lastName: 'Doe',
-    avatar: 'avatar-s-11.jpg',
-    role: Role.Admin
-  },
-  {
-    id: 2,
-    email: 'client@demo.com',
-    password: 'client',
-    firstName: 'Nataly',
-    lastName: 'Doe',
-    avatar: 'avatar-s-2.jpg',
-    role: Role.Client
-  },
-  {
-    id: 3,
-    email: 'user@demo.com',
-    password: 'user',
-    firstName: 'Rose',
-    lastName: 'Doe',
-    avatar: 'avatar-s-3.jpg',
-    role: Role.User
-  }
+  // {
+  //   id: 1,
+  //   email: 'admin@demo.com',
+  //   password: 'admin',
+  //   firstName: 'John',
+  //   lastName: 'Doe',
+  //   avatar: 'avatar-s-11.jpg',
+  //   role: Role.Admin
+  // },
+  // {
+  //   id: 2,
+  //   email: 'client@demo.com',
+  //   password: 'client',
+  //   firstName: 'Nataly',
+  //   lastName: 'Doe',
+  //   avatar: 'avatar-s-2.jpg',
+  //   role: Role.Client
+  // },
+  // {
+  //   id: 3,
+  //   email: 'user@demo.com',
+  //   password: 'user',
+  //   firstName: 'Rose',
+  //   lastName: 'Doe',
+  //   avatar: 'avatar-s-3.jpg',
+  //   role: Role.User
+  // }
 ];
 
 @Injectable()

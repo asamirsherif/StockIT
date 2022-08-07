@@ -33,7 +33,7 @@ export class BrandComponent implements OnInit {
           this.brand=res.data
           console.log(res)
         },
-        (e)=>{console.log("erorr")},
+        (e)=>{console.log("error")},
         ()=>{
           console.log("done");
           this._router.navigate(['brand'])

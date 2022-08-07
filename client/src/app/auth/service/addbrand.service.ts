@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AddbrandService {
   public brandData={data:''}
-  host = "http://localhost:8000/api/brands/"
+  host = environment.apiUrl + "/api/brands/"
   constructor(private _http:HttpClient) {}
  
   AddBrand(data:any):Observable<any>{

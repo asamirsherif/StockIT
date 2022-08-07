@@ -8,5 +8,5 @@ export class User {
   lastName: string;
   avatar: string;
   role: Role;
-  token?: string;
+  access_token: string;
 }
