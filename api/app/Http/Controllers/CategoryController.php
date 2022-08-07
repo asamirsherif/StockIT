@@ -86,7 +86,7 @@ class CategoryController extends Controller
         if(!$category)
             return $this->errMsg('This category doesn\'t exist');
         else
-            return $this->categoryRepo->read($id);
+            return $this->succWithData(new CategoryResource($category),'category found');
 
         // $category = Category::find($id);
         // return new CategoryResource($category);

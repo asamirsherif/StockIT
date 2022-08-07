@@ -80,7 +80,14 @@ class CurrencyController extends Controller
     {   
         $this->authorizeForUser($request->user('api'), 'view', Currency::class);
 
-        $this->currencyRepo->read($id);
+        // $this->currencyRepo->read($id);
+        
+        $currency = Currency::find($id);
+        if($currency)
+            return $this->succWithData(new CurrencyResource($currency),'currency found');
+        else
+            return $this->errMsg('currency not exist!');
+            
     }
 
     /**

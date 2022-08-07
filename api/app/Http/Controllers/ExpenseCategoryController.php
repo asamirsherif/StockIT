@@ -68,8 +68,8 @@ class ExpenseCategoryController extends Controller
     public function show(int $id)
     {
         $this->authorizeForUser($request->user('api'), 'view', ExpenseCategory::class);
-
-        $expenseCategory = $this->expCatRepo->read($id);
+        $expenseCategory = ExpenseCategory::find($id);
+        
         if ($expenseCategory)
             return $this->succWithData(new ExpenseCategoryResource($expenseCategory));
         else

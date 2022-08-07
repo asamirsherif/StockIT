@@ -30,25 +30,24 @@ class PurchaseController extends Controller
     {
         if ($request->filled('search')) {
             $purchases = $this->purchaseRepo->multiSearch($request)
-                                ->paginate($request->perPage);
+                ->paginate($request->perPage);
             $purchases->appends('search', $request->search);
-
         } else
 
             $purchases = Purchase::filter($request)->paginate($request->perPage);
 
-            $purchases->appends([
-                'user_id'        => $request->user_id,
-                'warehouse_id'   => $request->warehouse_id,
-                'ref'            => $request->ref,
-                'date'           => $request->date,
-                'provider_id'    => $request->provider_id,
-                'status'         => $request->status,
-                'payment_status' => $request->payment_status,
-                'perPage'        => $request->perPage
+        $purchases->appends([
+            'user_id'        => $request->user_id,
+            'warehouse_id'   => $request->warehouse_id,
+            'ref'            => $request->ref,
+            'date'           => $request->date,
+            'provider_id'    => $request->provider_id,
+            'status'         => $request->status,
+            'payment_status' => $request->payment_status,
+            'perPage'        => $request->perPage
 
-            ]);
-            return new PurchaseCollection($purchases);
+        ]);
+        return new PurchaseCollection($purchases);
     }
 
     /**
@@ -61,8 +60,8 @@ class PurchaseController extends Controller
     {
         $purchaseCreated = $this->purchaseRepo->create($request);
 
-        $this->purchaseRepo->createPurchaseDateails($request,$purchaseCreated->id);
-            $this->purchaseRepo->addProductWarehouse($request);
+        $this->purchaseRepo->createPurchaseDateails($request, $purchaseCreated->id);
+        $this->purchaseRepo->addProductWarehouse($request);
 
         if ($purchaseCreated)
             return $this->succWithData(new PurchaseResource($purchaseCreated), "purchase Created successfully");
@@ -80,11 +79,10 @@ class PurchaseController extends Controller
     {
         $purchase = Purchase::find($id);
 
-        if(!$purchase)
+        if (!$purchase)
             return $this->errMsg('This purchase doesn\'t exist');
         else
-            // return $this->purchaseRepo->read($id);
-            return $this->succWithData(new PurchaseResource($purchase), "purchase details");
+            return $this->succWithData(new PurchaseResource($purchase), 'purchase found');
     }
 
     /**
@@ -121,12 +119,12 @@ class PurchaseController extends Controller
     {
         $purchase = Purchase::find($id);
 
-        if(!$purchase)
+        if (!$purchase)
             return $this->errMsg('This purchase doesn\'t exist');
 
-            $purchaseDeleted = $this->purchaseRepo->delete($id);
+        $purchaseDeleted = $this->purchaseRepo->delete($id);
 
-        if($purchaseDeleted)
+        if ($purchaseDeleted)
             return $this->succWithData(new PurchaseResource($purchase), "purchase deleted successfully");
         else
             return $this->errMsg("purchase not deleted");

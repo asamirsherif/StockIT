@@ -73,7 +73,7 @@ class UnitController extends Controller
         if(!$unit)
             return $this->errMsg('This unit doesn\'t exist');
         else
-            return $this->unitRepo->read($id);
+            return $this->succWithData(new UnitResource($unit),'unit found');
     }
 
     /**
