@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -43,7 +43,7 @@ export class AuthenticationService {
   get isClient() {
     return this.currentUser && this.currentUserSubject.value.role === Role.Client;
   }
-
+ 
   /**
    * User login
    *
@@ -57,10 +57,10 @@ export class AuthenticationService {
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response
-          if (user && user.token) {
+          if (user && user.access_token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
+            
             localStorage.setItem('currentUser', JSON.stringify(user));
-
             // Display welcome toast!
             setTimeout(() => {
               this._toastrService.success(

@@ -19,7 +19,7 @@ class Adjustment extends Model
 
     // filteration
     public function scopeFilter(Builder $builder, Request $request) {
-        
+
         return (new AdjustmentFilter($request))->filter($builder);
     }
 

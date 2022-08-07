@@ -11,7 +11,65 @@
             </form>
         </div>
         <div class="col-md-3 ">
-            <button type="button" class="btn btn-primary"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-primary" (click)="openModal(contentModal)"><i data-feather="plus-circle"></i>Create</button>
+                <!-- Modal -->
+                <ng-template #contentModal let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-primary-title">Create</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body centered">
+                        <form class=" col-md-12" [formGroup]="createunit" (ngSubmit)="formSubmit()">
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Name Unit">Name Unit</label>
+                                    <div class="col-md-12 ">
+                                        <input class="form-control form-control col-md-12" type="text"
+                                            placeholder="Name Unit" aria-label="Date" id="NameUnit"
+                                            name="NameUnit" formControlName="NameUnit">
+                                            <div id="NameUnit" *ngIf="createunit.controls['NameUnit'].touched &&createunit.controls['NameUnit'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createunit.controls['NameUnit'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Short Name">Short Name</label>
+                                    <div class="col-md-12 ">
+                                        <input class="form-control form-control col-md-12" type="text"
+                                            placeholder="Short Name" aria-label="Date" id="ShortName"
+                                            name="ShortName" formControlName="ShortName">
+                                            <div id="ShortName" *ngIf="createunit.controls['ShortName'].touched &&createunit.controls['ShortName'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createunit.controls['ShortName'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Base Unit">Base Unit</label>
+                                    <div class="col-md-12 ">
+                                        <select class="form-select col-md-12 " aria-label="Default select example">
+                                            <option selected>Choose base unit</option>
+                                            <option>كجم</option>
+                                            <option>شيكارة</option>
+                                            <option>متر</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                           
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4">
+                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+    
+                    </div>
+                </ng-template>
         </div>
     </div>
     <table class="table">

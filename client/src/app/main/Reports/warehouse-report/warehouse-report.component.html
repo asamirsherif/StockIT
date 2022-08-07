@@ -3,7 +3,7 @@
     <hr>
     <div class="container row justify-content-center mb-5">
         
-            <div class=" form-group col-md-12">
+            <div class=" form-group col-md-12 text-center" >
                 <label class="col-md-6 control-label " for="category">Warehouse</label>
                 <div class="col-md-12 ">
                     <select class="form-select col-md-12 " aria-label="Default select example">
@@ -11,3 +11,374 @@
                       </select>
                 </div>
             </div>
+            <br> <br> <br> <br>
+            <section >
+                <div class="col-md-12 row ">
+                    <div class="col-md-3">
+                        <div class="card mb-3 ">
+                          <div class="row g-0">
+                            <div class="col-md-4 p-2">
+                              <i data-feather="shopping-cart" [size]="50"></i>
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body mb-2" >
+                                <h5 class="card-title ">Sales</h5>
+                                <p class="card-subtitle color-primary">12</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  <div class="col-md-3">
+                    <div class="card mb-3 ">
+                      <div class="row g-0">
+                        <div class="col-md-3 p-2">
+                          <i data-feather="shopping-bag" [size]="50"></i>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="card-body mb-2 ">
+                            <h5 class="card-title text-left">Purchases</h5>
+                            <p class="card-subtitle color-primary">4</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-3">
+                    <div class="card mb-3 ">
+                      <div class="row g-0">
+                        <div class="col-md-3 p-2">
+                          <i data-feather="corner-up-left" [size]="50"></i>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="card-body">
+                            <h5 class="card-title ">Purchases Return</h5>
+                            <p class="card-subtitle color-primary">0</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card mb-3 ">
+                      <div class="row g-0">
+                        <div class="col-md-3 p-2">
+                          <i data-feather="corner-up-right" [size]="50"></i>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="card-body">
+                            <h5 class="card-title ">Sales Return</h5>
+                            <p class="card-subtitle">0</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              
+
+                  <div class="conatiner" style="border-color:1px solid white;">
+
+  
+                    <ul ngbNav #nav="ngbNav" class="nav nav-pills">
+                      <li ngbNavItem>
+                        <a ngbNavLink>Quotations</a>
+                        <ng-template ngbNavContent>
+                            <body>
+                                <div class="container row">
+                                    <div class="col-md-6">
+                                        <form class="form-inline col-md-12 mb-1">
+                                            <span class="switch-icon-left"><i data-feather="search" [size]="25"></i></span>
+                                            <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                                                aria-label="Search">
+                                        </form>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Reference</th>
+                                            <th scope="col"> Customer</th>   
+                                            <th scope="col"> Grand Total</th>
+                                            <th scope="col"> Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>2022-7-22</td>
+                                            <td>EXP</td>
+                                            <td>fff</td>
+                                            <td>reee</td>
+                                            <td><button type="button" class="btn btn-outline-primary">pending</button></td>
+                                           
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </body>
+                            
+                           
+                        </ng-template>
+                      </li>
+                      <li ngbNavItem>
+                        <a ngbNavLink>Sales</a>
+                        <ng-template ngbNavContent>
+                            <body>
+                               
+                                <div class=" row">
+                                    <div class="col-md-6">
+                                        <form class="form-inline col-md-12 mb-1">
+                                            <span class="switch-icon-left"><i data-feather="search" [size]="25"></i></span>
+                                            <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                                                aria-label="Search">
+                                        </form>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Reference</th>
+                                            <th scope="col">Customer</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Grand Total</th>
+                                            <th scope="col">Paid</th>
+                                            <th scope="col">Due</th>
+                                            <th scope="col">Payment Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td><button type="button" class="btn btn-outline-success ">completed</button></td>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td>12</td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td><button type="button" class="btn btn-outline-success ">completed</button></td>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td>12</td>
+                                           
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td><button type="button" class="btn btn-outline-success ">completed</button></td>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td>12</td>
+                                          
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td><button type="button" class="btn btn-outline-success ">completed</button></td>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td>12</td>
+                                           
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td><button type="button" class="btn btn-outline-success ">completed</button></td>
+                                            <td>AD-1111</td>
+                                            <td>N/D</td>
+                                            <td>12</td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </body>
+                            
+                        </ng-template>
+                      </li>
+                      
+                      <li ngbNavItem>
+                        <a ngbNavLink>Sales Return</a>
+                        <ng-template ngbNavContent>
+                            <body>
+                                
+                                <div class=" row">
+                                    <div class="col-md-6">
+                                        <form class="form-inline col-md-12 mb-1">
+                                            <span class="switch-icon-left"><i data-feather="search" [size]="25"></i></span>
+                                            <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                                                aria-label="Search">
+                                        </form>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th scope="col">Reference</th>
+                                            <th scope="col">Customer</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Grand Total</th>
+                                            <th scope="col">Paid</th>
+                                            <th scope="col">Due</th>
+                                            <th scope="col">Payment Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                           
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </body>
+                            
+                            
+                        </ng-template>
+                      </li>
+                      <li ngbNavItem>
+                        <a ngbNavLink>Purchases Return</a>
+                        <ng-template ngbNavContent>
+                            <body>
+                                <div class="container row">
+                                    <div class="col-md-6">
+                                        <form class="form-inline col-md-12 mb-1">
+                                            <span class="switch-icon-left"><i data-feather="search" [size]="25"></i></span>
+                                            <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                                                aria-label="Search">
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                           
+                                            <th scope="col">Reference</th>
+                                            <th scope="col">Supplier</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Grand Total</th>
+                                            <th scope="col">Paid</th>
+                                            <th scope="col">Due</th>
+                                            <th scope="col">Payment Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                           
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </body>
+                            
+                        </ng-template>
+                      </li>
+                      <li ngbNavItem>
+                        <a ngbNavLink>Expenses</a>
+                        <ng-template ngbNavContent>
+                            <body>
+                
+                                <div class="container row">
+                                    <div class="col-md-6">
+                                        <form class="form-inline col-md-12 mb-1">
+                                            <span class="switch-icon-left"><i data-feather="search" [size]="25"></i></span>
+                                            <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                                                aria-label="Search">
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Reference</th>
+                                            <th scope="col"> Details</th>
+                                            <th scope="col"> Amount</th>
+                                            <th scope="col"> Category</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>2022-7-22</td>
+                                            <td>EXP</td>
+                                            <td>fff</td>
+                                            <td>10</td>
+                                            <td>كهربا</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>2022-7-22</td>
+                                            <td>EXP</td>
+                                            <td>fff</td>
+                                            <td>10</td>
+                                            <td>كهربا</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>2022-7-22</td>
+                                            <td>EXP</td>
+                                            <td>fff</td>
+                                            <td>10</td>
+                                            <td>كهربا</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="table-group-divider">
+                                        <tr>
+                                            <td>2022-7-22</td>
+                                            <td>EXP</td>
+                                            <td>fff</td>
+                                            <td>10</td>
+                                            <td>كهربا</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </body>
+                            
+                        </ng-template>
+                      </li>
+                    </ul>
+                    <div [ngbNavOutlet]="nav" class="mt-1"></div>
+                    <hr>
+                </div>
+<br><br>
+                <div class="chart  row container">
+                    <div class="col-md-6 sec1">
+                      <section class="charts-container">
+                        <canvas id="pieChart"></canvas>
+                      </section>
+                      </div>
+                   
+                        <div class="col-md-6 sec1">
+                          <section class="charts-container">
+                            <canvas id="pieChart2"></canvas>
+                          </section>
+                        </div>
+                        </div>

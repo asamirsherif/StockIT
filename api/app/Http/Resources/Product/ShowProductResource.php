@@ -15,8 +15,8 @@ class ShowProductResource extends JsonResource
      */
     public function toArray($request)
     {
-
         //----------------------------------------------------
+
         $price = $this->unitSale->operator == '/' ?
             (int)$this->price / (int) $this->unitSale->operator_value :
             (int)$this->price * (int)$this->unitSale->operator_value;
@@ -62,7 +62,7 @@ class ShowProductResource extends JsonResource
             'code' => $this->code,
             'name' => $this->name,
             'type_barcode' => $this->Type_barcode,
-            'brand' => $this->brand?->name ? $this->brand->name : "N/D",
+            'brand' => $this->brand->name ? $this->brand->name : "N/D",
             'variants' => ProductVariantResource::collection($this->productVariants),
             'unit' => new UnitResource($this->unit),
             'unitPurchase' => new UnitResource($this->unitPurchase),

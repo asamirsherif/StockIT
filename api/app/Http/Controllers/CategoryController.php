@@ -18,7 +18,8 @@ class CategoryController extends Controller
     private CategoryRepositoryInterface $categoryRepo;
 
     public function __construct(CategoryRepositoryInterface $categoryRepo)
-    {
+    {   
+        
         $this->categoryRepo = $categoryRepo;
     }
 
@@ -28,7 +29,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Category::class);
+
         // 2 params => perPage & search
         if ($request->filled('search')) {
             $categories = $this->categoryRepo->multiSearch($request)
@@ -48,7 +51,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Category::class);
+
         $created = $this->categoryRepo->create($request);
 
         if ($created)
@@ -74,7 +79,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Category::class);
+
         $category = Category::find($id);
         if(!$category)
             return $this->errMsg('This category doesn\'t exist');
@@ -94,6 +101,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
+
+        $this->authorizeForUser($request->user('api'), 'view', Category::class);
 
         $updated = $this->categoryRepo->update($request, $id);
         if ($updated)
@@ -116,7 +125,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Category::class);
+        
         $category = Category::find($id);
         if(!$category)
             return $this->errMsg('This category doesn\'t exist');
