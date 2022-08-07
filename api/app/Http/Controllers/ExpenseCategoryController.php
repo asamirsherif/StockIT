@@ -63,7 +63,7 @@ class ExpenseCategoryController extends Controller
      */
     public function show(int $id)
     {
-        $expenseCategory = $this->expCatRepo->read($id);
+        $expenseCategory = ExpenseCategory::find($id);
         if ($expenseCategory)
             return $this->succWithData(new ExpenseCategoryResource($expenseCategory));
         else

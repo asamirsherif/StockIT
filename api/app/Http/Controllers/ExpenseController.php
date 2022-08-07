@@ -67,7 +67,7 @@ class ExpenseController extends Controller
      */
     public function show(int $id)
     {
-        $expense = $this->expRepo->read($id);
+        $expense = Expense::find($id);
         if ($expense)
             return $this->succWithData(new ExpenseResource($expense), "Expense found");
         else
