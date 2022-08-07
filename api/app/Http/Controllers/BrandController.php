@@ -101,7 +101,7 @@ class BrandController extends Controller
     public function destroy($id)
     {   
 
-        $this->authorizeForUser($request->user('api'), 'view', Brand::class);
+       // $this->authorizeForUser($request->user('api'), 'view', Brand::class);
 
         $brand = Brand::find($id);
         if (!$brand)

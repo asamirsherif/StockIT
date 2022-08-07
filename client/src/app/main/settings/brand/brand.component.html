@@ -79,12 +79,12 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody class="table-group-divider" *ngFor="let brand of data.data ;let i =index" >
             <tr>
-                <td><img src="#"></td>
-                <td>jkk</td>
-                <td>ddvvv</td>
-                <td><i data-feather="edit" class="btn-outline-success"[size]="24" ></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24"></i></td>
+                <td><img [src]="brand.img"></td>
+                <td>{{brand.name}}</td>
+                <td>{{brand.description}}</td>
+                <td><i data-feather="edit" class="btn-outline-success"[size]="24" ></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24" (click)="deleteBrand(brand.id,i)"></i>   <button class="btn btn-sm btn-danger" (click)="deleteBrand(brand.id,i)">Delete</button></td>
             </tr>
         </tbody>
     </table>

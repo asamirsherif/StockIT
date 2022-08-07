@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./brand.component.scss']
 })
 export class BrandComponent implements OnInit {
+  data:any={}
   createbrand:FormGroup;
   constructor(private modalService: NgbModal ,private brand:AddbrandService,public _router:Router ) {
     this.createbrand = new FormGroup({
@@ -23,7 +24,18 @@ export class BrandComponent implements OnInit {
     this.modalService.open(contentModal);
     }
   ngOnInit(): void {
+   // this.AddBrand();
+   this.brand.allbrand().subscribe(
+    data=>this.data=data,
+    (e)=>this._router.navigate(['brand'])
+  )
   }
+  // AddBrand(){
+  //   this.brand.addBrand().subscribe(res=>{
+  //     console.log(res);
+  // this.data=res;
+  //   })
+  // }
   
   AddBrand(){
     if(this.createbrand.valid){
@@ -40,5 +52,16 @@ export class BrandComponent implements OnInit {
         }
       )
     }
+  }
+
+  deleteBrand(id:any,i:number){
+    console.log(id);
+    this.brand.deleteBrand(id).subscribe({
+    // res=>{this.AddBrand();}
+      next:()=>{
+       console.log(this.data)
+        this.data.data.splice(i,1)
+      }
+    })
   }
 }
