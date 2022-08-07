@@ -17,7 +17,7 @@ class ShowProductResource extends JsonResource
     {
 
         //----------------------------------------------------
-        if($this->unitSale)
+        
         $price = $this->unitSale->operator == '/' ?
             (int)$this->price / (int) $this->unitSale->operator_value :
             (int)$this->price * (int)$this->unitSale->operator_value;
