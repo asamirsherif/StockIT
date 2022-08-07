@@ -80,7 +80,7 @@ class ClientController extends Controller
         if(!$client)
             return $this->errMsg('This client doesn\'t exist');
         else
-            return $this->clientRepo->read($id);
+            return $this->succWithData(new ClientResource($client),'clint found');
     }
 
     /**
