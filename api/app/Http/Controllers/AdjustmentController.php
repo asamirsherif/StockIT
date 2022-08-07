@@ -63,7 +63,7 @@ class AdjustmentController extends Controller
      */
     public function show($id)
     {
-        $adjustment = $this->adjustmentRepo->read($id);
+        $adjustment = Adjustment::find($id);
 
         if($adjustment)
             return $this->succWithData(new AdjustmentResource($adjustment), "Adjustment found");

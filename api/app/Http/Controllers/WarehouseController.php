@@ -63,7 +63,7 @@ class WarehouseController extends Controller
      */
     public function show(int $id)
     {
-        $warehouse = $this->warehouseRepo->read($id);
+        $warehouse = Warehouse::find($id);
         if ($warehouse)
             return $this->succWithData(new WarehouseResource($warehouse));
         else

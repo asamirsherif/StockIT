@@ -71,9 +71,10 @@ class ExpenseController extends Controller
      */
     public function show(int $id)
     {
-        $this->authorizeForUser($request->user('api'), 'view', Expense::class);
 
-        $expense = $this->expRepo->read($id);
+        $this->authorizeForUser($request->user('api'), 'view', Expense::class);
+        
+        $expense = Expense::find($id);
         if ($expense)
             return $this->succWithData(new ExpenseResource($expense), "Expense found");
         else
