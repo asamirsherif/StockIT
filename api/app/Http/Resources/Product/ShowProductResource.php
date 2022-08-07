@@ -15,9 +15,8 @@ class ShowProductResource extends JsonResource
      */
     public function toArray($request)
     {
-
         //----------------------------------------------------
-        
+
         $price = $this->unitSale->operator == '/' ?
             (int)$this->price / (int) $this->unitSale->operator_value :
             (int)$this->price * (int)$this->unitSale->operator_value;
