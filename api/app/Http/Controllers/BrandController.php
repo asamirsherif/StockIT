@@ -68,7 +68,11 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        $this->brandRepo->read($id);
+        $brand = Brand::find($id);
+        if($brand){
+            return $this->succWithData(new BrandResource($brand),'brand found');
+        }else
+            return $this->errMsg('Brand not exist!');
     }
 
     /**
