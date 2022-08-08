@@ -225,9 +225,6 @@ const appRoutes: Routes = [
   {
     path: 'createpermission',
     loadChildren: () => import('./main/setting/permission/createpermission/createpermission.module').then(m => m.CreatepermissionModule)
-  },{
-    path: 'editbrand/:id',
-    loadChildren: () => import('./main/settings/brand/editbrand.module').then(m => m.EditBrandModule)
   },
   {
     path: '**',
