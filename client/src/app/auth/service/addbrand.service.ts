@@ -6,21 +6,24 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AddbrandService {
- public brandData={data:''}
+public brandData={data:''}
  host = environment.apiUrl + "/api/brands/"
   constructor(private _http:HttpClient) {}
  
   AddBrand(data:any):Observable<any>{
     return this._http.post(`${this.host}`, data)
   }
-  // addBrand(){
-  //   return this._http.get('http:/127.0.0.1:8000/api/brands')
-  // }
-
   allbrand():Observable<any>{
     return this._http.get(`${this.host}`)
   }
   deleteBrand(id:any):Observable<any>{
     return this._http.delete(`${this.host}${id}`)
   }
+  updateBrand(id:string,data:any):Observable<any>{
+    return this._http.patch(`${this.host}${id}`,data)
+  }
+  
+  // getBrandid(id:any):Observable<any>{
+  //   return this._http.get(`${this.host}${id}`)
+  // }
 }

@@ -8,7 +8,7 @@ import 'hammerjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrModule } from 'ngx-toastr'; // For auth after login toast
-
+import {NgForm} from '@angular/forms';
 import { CoreModule } from '@core/core.module';
 import { CoreCommonModule } from '@core/common.module';
 import { CoreSidebarModule, CoreThemeCustomizerModule } from '@core/components';
@@ -225,6 +225,9 @@ const appRoutes: Routes = [
   {
     path: 'createpermission',
     loadChildren: () => import('./main/setting/permission/createpermission/createpermission.module').then(m => m.CreatepermissionModule)
+  },{
+    path: 'editbrand/:id',
+    loadChildren: () => import('./main/settings/brand/editbrand.module').then(m => m.EditBrandModule)
   },
   {
     path: '**',
@@ -233,7 +236,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent,],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule, FormsModule,
@@ -257,8 +260,7 @@ const appRoutes: Routes = [
 
     // App modules
     LayoutModule,
-    SampleModule,
-    ProfitAndLossModule
+    SampleModule
   ],
 
   bootstrap: [AppComponent],

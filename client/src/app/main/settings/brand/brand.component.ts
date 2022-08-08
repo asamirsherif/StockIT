@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
+import { FormGroup,FormControl,Validators} from '@angular/forms';
 import { AddbrandService } from 'app/auth/service/addbrand.service';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./brand.component.scss']
 })
 export class BrandComponent implements OnInit {
+  msg=""
+  page = 1;
   data:any={}
   createbrand:FormGroup;
   constructor(private modalService: NgbModal ,private brand:AddbrandService,public _router:Router ) {
@@ -24,44 +26,27 @@ export class BrandComponent implements OnInit {
     this.modalService.open(contentModal);
     }
   ngOnInit(): void {
-   // this.AddBrand();
-   this.brand.allbrand().subscribe(
-    data=>this.data=data,
-    (e)=>this._router.navigate(['brand'])
-  )
+    this.AllData();
   }
-  // AddBrand(){
-  //   this.brand.addBrand().subscribe(res=>{
-  //     console.log(res);
-  // this.data=res;
-  //   })
-  // }
-  
+ 
+  AllData(){
+    this.brand.allbrand().subscribe(res=>{
+      this.data=res;
+    })
+  }
+
   AddBrand(){
     if(this.createbrand.valid){
       console.log(this.createbrand.value)
-      this.brand.AddBrand(this.createbrand.value).subscribe(
-        (res)=> {
-          this.brand=res.data
-          console.log(res)
-        },
-        (e)=>{console.log("error")},
-        ()=>{
-          console.log("done");
-          this._router.navigate(['brand'])
-        }
-      )
+      this.brand.AddBrand(this.createbrand.value).subscribe(res=>{this.AllData();})
+       
     }
   }
 
-  deleteBrand(id:any,i:number){
+  deleteBrand(id:any){
     console.log(id);
-    this.brand.deleteBrand(id).subscribe({
-    // res=>{this.AddBrand();}
-      next:()=>{
-       console.log(this.data)
-        this.data.data.splice(i,1)
-      }
+    this.brand.deleteBrand(id).subscribe(res=>{
+    this.AllData();
     })
   }
 }
