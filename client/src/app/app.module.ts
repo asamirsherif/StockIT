@@ -66,6 +66,13 @@ import { SupplierlistComponent } from './main/people/supplierlist/supplierlist.c
 import { UserlistComponent } from './main/people/userlist/userlist.component'
 import { ProfitAndLossModule } from './main/Reports/profit-and-loss/profit-and-loss.module';
 import { CreatepermissionComponent } from './main/setting/permission/createpermission/createpermission.component';
+import { ProductupdateComponent } from './main/products/productupdate/productupdate.component';
+import { ProductdetatilsComponent } from './main/products/productdetatils/productdetatils.component';
+import { AdjustupdateComponent } from './main/Adjustment/adjustupdate/adjustupdate.component';
+import { ExpenseupdateComponent } from './main/expenses/expenseupdate/expenseupdate.component';
+import { QuotationupdateComponent } from './main/quotations/quotationupdate/quotationupdate.component';
+import { PurchasesupdateComponent } from './main/Purchases/purchasesupdate/purchasesupdate.component';
+import { SalesupdateComponent } from './main/sales/salesupdate/salesupdate.component';
 
 const appRoutes: Routes = [
   {
@@ -223,8 +230,29 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/people/userlist/userlist.module').then(m => m.UserlistModule)
   },
   {
+    path: 'adjustupdate',
+    loadChildren: () => import('./main/Adjustment/adjustupdate/adjustupdate.module').then(m => m.AdjustupdateModule)
+  },{
+    path: 'expenseupdate',
+    loadChildren: () => import('./main/expenses/expenseupdate/expensesupdate.module').then(m => m.ExpenseupdateModule)
+  },{
     path: 'createpermission',
     loadChildren: () => import('./main/setting/permission/createpermission/createpermission.module').then(m => m.CreatepermissionModule)
+  },{
+    path: 'productdetails',
+    loadChildren: () => import('./main/products/productdetatils/productdetails.module').then(m => m.ProductdetatilsModule)
+  },{
+    path: 'productupdate',
+    loadChildren: () => import('./main/products/productupdate/productupdate.module').then(m => m.ProductupdateComponentModule)
+  },{
+    path: 'purchasesupdate',
+    loadChildren: () => import('./main/Purchases/purchasesupdate/purchasesupdate.module').then(m => m.PurchasesupdateModule)
+  },{
+    path: 'quotationupdate',
+    loadChildren: () => import('./main/quotations/quotationupdate/quotationupdate.module').then(m => m.QuotationupdateModule)
+  },{
+    path: 'salesupdate',
+    loadChildren: () => import('./main/sales/salesupdate/salesupdate.module').then(m => m.SalesupdateModule)
   },
   {
     path: '**',

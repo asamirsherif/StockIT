@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./brand.component.scss']
 })
 export class BrandComponent implements OnInit {
-  msg=""
+
   public pageBasicText = 3;
   data:any={}
   createbrand:FormGroup;
