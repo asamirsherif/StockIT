@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./returnlist.component.scss']
 })
 export class ReturnlistComponent implements OnInit {
-
+  public pageBasicText = 3;
   constructor() { }
 
   ngOnInit(): void {

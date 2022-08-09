@@ -2,7 +2,9 @@
     <h2>Brand
     </h2>
     <hr>
+    
     <div class=" row">
+
         <div class="col-md-9">
             <form class="form-inline col-md-12 mb-1">
                 <span class="switch-icon-left"><i data-feather="search"></i></span>
@@ -79,15 +81,66 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody class="table-group-divider" *ngFor="let brand of data.data;let i =index" >
             <tr>
-                <td><img src="#"></td>
-                <td>jkk</td>
-                <td>ddvvv</td>
-                <td><i data-feather="edit" class="btn-outline-success"[size]="24" ></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24"></i></td>
+                <td><img src="{{brand.image}}"  width="50" height="50"></td>
+                <td>{{brand.name}}</td>
+                <td>{{brand.description}}</td>
+                <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" ></i></button>  <button class="btn btn-sm btn-danger" (click)="deleteBrand(brand.id)"><i data-feather="x-circle"  [size]="24"></i></button></td>
             </tr>
         </tbody>
+         <!-- Modal -->
+         <ng-template #contentModal2 let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body centered">
+                <form class="col-md-12" >
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label " for="Brand Name">Brand Name</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="Brand Name" aria-label="Date" id="name"
+                                    name="name" formControlName="name"> 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12 ">
+                            <label for="exampleFormControlTextarea1" class="form-label ">Brand Description</label>
+                            <textarea class="form-control " id="description" name="description" rows="3" formControlName="description"></textarea>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label " for="Brand Image">Brand Image</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="file"
+                                    placeholder="image" aria-label="Date" id="image"
+                                    name="image" formControlName="image">      
+                            </div>
+                        </div>
+                      
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-4">
+                            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </ng-template>
     </table>
+    <!-- <ngb-pagination class="d-flex justify-content-end" [collectionSize]="60" [(page)]="page"></ngb-pagination> -->
+    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
+        <ng-template ngbPaginationPrevious
+          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+        </ng-template>
+        <ng-template ngbPaginationNext
+          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+        </ng-template>
+      </ngb-pagination>
+        
 </body>
 
 

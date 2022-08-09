@@ -32,10 +32,20 @@
                 <td>AD-1111</td>
                 <td>N/D</td>
                 <td>12</td>
-                <td><i data-feather="eye" class="btn-outline-primary" [size]="24"></i><i data-feather="edit"
-                        class="btn-outline-success" [size]="24"></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24"></i></td>
+                <td> <button class="btn btn-sm btn-primary" ><i data-feather="eye"[size]="22"></i>
+                </button><button class="btn btn-sm btn-success" [routerLink]="['../adjustupdate']"><i data-feather="edit" [size]="24" >
+                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </button></td>   
             </tr>
         </tbody>
     </table>
+    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
+        <ng-template ngbPaginationPrevious
+          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+        </ng-template>
+        <ng-template ngbPaginationNext
+          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+        </ng-template>
+      </ngb-pagination>
 </body>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
+import { FormGroup,FormControl,Validators} from '@angular/forms';
 import { AddbrandService } from 'app/auth/service/addbrand.service';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./brand.component.scss']
 })
 export class BrandComponent implements OnInit {
+
+  public pageBasicText = 3;
+  data:any={}
   createbrand:FormGroup;
   constructor(private modalService: NgbModal ,private brand:AddbrandService,public _router:Router ) {
     this.createbrand = new FormGroup({
@@ -22,23 +25,31 @@ export class BrandComponent implements OnInit {
   openModal(contentModal) {
     this.modalService.open(contentModal);
     }
+    openModal2(contentModal2) {
+      this.modalService.open(contentModal2);
+      }  
   ngOnInit(): void {
+    this.AllData();
   }
-  
+ 
+  AllData(){
+    this.brand.allbrand().subscribe(res=>{
+      this.data=res;
+    })
+  }
+
   AddBrand(){
     if(this.createbrand.valid){
       console.log(this.createbrand.value)
-      this.brand.AddBrand(this.createbrand.value).subscribe(
-        (res)=> {
-          this.brand=res.data
-          console.log(res)
-        },
-        (e)=>{console.log("error")},
-        ()=>{
-          console.log("done");
-          this._router.navigate(['brand'])
-        }
-      )
+      this.brand.AddBrand(this.createbrand.value).subscribe(res=>{this.AllData();})
+       
     }
+  }
+
+  deleteBrand(id:any){
+    console.log(id);
+    this.brand.deleteBrand(id).subscribe(res=>{
+    this.AllData();
+    })
   }
 }

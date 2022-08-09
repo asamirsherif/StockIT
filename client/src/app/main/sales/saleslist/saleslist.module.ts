@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CoreCommonModule } from '@core/common.module';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SaleslistComponent } from './Saleslist.component';
 
 
@@ -17,7 +17,7 @@ const routes = [
 
 @NgModule({
   declarations: [ SaleslistComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule],
   exports: [ SaleslistComponent ]
 })
 export class SaleslistModule {}

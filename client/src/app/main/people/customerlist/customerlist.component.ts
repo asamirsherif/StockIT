@@ -8,6 +8,7 @@ templateUrl: './customerlist.component.html',
 styleUrls: ['./customerlist.component.scss']
 })
 export class CustomerlistComponent implements OnInit {
+  public pageBasicText = 3;
     createcustomer:FormGroup;
 constructor(private modalService: NgbModal,private fb:FormBuilder) {
     this.createcustomer = new FormGroup({

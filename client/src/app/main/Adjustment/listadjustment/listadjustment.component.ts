@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listadjustment.component.scss']
 })
 export class ListadjustmentComponent implements OnInit {
-
+  public pageBasicText = 3;
   constructor() { }
 
   ngOnInit(): void {

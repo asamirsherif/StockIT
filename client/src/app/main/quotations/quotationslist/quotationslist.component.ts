@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quotationslist.component.scss']
 })
 export class QuotationslistComponent implements OnInit {
-
+  public pageBasicText = 3;
   constructor() { }
 
   ngOnInit(): void {

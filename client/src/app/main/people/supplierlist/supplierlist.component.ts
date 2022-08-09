@@ -8,6 +8,7 @@ import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
   styleUrls: ['./supplierlist.component.scss']
 })
 export class SupplierlistComponent implements OnInit {
+  public pageBasicText = 3;
   createsuplier:FormGroup;
   constructor(private modalService: NgbModal,private fb:FormBuilder) {
     this.createsuplier = new FormGroup({

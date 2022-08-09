@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -17,7 +18,7 @@ const routes = [
 
 @NgModule({
   declarations: [ PurchaseslistComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule],
   exports: [ PurchaseslistComponent ]
 })
 export class PurchaseslistModule {}

@@ -59,7 +59,26 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Operator">Operator</label>
+                                    <div class="col-md-12 ">
+                                        <select class="form-select col-md-12 " aria-label="Default select example">
+                                            <option selected>Choose Operator</option>
+                                            <option>/</option>
+                                            <option>*</option>
+                                            <option>+</option>
+                                            <option>+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="value">opertation value </label>
+                                    <div class="col-md-12 ">
+                                        <input class="form-control form-control col-md-12" type="text"
+                                            placeholder="Name Unit" aria-label="Date" id="value"
+                                            name="value" formControlName="value">
+                                    </div>
+                                </div>
                            
                             <div class="form-group col-md-12">
                                 <div class="col-md-4">
@@ -90,8 +109,86 @@
                 <td>EGP</td>
                 <td>jkk</td>
                 <td>ddvvv</td>
-                <td><i data-feather="edit" class="btn-outline-success" [size]="24"></i><i data-feather="x-circle" class="btn-outline-danger"[size]="24" ></i></td>
-            </tr>
+                <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
+                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </button></td>
+            </tr>   
+                    <!-- Modal -->
+                <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body centered">
+                        <form class=" col-md-12" >
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Name Unit">Name Unit</label>
+                                    <div class="col-md-12 ">
+                                        <input class="form-control form-control col-md-12" type="text"
+                                            placeholder="Name Unit" aria-label="Date" id="NameUnit"
+                                            name="NameUnit" formControlName="NameUnit">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Short Name">Short Name</label>
+                                    <div class="col-md-12 ">
+                                        <input class="form-control form-control col-md-12" type="text"
+                                            placeholder="Short Name" aria-label="Date" id="ShortName"
+                                            name="ShortName" formControlName="ShortName">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Base Unit">Base Unit</label>
+                                    <div class="col-md-12 ">
+                                        <select class="form-select col-md-12 " aria-label="Default select example">
+                                            <option selected>Choose base unit</option>
+                                            <option>كجم</option>
+                                            <option>شيكارة</option>
+                                            <option>متر</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="Operator">Operator</label>
+                                    <div class="col-md-12 ">
+                                        <select class="form-select col-md-12 " aria-label="Default select example">
+                                            <option selected>Choose Operator</option>
+                                            <option>/</option>
+                                            <option>*</option>
+                                            <option>+</option>
+                                            <option>+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12 control-label " for="value">opertation value </label>
+                                    <div class="col-md-12 ">
+                                        <input class="form-control form-control col-md-12" type="text"
+                                            placeholder="Name Unit" aria-label="Date" id="value"
+                                            name="value" formControlName="value">
+                                    </div>
+                                </div>  
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4">
+                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+    
+                    </div>
+                </ng-template>
+               
         </tbody>
     </table>
+    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
+        <ng-template ngbPaginationPrevious
+          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+        </ng-template>
+        <ng-template ngbPaginationNext
+          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+        </ng-template>
+      </ngb-pagination>
 

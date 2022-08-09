@@ -87,7 +87,62 @@
                 <td>EGP</td>
                 <td>jkk</td>
                 <td>ddvvv</td>
-                <td><i data-feather="edit" class="btn-outline-success" [size]="24"></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24"></i></td>
+                <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
+                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </button></td>
             </tr>
+               <!-- Modal -->
+               <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class=" col-md-12">
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12 control-label " for="Currency Code">Currency Code</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Currency Code" aria-label="Date" id="CurrencyCode"
+                                        name="CurrencyCode" formControlName="CurrencyCode">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12 control-label " for="Currency Name">Currency Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="Currency Name"
+                                        placeholder="Currency Name" aria-label="Date" id="CurrencyName"
+                                        name="CurrencyName" formControlName="CurrencyName">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-md-12 control-label " for="Symbol">Symbol</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Symbol" aria-label="Date" id="Symbol"
+                                        name="Symbol" formControlName="Symbol">
+                                      
+                                </div>
+                            </div>
+                       
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </ng-template>
         </tbody>
     </table>
+    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
+        <ng-template ngbPaginationPrevious
+          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+        </ng-template>
+        <ng-template ngbPaginationNext
+          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+        </ng-template>
+      </ngb-pagination>
