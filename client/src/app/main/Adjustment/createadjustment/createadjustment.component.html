@@ -1,8 +1,9 @@
 <body>
     <h2>Create Adjustment</h2>
     <hr>
-    <div class="col-md-12 row">
-        <div class="form-group col-md-6">
+    <div class="container col-md-12">
+    <div class=" form-group col-md-12 row">
+        <div class="col-md-6">
             <label class="col-md-4 control-label " for="category">Warehouse</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
@@ -11,21 +12,22 @@
             </div>
         </div>
         <div class="form-group col-md-6">
-            <label class="col-md-4 control-label " for="category">Date</label>
+            <label class="col-md-6 control-label " for="category">Date</label>
             <div class="col-md-12 ">
-                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
+                <input class="form-control form-control col-md-12" type="date" placeholder="Date" aria-label="Date">
             </div>
         </div>
     </div>
     <div class="col-md-12">
         <label class="col-md-4 control-label" for="product">Product</label>
         <div class="col-md-12 row">
-            <span class="switch-icon-left col-md-1 icon "><i data-feather="search"></i></span>
-            <input class="form-control form-control col-md-11" type="text" placeholder="Search Product by name"
+            <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
+            <input class="form-control col-md-11 text-left" type="text" placeholder="Search Product by name"
                 aria-label="Search">
         </div>
     </div>
-    <table class="table col-md-11">
+    <div class="container text-left">
+    <table class="table col-md-12">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -44,6 +46,7 @@
             </tr>
         </tbody>
     </table>
+</div>
     <div class="form-group col-md-12 ">
         <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
         <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -53,6 +56,7 @@
             <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
         </div>
     </div>
-
+    
+</div>
 </body>
 
