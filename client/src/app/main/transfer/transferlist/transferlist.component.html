@@ -13,7 +13,7 @@
             <button type="button" class="btn btn-outline-primary "><i data-feather="filter"></i>Filter</button>
             <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
             <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
-            <button type="button" class="btn btn-secondary" [routerLink]="['../createtransfer']"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-secondary" ><i data-feather="plus-circle"></i>Create</button>
         </div>
     </div>
     <table class="table">
@@ -38,8 +38,61 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><i data-feather="eye" class="btn-outline-primary" [size]="17"></i><i data-feather="edit"
-                        class="btn-outline-success" [size]="17"></i><i data-feather="x-circle" class="btn-outline-danger" [size]="17"></i></td>
+                <td> <button class="btn btn-sm btn-primary" (click)="openModal(contentModal)"><i data-feather="eye"[size]="22"></i>
+                </button><button class="btn btn-sm btn-success" [routerLink]="['../ternsupdate']"><i data-feather="edit" [size]="24" >
+                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </button></td> 
+                  <!-- Modal -->
+              <ng-template #contentModal let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Transfer Details</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered ">
+                  <table class="col-md-12 table table-light table-striped">
+                    <tr>
+                        <td>Date</td>
+                        <td> 2022-08-05</td>
+                    </tr>
+                    <tr>
+                        <td>Reference</td>
+                        <td> TR_1156</td>
+                    </tr>
+                    <tr>
+                        <td>From WareHous</td>
+                        <td> w1</td>
+                    </tr>
+                    <tr>
+                        <td>To WareHous</td>
+                        <td> w2</td>
+                    </tr>
+                    <tr>
+                        <td>Grand Total</td>
+                        <td> 12334$</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td> completed</td>
+                    </tr>
+                  </table>
+                   <table class="col-md-12 table table-light table-striped">
+                    <tr>
+                        <th>Product</th>
+                        <th>Code product</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    <tr>
+                        <td>ghshg</td>
+                        <td>5636</td>
+                        <td>32</td>
+                        <td>677</td>
+                    </tr>
+                   </table>
+                </div>
+            </ng-template>
             </tr>
         </tbody>
     </table>
