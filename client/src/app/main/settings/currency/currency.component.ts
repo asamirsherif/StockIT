@@ -19,6 +19,9 @@ export class CurrencyComponent implements OnInit {
   openModal(contentModal) {
     this.modalService.open(contentModal);
     }
+    openModal2(contentModal2) {
+      this.modalService.open(contentModal2);
+      }  
   ngOnInit(): void {
   }
   formSubmit() {
