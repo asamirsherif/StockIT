@@ -7,6 +7,7 @@ import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
   styleUrls: ['./warehouse.component.scss']
 })
 export class WarehouseComponent implements OnInit {
+  public pageBasicText = 3;
   createwarehous:FormGroup;
   constructor(private modalService: NgbModal,private fb:FormBuilder) { 
     this.createwarehous = new FormGroup({

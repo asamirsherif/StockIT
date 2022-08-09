@@ -8,6 +8,7 @@ import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
   styleUrls: ['./unit.component.scss']
 })
 export class UnitComponent implements OnInit {
+  public pageBasicText = 3;
   createunit:FormGroup;
 
   constructor(private modalService: NgbModal,private fb:FormBuilder) { 

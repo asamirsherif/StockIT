@@ -8,6 +8,7 @@ import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+  public pageBasicText = 3;
   createcategory:FormGroup;
   constructor(private modalService: NgbModal ,private fb:FormBuilder) {
     this.createcategory = new FormGroup({

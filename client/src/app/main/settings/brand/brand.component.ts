@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class BrandComponent implements OnInit {
   msg=""
-  page = 1;
+  public pageBasicText = 3;
   data:any={}
   createbrand:FormGroup;
   constructor(private modalService: NgbModal ,private brand:AddbrandService,public _router:Router ) {

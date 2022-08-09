@@ -7,6 +7,7 @@ import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
   styleUrls: ['./userlist.component.scss']
 })
 export class UserlistComponent implements OnInit {
+  public pageBasicText = 3;
   createuser:FormGroup;
   constructor(private modalService: NgbModal,private fb:FormBuilder) { 
     this.createuser = new FormGroup({
