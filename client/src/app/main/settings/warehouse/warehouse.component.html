@@ -127,7 +127,77 @@
                 <td>ddvvv</td>
                 <td>jkk</td>
                 <td>ddvvv</td>
-                <td><i data-feather="edit" class="btn-outline-success"[size]="24" ></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24"></i></td>
+                <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
+                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </button></td>
+                 <!-- Modal -->
+             <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label " for="Name"> Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Name" aria-label="Date" id="Name"
+                                        name="Name" formControlName="Name">  
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Email">Email</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="email"
+                                        placeholder="email" aria-label="Date" id="email"
+                                        name="email" formControlName="email">  
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="phone">Phone</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="phone" aria-label="Date" id="phone"
+                                        name="phone" formControlName="phone">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Country">Country</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="country" aria-label="Date" id="country"
+                                        name="country" formControlName="country">    
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="city">City</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="city" aria-label="Date" id="city"
+                                        name="city" formControlName="city">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label" for="Zip Code">Zip Code</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Zip Code" aria-label="Date" id="Zip Code"
+                                        name="Zip Code" formControlName="Zip Code">
+                                </div>
+                            </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </ng-template>
             </tr>
         </tbody>
     </table>
