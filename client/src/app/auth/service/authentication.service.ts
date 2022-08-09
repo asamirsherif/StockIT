@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { User, Role } from 'app/auth/models';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from 'app/auth/service/user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -20,7 +21,7 @@ export class AuthenticationService {
    * @param {HttpClient} _http
    * @param {ToastrService} _toastrService
    */
-  constructor(private _http: HttpClient, private _toastrService: ToastrService) {
+  constructor(private _http: HttpClient, private _toastrService: ToastrService, private _UserService : UserService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -61,13 +62,30 @@ export class AuthenticationService {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             
             localStorage.setItem('currentUser', JSON.stringify(user));
+
+            user.data = this._UserService.getLoggedUser();
+            user.permission = this._UserService.getUserPermissions();
+
+            user.data.subscribe((user_data)=>{
+              user.data = user_data;
+              localStorage.setItem('currentUser', JSON.stringify(user));
+              console.log('Welcome ' + JSON.parse(localStorage.currentUser).data.firstname);
+            });
+
+            user.permission.subscribe((user_permissions)=>{
+              user.permission = user_permissions;
+              localStorage.setItem('currentUser', JSON.stringify(user));
+            });
+
+            
+
             // Display welcome toast!
             setTimeout(() => {
               this._toastrService.success(
                 'You have successfully logged in as an ' +
                   user.role +
                   ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
-                '👋 Welcome, ' + user.firstName + '!',
+                '👋 Welcome, ' + user.data.firstname + '!',
                 { toastClass: 'toast ngx-toastr', closeButton: true }
               );
             }, 2500);

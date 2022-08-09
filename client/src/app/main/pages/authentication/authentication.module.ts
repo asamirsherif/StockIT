@@ -37,84 +37,86 @@ const routes: Routes = [
     path: 'login',
     component: AuthLoginV2Component,
     data: { animation: 'auth' }
-  },
-  {
-    path: 'sample',
-    component: SampleComponent,
-    canActivate: [AuthGuard]
-  },{
-    path: 'createproduct',
-    component: CreateproductComponent,
-    canActivate: [AuthGuard]
-  },{
-    path: 'printbarcode',
-    component: PrintbarcodeComponent,
-    canActivate: [AuthGuard]
-  },{
-    path: 'productlist',
-    component: ProductlistComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'purchases',
-    component: PurchasesComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'sales',
-    component: SalesComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'sales return',
-    component: SalesReturnComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'purchases return',
-    component: PurchasesReturnComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'profit and loss',
-    component: ProfitAndLossComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'product quantity alerts',
-    component: PrductquantityComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'warehouse report',
-    component: WarehouseReportComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'sale report',
-    component: SaleReportComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'purchase report',
-    component: PurchaseReportComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'customer report',
-    component: CustomerReportComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'suplplier report',
-    component: SupplierReportComponent,
-    canActivate: [AuthGuard]
   }
+  // ,
+  // {
+  //   path: 'sample',
+  //   component: SampleComponent,
+  //   canActivate: [AuthGuard]
+  // },{
+  //   path: 'createproduct',
+  //   component: CreateproductComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { permission:'product_add'}
+  // },{
+  //   path: 'printbarcode',
+  //   component: PrintbarcodeComponent,
+  //   canActivate: [AuthGuard]
+  // },{
+  //   path: 'productlist',
+  //   component: ProductlistComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'home',
+  //   component: HomeComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'purchases',
+  //   component: PurchasesComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'sales',
+  //   component: SalesComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'sales return',
+  //   component: SalesReturnComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'purchases return',
+  //   component: PurchasesReturnComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'profit and loss',
+  //   component: ProfitAndLossComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'product quantity alerts',
+  //   component: PrductquantityComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'warehouse report',
+  //   component: WarehouseReportComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'sale report',
+  //   component: SaleReportComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'purchase report',
+  //   component: PurchaseReportComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'customer report',
+  //   component: CustomerReportComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'suplplier report',
+  //   component: SupplierReportComponent,
+  //   canActivate: [AuthGuard]
+  // }
 ];
 
 @NgModule({

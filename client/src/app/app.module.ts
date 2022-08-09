@@ -20,7 +20,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
-import {  ErrorInterceptor, JwtInterceptor } from 'app/auth/helpers';
+import {  AuthGuard, ErrorInterceptor, JwtInterceptor } from 'app/auth/helpers';
 
 import { CreateproductComponent } from './main/products/createproduct/createproduct.component';
 import { ProductlistComponent } from './main/products/productlist/productlist.component';
@@ -42,7 +42,7 @@ import { SystemsettingComponent } from './main/settings/systemsetting/systemsett
 import { GrouppermissionComponent } from './main/settings/grouppermission/grouppermission.component';
 import { WarehouseComponent } from './main/settings/warehouse/warehouse.component';
 import { CategoryComponent } from './main/settings/category/category.component';
-import { BrandComponent } from './main/settings/brand/brand.component';
+// import { BrandComponent } from './main/settings/brand/brand.component';
 import { CurrencyComponent } from './main/settings/currency/currency.component';
 import { UnitComponent } from './main/settings/unit/unit.component';
 import { BackupComponent } from './main/settings/backup/backup.component';
@@ -66,6 +66,7 @@ import { SupplierlistComponent } from './main/people/supplierlist/supplierlist.c
 import { UserlistComponent } from './main/people/userlist/userlist.component'
 import { ProfitAndLossModule } from './main/Reports/profit-and-loss/profit-and-loss.module';
 import { CreatepermissionComponent } from './main/setting/permission/createpermission/createpermission.component';
+import { HomeComponent } from './main/sample/home.component';
 
 const appRoutes: Routes = [
   {
@@ -73,9 +74,10 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)
   },
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    path: 'home',
+    component: HomeComponent,
+    pathMatch: 'full',
+    canActivate : [AuthGuard]
   },{
     path: 'createproduct',
     loadChildren: () => import('./main/products/createproduct/createproduct.module').then(m => m.CreateproductModule)
@@ -136,9 +138,6 @@ const appRoutes: Routes = [
   },{
     path: 'category',
     loadChildren: () => import('./main/settings/category/category.module').then(m => m.CategoryModule)
-  },{
-    path: 'brand',
-    loadChildren: () => import('./main/settings/brand/brand.module').then(m => m.BrandModule)
   },{
     path: 'currency',
     loadChildren: () => import('./main/settings/currency/currency.module').then(m => m.CurrencyModule)
@@ -225,10 +224,6 @@ const appRoutes: Routes = [
   {
     path: 'createpermission',
     loadChildren: () => import('./main/setting/permission/createpermission/createpermission.module').then(m => m.CreatepermissionModule)
-  },
-  {
-    path: '**',
-    redirectTo: '/pages/miscellaneous/error' //Error 404 - Page not found
   }
 ];
 

@@ -13,4 +13,6 @@ export class AddbrandService {
   AddBrand(data:any):Observable<any>{
     return this._http.post(`${this.host}`, data)
   }
+
+  
 }

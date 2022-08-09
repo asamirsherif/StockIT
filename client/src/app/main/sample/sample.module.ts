@@ -10,16 +10,16 @@ import { SampleComponent } from './sample.component';
 import { HomeComponent } from './home.component';
 
 const routes = [
-  {
-    path: 'sample',
-    component: SampleComponent,
-    data: { animation: 'sample' }
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    data: { animation: 'home' }
-  }
+  // {
+  //   path: 'sample',
+  //   component: SampleComponent,
+  //   data: { animation: 'sample' }
+  // }
+  // {
+  //   path: 'home',
+  //   component: HomeComponent,
+  //   data: { animation: 'home' }
+  // }
 ];
 
 @NgModule({
