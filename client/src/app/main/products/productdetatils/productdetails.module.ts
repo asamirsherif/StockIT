@@ -8,6 +8,8 @@ import { CoreCommonModule } from '@core/common.module';
 
 
 
+
+
 const routes = [
   {
     path: '',
@@ -18,7 +20,8 @@ const routes = [
 
 @NgModule({
   declarations: [ProductdetatilsComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule ,
+  ],
   exports: [ProductdetatilsComponent ]
 })
 export class ProductdetatilsModule {}
