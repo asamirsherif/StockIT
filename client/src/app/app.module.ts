@@ -73,6 +73,7 @@ import { ExpenseupdateComponent } from './main/expenses/expenseupdate/expenseupd
 import { QuotationupdateComponent } from './main/quotations/quotationupdate/quotationupdate.component';
 import { PurchasesupdateComponent } from './main/Purchases/purchasesupdate/purchasesupdate.component';
 import { SalesupdateComponent } from './main/sales/salesupdate/salesupdate.component';
+import { GrouppermissingupdateComponent } from './main/settings/grouppermissingupdate/grouppermissingupdate.component';
 
 const appRoutes: Routes = [
   {
@@ -253,6 +254,10 @@ const appRoutes: Routes = [
   },{
     path: 'salesupdate',
     loadChildren: () => import('./main/sales/salesupdate/salesupdate.module').then(m => m.SalesupdateModule)
+  },
+  {
+    path: 'permissionupdate',
+    loadChildren: () => import('./main/settings/grouppermissingupdate/grouppermissionupdate.module').then(m => m.GrouppermissingupdateModule)
   },
   {
     path: '**',
