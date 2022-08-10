@@ -25,16 +25,20 @@
                     <form class="row col-md-12" [formGroup]="createcategory" (ngSubmit)="formSubmit()">
                         <div class="col-md-12 row">
                             <div class="form-group col-md-12">
-                                <label class="col-md-4 control-label " for="Category Name">Category Name</label>
+                                <label class="col-md-4 control-label " for="name">Category Name</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Category Name" aria-label="Date" id="CategoryName"
-                                        name="CategoryName" formControlName="CategoryName">
-                                        <div id="CategoryName" *ngIf="createcategory.controls['CategoryName'].touched &&createcategory.controls['CategoryName'].invalid"
+                                        placeholder="Category Name" aria-label="Date" id="name"
+                                        name="CategoryName" formControlName="name">
+                                        <div id="name" *ngIf="createcategory.controls['name'].touched &&createcategory.controls['name'].invalid || submitted && createcategory.controls['name'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="createcategory.controls['CategoryName'].errors?.['required']">This field is
+                                        <small *ngIf="createcategory.controls['name'].errors?.['required']">This field is
                                             required</small>
-                                    </div>    
+                                    </div>   
+                                    <div
+                                            class="form-text text-danger">
+                                            <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                        </div>  
                                 </div>
                             </div>
                             <div class="form-group col-md-12 ">
@@ -79,14 +83,23 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12" >
+                    <form class="row col-md-12" [formGroup]="createcategory" (ngSubmit)="formSubmit()">
                         <div class="col-md-12 row">
                             <div class="form-group col-md-12">
-                                <label class="col-md-4 control-label " for="Category Name">Category Name</label>
+                                <label class="col-md-4 control-label " for="name">Category Name</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Category Name" aria-label="Date" id="CategoryName"
-                                        name="CategoryName" formControlName="CategoryName">
+                                        placeholder="Category Name" aria-label="Date" id="name"
+                                        name="CategoryName" formControlName="name">
+                                        <div id="name" *ngIf="createcategory.controls['name'].touched &&createcategory.controls['name'].invalid || submitted && createcategory.controls['name'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="createcategory.controls['name'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>   
+                                    <div
+                                            class="form-text text-danger">
+                                            <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                        </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-12 ">
