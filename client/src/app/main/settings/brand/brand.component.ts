@@ -12,8 +12,16 @@ import { Router } from '@angular/router';
 export class BrandComponent implements OnInit {
 
   public pageBasicText = 3;
+
+  submitted = false;
+  
   data:any={}
+
+  errors:any = {};
+
   createbrand:FormGroup;
+
+
   constructor(private modalService: NgbModal ,private brand:AddbrandService,public _router:Router ) {
     this.createbrand = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -39,9 +47,22 @@ export class BrandComponent implements OnInit {
   }
 
   AddBrand(){
+    this.submitted = true;
     if(this.createbrand.valid){
-      console.log(this.createbrand.value)
-      this.brand.AddBrand(this.createbrand.value).subscribe(res=>{this.AllData();})
+      
+
+      const observer = {
+        next: (result) => {
+            console.log(result,'asdasd');
+        }, 
+        error: (error) => {
+            // console.log("error occured", error)
+            this.errors = error;
+            console.log(this.errors.errors);
+        }
+      }
+
+      this.brand.AddBrand(this.createbrand.value).subscribe(observer);
        
     }
   }
