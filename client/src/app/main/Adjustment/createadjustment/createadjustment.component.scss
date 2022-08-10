@@ -2,20 +2,25 @@ body{
     background: white;
     border-radius: 20px;
     padding: 20px;
+    
 }
 select{
     border-radius: 5px;
     padding: 7px;
     border: 1px gainsboro solid;
+    height:39px;
 }
 .icon{
     padding-left: 10px;
     padding-top: 6px;
-    text-align: center;
+    text-align: left;
 }
 table{
     margin-top: 20px;
-    margin-left: 25px;
-    text-align: center;
+    text-align: left;
     border-radius: 10px;
+}
+#btn{
+    height:10px;
+    width: 10px;
 }
