@@ -4,32 +4,63 @@
     <h2>Edit Adjustement
     </h2>
     <hr>
-    <div class="container col-md-12">
-    <div class="  col-md-12 row">
-        <div class="col-md-6">
-            <label class="col-md-6 control-label " for="category">Warehouse</label>
-            <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Warehouse</option>
-                </select>
-            </div>
-        </div>
-        <div class=" col-md-6">
-            <label class="col-md-6 control-label " for="category">Date</label>
-            <div class="col-md-12 ">
-                <input class="form-control form-control col-md-12" type="date" placeholder="Date" aria-label="Date">
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <label class="col-md-4 control-label" for="product">Product</label>
-        <div class="col-md-12 row">
-            <span class="switch-icon-left icon col-md-1"><i data-feather="search" [size]="30"></i></span>
-            <input class="form-control col-md-11 text-left" type="text" placeholder="Search Product by name"
-                aria-label="Search">
-        </div>
-    </div>
+    <form class="container col-md-12" [formGroup]="createadjustment" (ngSubmit)="AddAdjustment()">
+        <div class="  col-md-12 row">
+            <div class="col-md-6">
+                <label class="col-md-4 control-label " for="category">Warehouse</label>
+                <div class="col-md-12 ">
+                    <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
+                        <option selected>Choose Warehouse</option>
+                    </select>
+                    <div id="warehouse_id" *ngIf="createadjustment.controls['warehouse_id'].touched &&createadjustment.controls['warehouse_id'].invalid || submitted && createadjustment.controls['warehouse_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createadjustment.controls['warehouse_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.warehouse_id">{{errors?.warehouse_id}}</small>
+                                    </div> 
     
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="col-md-6 control-label " for="category">Date</label>
+                <div class="col-md-12 ">
+                    <input class="form-control form-control col-md-12" type="date" 
+                    placeholder="Date" aria-label="Date" formControlName="date">
+                    <div id="date" *ngIf="createadjustment.controls['date'].touched &&createadjustment.controls['date'].invalid || submitted && createadjustment.controls['date'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createadjustment.controls['date'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.date">{{errors?.date}}</small>
+                                    </div> 
+    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <label class="col-md-4 control-label" for="items">Product</label>
+            <div class="col-md-12 row">
+                <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
+                <input class="form-control col-md-11 text-left" type="text" placeholder="Search Product by name"
+                    aria-label="Search" formControlName="items">
+                    <div id="items" *ngIf="createadjustment.controls['items'].touched &&createadjustment.controls['items'].invalid || submitted && createadjustment.controls['items'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createadjustment.controls['items'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.items">{{errors?.items}}</small>
+                                    </div> 
+    
+            </div>
+        </div>
+    </form>
     <div class="container text-left">
     <table class="table col-md-12 table-hover">
         <thead>

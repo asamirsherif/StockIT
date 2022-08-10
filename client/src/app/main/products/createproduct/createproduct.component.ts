@@ -8,34 +8,51 @@ import { AddproductService } from 'app/auth/service/addproduct.service';
   styleUrls: ['./createproduct.component.scss']
 })
 export class CreateproductComponent implements OnInit {
+  public pageBasicText = 3;
+
+  submitted = false;
+  
+  data:any={}
+
+  errors:any = {};
+
   createproduct:FormGroup;
   constructor(private fb:FormBuilder,private product:AddproductService,public _router:Router) {
     this.createproduct = new FormGroup({
-      productname: new FormControl('', Validators.required),
-      productid: new FormControl('', Validators.required),
-      productcost: new FormControl('', Validators.required),
-      productprice: new FormControl('', Validators.required),
-      stockalert: new FormControl('', Validators.required),
-      ordertax: new FormControl('', Validators.required)
+        name: new FormControl('', Validators.required),
+      code: new FormControl('', Validators.required),
+      category_id:  new FormControl('', Validators.required),
+      type_barcode:  new FormControl('', Validators.required),
+      cost: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
+      unit_id: new FormControl('', Validators.required),
+      unit_sale_id: new FormControl('', Validators.required),
+      tax_method: new FormControl('', Validators.required),
+      image: new FormControl('', Validators.required)
     })
 }
 
   ngOnInit(): void {
   }
+  
   AddProduct(){
+    this.submitted = true;
     if(this.createproduct.valid){
-      console.log(this.createproduct.value)
-      this.product.AddProduct(this.createproduct.value).subscribe(
-        (res)=> {
-          this.product=res.data
-          console.log(res)
-        },
-        (e)=>{console.log("erorr")},
-        ()=>{
-          console.log("done");
-          this._router.navigate(['productlist'])
+      
+
+      const observer = {
+        next: (result) => {
+            console.log(result,'asdasd');
+        }, 
+        error: (error) => {
+            // console.log("error occured", error)
+            this.errors = error;
+            console.log(this.errors.errors);
         }
-      )
+      }
+
+      this.product.AddProduct(this.createproduct.value).subscribe(observer);
+       
     }
   }
 }

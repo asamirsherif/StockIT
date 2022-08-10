@@ -1,32 +1,62 @@
 <h2>Update Product</h2>
 <hr>
 
-<form class="row col-md-12">
+<form class="row col-md-12" [formGroup]="productupdate" (ngSubmit)="UppProduct()">
     <div class="col-md-8 row">
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="product_name">PRODUCT NAME</label>
+            <label class="col-md-8 control-label" for="name">PRODUCT NAME</label>
             <div class="col-md-12">
-                <input id="product_name" name="productname" placeholder="PRODUCT NAME" class="form-control input-md"
+                <input id="name" name="productname" placeholder="PRODUCT NAME" class="form-control input-md"
                     required type="text" formControlName="productname">
+                    <div id="name" *ngIf="productupdate.controls['name'].touched &&productupdate.controls['name'].invalid || submitted && productupdate.controls['name'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="productupdate.controls['name'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                    </div>   
                
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="product_id">PRODUCT ID</label>
+            <label class="col-md-8 control-label" for="code">PRODUCT ID</label>
             <div class="col-md-12">
-                <input id="product_id" name="product_id" placeholder="PRODUCT ID" class="form-control input-md"
-                    required="" type="text" formControlName="productid">
-                
+                <input id="code" name="product_id" placeholder="PRODUCT ID" class="form-control input-md"
+                    required="" type="text" formControlName="code">
+                <div id="code"
+                    *ngIf="productupdate.controls['code'].touched &&productupdate.controls['code'].invalid || submitted && productupdate.controls['code'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="productupdate.controls['code'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.code">{{errors?.code}}</small>
+                                    </div>
             </div>
         </div>
 
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label " for="category">Category</label>
             <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="category_id" >
                     <option selected>Open this select menu</option>
                 </select>
+                <div id="category_id"
+                    *ngIf="productupdate.controls['category_id'].touched &&productupdate.controls['category_id'].invalid || submitted && productupdate.controls['category_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="productupdate.controls['category_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.category_id">{{errors?.category_id}}</small>
+                                    </div>
             </div>
         </div>
 
@@ -40,58 +70,125 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="Barcode Symbology">Barcode Symbology</label>
+            <label class="col-md-8 control-label" for="type_barcode">Barcode Symbology</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="type_barcode">
                     <option selected>Choose Symbology</option>
                 </select>
+                <div id="type_barcode"
+                    *ngIf="productupdate.controls['type_barcode'].touched &&productupdate.controls['type_barcode'].invalid || submitted && productupdate.controls['type_barcode'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="productupdate.controls['type_barcode'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.type_barcode">{{errors?.type_barcode}}</small>
+                                    </div>
+
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="productCost">PRODUCT Cost</label>
+            <label class="col-md-8 control-label" for="cost">PRODUCT Cost</label>
             <div class="col-md-12">
-                <input id="productcost" name="productcost" placeholder="PRODUCT COST" class="form-control input-md"
-                    required="" type="text" formControlName="productcost">
-                
+                <input id="cost" name="cost" placeholder="PRODUCT COST" class="form-control input-md"
+                    required="" type="text" formControlName="cost">
+                    <div id="type_barcode"
+                    *ngIf="productupdate.controls['cost'].touched &&productupdate.controls['cost'].invalid || submitted && productupdate.controls['cost'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="productupdate.controls['cost'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.cost">{{errors?.cost}}</small>
+                                    </div>
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="productprice">PRODUCT price</label>
+            <label class="col-md-8 control-label" for="price">PRODUCT price</label>
             <div class="col-md-12">
-                <input id="productprice" name="productprice" placeholder="PRODUCT PRICE" class="form-control input-md"
-                    required="" type="text" formControlName="productprice">
-                
+                <input id="price" name="price" placeholder="PRODUCT PRICE" class="form-control input-md"
+                    required="" type="text" formControlName="price">
+                <div id="price"
+                    *ngIf="productupdate.controls['price'].touched &&productupdate.controls['price'].invalid || submitted && productupdate.controls['price'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="productupdate.controls['price'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.price">{{errors?.price}}</small>
+                                    </div>
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="ProductUnit">Product Unit</label>
+            <label class="col-md-8 control-label" for="unit_id">Product Unit</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="unit_id" >
                     <option selected>Choose ProductUnit</option>
                 </select>
-            </div>
-        </div>
+                <div id="unit_id"
+                    *ngIf="productupdate.controls['unit_id'].touched &&productupdate.controls['unit_id'].invalid || submitted && productupdate.controls['unit_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="productupdate.controls['unit_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
 
-        <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="salesUnit">Sales Unit</label>
-            <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Sales Unit</option>
-                </select>
-            </div>
-        </div>
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.unit_id">{{errors?.unit_id}}</small>
+                                    </div>
 
-        <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="ProductUnit">Purchase Unit</label>
-            <div class="col-md-12">
-                <select class="form-select col-md-12" aria-label="Default select example">
-                    <option selected>Choose PurchaseUnit</option>
-                </select>
-            </div>
-        </div>
+</div>
+</div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-8 control-label" for="salesUnit">Sales Unit</label>
+                                        <div class="col-md-12">
+                                            <select class="form-select col-md-12 " aria-label="Default select example" formControlName="unit_sale_id">
+                                                <option selected>Choose Sales Unit</option>
+                                            </select>
+                            
+                                            <div id="unit_sale_id"
+                                                *ngIf="productupdate.controls['unit_sale_id'].touched &&productupdate.controls['unit_sale_id'].invalid || submitted && productupdate.controls['unit_sale_id'].invalid"
+                                                class="form-text text-danger">
+                                                <small *ngIf="productupdate.controls['unit_sale_id'].errors?.['required']">This field is
+                                                    required</small>
+                                            </div>
+                            
+                                            <div
+                                                                    class="form-text text-danger">
+                                                                    <small *ngIf="errors?.unit_sale_id">{{errors?.unit_sale_id}}</small>
+                                                                </div>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-8 control-label" for="ProductUnit">Purchase Unit</label>
+                                        <div class="col-md-12">
+                                            <select class="form-select col-md-12" aria-label="Default select example" formControlName="unit_sale_id">
+                                                <option selected>Choose PurchaseUnit</option>
+                                            </select>
+                            
+                                            <div id="unit_sale_id"
+                                                *ngIf="productupdate.controls['unit_sale_id'].touched &&productupdate.controls['unit_sale_id'].invalid || submitted && productupdate.controls['unit_sale_id'].invalid"
+                                                class="form-text text-danger">
+                                                <small *ngIf="productupdate.controls['unit_sale_id'].errors?.['required']">This field is
+                                                    required</small>
+                                            </div>
+                            
+                                            <div
+                                                                    class="form-text text-danger">
+                                                                    <small *ngIf="errors?.unit_sale_id">{{errors?.unit_sale_id}}</small>
+                                                                </div>
+                                        </div>
+                                    </div>
 
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="stockalert">Stock Alert</label>
@@ -103,11 +200,19 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
+            <label class="col-md-8 control-label" for="tax_method">Order Tax</label>
             <div class="col-md-12">
-                <input id="ordertax" name="ordertax" placeholder="Order Tax" class="form-control input-md" required=""
-                    type="text" formControlName="ordertax">
-                
+                <input id="tax_method" name="tax_method" placeholder="Order Tax" class="form-control input-md" required=""
+                    type="text" formControlName="tax_method">
+                <div id="tax_method"
+                    *ngIf="productupdate.controls['tax_method'].touched &&productupdate.controls['tax_method'].invalid  || submitted && productupdate.controls['unit_sale_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="productupdate.controls['tax_method'].errors?.['required']">This field is required</small>
+                </div>
+                <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.tax_method">{{errors?.tax_method}}</small>
+                                    </div>
             </div>
         </div>
 
