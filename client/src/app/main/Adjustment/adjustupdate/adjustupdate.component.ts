@@ -46,7 +46,7 @@ export class AdjustupdateComponent implements OnInit {
         }
       }
   
-      //this.product.AddProduct(this.createproduct.value).subscribe(observer);
+      //this.product.AddProduct(this.createadjustment.value).subscribe(observer);
        
     }
   }
