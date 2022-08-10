@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: 'http://127.0.0.1:8000',
-  client_id: 4,
-  client_secret: 'TAP6IZxJJ61wQN3SveFWIWUkgV8c8jTUfChv2qN1',
-  grant_type: 'password'
+  apiUrl: "http://127.0.0.1:8000",
+  client_id: 2,
+  client_secret: "r27V3LvKJeCliMi0musHKJipUm3N4o3hmSIMIDkJ",
+  grant_type: "password",
 };
 
 /*
