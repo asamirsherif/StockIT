@@ -69,7 +69,9 @@ class ExpenseController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id,Request $request)
+
+    public function show(int $id, Request $request)
+
     {
 
         $this->authorizeForUser($request->user('api'), 'view', Expense::class);

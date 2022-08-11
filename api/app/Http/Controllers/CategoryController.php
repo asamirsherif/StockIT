@@ -18,8 +18,8 @@ class CategoryController extends Controller
     private CategoryRepositoryInterface $categoryRepo;
 
     public function __construct(CategoryRepositoryInterface $categoryRepo)
-    {   
-        
+    {
+
         $this->categoryRepo = $categoryRepo;
     }
 
@@ -29,19 +29,18 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
         $this->authorizeForUser($request->user('api'), 'view', Category::class);
 
         // 2 params => perPage & search
         if ($request->filled('search')) {
             $categories = $this->categoryRepo->multiSearch($request)
-            ->paginate($request->perPage);
+                ->paginate($request->perPage);
             $categories->appends(['search' => $request->search, 'perPage' => $request->perPage]);
         } else
             $categories = Category::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
 
         return new CategoryCollection($categories);
-
     }
 
     /**
@@ -51,7 +50,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
-    {   
+    {
         $this->authorizeForUser($request->user('api'), 'view', Category::class);
 
         $created = $this->categoryRepo->create($request);
@@ -78,15 +77,16 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id,Request $request)
-    {   
+
+    public function show($id, Request $request)
+    {
         $this->authorizeForUser($request->user('api'), 'view', Category::class);
 
         $category = Category::find($id);
-        if(!$category)
+        if (!$category)
             return $this->errMsg('This category doesn\'t exist');
         else
-            return $this->succWithData(new CategoryResource($category),'category found');
+            return $this->succWithData(new CategoryResource($category), 'category found');
 
         // $category = Category::find($id);
         // return new CategoryResource($category);
@@ -124,19 +124,19 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request)
-    {   
+
+    public function destroy($id, Request $request)
+    {
         $this->authorizeForUser($request->user('api'), 'view', Category::class);
-        
+
         $category = Category::find($id);
-        if(!$category)
+        if (!$category)
             return $this->errMsg('This category doesn\'t exist');
 
         $categoryDeleted = $this->categoryRepo->delete($id);
-        if($categoryDeleted)
+        if ($categoryDeleted)
             return $this->succWithData(new CategoryResource($category), "category deleted successfully");
         else
             return $this->errMsg("category not deleted");
-
     }
 }

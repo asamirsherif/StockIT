@@ -27,7 +27,7 @@ class ExpenseCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
+    {
         $this->authorizeForUser($request->user('api'), 'view', ExpenseCategory::class);
 
         if ($request->filled('search')) {
@@ -65,11 +65,12 @@ class ExpenseCategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id,Request $request)
+
+    public function show(int $id, Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'view', ExpenseCategory::class);
         $expenseCategory = ExpenseCategory::find($id);
-        
+
         if ($expenseCategory)
             return $this->succWithData(new ExpenseCategoryResource($expenseCategory));
         else
@@ -102,7 +103,9 @@ class ExpenseCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id,Request $request)
-    {   
+
+    {
+
 
         $this->authorizeForUser($request->user('api'), 'delete', ExpenseCategory::class);
 
