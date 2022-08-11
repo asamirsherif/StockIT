@@ -16,7 +16,21 @@ export class UserService {
    * Get all users
    */
   getAll() {
-    return this._http.get<User[]>(`${environment.apiUrl}/users`);
+    return this._http.get<User[]>(`${environment.apiUrl}/api/users`);
+  }
+
+  /**
+   * Get user by id
+   */
+   getLoggedUser() {
+    return this._http.get<User>(`${environment.apiUrl}/api/user`);
+  }
+
+  /**
+   * Get user by id
+   */
+   getUserPermissions() {
+    return this._http.get<User>(`${environment.apiUrl}/api/GetPermissions`);
   }
 
   /**
