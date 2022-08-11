@@ -8,24 +8,31 @@ templateUrl: './customerlist.component.html',
 styleUrls: ['./customerlist.component.scss']
 })
 export class CustomerlistComponent implements OnInit {
-    createcustomer:FormGroup;
+public pageBasicText = 3;
+createcustomer:FormGroup;
 constructor(private modalService: NgbModal,private fb:FormBuilder) {
-    this.createcustomer = new FormGroup({
-        CustomerName: new FormControl('', Validators.required),
-        email: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      country: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required)
-      })
+this.createcustomer = new FormGroup({
+CustomerName: new FormControl('', Validators.required),
+email: new FormControl('', Validators.required),
+phone: new FormControl('', Validators.required),
+country: new FormControl('', Validators.required),
+city: new FormControl('', Validators.required),
+address: new FormControl('', Validators.required)
+})
 
- }
+}
 openModal(contentModal) {
 this.modalService.open(contentModal);
+}
+openModal2(contentModal2) {
+this.modalService.open(contentModal2);
+}
+openModal3(contentModal3) {
+this.modalService.open(contentModal3);
 }
 ngOnInit(): void {
 }
 formSubmit() {
-    console.log(this.createcustomer);
-  }
+console.log(this.createcustomer);
+}
 }

@@ -8,24 +8,59 @@
         <div class="form-group col-md-4">
             <label class="col-md-4 control-label " for="category">Date</label>
             <div class="col-md-12 ">
-                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
+                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date" formControlName="date">
                 
+                <div id="datet"
+                *ngIf="createexpence.controls['date'].touched &&createexpence.controls['date'].invalid || submitted && createexpence.controls['date'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createexpence.controls['date'].errors?.['required']">This field is
+                    required</small>
+            </div>
+
+            <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.date">{{errors?.date}}</small>
+                                    </div> 
             </div>
         </div>
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label " for="category"> Warehouse</label>
             <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
                     <option selected>Choose Warehouse</option>
                 </select>
+
+                <div id="warehouse_id"
+                *ngIf="createexpence.controls['warehouse_id'].touched &&createexpence.controls['warehouse_id'].invalid || submitted && createexpence.controls['warehouse_id'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createexpence.controls['warehouse_id'].errors?.['required']">This field is
+                    required</small>
+            </div>
+
+            <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.warehouse_id">{{errors?.warehouse_id}}</small>
+                                    </div> 
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="category">Expence Warehouse</label>
+            <label class="col-md-8 control-label " for="expense_category_id">Expence Warehouse</label>
             <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="expense_category_id">
                     <option selected>Choose Warehouse</option>
                 </select>
+
+                <div id="expense_category_id"
+                *ngIf="createexpence.controls['expense_category_id'].touched &&createexpence.controls['expense_category_id'].invalid || submitted && createexpence.controls['expense_category_id'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createexpence.controls['expense_category_id'].errors?.['required']">This field is
+                    required</small>
+            </div>
+
+            <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.expense_category_id">{{errors?.expense_category_id}}</small>
+                                    </div> 
             </div>
         </div>
         <div class="form-group col-md-4">
@@ -33,22 +68,34 @@
             <div class="col-md-12 ">
                 <input class="form-control form-control col-md-11" type="text" placeholder="Amount" aria-label="Date" id="amount" name="amount" formControlName="amount">
                 <div id="amount"
-                *ngIf="createexpence.controls['amount'].touched &&createexpence.controls['amount'].invalid"
+                *ngIf="createexpence.controls['amount'].touched &&createexpence.controls['amount'].invalid || submitted && createexpence.controls['amount'].invalid"
                 class="form-text text-danger">
                 <small *ngIf="createexpence.controls['amount'].errors?.['required']">This field is
                     required</small>
             </div>
+
+            <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.amount">{{errors?.amount}}</small>
+                                    </div> 
             </div>
         </div>
         <div class="form-group col-md-8 ">
-            <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-            <textarea class="form-control " id="note" rows="3" formControlName="note" name="note"></textarea>
-            <div id="note"
-            *ngIf="createexpence.controls['note'].touched &&createexpence.controls['note'].invalid"
-            class="form-text text-danger">
-            <small *ngIf="createexpence.controls['note'].errors?.['required']">This field is
-                required</small>
-        </div>
+            <label for="exampleFormControlTextarea1" class="form-label ">Details</label>
+            <textarea class="form-control " id="note" rows="3" formControlName="note" name="note" formControlName="details"></textarea>
+
+            <div id="details"
+                *ngIf="createexpence.controls['details'].touched &&createexpence.controls['details'].invalid || submitted && createexpence.controls['details'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createexpence.controls['details'].errors?.['required']">This field is
+                    required</small>
+            </div>
+
+            <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.details">{{errors?.details}}</small>
+                                    </div>
+           
         </div>
     </div>
     

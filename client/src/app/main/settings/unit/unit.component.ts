@@ -8,6 +8,7 @@ import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
   styleUrls: ['./unit.component.scss']
 })
 export class UnitComponent implements OnInit {
+  public pageBasicText = 3;
   createunit:FormGroup;
 
   constructor(private modalService: NgbModal,private fb:FormBuilder) { 
@@ -19,7 +20,9 @@ export class UnitComponent implements OnInit {
   openModal(contentModal) {
     this.modalService.open(contentModal);
     }
-
+    openModal2(contentModal2) {
+      this.modalService.open(contentModal2);
+      }
   ngOnInit(): void {
   }
   formSubmit() {

@@ -1,25 +1,77 @@
 <body>
-    <h2>Brand
-    </h2>
-    <hr>
-    <div class=" row">
-        <div class="col-md-9">
-            <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
-            </form>
+  <h2>Brand</h2>
+  <hr />
+
+  <div class="row">
+    <div class="col-md-9">
+      <form class="form-inline col-md-12 mb-1">
+        <span class="switch-icon-left"><i data-feather="search"></i></span>
+        <input
+          [ngModel]="searchInput"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="search($event)"
+          class="form-control form-control ml-1 fs-5 w-75"
+          type="text"
+          placeholder="Search"
+          aria-label="Search"
+        />
+      </form>
+    </div>
+    <div class="col-md-3">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="openModal(contentModal)"
+      >
+        <i data-feather="plus-circle"></i>Create
+      </button>
+      <!-- Modal -->
+      <ng-template #contentModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-primary-title">Create</h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="d('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="col-md-3 ">
-            <button type="button" class="btn btn-primary" (click)="openModal(contentModal)"><i data-feather="plus-circle"></i>Create</button>
-              <!-- Modal -->
-              <ng-template #contentModal let-c="close" let-d="dismiss">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-primary-title">Create</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <div class="modal-body centered">
+          <form
+            class="col-md-12"
+            [formGroup]="createbrand"
+            (ngSubmit)="AddBrand()"
+          >
+            <div class="form-group col-md-12">
+              <label class="col-md-12 control-label" for="Brand Name"
+                >Brand Name</label
+              >
+              <div class="col-md-12">
+                <input
+                  class="form-control form-control col-md-12"
+                  type="text"
+                  placeholder="Brand Name"
+                  aria-label="Date"
+                  id="name"
+                  name="name"
+                  formControlName="name"
+                />
+                <div
+                  id="BrandName"
+                  *ngIf="
+                    createbrand.controls['name'].touched &&
+                    createbrand.controls['name'].invalid
+                  "
+                  class="form-text text-danger"
+                >
+                  <small
+                    *ngIf="createbrand.controls['name'].errors?.['required']"
+                    >This field is required</small
+                  >
                 </div>
+
                 <div class="modal-body centered">
                     <form class="col-md-12" [formGroup]="createbrand" (ngSubmit)="AddBrand()">
                             <div class="form-group col-md-12">
@@ -28,21 +80,22 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Brand Name" aria-label="Date" id="name"
                                         name="name" formControlName="name">
-                                        <div id="BrandName" *ngIf="createbrand.controls['name'].touched &&createbrand.controls['name'].invalid"
+                                        <div id="BrandName" *ngIf="createbrand.controls['name'].touched && createbrand.controls['name'].invalid || submitted && createbrand.controls['name'].invalid"
                                         class="form-text text-danger">
                                         <small *ngIf="createbrand.controls['name'].errors?.['required']">This field is
                                             required</small>
                                     </div>     
+                                    <div
+                                        class="form-text text-danger">
+                                        <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                    </div>    
+                                    
                                 </div>
                             </div>
                             <div class="form-group col-md-12 ">
                                 <label for="exampleFormControlTextarea1" class="form-label ">Brand Description</label>
                                 <textarea class="form-control " id="description" name="description" rows="3" formControlName="description"></textarea>
-                                <div id="description" *ngIf="createbrand.controls['description'].touched &&createbrand.controls['description'].invalid"
-                                class="form-text text-danger">
-                                <small *ngIf="createbrand.controls['description'].errors?.['required']">This field is
-                                    required</small>
-                            </div>    
+                                    
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="col-md-12 control-label " for="Brand Image">Brand Image</label>
@@ -50,11 +103,7 @@
                                     <input class="form-control form-control col-md-12" type="file"
                                         placeholder="image" aria-label="Date" id="image"
                                         name="image" formControlName="image">
-                                        <div id="image" *ngIf="createbrand.controls['image'].touched &&createbrand.controls['image'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createbrand.controls['image'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>        
+                                              
                                 </div>
                             </div>
                           
@@ -66,28 +115,209 @@
                         </div>
                     </form>
 
+
+              </div>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >Brand Description</label
+              >
+              <textarea
+                class="form-control"
+                id="description"
+                name="description"
+                rows="3"
+                formControlName="description"
+              ></textarea>
+              <div
+                id="description"
+                *ngIf="
+                  createbrand.controls['description'].touched &&
+                  createbrand.controls['description'].invalid
+                "
+                class="form-text text-danger"
+              >
+                <small
+                  *ngIf="createbrand.controls['description'].errors?.['required']"
+                  >This field is required</small
+                >
+              </div>
+            </div>
+            <div class="form-group col-md-12">
+              <label class="col-md-12 control-label" for="Brand Image"
+                >Brand Image</label
+              >
+              <div class="col-md-12">
+                <input
+                  class="form-control form-control col-md-12"
+                  type="file"
+                  placeholder="image"
+                  aria-label="Date"
+                  id="image"
+                  name="image"
+                  formControlName="image"
+                />
+                <div
+                  id="image"
+                  *ngIf="
+                    createbrand.controls['image'].touched &&
+                    createbrand.controls['image'].invalid
+                  "
+                  class="form-text text-danger"
+                >
+                  <small
+                    *ngIf="createbrand.controls['image'].errors?.['required']"
+                    >This field is required</small
+                  >
+
                 </div>
-            </ng-template>
+              </div>
+            </div>
+
+            <div class="form-group col-md-12">
+              <div class="col-md-4">
+                <button
+                  id="singlebutton"
+                  name="singlebutton"
+                  class="btn btn-primary"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
+      </ng-template>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Brand Image</th>
-                <th scope="col">Brand Name </th>
-                <th scope="col">Brand Description</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <tr>
-                <td><img src="#"></td>
-                <td>jkk</td>
-                <td>ddvvv</td>
-                <td><i data-feather="edit" class="btn-outline-success"[size]="24" ></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24"></i></td>
-            </tr>
-        </tbody>
-    </table>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Brand Image</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Brand Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody
+      class="table-group-divider"
+      *ngFor="let brand of data; let i = index"
+    >
+      <tr>
+        <td><img src="{{ brand.image }}" width="50" height="50" /></td>
+        <td>{{ brand.name }}</td>
+        <td>{{ brand.description }}</td>
+        <td>
+          <button
+            class="btn btn-sm btn-success"
+            (click)="editBrand(brand.id); openModal2(contentModal2)"
+          >
+            <i data-feather="edit" [size]="24"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteBrand(brand.id)">
+            <i data-feather="x-circle" [size]="24"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <!-- Modal -->
+    <ng-template #contentModal2 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="d('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body centered">
+        <form
+          class="col-md-12"
+          [formGroup]="editBrandForm"
+          (ngSubmit)="updateBrand()"
+        >
+          <div class="form-group col-md-12">
+            <label class="col-md-12 control-label" for="Brand Name"
+              >Brand Name</label
+            >
+            <div class="col-md-12">
+              <input
+                class="form-control form-control col-md-12"
+                type="text"
+                placeholder="Brand Name"
+                aria-label="Date"
+                id="name"
+                name="name"
+                formControlName="name"
+              />
+            </div>
+          </div>
+          <div class="form-group col-md-12">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Brand Description</label
+            >
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              rows="3"
+              formControlName="description"
+            ></textarea>
+          </div>
+          <div class="form-group col-md-12">
+            <label class="col-md-12 control-label" for="Brand Image"
+              >Brand Image</label
+            >
+            <div class="col-md-12">
+              <input
+                class="form-control form-control col-md-12"
+                type="file"
+                placeholder="image"
+                aria-label="Date"
+                id="image"
+                name="image"
+                formControlName="image"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <div class="col-md-4">
+              <button
+                id="singlebutton"
+                name="singlebutton"
+                class="btn btn-primary"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </table>
+  <!-- <ngb-pagination class="d-flex justify-content-end" [collectionSize]="60" [(page)]="page"></ngb-pagination> -->
+  <ngb-pagination
+    class="d-flex justify-content-end"
+    [collectionSize]="50"
+    [(page)]="pageBasicText"
+    aria-label="Custom pagination"
+  >
+    <ng-template ngbPaginationPrevious
+      ><span
+        [data-feather]="'chevron-left'"
+        [class]="'font-weight-bolder'"
+      ></span
+      >Prev
+    </ng-template>
+    <ng-template ngbPaginationNext
+      >Next<span
+        [data-feather]="'chevron-right'"
+        [class]="'font-weight-bolder'"
+      ></span>
+    </ng-template>
+  </ngb-pagination>
 </body>
-
-

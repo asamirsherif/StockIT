@@ -5,13 +5,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoreCommonModule } from '@core/common.module';
 
 import { CreateproductComponent } from './createproduct.component';
+import { AuthGuard } from 'app/auth/helpers';
 
 
 const routes = [
   {
     path: '',
     component: CreateproductComponent ,
-    data: { animation: 'sample' }
+    data: { animation: 'sample' },
+    
   }
 ];
 
