@@ -1,31 +1,66 @@
 <body>
     <h2>Create Adjustment</h2>
     <hr>
-    <div class="col-md-12 row">
-        <div class="form-group col-md-6">
+   
+    <form class="container col-md-12" [formGroup]="createadjustment" (ngSubmit)="AddAdjustment()">
+    <div class="  col-md-12 row">
+        <div class="col-md-6">
             <label class="col-md-4 control-label " for="category">Warehouse</label>
             <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
                     <option selected>Choose Warehouse</option>
                 </select>
+                <div id="warehouse_id" *ngIf="createadjustment.controls['warehouse_id'].touched &&createadjustment.controls['warehouse_id'].invalid || submitted && createadjustment.controls['warehouse_id'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createadjustment.controls['warehouse_id'].errors?.['required']">This field is
+                    required</small>
+            </div>
+            <div
+                                    class="form-text text-danger">
+                                    <small *ngIf="errors?.warehouse_id">{{errors?.warehouse_id}}</small>
+                                </div> 
+
             </div>
         </div>
         <div class="form-group col-md-6">
-            <label class="col-md-4 control-label " for="category">Date</label>
+            <label class="col-md-6 control-label " for="category">Date</label>
             <div class="col-md-12 ">
-                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
+                <input class="form-control form-control col-md-12" type="date" 
+                placeholder="Date" aria-label="Date" formControlName="date">
+                <div id="date" *ngIf="createadjustment.controls['date'].touched &&createadjustment.controls['date'].invalid || submitted && createadjustment.controls['date'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createadjustment.controls['date'].errors?.['required']">This field is
+                    required</small>
+            </div>
+            <div
+                                    class="form-text text-danger">
+                                    <small *ngIf="errors?.date">{{errors?.date}}</small>
+                                </div> 
+
             </div>
         </div>
     </div>
     <div class="col-md-12">
-        <label class="col-md-4 control-label" for="product">Product</label>
+        <label class="col-md-4 control-label" for="items">Product</label>
         <div class="col-md-12 row">
-            <span class="switch-icon-left col-md-1 icon "><i data-feather="search"></i></span>
-            <input class="form-control form-control col-md-11" type="text" placeholder="Search Product by name"
-                aria-label="Search">
+            <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
+            <input class="form-control col-md-11 text-left" type="text" placeholder="Search Product by name"
+                aria-label="Search" formControlName="items">
+                <div id="items" *ngIf="createadjustment.controls['items'].touched &&createadjustment.controls['items'].invalid || submitted && createadjustment.controls['items'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createadjustment.controls['items'].errors?.['required']">This field is
+                    required</small>
+            </div>
+            <div
+                                    class="form-text text-danger">
+                                    <small *ngIf="errors?.items">{{errors?.items}}</small>
+                                </div> 
+
         </div>
     </div>
-    <table class="table col-md-11">
+
+    <div class="container text-left">
+    <table class="table col-md-12">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -38,12 +73,68 @@
         </thead>
         <tbody class="table-group-divider">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>63417341</td>
+                <td>(earphones)</td>
+                <td><div class="badge badge-pill badge-light-warning">50 pc</div></td>
+                <td>	<div class="container text-left ">
+<button type="button" (click)="minus()" ><i data-feather="minus"></i></button>
+<input class="quantity" type="text" [value]="quantity">
+<button type="button" (click)="plus()" ><i data-feather="plus"></i></button>
+                </div>
+                     </td>
+                <td>
+                    <select class="form-select col-md-12 " aria-label="Default select example">
+                        <option selected>Addition</option>
+                        <option selected>Subtraction</option>
+                    </select>
+                </td>
+                <td> <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>63417341</td>
+                <td>(earphones)</td>
+                <td><div class="badge badge-pill badge-light-warning">50 pc</div></td>
+                <td>	<div class="container text-left ">
+<button type="button" (click)="minus()" ><i data-feather="minus"></i></button>
+<input class="quantity" type="text" [value]="quantity">
+<button type="button" (click)="plus()" ><i data-feather="plus"></i></button>
+                </div>
+                     </td>
+                <td>
+                    <select class="form-select col-md-12 " aria-label="Default select example">
+                        <option selected>Addition</option>
+                        <option selected>Subtraction</option>
+                    </select>
+                </td>
+                <td> <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>63417341</td>
+                <td>(earphones)</td>
+                <td><div class="badge badge-pill badge-light-warning">50 pc</div></td>
+                <td>	<div class="container text-left ">
+<button type="button" (click)="minus()" ><i data-feather="minus"></i></button>
+<input class="quantity" type="text" [value]="quantity" name="qty" >
+<button type="button" (click)="plus()" ><i data-feather="plus"></i></button>
+                </div>
+                     </td>
+                <td>
+                    <select class="form-select col-md-12 " aria-label="Default select example">
+                        <option selected>Addition</option>
+                        <option selected>Subtraction</option>
+                    </select>
+                </td>
+                <td> <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </button></td>
             </tr>
         </tbody>
     </table>
+</div>
     <div class="form-group col-md-12 ">
         <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
         <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -53,6 +144,7 @@
             <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
         </div>
     </div>
+</form>
 
 </body>
 

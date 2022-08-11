@@ -73,7 +73,9 @@ import { ExpenseupdateComponent } from './main/expenses/expenseupdate/expenseupd
 import { QuotationupdateComponent } from './main/quotations/quotationupdate/quotationupdate.component';
 import { PurchasesupdateComponent } from './main/Purchases/purchasesupdate/purchasesupdate.component';
 import { SalesupdateComponent } from './main/sales/salesupdate/salesupdate.component';
-import { AuthLoginV2Component } from './main/pages/authentication/auth-login-v2/auth-login-v2.component';
+import { GrouppermissingupdateComponent } from './main/settings/grouppermissingupdate/grouppermissingupdate.component';
+import { UpdatetransferComponent } from './main/transfer/updatetransfer/updatetransfer.component';
+
 
 const appRoutes: Routes = [
   {
@@ -308,6 +310,13 @@ const appRoutes: Routes = [
     path: 'salesupdate',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/sales/salesupdate/salesupdate.module').then(m => m.SalesupdateModule)
+  },
+  {
+    path: 'permissionupdate',
+    loadChildren: () => import('./main/settings/grouppermissingupdate/grouppermissionupdate.module').then(m => m.GrouppermissingupdateModule)
+  },{
+    path: 'ternsupdate',
+    loadChildren: () => import('./main/transfer/updatetransfer/updatetransfer.module').then(m => m.UpdatetransferModule)
   },
   {
     path: '**',

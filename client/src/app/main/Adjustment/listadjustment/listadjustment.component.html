@@ -1,10 +1,11 @@
 <body>
     <h2>Adjustment List</h2>
     <hr>
-    <div class="container row">
+    <div class="container">
+    <div class="row">
         <div class="col-md-6">
             <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
+                <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
                 <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
                     aria-label="Search">
             </form>
@@ -32,10 +33,78 @@
                 <td>AD-1111</td>
                 <td>N/D</td>
                 <td>12</td>
-                <td> <button class="btn btn-sm btn-primary" ><i data-feather="eye"[size]="22"></i>
+                <td> <button class="btn btn-sm btn-primary" (click)="openModal(contentModal)"><i data-feather="eye"[size]="22"></i>
                 </button><button class="btn btn-sm btn-success" [routerLink]="['../adjustupdate']"><i data-feather="edit" [size]="24" >
                 </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
-                </button></td>   
+                </button></td> 
+                 <!-- Modal -->
+              <ng-template #contentModal let-c="close" let-d="dismiss" let-model >
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Adjustment Detail</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <table class="table table-hover table-bordered">
+                                
+                        <tbody class="table-group-divider">
+                           
+                            <tr>
+                                <td>Date</td>
+                                <td>2022-08-06</td>
+                            </tr>
+                            <tr>
+                                <td>Reference</td>
+                                <td>AD_1114</td>
+                            </tr>
+                            <tr>
+                                <td>Warehouse</td>
+                                <td>Warehouse 2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Code Product</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Type</th>
+                                    </tr>
+                                </thead>
+                            <tbody class="table-group-divider" >
+                                <tr>
+                                    <td>earphones	</td>
+                                    <td>63417341	</td>
+                                    <td>49.00 pc</td>
+                                    <td>Addition</td>
+                                </tr>
+                                <tr>
+                                    <td>earphones	</td>
+                                    <td>63417341	</td>
+                                    <td>49.00 pc</td>
+                                    <td>Addition</td>
+                                </tr>
+                                <tr>
+                                    <td>earphones	</td>
+                                    <td>63417341	</td>
+                                    <td>49.00 pc</td>
+                                    <td>Addition</td>
+                                </tr>
+                                <tr>
+                                    <td>earphones	</td>
+                                    <td>63417341	</td>
+                                    <td>49.00 pc</td>
+                                    <td>Addition</td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+
+
+                </div>
+            </ng-template>  
             </tr>
         </tbody>
     </table>
@@ -47,5 +116,6 @@
           >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
         </ng-template>
       </ngb-pagination>
+    </div>
 </body>
 

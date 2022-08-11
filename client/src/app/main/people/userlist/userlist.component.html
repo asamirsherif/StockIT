@@ -166,7 +166,89 @@
                     </div>
 
                 </td>
-                <td><i data-feather="edit" class="btn-outline-success" [size]="24"></i></td>
+                <td><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
+                </i></button></td>  
+                  <!-- Modal2 -->
+              <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class="row col-md-12">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-12 control-label " for="firstName">First Name</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="first Name"
+                                    aria-label="Date" id="firstName" name="firstName" formControlName="firstName">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-12 control-label " for="LastName">Last Name</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="last Name"
+                                    aria-label="Date" id="lastName" name="lastName" formControlName="lastName">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-12 control-label " for="userName">User Name</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="user Name"
+                                    aria-label="Date" id="userName" name="userName" formControlName="userName">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="Email">Email</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="email" placeholder="email"
+                                    aria-label="Date" id="email" name="email" formControlName="email">
+                               
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="phone">Phone</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="phone"
+                                    aria-label="Date" id="phone" name="phone" formControlName="phone">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="password">Password</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="password"
+                                    placeholder="password" aria-label="Date" id="password" name="password"
+                                    formControlName="password">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-8 control-label " for="Role">Role</label>
+                            <div class="col-md-12 ">
+                                <select class="form-select col-md-12 " aria-label="Default select example">
+                                    <option selected>Pleses select menu</option>
+                                    <option>Owner</option>
+                                    <option>Manger</option>
+                                    <option>Chasier</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-12 control-label " for="image">User Image</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="file" placeholder="image"
+                                    aria-label="Date" id="image" name="image" formControlName="image">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </ng-template>
+
             </tr>
         </tbody>
     </table>

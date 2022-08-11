@@ -15,6 +15,7 @@ import { ThisReceiver } from "@angular/compiler";
 })
 export class BrandComponent implements OnInit {
   public pageBasicText = 3;
+
   data: Array<IBrand> = [];
   brandForEdit!: IBrand;
 
@@ -33,6 +34,7 @@ export class BrandComponent implements OnInit {
     public _router: Router,
     private toaster: ToastrService
   ) {
+
     this.createbrand = new FormGroup({
       name: new FormControl("", Validators.required),
       description: new FormControl("", Validators.required),
@@ -65,6 +67,7 @@ export class BrandComponent implements OnInit {
       this.data = res.data;
     });
   }
+
 
   AddBrand() {
     if (this.createbrand.valid) {
