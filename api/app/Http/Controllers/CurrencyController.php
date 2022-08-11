@@ -76,7 +76,7 @@ class CurrencyController extends Controller
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {   
         $this->authorizeForUser($request->user('api'), 'view', Currency::class);
 
@@ -114,7 +114,7 @@ class CurrencyController extends Controller
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {   
         $this->authorizeForUser($request->user('api'), 'view', Currency::class);
         
