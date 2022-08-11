@@ -7,8 +7,8 @@ export const environment = {
   hmr: false,
 
   apiUrl: "http://localhost:8000",
-  client_id: 2,
-  client_secret: "qtfPKasX4L4I37dOWiIB7LPlgo55GdscfiaBUbSM",
+  client_id: 6,
+  client_secret: "hbtdVsMs0CMYi1AMxDv2NFpoMYVUoogfvr2tgwfa",
   grant_type: "password",
 
 };
