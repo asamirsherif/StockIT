@@ -121,7 +121,7 @@ class CurrencyController extends Controller
         $currency = Currency::find($id);
         if (!$currency)
             return $this->errMsg("This Currency doesnt exist");
-        $deleted = $this->brandRepo->delete($id);
+        $deleted = $this->currencyRepo->delete($id);
         if ($deleted)
             return $this->succWithData(new CurrencyResource($currency), "Brand deleted");
         else

@@ -131,7 +131,7 @@ export class BrandComponent implements OnInit {
   search(event) {
 
     this.brand.params = this.brand.params.set("search", event);
- 
-    this.AllData(); 
+
+    this.AllData();
   }
 }
