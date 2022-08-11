@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class BrandPolicy
+class CategoryPolicy
 {
     use HandlesAuthorization;
 

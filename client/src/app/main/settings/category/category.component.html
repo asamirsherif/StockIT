@@ -6,8 +6,9 @@
         <div class="col-md-9">
             <form class="form-inline col-md-12 mb-1">
                 <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
+                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+                    class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search" />
             </form>
         </div>
         <div class="col-md-3 ">
@@ -21,16 +22,16 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="col-md-12" [formGroup]="createcategory" (ngSubmit)="formSubmit()">
+                    <form class="col-md-12" [formGroup]="createCategoryForm" (ngSubmit)="createCategory()">
                             <div class="form-group col-md-12" >
                                 <label class="col-md-12 control-label " for="Category Code">Category Code</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Category Code" aria-label="Date" id="CategoryCode"
                                         name="CategoryCode" formControlName="CategoryCode">
-                                        <div id="CategoryCode" *ngIf="createcategory.controls['CategoryCode'].touched &&createcategory.controls['CategoryCode'].invalid"
+                                        <div id="CategoryCode" *ngIf="createCategoryForm.controls['CategoryCode'].touched &&createCategoryForm.controls['CategoryCode'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="createcategory.controls['CategoryCode'].errors?.['required']">This field is
+                                        <small *ngIf="createCategoryForm.controls['CategoryCode'].errors?.['required']">This field is
                                             required</small>
                                     </div>     
                                 </div>
@@ -41,9 +42,9 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Category Name" aria-label="Date" id="CategoryName"
                                         name="CategoryName" formControlName="CategoryName">
-                                        <div id="CategoryName" *ngIf="createcategory.controls['CategoryName'].touched &&createcategory.controls['CategoryName'].invalid"
+                                        <div id="CategoryName" *ngIf="createCategoryForm.controls['CategoryName'].touched &&createCategoryForm.controls['CategoryName'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="createcategory.controls['CategoryName'].errors?.['required']">This field is
+                                        <small *ngIf="createCategoryForm.controls['CategoryName'].errors?.['required']">This field is
                                             required</small>
                                     </div>
                                 </div>
@@ -68,14 +69,16 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider">
-            <tr>
-                <td>jkk</td>
-                <td>ddvvv</td>
-                <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+        <tbody class="table-group-divider" class="table-group-divider">
+            <tr *ngFor="let category of categories; let i = index">
+                <td>{{ category.code }}</td>
+                <td>{{ category.name }}</td>
+                <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2);editCategory(category.id)" ><i data-feather="edit" [size]="24" >
+                </i></button>  <button class="btn btn-sm btn-danger" (click)="deleteCategory(category.id)"><i data-feather="x-circle"  [size]="24"></i>
                 </button></td>
-                <!-- Modal -->
+
+
+                <!-- Edit Category Modal -->
                 <ng-template #contentModal2 let-c="close" let-d="dismiss">
                     <div class="modal-header">
                         <h4 class="modal-title" id="modal-primary-title">Edit</h4>
@@ -84,7 +87,7 @@
                         </button>
                     </div>
                     <div class="modal-body centered">
-                        <form class="col-md-12" >
+                        <form [formGroup]="editCategoryForm" (ngSubmit)="updateCategory(category.id)" class="col-md-12" >
                                 <div class="form-group col-md-12" >
                                     <label class="col-md-12 control-label " for="Category Code">Category Code</label>
                                     <div class="col-md-12 ">
@@ -108,9 +111,10 @@
                                 </div>
                             </div>
                         </form>
-    
                     </div>
                 </ng-template>   
+                <!-- END OF EDIT CATEGORY MODAL -->
+
             </tr>
         </tbody>
     </table>

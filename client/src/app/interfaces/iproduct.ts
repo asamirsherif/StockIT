@@ -1,0 +1,17 @@
+export interface IProduct {
+id?: number,
+name: string,
+code: string,
+type_barcode: string,
+brand_id: number,
+unit_id: number,
+tax_method: string,
+tax_percent: number,
+fixed_price: number,
+price: number,
+fixed_cost: number,
+cost: number,
+unit_sale_id: number,
+unit_purchase_id: number,
+is_variant: boolean,
+}
