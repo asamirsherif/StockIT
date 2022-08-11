@@ -289,9 +289,7 @@ class UserController extends BaseController
         $data = [];
         if ($roles) {
             foreach ($roles->permissions as $permission) {
-                $item[$permission->name]['slug'] = $permission->name;
-                $item[$permission->name]['id'] = $permission->id;
-
+                $item[] = $permission->name;
             }
             $data[] = $item;
         }
