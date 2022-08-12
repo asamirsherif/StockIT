@@ -10,7 +10,59 @@
             </form>
         </div>
         <div class="col-md-6 ">
-            <button type="button" class="btn btn-outline-primary "><i data-feather="filter"></i>Filter</button>
+            <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
+
+            <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i data-feather="filter"></i>Filter</button>
+
+            <div ngbDropdownMenu style="width:400px;height: 460px;">
+                <form class="px-2 py-2">
+                    <h3 style="font-weight:bold ;">Filter</h3>
+
+                  <div class="form-group mb-1 ">
+                    <label  for="exampleDropdownFormDate1">Date</label>
+                    <input  type="date" class="form-control" id="exampleDropdownFormDate1"  />
+                  </div>
+
+                  <div class="form-group mb-1 ">
+                    <label  for="exampleDropdownFormReferenc1">Referenc</label>
+                    <input  type="text" class="form-control" id="exampleDropdownFormReferenc1"  placeholder="Referenc" />
+                  </div>
+
+                    <div class="form-group mb-1">
+                        <label for="exampleDropdownFormWarehouse1">Warehouse</label>
+                        <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
+                        <option selected>Choose Warehouse</option>
+                        <option>الرئيسي </option>
+                    <option>officic annim </option>
+                        </select>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="exampleDropdownFormCategory1">Expense Category</label>
+                            <select class="form-control" aria-label="Default select example" id="exampleDropdownFormCategory1" >
+                            <option selected>Choose Category</option>
+                            <option>كهرباء </option>
+                            <option>ريت</option>
+                            <option>ايجار</option>
+                            </select>
+                            </div>
+                        <div class="row">
+                        <div class="col-lg-6 col-md-12 ">
+                            <div class="form-group">
+                              <button type="button" class="btn btn-primary btn-block" rippleEffect><i data-feather="filter"></i>Filter</button>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                              <button type="button" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i> Reset</button>
+                            </div>
+                         </div> 
+                        </div>
+                         </form> 
+                                        
+                </div>
+              </div>
+
             <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
             <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
             <button type="button" class="btn btn-secondary" [routerLink]="['../createexpenses']"><i data-feather="plus-circle"></i>Create</button>
