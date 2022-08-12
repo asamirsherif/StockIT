@@ -65,6 +65,7 @@ class ExpenseCategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
+
     public function show(int $id, Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'view', ExpenseCategory::class);
@@ -102,7 +103,9 @@ class ExpenseCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id,Request $request)
+
     {
+
 
         $this->authorizeForUser($request->user('api'), 'delete', ExpenseCategory::class);
 
