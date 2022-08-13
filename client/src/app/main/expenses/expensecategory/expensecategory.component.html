@@ -72,7 +72,7 @@
                 <td>{{ expenseCategory.name }}</td>
                 <td>{{ expenseCategory.description }}</td>
                 <td><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)"><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </i></button>  <button class="btn btn-sm btn-danger" (click)="destroy(expenseCategory.id)" ><i data-feather="x-circle"  [size]="24"></i>
                 </button></td> 
                 <!-- Modal2 -->
             <ng-template #contentModal2 let-c="close" let-d="dismiss">

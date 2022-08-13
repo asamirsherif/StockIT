@@ -85,6 +85,20 @@ export class ExpensecategoryComponent implements OnInit {
       this.expenseCategoryService.store(data).subscribe(observer)
     }
   }
+  destroy(id){    
+   //then
+   const observer={
+    next:(res)=>{
+      this.getall();
+    },
+    error:(error)=>{
+      console.log(error)
+    }
+   }
+
+    //first
+    this.expenseCategoryService.destroy(id).subscribe(observer)
+  }
 
 }
 
