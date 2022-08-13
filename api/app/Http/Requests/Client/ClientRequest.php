@@ -25,7 +25,6 @@ class ClientRequest extends FormRequest
     {
         return [
             'name'      => ['required', 'string', 'min:4'],
-            'code'      => ['required', 'unique:clients,code', 'integer'],
             'email'     => ['required', 'email:filter', 'unique:clients,email'],
             'country'   => ['required'],
             'city'      => ['required'],
