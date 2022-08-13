@@ -3,11 +3,11 @@
     <hr>
     <div class="container row">
         <div class="col-md-6">
-            <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search" [size]="25"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
-            </form>
+          <form class="form-inline col-md-12 mb-1">
+            <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+            <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+              class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
+          </form>
         </div>
         <div class="col-md-6 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">

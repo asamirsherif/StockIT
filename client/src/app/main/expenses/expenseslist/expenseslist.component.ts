@@ -9,6 +9,7 @@ import { ExpenseService } from 'app/auth/service/expense/expense.service';
 export class ExpenseslistComponent implements OnInit {
   public pageBasicText = 3;
   expense: IExpense[];
+  searchInput = "";
 
   constructor(private expenseService:ExpenseService) { }
 
@@ -46,5 +47,9 @@ export class ExpenseslistComponent implements OnInit {
     //first
     this.expenseService.destroy(id).subscribe(observer)
     
+  }
+  search(event) {
+    this.expenseService.params = this.expenseService.params.set("search", event)
+    this.getall()
   }
 }
