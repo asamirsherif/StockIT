@@ -1,11 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from "@angular/forms";
+import {FormGroup,FormControl,Validators,FormBuilder} from "@angular/forms";
 import { CategorytService } from "app/auth/service/category/category.service";
 import { observable } from "rxjs";
 import { ICategory } from "app/interfaces/icategory";
@@ -19,7 +14,7 @@ export class CategoryComponent implements OnInit {
   public pageBasicText = 3;
   submitted = false;
   categories: ICategory[];
-  contentModal;
+  contentModal:any;
   searchInput= "";
 
   createCategoryForm: FormGroup;

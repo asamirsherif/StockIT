@@ -25,12 +25,11 @@ class ClientRequest extends FormRequest
     {
         return [
             'name'      => ['required', 'string', 'min:4'],
-            'code'      => ['required', 'unique:clients,code', 'integer'],
             'email'     => ['required', 'email:filter', 'unique:clients,email'],
             'country'   => ['required'],
             'city'      => ['required'],
             'phone'     => ['required', 'unique:clients,phone', 'regex:/^01[0125][0-9]{8}$/'],
-            'adresse'   => ['required']
+            'address'   => ['required']
         ];
     }
 

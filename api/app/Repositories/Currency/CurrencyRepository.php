@@ -41,7 +41,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
         DB::transaction(function () use ($request, $currency) {
             $currency->code = $request->code ? $request->code : $currency->code;
             $currency->name = $request->name ? $request->name : $currency->name;
-            $currency->sympol = $request->sympol ? $request->sympol : $currency->sympol;
+            $currency->symbol = $request->symbol ? $request->symbol : $currency->symbol;
 
             $currency->save();
         }, 3);
