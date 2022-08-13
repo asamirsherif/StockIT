@@ -2,13 +2,13 @@
     <h2>Edit Expence
     </h2>
     <hr>
-    <form class="row col-md-12" [formGroup]="editexpence" (ngSubmit)="EditExpense()">
+    <form class="row col-md-12" [formGroup]="editexpence" (ngSubmit)="update(data)">
         <div class="col-md-12 row">
            
             <div class="form-group col-md-4">
                 <label class="col-md-4 control-label " for="category">Date</label>
                 <div class="col-md-12 ">
-                    <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date" formControlName="date">
+                    <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date" formControlName="date" [(ngModel)]="data.date" ngModel>
                     
                     <div id="datet"
                     *ngIf="editexpence.controls['date'].touched &&editexpence.controls['date'].invalid || submitted && editexpence.controls['date'].invalid"
@@ -66,7 +66,7 @@
             <div class="form-group col-md-4">
                 <label class="col-md-4 control-label " for="amount">Amount</label>
                 <div class="col-md-12 ">
-                    <input class="form-control form-control col-md-11" type="text" placeholder="Amount" aria-label="Date" id="amount" name="amount" formControlName="amount">
+                    <input class="form-control col-md-11" type="text" placeholder="Amount" aria-label="Date" id="amount" name="amount" formControlName="amount" [(ngModel)]="data.amount" ngModel>
                     <div id="amount"
                     *ngIf="editexpence.controls['amount'].touched &&editexpence.controls['amount'].invalid || submitted && editexpence.controls['amount'].invalid"
                     class="form-text text-danger">
@@ -103,7 +103,7 @@
         
         <div class="form-group col-md-12">
             <div class="col-md-4">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary" >Submit</button>
             </div>
         </div>
     </form>
