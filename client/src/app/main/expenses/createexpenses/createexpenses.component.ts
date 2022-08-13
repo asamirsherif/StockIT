@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 import { WarehousservService } from 'app/auth/service/warehous/warehousserv.service';
+import { ExpenseCategoryService } from 'app/auth/service/expense/expense-category.service';
+import { IExpenseCategory } from 'app/interfaces/iexpense-category';
 
 @Component({
   selector: 'app-createexpenses',
@@ -11,6 +13,8 @@ import { WarehousservService } from 'app/auth/service/warehous/warehousserv.serv
 export class CreateexpensesComponent implements OnInit {
   public pageBasicText = 3;
   WarehousArray:any[]=[];
+  expenseCategories: IExpenseCategory[]=[];
+
   submitted = false;
   
   data:any={}
@@ -18,7 +22,7 @@ export class CreateexpensesComponent implements OnInit {
   errors:any = {};
   createexpence:FormGroup;
   constructor(private fb:FormBuilder,public _router:Router,
-  public wareser:WarehousservService) {
+  public wareser:WarehousservService,private expenseCategoryService :ExpenseCategoryService ) {
     this.createexpence = new FormGroup({
       amount: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
@@ -46,6 +50,17 @@ export class CreateexpensesComponent implements OnInit {
       }
 
     );
+
+   const  expCatObserver = {
+      next:(res)=>{
+        this.expenseCategories = res.data                
+      },
+      error:(error)=>{
+        console.log(error);
+      }
+    }
+
+    this.expenseCategoryService.getall().subscribe(expCatObserver)
   }
   formSubmit(){
     this.submitted = true;
@@ -63,7 +78,6 @@ export class CreateexpensesComponent implements OnInit {
         }
       }
   
-      //this.product.AddProduct(this.createexpence.value).subscribe(observer);
        
     }
   }
