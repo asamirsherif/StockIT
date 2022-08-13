@@ -27,8 +27,11 @@
                 <label class="col-md-8 control-label " for="category"> Warehouse</label>
                 <div class="col-md-12 ">
                     <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
-                        <option selected>Choose Warehouse</option>
-                    </select>
+                        <option *ngFor="let item of WarehousArray" [value]="item.id">
+
+                            {{ item.name }}
+
+                        </option>                    </select>
     
                     <div id="warehouse_id"
                     *ngIf="editexpence.controls['warehouse_id'].touched &&editexpence.controls['warehouse_id'].invalid || submitted && editexpence.controls['warehouse_id'].invalid"
@@ -47,8 +50,9 @@
                 <label class="col-md-8 control-label " for="expense_category_id">Expence Warehouse</label>
                 <div class="col-md-12 ">
                     <select class="form-select col-md-12 " aria-label="Default select example" formControlName="expense_category_id">
-                        <option selected>Choose Warehouse</option>
-                    </select>
+                        <option *ngFor="let item of expenseCategories" [value]="item.id">
+                            {{ item.name }}
+                        </option>                    </select>
     
                     <div id="expense_category_id"
                     *ngIf="editexpence.controls['expense_category_id'].touched &&editexpence.controls['expense_category_id'].invalid || submitted && editexpence.controls['expense_category_id'].invalid"
