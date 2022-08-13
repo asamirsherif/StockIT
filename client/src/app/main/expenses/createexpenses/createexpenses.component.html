@@ -27,8 +27,11 @@
             <label class="col-md-8 control-label " for="category"> Warehouse</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
-                    <option selected>Choose Warehouse</option>
-                </select>
+                    <option *ngFor="let item of WarehousArray" [value]="item.id">
+
+                        {{ item.name }}
+
+                 </option>                </select>
 
                 <div id="warehouse_id"
                 *ngIf="createexpence.controls['warehouse_id'].touched &&createexpence.controls['warehouse_id'].invalid || submitted && createexpence.controls['warehouse_id'].invalid"

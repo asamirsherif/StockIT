@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
+import { WarehousservService } from 'app/auth/service/warehous/warehousserv.service';
 
 @Component({
   selector: 'app-createexpenses',
@@ -9,14 +10,15 @@ import { Router } from '@angular/router';
 })
 export class CreateexpensesComponent implements OnInit {
   public pageBasicText = 3;
-
+  WarehousArray:any[]=[];
   submitted = false;
   
   data:any={}
 
   errors:any = {};
   createexpence:FormGroup;
-  constructor(private fb:FormBuilder,public _router:Router) {
+  constructor(private fb:FormBuilder,public _router:Router,
+  public wareser:WarehousservService) {
     this.createexpence = new FormGroup({
       amount: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
@@ -27,6 +29,23 @@ export class CreateexpensesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.wareser.allware().subscribe(
+
+      (res) => {
+
+        this.WarehousArray=res.data;
+
+        console.log(this.WarehousArray);
+
+      },
+
+      (err:any) => {
+
+        console.log(err);
+
+      }
+
+    );
   }
   formSubmit(){
     this.submitted = true;
