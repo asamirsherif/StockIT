@@ -22,7 +22,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
 
-
+</div>
           <div class="modal-body centered">
             <form class="col-md-12" [formGroup]="createbrand" (ngSubmit)="AddBrand()">
               <div class="form-group col-md-12">
@@ -43,10 +43,11 @@
                 </div>
               </div>
               <div class="form-group col-md-12 ">
-                <label for="exampleFormControlTextarea1" class="form-label ">Brand Description</label>
+                <label for="exampleFormControlTextarea1" class="form-label col-md-12 ">Brand Description</label>
+                <div class="col-md-12">
                 <textarea class="form-control " id="description" name="description" rows="3"
                   formControlName="description"></textarea>
-
+                </div>
               </div>
               <div class="form-group col-md-12">
                 <label class="col-md-12 control-label " for="Brand Image">Brand Image</label>
@@ -68,11 +69,6 @@
 
           </div>
 
-
-
-
-
-        </div>
       </ng-template>
     </div>
   </div>
@@ -120,10 +116,12 @@
             </div>
           </div>
           <div class="form-group col-md-12">
-            <label for="exampleFormControlTextarea1" class="form-label">Brand Description</label>
+            <label for="exampleFormControlTextarea1" class="form-label col-md-12">Brand Description</label>
+            <div class="col-md-12">
             <textarea class="form-control" id="description" name="description" rows="3"
               formControlName="description"></textarea>
           </div>
+        </div>
           <div class="form-group col-md-12">
             <label class="col-md-12 control-label" for="Brand Image">Brand Image</label>
             <div class="col-md-12">
