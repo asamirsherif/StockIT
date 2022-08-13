@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ExpenseCategoryService } from 'app/auth/service/expense/expense-category.service';
+import { IExpenseCategory } from 'app/interfaces/iexpense-category';
 
 @Component({
   selector: 'app-expensecategory',
@@ -12,43 +14,77 @@ export class ExpensecategoryComponent implements OnInit {
   public pageBasicText = 3;
 
   submitted = false;
-  
-  data:any={}
+  contentmodel: any;
 
-  errors:any = {};
-  createcategory:FormGroup;
-  constructor(private modalService: NgbModal,private fb:FormBuilder,public _router:Router) {
-    this.createcategory = new FormGroup({
-      name: new FormControl('', Validators.required)
+  expenseCategoies: IExpenseCategory[];
+  errors: any = {};
+
+
+  createCategoryForm: FormGroup;
+  constructor(private modalService: NgbModal, private fb: FormBuilder, public _router: Router, private expenseCategoryService: ExpenseCategoryService) {
+    this.createCategoryForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      description: new FormControl('', null)
     })
-   }
-   formSubmit(){
+  }
+
+
+  openModal(contentModal) {
+    this.contentmodel = contentModal;
+    this.modalService.open(contentModal);
+  }
+  openModal2(contentModal2) {
+    this.contentmodel = contentModal2;
+    this.modalService.open(contentModal2);
+  }
+  ngOnInit(): void {
+    this.getall()
+  }
+
+  getall() {
+    //then
+    const observer = {
+      next: (res) => {
+        this.expenseCategoies = res.data
+      },
+      error: (error) => {
+        console.log(error);
+
+      }
+    }
+
+    //first
+    this.expenseCategoryService.getall().subscribe(observer)
+  }
+
+
+  store() {
     this.submitted = true;
-    if(this.createcategory.valid){
-      
-  
+    if (this.createCategoryForm.valid) {
+      const user = JSON.parse(localStorage.getItem(`currentUser`))
+      const formdata = this.createCategoryForm.value;
+
+      //then
       const observer = {
         next: (result) => {
-            console.log(result,'asdasd');
-        }, 
+          this.modalService.dismissAll(this.contentmodel)
+          this.expenseCategoies.push(result.data)
+        },
         error: (error) => {
-            // console.log("error occured", error)
-            this.errors = error;
-            console.log(this.errors.errors);
+          console.log(error);
         }
       }
-  
-      //this.product.formSubmit(this.createcategory.value).subscribe(observer);
-       
+
+      let data: IExpenseCategory = {
+        name: formdata.name,
+        description: formdata.description,
+        user_id: user.id
+      }
+
+      //first 
+      this.expenseCategoryService.store(data).subscribe(observer)
     }
   }
-   openModal(contentModal) {
-    this.modalService.open(contentModal);}
-    openModal2(contentModal2) {
-      this.modalService.open(contentModal2);}
-  ngOnInit(): void {
-  }
-  
- 
+
 }
 
