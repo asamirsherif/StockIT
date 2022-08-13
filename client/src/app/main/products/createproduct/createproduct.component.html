@@ -1,16 +1,16 @@
 <h2>Create Product</h2>
 <hr>
 
-<form class="row col-md-12" [formGroup]="createproduct" (ngSubmit)="AddProduct()">
+<form class="row col-md-12" [formGroup]="createProductForm" (ngSubmit)="AddProduct()">
     <div class="col-md-8 row">
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="name">PRODUCT NAME</label>
             <div class="col-md-12">
                 <input id="name" name="name" placeholder="PRODUCT NAME" class="form-control input-md"
                     required type="text" formControlName="name">
-                <div id="name" *ngIf="createproduct.controls['name'].touched &&createproduct.controls['name'].invalid || submitted && createproduct.controls['name'].invalid"
+                <div id="name" *ngIf="createProductForm.controls['name'].touched &&createProductForm.controls['name'].invalid || submitted && createProductForm.controls['name'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['name'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['name'].errors?.['required']">This field is
                         required</small>
                 </div>
                 <div
@@ -26,9 +26,9 @@
                 <input id="code" name="product_id" placeholder="PRODUCT ID" class="form-control input-md"
                     required="" type="text" formControlName="code">
                 <div id="code"
-                    *ngIf="createproduct.controls['code'].touched &&createproduct.controls['code'].invalid || submitted && createproduct.controls['code'].invalid"
+                    *ngIf="createProductForm.controls['code'].touched &&createProductForm.controls['code'].invalid || submitted && createProductForm.controls['code'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['code'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['code'].errors?.['required']">This field is
                         required</small>
                 </div>
 
@@ -46,9 +46,9 @@
                     <option selected>Open this select menu</option>
                 </select>
                 <div id="category_id"
-                    *ngIf="createproduct.controls['category_id'].touched &&createproduct.controls['category_id'].invalid || submitted && createproduct.controls['category_id'].invalid"
+                    *ngIf="createProductForm.controls['category_id'].touched &&createProductForm.controls['category_id'].invalid || submitted && createProductForm.controls['category_id'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['category_id'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['category_id'].errors?.['required']">This field is
                         required</small>
                 </div>
 
@@ -77,9 +77,9 @@
                     <option selected>Choose Symbology</option>
                 </select>
                 <div id="type_barcode"
-                    *ngIf="createproduct.controls['type_barcode'].touched &&createproduct.controls['type_barcode'].invalid || submitted && createproduct.controls['type_barcode'].invalid"
+                    *ngIf="createProductForm.controls['type_barcode'].touched &&createProductForm.controls['type_barcode'].invalid || submitted && createProductForm.controls['type_barcode'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['type_barcode'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['type_barcode'].errors?.['required']">This field is
                         required</small>
                 </div>
 
@@ -97,9 +97,9 @@
                 <input id="cost" name="cost" placeholder="PRODUCT COST" class="form-control input-md"
                     required="" type="text" formControlName="cost">
                     <div id="type_barcode"
-                    *ngIf="createproduct.controls['cost'].touched &&createproduct.controls['cost'].invalid || submitted && createproduct.controls['cost'].invalid"
+                    *ngIf="createProductForm.controls['cost'].touched &&createProductForm.controls['cost'].invalid || submitted && createProductForm.controls['cost'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['cost'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['cost'].errors?.['required']">This field is
                         required</small>
                 </div>
 
@@ -116,9 +116,9 @@
                 <input id="price" name="price" placeholder="PRODUCT PRICE" class="form-control input-md"
                     required="" type="text" formControlName="price">
                 <div id="price"
-                    *ngIf="createproduct.controls['price'].touched &&createproduct.controls['price'].invalid || submitted && createproduct.controls['price'].invalid"
+                    *ngIf="createProductForm.controls['price'].touched &&createProductForm.controls['price'].invalid || submitted && createProductForm.controls['price'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['price'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['price'].errors?.['required']">This field is
                         required</small>
                 </div>
 
@@ -136,9 +136,9 @@
                     <option selected>Choose ProductUnit</option>
                 </select>
                 <div id="unit_id"
-                    *ngIf="createproduct.controls['unit_id'].touched &&createproduct.controls['unit_id'].invalid || submitted && createproduct.controls['unit_id'].invalid"
+                    *ngIf="createProductForm.controls['unit_id'].touched &&createProductForm.controls['unit_id'].invalid || submitted && createProductForm.controls['unit_id'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['unit_id'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['unit_id'].errors?.['required']">This field is
                         required</small>
                 </div>
 
@@ -158,9 +158,9 @@
                 </select>
 
                 <div id="unit_sale_id"
-                    *ngIf="createproduct.controls['unit_sale_id'].touched &&createproduct.controls['unit_sale_id'].invalid || submitted && createproduct.controls['unit_sale_id'].invalid"
+                    *ngIf="createProductForm.controls['unit_sale_id'].touched &&createProductForm.controls['unit_sale_id'].invalid || submitted && createProductForm.controls['unit_sale_id'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['unit_sale_id'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['unit_sale_id'].errors?.['required']">This field is
                         required</small>
                 </div>
 
@@ -179,9 +179,9 @@
                 </select>
 
                 <div id="unit_sale_id"
-                    *ngIf="createproduct.controls['unit_sale_id'].touched &&createproduct.controls['unit_sale_id'].invalid || submitted && createproduct.controls['unit_sale_id'].invalid"
+                    *ngIf="createProductForm.controls['unit_sale_id'].touched &&createProductForm.controls['unit_sale_id'].invalid || submitted && createProductForm.controls['unit_sale_id'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['unit_sale_id'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['unit_sale_id'].errors?.['required']">This field is
                         required</small>
                 </div>
 
@@ -207,9 +207,9 @@
                 <input id="tax_method" name="tax_method" placeholder="Order Tax" class="form-control input-md" required=""
                     type="text" formControlName="tax_method">
                 <div id="tax_method"
-                    *ngIf="createproduct.controls['tax_method'].touched &&createproduct.controls['tax_method'].invalid  || submitted && createproduct.controls['unit_sale_id'].invalid"
+                    *ngIf="createProductForm.controls['tax_method'].touched &&createProductForm.controls['tax_method'].invalid  || submitted && createProductForm.controls['unit_sale_id'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['tax_method'].errors?.['required']">This field is required</small>
+                    <small *ngIf="createProductForm.controls['tax_method'].errors?.['required']">This field is required</small>
                 </div>
                 <div
                                         class="form-text text-danger">

@@ -10,7 +10,7 @@
             <div class="col-md-12 ">
                 <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date" formControlName="date">
                 
-                <div id="datet"
+                <div id="date"
                 *ngIf="createexpence.controls['date'].touched &&createexpence.controls['date'].invalid || submitted && createexpence.controls['date'].invalid"
                 class="form-text text-danger">
                 <small *ngIf="createexpence.controls['date'].errors?.['required']">This field is

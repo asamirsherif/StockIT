@@ -13,4 +13,5 @@ export class User {
   status: number;
   access_token: string;
   permissions: string[];
+  success: boolean;
 }
