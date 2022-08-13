@@ -3,8 +3,10 @@
 namespace App\Policies;
 
 use App\Models\ExpenseCategory;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+
 
 class ExpenseCategoryPolicy
 {
