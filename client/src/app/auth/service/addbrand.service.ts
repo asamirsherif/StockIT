@@ -20,12 +20,7 @@ export class AddbrandService {
   }
 
   AddBrand(data: any): Observable<any> {
-    return this._http.post(`${this.host}`, data, { headers: this.header }).pipe(
-      catchError((err) => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    return this._http.post(`${this.host}`, data, { headers: this.header });
   }
   allbrand(): Observable<any> {
     return this._http.get(`${this.host}`, { headers: this.header, params:this.params });

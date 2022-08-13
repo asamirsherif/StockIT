@@ -38,6 +38,8 @@ export class BrandComponent implements OnInit {
     this.createbrand = new FormGroup({
       name: new FormControl("", Validators.required),
       description: new FormControl("", Validators.required),
+
+      image: new FormControl(null)
     });
 
     this.editBrandForm = new FormGroup({
@@ -78,7 +80,8 @@ export class BrandComponent implements OnInit {
           this.data.push(res.data);
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.status);
+         this.errors = error.error.errors;
+         console.log(this.errors)
         },
       };
       this.brand.AddBrand(this.createbrand.value).subscribe(observer);
