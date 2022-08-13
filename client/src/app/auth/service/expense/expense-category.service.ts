@@ -39,4 +39,7 @@ export class ExpenseCategoryService {
   update(id:number,data:IExpenseCategory): Observable<any> {
     return this._Http.put(`${this.host}${id}`, data, { headers: this.headers });
   }
+  show(id:number): Observable<any>{
+return this._Http.get(`${this.host}${id}`,{headers:this.headers});
+  }
 }

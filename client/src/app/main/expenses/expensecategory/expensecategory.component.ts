@@ -12,7 +12,7 @@ import { IExpenseCategory } from 'app/interfaces/iexpense-category';
 })
 export class ExpensecategoryComponent implements OnInit {
   public pageBasicText = 3;
-
+  searchInput = "";
   submitted = false;
   contentmodel: any;
 
@@ -21,8 +21,13 @@ export class ExpensecategoryComponent implements OnInit {
 
 
   createCategoryForm: FormGroup;
+  editCategoryForm: FormGroup;
   constructor(private modalService: NgbModal, private fb: FormBuilder, public _router: Router, private expenseCategoryService: ExpenseCategoryService) {
     this.createCategoryForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      description: new FormControl('', null)
+    })
+    this.editCategoryForm = new FormGroup({
       name: new FormControl('', Validators.required),
       description: new FormControl('', null)
     })
@@ -85,20 +90,51 @@ export class ExpensecategoryComponent implements OnInit {
       this.expenseCategoryService.store(data).subscribe(observer)
     }
   }
-  destroy(id){    
-   //then
-   const observer={
-    next:(res)=>{
-      this.getall();
-    },
-    error:(error)=>{
-      console.log(error)
+  destroy(id) {
+    //then
+    const observer = {
+      next: (res) => {
+        this.getall();
+      },
+      error: (error) => {
+        console.log(error)
+      }
     }
-   }
 
     //first
     this.expenseCategoryService.destroy(id).subscribe(observer)
   }
+  edit(id) {
+    //then
+    const observer = {
+      next: (res) => {
+        this.editCategoryForm.get("name").setValue(res.data.name)
+        this.editCategoryForm.get("description").setValue(res.data.description)
+      }
+    }
 
+    //first
+    this.expenseCategoryService.show(id).subscribe(observer)
+  }
+  update(id) {
+    this.submitted = true;
+    if (this.editCategoryForm.valid) {
+      const observer = {
+        next: (res) => {
+          this.modalService.dismissAll(this.contentmodel)
+          this.getall();
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      }
+      //first
+      this.expenseCategoryService.update(id, this.editCategoryForm.value).subscribe(observer)
+    }
+  }
+  search(event) {
+    this.expenseCategoryService.params = this.expenseCategoryService.params.set("search", event)
+    this.getall()
+  }
 }
 
