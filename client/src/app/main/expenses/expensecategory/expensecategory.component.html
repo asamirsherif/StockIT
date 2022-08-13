@@ -5,10 +5,10 @@
     <div class="container row">
         <div class="col-md-9">
             <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
-            </form>
+                <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+                  class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
+              </form>
         </div>
         <div class="col-md-3 ">
             <button type="button" class="btn btn-secondary" (click)="openModal(contentModal)"><i
@@ -71,7 +71,7 @@
             <tr *ngFor="let expenseCategory of expenseCategoies; let i = index">
                 <td>{{ expenseCategory.name }}</td>
                 <td>{{ expenseCategory.description }}</td>
-                <td><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)"><i data-feather="edit" [size]="24" >
+                <td><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2);edit(expenseCategory.id)" ><i data-feather="edit" [size]="24" >
                 </i></button>  <button class="btn btn-sm btn-danger" (click)="destroy(expenseCategory.id)" ><i data-feather="x-circle"  [size]="24"></i>
                 </button></td> 
                 <!-- Modal2 -->
@@ -83,7 +83,7 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12" [formGroup]="editCategoryForm" (ngSubmit)="update()">
+                    <form class="row col-md-12" [formGroup]="editCategoryForm" (ngSubmit)="update(expenseCategory.id)" >
                         <div class="col-md-12 row">
                             <div class="form-group col-md-12">
                                 <label class="col-md-4 control-label " for="name">Category Name</label>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="form-group col-md-12 ">
                                 <label for="exampleFormControlTextarea1" class="form-label ">Description</label>
-                                <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
                             </div>
                         </div>
 
