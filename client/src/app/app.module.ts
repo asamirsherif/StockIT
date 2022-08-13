@@ -283,7 +283,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Adjustment/adjustupdate/adjustupdate.module').then(m => m.AdjustupdateModule)
   },{
-    path: 'expenseupdate',
+    path: 'expenseupdate/:id',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/expenses/expenseupdate/expensesupdate.module').then(m => m.ExpenseupdateModule)
   },{
