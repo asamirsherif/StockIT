@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ICategory } from "app/interfaces/icategory";
 import { IExpenseCategory } from "app/interfaces/iexpense-category";
-import { IProduct } from "app/interfaces/iproduct";
 import { environment } from "environments/environment";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
