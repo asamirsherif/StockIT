@@ -12,9 +12,9 @@
                         formControlName="date">
 
                     <div id="date"
-                        *ngIf="createexpence.controls['date'].touched &&createexpence.controls['date'].invalid || submitted && createexpence.controls['date'].invalid"
+                        *ngIf="createExpenseForm.controls['date'].touched &&createExpenseForm.controls['date'].invalid || submitted && createExpenseForm.controls['date'].invalid"
                         class="form-text text-danger">
-                        <small *ngIf="createexpence.controls['date'].errors?.['required']">This field is
+                        <small *ngIf="createExpenseForm.controls['date'].errors?.['required']">This field is
                             required</small>
                     </div>
 
@@ -36,9 +36,9 @@
                     </select>
 
                     <div id="warehouse_id"
-                        *ngIf="createexpence.controls['warehouse_id'].touched &&createexpence.controls['warehouse_id'].invalid || submitted && createexpence.controls['warehouse_id'].invalid"
+                        *ngIf="createExpenseForm.controls['warehouse_id'].touched &&createExpenseForm.controls['warehouse_id'].invalid || submitted && createExpenseForm.controls['warehouse_id'].invalid"
                         class="form-text text-danger">
-                        <small *ngIf="createexpence.controls['warehouse_id'].errors?.['required']">This field is
+                        <small *ngIf="createExpenseForm.controls['warehouse_id'].errors?.['required']">This field is
                             required</small>
                     </div>
 
@@ -58,9 +58,9 @@
                     </select>
 
                     <div id="expense_category_id"
-                        *ngIf="createexpence.controls['expense_category_id'].touched &&createexpence.controls['expense_category_id'].invalid || submitted && createexpence.controls['expense_category_id'].invalid"
+                        *ngIf="createExpenseForm.controls['expense_category_id'].touched &&createExpenseForm.controls['expense_category_id'].invalid || submitted && createExpenseForm.controls['expense_category_id'].invalid"
                         class="form-text text-danger">
-                        <small *ngIf="createexpence.controls['expense_category_id'].errors?.['required']">This field is
+                        <small *ngIf="createExpenseForm.controls['expense_category_id'].errors?.['required']">This field is
                             required</small>
                     </div>
 
@@ -75,9 +75,9 @@
                     <input class="form-control form-control col-md-11" type="text" placeholder="Amount"
                         aria-label="Date" id="amount" name="amount" formControlName="amount">
                     <div id="amount"
-                        *ngIf="createexpence.controls['amount'].touched &&createexpence.controls['amount'].invalid || submitted && createexpence.controls['amount'].invalid"
+                        *ngIf="createExpenseForm.controls['amount'].touched &&createExpenseForm.controls['amount'].invalid || submitted && createExpenseForm.controls['amount'].invalid"
                         class="form-text text-danger">
-                        <small *ngIf="createexpence.controls['amount'].errors?.['required']">This field is
+                        <small *ngIf="createExpenseForm.controls['amount'].errors?.['required']">This field is
                             required</small>
                     </div>
 
@@ -92,9 +92,9 @@
                     formControlName="details"></textarea>
 
                 <div id="details"
-                    *ngIf="createexpence.controls['details'].touched &&createexpence.controls['details'].invalid || submitted && createexpence.controls['details'].invalid"
+                    *ngIf="createExpenseForm.controls['details'].touched &&createExpenseForm.controls['details'].invalid || submitted && createExpenseForm.controls['details'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createexpence.controls['details'].errors?.['required']">This field is
+                    <small *ngIf="createExpenseForm.controls['details'].errors?.['required']">This field is
                         required</small>
                 </div>
 
