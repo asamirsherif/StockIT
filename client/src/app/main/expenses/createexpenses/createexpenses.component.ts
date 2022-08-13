@@ -20,19 +20,21 @@ export class CreateexpensesComponent implements OnInit {
   data:any={}
 
   errors:any = {};
-  createexpence:FormGroup;
+  createExpenseForm:FormGroup;
   constructor(private fb:FormBuilder,public _router:Router,
   public wareser:WarehousservService,private expenseCategoryService :ExpenseCategoryService ) {
-    this.createexpence = new FormGroup({
+    this.createExpenseForm = new FormGroup({
       amount: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       warehouse_id: new FormControl('', Validators.required),
       expense_category_id: new FormControl('', Validators.required),
-      details: new FormControl('', Validators.required)
+      details: new FormControl('')
     })
   }
 
   ngOnInit(): void {
+//get select from database
+
     this.wareser.allware().subscribe(
 
       (res) => {
@@ -40,7 +42,6 @@ export class CreateexpensesComponent implements OnInit {
         this.WarehousArray=res.data;
 
         console.log(this.WarehousArray);
-
       },
 
       (err:any) => {
@@ -62,11 +63,12 @@ export class CreateexpensesComponent implements OnInit {
 
     this.expenseCategoryService.getall().subscribe(expCatObserver)
   }
-  formSubmit(){
+
+
+  store(){
     this.submitted = true;
-    if(this.createexpence.valid){
+    if(this.createExpenseForm.valid){
       
-  
       const observer = {
         next: (result) => {
             console.log(result,'asdasd');
@@ -77,6 +79,9 @@ export class CreateexpensesComponent implements OnInit {
             console.log(this.errors.errors);
         }
       }
+
+      //first
+      
   
        
     }
