@@ -6,8 +6,9 @@
         <div class="col-md-9">
             <form class="form-inline col-md-12 mb-1">
                 <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
+                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+                    class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search" />
             </form>
         </div>
         <div class="col-md-3 ">
@@ -21,16 +22,16 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12" [formGroup]="createwarehous" (ngSubmit)="formSubmit()">
+                    <form class="row col-md-12" [formGroup]="createwarehous" (ngSubmit)="AddWare()">
                             <div class="form-group col-md-6">
                                 <label class="col-md-12 control-label " for="Name"> Name</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Name" aria-label="Date" id="Name"
-                                        name="Name" formControlName="Name">
-                                        <div id="Name" *ngIf="createwarehous.controls['Name'].touched &&createwarehous.controls['Name'].invalid"
+                                        placeholder="Name" aria-label="Date" id="name"
+                                        name="name" formControlName="name">
+                                        <div id="name" *ngIf="createwarehous.controls['name'].touched &&createwarehous.controls['name'].invalid|| submitted && createwarehous.controls['name'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="createwarehous.controls['Name'].errors?.['required']">This field is
+                                        <small *ngIf="createwarehous.controls['name'].errors?.['required']">This field is
                                             required</small>
                                     </div>        
                                 </div>
@@ -41,7 +42,7 @@
                                     <input class="form-control form-control col-md-12" type="email"
                                         placeholder="email" aria-label="Date" id="email"
                                         name="email" formControlName="email">
-                                        <div id="email" *ngIf="createwarehous.controls['email'].touched &&createwarehous.controls['email'].invalid"
+                                        <div id="email" *ngIf="createwarehous.controls['email'].touched &&createwarehous.controls['email'].invalid|| submitted && createwarehous.controls['email'].invalid"
                                         class="form-text text-danger">
                                         <small *ngIf="createwarehous.controls['email'].errors?.['required']">This field is
                                             required</small>
@@ -52,11 +53,11 @@
                                 <label class="col-md-4 control-label " for="phone">Phone</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="phone" aria-label="Date" id="phone"
-                                        name="phone" formControlName="phone">
-                                        <div id="phone" *ngIf="createwarehous.controls['phone'].touched &&createwarehous.controls['phone'].invalid"
+                                        placeholder="mobile" aria-label="Date" id="mobile"
+                                        name="mobile" formControlName="mobile">
+                                        <div id="mobile" *ngIf="createwarehous.controls['mobile'].touched &&createwarehous.controls['mobile'].invalid|| submitted && createwarehous.controls['mobile'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="createwarehous.controls['phone'].errors?.['required']">This field is
+                                        <small *ngIf="createwarehous.controls['mobile'].errors?.['digits']">This field is
                                             required</small>
                                     </div>      
                                 </div>
@@ -66,12 +67,7 @@
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="country" aria-label="Date" id="country"
-                                        name="country" formControlName="country">
-                                        <div id="country" *ngIf="createwarehous.controls['country'].touched &&createwarehous.controls['country'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createwarehous.controls['country'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>         
+                                        name="country" formControlName="country">       
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -80,11 +76,6 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="city" aria-label="Date" id="city"
                                         name="city" formControlName="city">
-                                        <div id="city" *ngIf="createwarehous.controls['city'].touched &&createwarehous.controls['city'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createwarehous.controls['city'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>     
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -92,7 +83,7 @@
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Zip Code" aria-label="Date" id="Zip Code"
-                                        name="Zip Code" formControlName="Zip Code">
+                                        name="zip" formControlName="zip">
                                 </div>
                             </div>
 
@@ -119,16 +110,16 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody class="table-group-divider" *ngFor="let ware of data; let i = index">
             <tr>
-                <td>jkk</td>
-                <td>ddvvv</td>
-                <td>jkk</td>
-                <td>ddvvv</td>
-                <td>jkk</td>
-                <td>ddvvv</td>
-                <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                <td>{{ware.name}}</td>
+                <td>{{ware.mobile}}</td>
+                <td>{{ware.country}}</td>
+                <td>{{ware.city}}</td>
+                <td>{{ware.email}}</td>
+                <td>{{ware.zip}}</td>
+                <td> <button class="btn btn-sm btn-success" (click)="editWare(ware.id);openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
+                </i></button>  <button class="btn btn-sm btn-danger"(click)="deleteWare(ware.id)" ><i data-feather="x-circle"  [size]="24"></i>
                 </button></td>
                  <!-- Modal -->
              <ng-template #contentModal2 let-c="close" let-d="dismiss">
@@ -139,55 +130,70 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12">
-                            <div class="form-group col-md-6">
-                                <label class="col-md-12 control-label " for="Name"> Name</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Name" aria-label="Date" id="Name"
-                                        name="Name" formControlName="Name">  
-                                </div>
+                    <form class="row col-md-12"  [formGroup]="editWareForm" (ngSubmit)="updateWare()">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-12 control-label " for="Name"> Name</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="Name" aria-label="Date" id="name"
+                                    name="name" formControlName="name">
+                                    <div id="name" *ngIf="editWareForm.controls['name'].touched &&editWareForm.controls['name'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="editWareForm.controls['name'].errors?.['required']">This field is
+                                        required</small>
+                                </div>        
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="Email">Email</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="email"
-                                        placeholder="email" aria-label="Date" id="email"
-                                        name="email" formControlName="email">  
-                                </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="Email">Email</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="email"
+                                    placeholder="email" aria-label="Date" id="email"
+                                    name="email" formControlName="email">
+                                    <div id="email" *ngIf="editWareForm.controls['email'].touched &&editWareForm.controls['email'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="editWareForm.controls['email'].errors?.['required']">This field is
+                                        required</small>
+                                </div>      
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="phone">Phone</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="phone" aria-label="Date" id="phone"
-                                        name="phone" formControlName="phone">
-                                </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="phone">Phone</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="mobile" aria-label="Date" id="mobile"
+                                    name="mobile" formControlName="mobile">
+                                    <div id="mobile" *ngIf="editWareForm.controls['mobile'].touched &&editWareForm.controls['mobile'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="editWareForm.controls['mobile'].errors?.['digits']">This field is
+                                        required</small>
+                                </div>      
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="Country">Country</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="country" aria-label="Date" id="country"
-                                        name="country" formControlName="country">    
-                                </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="Country">Country</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="country" aria-label="Date" id="country"
+                                    name="country" formControlName="country">       
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="city">City</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="city" aria-label="Date" id="city"
-                                        name="city" formControlName="city">
-                                </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="city">City</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="city" aria-label="Date" id="city"
+                                    name="city" formControlName="city">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-12 control-label" for="Zip Code">Zip Code</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Zip Code" aria-label="Date" id="Zip Code"
-                                        name="Zip Code" formControlName="Zip Code">
-                                </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-12 control-label" for="Zip Code">Zip Code</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="Zip Code" aria-label="Date" id="Zip Code"
+                                    name="Zip Code" formControlName="zip">
                             </div>
+                        </div> 
 
                         <div class="form-group col-md-12">
                             <div class="col-md-4">
