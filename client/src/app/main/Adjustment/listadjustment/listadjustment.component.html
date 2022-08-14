@@ -11,7 +11,50 @@
             </form>
         </div>
         <div class="col-md-6 ">
-            <button type="button" class="btn btn-outline-primary "><i data-feather="filter"></i>Filter</button>
+            <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
+
+            <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i data-feather="filter"></i>Filter</button>
+            <div ngbDropdownMenu style="width:400px;height: 450px;">
+                <form class="px-2 py-2">
+                    <h3 style="font-weight:bold ;">Filter</h3>
+
+                  <div class="form-group mb-1 ">
+                    <label  for="exampleDropdownFormDate1">Date</label>
+                    <input  type="date" class="form-control" id="exampleDropdownFormDate1"  />
+                  </div>
+
+                  <div class="form-group mb-1">
+                    <label for="exampleDropdownFormReference1">Reference</label>
+                    <input type="text" class="form-control" id="exampleDropdownFormReference1"
+                      placeholder="Reference"/>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="exampleDropdownFormReference1">Warehouse</label>
+                        <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" placeholder="Choose Warehouse">
+                        <option selected>Choose Warehouse</option>
+                        <option>الرئيسي</option>
+                        <option>office annim </option>
+                        </select>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-6 col-md-12 ">
+                            <div class="form-group">
+                              <button type="button" class="btn btn-primary btn-block" rippleEffect><i data-feather="filter"></i>Filter</button>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                              <button type="button" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i> Reset</button>
+                            </div>
+                         </div> 
+                        </div>
+                         </form> 
+                                        
+                </div>
+              </div>
+                
+
             <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
             <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
             <button type="button" class="btn btn-secondary" [routerLink]="['../createadjustment']"><i data-feather="plus-circle"></i>Create</button>
@@ -117,5 +160,8 @@
         </ng-template>
       </ngb-pagination>
     </div>
+    
+    
+        
 </body>
 

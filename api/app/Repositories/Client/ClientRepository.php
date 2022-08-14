@@ -21,7 +21,7 @@ class ClientRepository implements ClientRepositoryInterface
         DB::transaction(function () use ($request, $client) {
 
             $client->name    = $request->name;
-            $client->code    = $request->code;
+            $client->code    = $this->makeCode();
             $client->email   = $request->email;
             $client->country = $request->country;
             $client->city    = $request->city;
@@ -40,7 +40,6 @@ class ClientRepository implements ClientRepositoryInterface
         DB::transaction(function () use ($request, $client) {
 
             $client->name = $request->name ? $request->name : $client->name;
-            $client->code = $request->code ? $request->code : $client->code;
             $client->email = $request->email ? $request->email : $client->email;
             $client->country = $request->country ? $request->country : $client->country;
             $client->city = $request->city ? $request->city : $client->city;
@@ -71,5 +70,17 @@ class ClientRepository implements ClientRepositoryInterface
         });
 
         return $clients;
+    }
+
+    public function makeCode(): string
+    {
+        $last = Client::latest()->first();
+
+        if ($last) {
+            $code = $last->code + 1;
+        } else {
+            $code = 1;
+        }
+        return $code;
     }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import { AuthenticationService } from 'app/auth/service';
+import { AuthenticationService, UserService } from 'app/auth/service';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -10,7 +11,10 @@ export class AuthGuard implements CanActivate {
    * @param {Router} _router
    * @param {AuthenticationService} _authenticationService
    */
-  constructor(private _router: Router, private _authenticationService: AuthenticationService) {}
+  constructor(
+    private _router: Router, 
+    private _authenticationService: AuthenticationService,
+    private _userService: UserService) {}
 
   // canActivate
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -18,7 +22,6 @@ export class AuthGuard implements CanActivate {
 
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser) {
-
       // check if route is restricted by role
       if (route.data.permission && currentUser.permissions.indexOf(route.data.permission) === -1) {
         // role not authorised so redirect to not-authorized page
@@ -26,6 +29,17 @@ export class AuthGuard implements CanActivate {
         return false;
       }
       
+      
+
+      // console.log(this.getAuth())
+      // // check if response is true
+      // if(!this.getAuth()){
+      //   // role not authorised so redirect to login
+      //   this._router.navigate(['/pages/login']);
+      //   return false;
+      // }
+      
+
       // authorised so return true
       return true;
     }
@@ -34,4 +48,19 @@ export class AuthGuard implements CanActivate {
     this._router.navigate(['/pages/login'], { queryParams: {url:decodeURIComponent(state.url)} });
     return false;
   }
+
+  // async getAuth() {
+  //     let result:any;
+  //     //Check if stored token is correct
+  //       const observed = {
+  //         next: (res) => {
+  //           result = res.success;
+  //         },
+  //       };
+  //       await this._userService.isAuth().subscribe(observed)
+      
+  //     if(result){return true}
+  // }
+
+
 }
