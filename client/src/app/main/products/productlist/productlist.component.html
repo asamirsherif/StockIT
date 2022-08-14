@@ -27,7 +27,7 @@
                     <label for="exampleDropdownFormWarehouse1">From Warehouse</label>
                     <select class="form-control" aria-label="Default select example" id="exampleDropdownFormCategory1" >
                     <option selected>Choose Warehouse</option>
-                    <option>الرئيسي </option>
+                    <option >الرئيسي </option>
                     <option>officic annim </option>
                     </select>
                     </div>
@@ -86,17 +86,17 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <td><img src="#"></td>
-                <td>tshirt</td>
-                <td>12345</td>
-                <td>tshirt</td>
-                <td>N/D</td>
-                <td>12</td>
-                <td>sekar</td>
-                <td>6377</td>
-                <td> <button class="btn btn-sm btn-primary" [routerLink]="['../productdetails']"><i data-feather="eye"[size]="22"></i>
-                </button><button class="btn btn-sm btn-success" [routerLink]="['../productupdate']"><i data-feather="edit" [size]="24" >
+            <tr *ngFor="let product of products; let i = index">
+                <td><img src="{{ product.images }}"></td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.code }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.brand }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.unit }}</td>
+                <td>99</td>
+                <td> <button class="btn btn-sm btn-primary" routerLink="../productdetails/{{product.id}}"><i data-feather="eye"[size]="22"></i>
+                </button><button class="btn btn-sm btn-success" routerLink="../productupdate/{{product.id}}"><i data-feather="edit" [size]="24" >
                 </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
                 </button></td>    
             </tr>
