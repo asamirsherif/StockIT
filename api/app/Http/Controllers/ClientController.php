@@ -54,7 +54,7 @@ class ClientController extends Controller
         $clientCreated = $this->clientRepo->create($request);
 
         if ($clientCreated)
-            return $this->succWithData(new ClientResource($clientCreated));
+            return $this->succWithData(new ClientResource($clientCreated), "client created successfully");
         else
             return $this->errMsg("client not created!");
 
@@ -80,7 +80,8 @@ class ClientController extends Controller
         if(!$client)
             return $this->errMsg('This client doesn\'t exist');
         else
-            return $this->clientRepo->read($id);
+            return $this->succWithData(new ClientResource($client), "client details");
+            // return $this->clientRepo->read($id);
     }
 
     /**
@@ -92,11 +93,16 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, $id)
     {
+        $client = Client::find($id);
+        if(!$client)
+            return $this->errMsg("This client doesn\'t exist");
+
         $clientUpdated = $this->clientRepo->update($request, $id);
+
         if ($clientUpdated)
-            return $this->succWithData(new ClientResource($clientUpdated));
+            return $this->succWithData(new ClientResource($clientUpdated), "client updated successfully");
         else
-            return $this->errMsg("client not updated!");
+            return $this->errMsg("client doesn\'t updated");
     }
 
     /**
