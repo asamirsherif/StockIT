@@ -29,7 +29,7 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Category Code" aria-label="Date" id="CategoryCode"
                                         name="CategoryCode" formControlName="CategoryCode">
-                                        <div id="CategoryCode" *ngIf="createCategoryForm.controls['CategoryCode'].touched &&createCategoryForm.controls['CategoryCode'].invalid"
+                                        <div id="CategoryCode" *ngIf="createCategoryForm.controls['CategoryCode'].touched &&createCategoryForm.controls['CategoryCode'].invalid|| submitted && createCategoryForm.controls['CategoryCode'].invalid"
                                         class="form-text text-danger">
                                         <small *ngIf="createCategoryForm.controls['CategoryCode'].errors?.['required']">This field is
                                             required</small>
@@ -42,7 +42,7 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Category Name" aria-label="Date" id="CategoryName"
                                         name="CategoryName" formControlName="CategoryName">
-                                        <div id="CategoryName" *ngIf="createCategoryForm.controls['CategoryName'].touched &&createCategoryForm.controls['CategoryName'].invalid"
+                                        <div id="CategoryName" *ngIf="createCategoryForm.controls['CategoryName'].touched &&createCategoryForm.controls['CategoryName'].invalid|| submitted && createCategoryForm.controls['CategoryName'].invalid "
                                         class="form-text text-danger">
                                         <small *ngIf="createCategoryForm.controls['CategoryName'].errors?.['required']">This field is
                                             required</small>

@@ -41,10 +41,8 @@ class ClientController extends Controller
         } else
             $clients = Client::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
 
-        return new ClientCollection($clients);
+        return ClientResource::collection($clients);
 
-        // return new CategoryCollection(Category::all());
-        // return new ClientCollection(Client::all());
     }
 
     /**
@@ -56,7 +54,7 @@ class ClientController extends Controller
     public function store(ClientRequest $request)
     {
 
-        $this->authorizeForUser($request->user('api'), 'create', Client::class);
+       // $this->authorizeForUser($request->user('api'), 'create', Client::class);
 
         $clientCreated = $this->clientRepo->create($request);
 
@@ -101,8 +99,6 @@ class ClientController extends Controller
      */
     public function update(UpdatedClientRequest $request, $id)
     {
-
-
         $this->authorizeForUser($request->user('api'), 'update', Client::class);
 
         $client = Client::find($id);

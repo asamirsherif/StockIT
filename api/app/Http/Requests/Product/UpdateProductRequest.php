@@ -31,11 +31,10 @@ class UpdateProductRequest extends FormRequest
             'price' => 'required|numeric',
             'category_id' => 'required',
             'cost' => 'required|numeric',
-            'tax_method' => 'required|in:1,0',
+            'tax_method' => 'required|in:Exclusive,Inclusive',
             'unit_id' => 'required',
             'unit_sale_id' => 'required',
-            'unit_purchase_id', 'required'
-
+            // 'unit_purchase_id', 'required'
         ];
     }
 

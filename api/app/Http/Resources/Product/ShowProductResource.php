@@ -3,6 +3,9 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Unit\UnitResource;
+use App\Http\Resources\Brand\BrandResource;
+use App\Http\Resources\Category\CategoryResource;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShowProductResource extends JsonResource
@@ -62,7 +65,8 @@ class ShowProductResource extends JsonResource
             'code' => $this->code,
             'name' => $this->name,
             'type_barcode' => $this->Type_barcode,
-            'brand' => $this->brand->name ? $this->brand->name : "N/D",
+            'brand' => new BrandResource($this->brand),
+            'category' => new CategoryResource($this->category),
             'variants' => ProductVariantResource::collection($this->productVariants),
             'unit' => new UnitResource($this->unit),
             'unitPurchase' => new UnitResource($this->unitPurchase),

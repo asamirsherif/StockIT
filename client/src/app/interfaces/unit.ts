@@ -1,8 +1,8 @@
 export interface Unit {
-    id:number,
+    id?:number,
     name:string,
     ShortName:string,
-    base_unit?:string,
+    base_unit?:number,
     operator:string,
     operator_value:number
 }
