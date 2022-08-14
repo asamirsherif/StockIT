@@ -20,41 +20,46 @@
 
                   <div class="form-group mb-1 ">
                     <label  for="exampleDropdownFormDate1">Date</label>
-                    <input  type="date" class="form-control" id="exampleDropdownFormDate1"  />
+                    <input  type="date" class="form-control" id="exampleDropdownFormDate1" [(ngModel)]="searchInputDate"
+                    id="searchbarDate" name="searchbarDate" />
                   </div>
 
                   <div class="form-group mb-1 ">
                     <label  for="exampleDropdownFormReferenc1">Referenc</label>
-                    <input  type="text" class="form-control" id="exampleDropdownFormReferenc1"  placeholder="Referenc" />
+                    <input  type="text" class="form-control" id="exampleDropdownFormReferenc1"  placeholder="Referenc" [(ngModel)]="searchInputRef"
+                    id="searchbarRef" name="searchbarRef"/>
                   </div>
 
                     <div class="form-group mb-1">
                         <label for="exampleDropdownFormWarehouse1">Warehouse</label>
-                        <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
-                        <option selected>Choose Warehouse</option>
-                        <option>الرئيسي </option>
-                    <option>officic annim </option>
+                        <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" [(ngModel)]="searchInputWare"
+                        id="searchbarWare" name="searchbarWare">
+                        <option *ngFor="let item of WarehousArray" [value]="item.id">
+
+                          {{ item.name }}
+
+                      </option>
                         </select>
                         </div>
 
                         <div class="form-group mb-2">
                             <label for="exampleDropdownFormCategory1">Expense Category</label>
-                            <select class="form-control" aria-label="Default select example" id="exampleDropdownFormCategory1" >
-                            <option selected>Choose Category</option>
-                            <option>كهرباء </option>
-                            <option>ريت</option>
-                            <option>ايجار</option>
+                            <select class="form-control" aria-label="Default select example" id="exampleDropdownFormCategory1" [(ngModel)]="searchInputExp"
+                            id="searchbarExp" name="searchbarExp">
+                            <option *ngFor="let item of expenseCategories" [value]="item.id">
+                              {{ item.name }}
+                          </option>
                             </select>
                             </div>
                         <div class="row">
                         <div class="col-lg-6 col-md-12 ">
                             <div class="form-group">
-                              <button type="button" class="btn btn-primary btn-block" rippleEffect><i data-feather="filter"></i>Filter</button>
+                              <button type="submit" class="btn btn-primary btn-block" rippleEffect><i data-feather="filter"></i>Filter</button>
                             </div>
                           </div>
                           <div class="col-lg-6 col-md-12">
                             <div class="form-group">
-                              <button type="button" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i> Reset</button>
+                              <button type="reset" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i> Reset</button>
                             </div>
                          </div> 
                         </div>
@@ -81,7 +86,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let createExpenses of expense; let i = index">
+            <tr *ngFor="let createExpenses of expense|filter: searchInputDate:'date'|filter:searchInputRef:'details'; let i = index">
                 <td>{{createExpenses.date}}</td>
                 <td>ref</td>
                 <td>{{createExpenses.details}}</td>
