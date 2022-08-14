@@ -1,112 +1,116 @@
 <body>
-    <h2>List Expenses</h2>
-    <hr>
-    <div class="container row">
-        <div class="col-md-6">
-          <form class="form-inline col-md-12 mb-1">
-            <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
-            <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
-              class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
-          </form>
-        </div>
-        <div class="col-md-6 ">
-            <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
+  <h2>List Expenses</h2>
+  <hr>
+  <div class="container row">
+    <div class="col-md-6">
+      <form class="form-inline col-md-12 mb-1">
+        <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+        <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+          class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
+      </form>
+    </div>
+    <div class="col-md-6 ">
+      <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
 
-            <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i data-feather="filter"></i>Filter</button>
+        <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
+            data-feather="filter"></i>Filter</button>
 
-            <div ngbDropdownMenu style="width:400px;height: 460px;">
-                <form class="px-2 py-2">
-                    <h3 style="font-weight:bold ;">Filter</h3>
+        <div ngbDropdownMenu style="width:400px;height: 460px;">
+          <form class="px-2 py-2">
+            <h3 style="font-weight:bold ;">Filter</h3>
 
-                  <div class="form-group mb-1 ">
-                    <label  for="exampleDropdownFormDate1">Date</label>
-                    <input  type="date" class="form-control" id="exampleDropdownFormDate1" [(ngModel)]="searchInputDate"
-                    id="searchbarDate" name="searchbarDate" />
-                  </div>
+            <div class="form-group mb-1 ">
+              <label for="exampleDropdownFormDate1">Date</label>
+              <input type="date" class="form-control" id="exampleDropdownFormDate1" [(ngModel)]="searchInputDate"
+                id="searchbarDate" name="searchbarDate" />
+            </div>
 
-                  <div class="form-group mb-1 ">
-                    <label  for="exampleDropdownFormReferenc1">Referenc</label>
-                    <input  type="text" class="form-control" id="exampleDropdownFormReferenc1"  placeholder="Referenc" [(ngModel)]="searchInputRef"
-                    id="searchbarRef" name="searchbarRef"/>
-                  </div>
+            <div class="form-group mb-1 ">
+              <label for="exampleDropdownFormReferenc1">Referenc</label>
+              <input type="text" class="form-control" id="exampleDropdownFormReferenc1" placeholder="Referenc"
+                [(ngModel)]="searchInputRef" id="searchbarRef" name="searchbarRef" />
+            </div>
 
-                    <div class="form-group mb-1">
-                        <label for="exampleDropdownFormWarehouse1">Warehouse</label>
-                        <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" [(ngModel)]="searchInputWare"
-                        id="searchbarWare" name="searchbarWare">
-                        <option *ngFor="let item of WarehousArray" [value]="item.id">
+            <div class="form-group mb-1">
+              <label for="exampleDropdownFormWarehouse1">Warehouse</label>
+              <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1"
+                [(ngModel)]="searchInputWare" id="searchbarWare" name="searchbarWare">
+                <option *ngFor="let item of WarehousArray" [value]="item.id">
 
-                          {{ item.name }}
+                  {{ item.name }}
 
-                      </option>
-                        </select>
-                        </div>
+                </option>
+              </select>
+            </div>
 
-                        <div class="form-group mb-2">
-                            <label for="exampleDropdownFormCategory1">Expense Category</label>
-                            <select class="form-control" aria-label="Default select example" id="exampleDropdownFormCategory1" [(ngModel)]="searchInputExp"
-                            id="searchbarExp" name="searchbarExp">
-                            <option *ngFor="let item of expenseCategories" [value]="item.id">
-                              {{ item.name }}
-                          </option>
-                            </select>
-                            </div>
-                        <div class="row">
-                        <div class="col-lg-6 col-md-12 ">
-                            <div class="form-group">
-                              <button type="submit" class="btn btn-primary btn-block" rippleEffect><i data-feather="filter"></i>Filter</button>
-                            </div>
-                          </div>
-                          <div class="col-lg-6 col-md-12">
-                            <div class="form-group">
-                              <button type="reset" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i> Reset</button>
-                            </div>
-                         </div> 
-                        </div>
-                         </form> 
-                                        
+            <div class="form-group mb-2">
+              <label for="exampleDropdownFormCategory1">Expense Category</label>
+              <select class="form-control" aria-label="Default select example" id="exampleDropdownFormCategory1"
+                [(ngModel)]="searchInputExp" id="searchbarExp" name="searchbarExp">
+                <option *ngFor="let item of expenseCategories" [value]="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-12 ">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block" rippleEffect><i
+                      data-feather="filter"></i>Filter</button>
                 </div>
               </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <button type="reset" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i>
+                    Reset</button>
+                </div>
+              </div>
+            </div>
+          </form>
 
-            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
-            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
-            <button type="button" class="btn btn-secondary" [routerLink]="['../createexpenses']"><i data-feather="plus-circle"></i>Create</button>
         </div>
+      </div>
+
+      <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+      <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
+      <button type="button" class="btn btn-secondary" [routerLink]="['../createexpenses']"><i
+          data-feather="plus-circle"></i>Create</button>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Reference</th>
-                <th scope="col"> Details</th>
-                <th scope="col"> Amount</th>
-                <th scope="col"> Category</th>
-                <th scope="col"> Warehouse</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <tr *ngFor="let createExpenses of expense|filter: searchInputDate:'date'|filter:searchInputRef:'details'; let i = index">
-                <td>{{createExpenses.date}}</td>
-                <td>ref</td>
-                <td>{{createExpenses.details}}</td>
-                <td>{{createExpenses.amount}}</td>
-                <td>{{createExpenses.expense_category_id}}</td>
-                <td>{{createExpenses.warehouse_id}}</td>
-                <td> <button class="btn btn-sm btn-success"  routerLink="../expenseupdate/{{createExpenses.id}}"><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" (click)="destroy(createExpenses.id)" ><i data-feather="x-circle"  [size]="24"></i>
-                </button></td>   
-            </tr>
-        </tbody>
-    </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-      </ngb-pagination>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Reference</th>
+        <th scope="col"> Details</th>
+        <th scope="col"> Amount</th>
+        <th scope="col"> Category</th>
+        <th scope="col"> Warehouse</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr
+        *ngFor="let createExpenses of expense|filter: searchInputDate:'date'|filter:searchInputRef:'details'; let i = index">
+        <td>{{createExpenses.date}}</td>
+        <td>{{createExpenses.ref}}</td>
+        <td>{{createExpenses.details}}</td>
+        <td>{{createExpenses.amount}}</td>
+        <td>{{createExpenses.expense_category.name}}</td>
+        <td>{{createExpenses.warehouse.name}}</td>
+        <td> <button class="btn btn-sm btn-success" routerLink="../expenseupdate/{{createExpenses.id}}"><i
+              data-feather="edit" [size]="24">
+            </i></button> <button class="btn btn-sm btn-danger" (click)="destroy(createExpenses.id)"><i
+              data-feather="x-circle" [size]="24"></i>
+          </button></td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
+    aria-label="Custom pagination">
+    <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+    </ng-template>
+    <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+    </ng-template>
+  </ngb-pagination>
 </body>
-
-
