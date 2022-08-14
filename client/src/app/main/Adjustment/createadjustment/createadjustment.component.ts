@@ -28,7 +28,10 @@ export class CreateadjustmentComponent implements OnInit {
 
 ngOnInit(): void {
 }
-
+countChange(value) {
+  // this.dateValue = value;
+  console.log(value);
+}
 AddAdjustment(){
   this.submitted = true;
   if(this.createadjustment.valid){
