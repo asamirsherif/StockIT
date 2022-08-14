@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Client\ClientRequest;
+use App\Http\Requests\Client\UpdatedClientRequest;
 use App\Http\Resources\Client\ClientCollection;
 use App\Http\Resources\Client\ClientResource;
 use App\Models\Client;
@@ -91,7 +92,7 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientRequest $request, $id)
+    public function update(UpdatedClientRequest $request, $id)
     {
         $client = Client::find($id);
         if(!$client)
