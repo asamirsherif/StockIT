@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Client\ClientRequest;
+use App\Http\Requests\Client\UpdatedClientRequest;
 use App\Http\Resources\Client\ClientCollection;
 use App\Http\Resources\Client\ClientResource;
 use App\Models\Client;
@@ -20,7 +21,7 @@ class ClientController extends Controller
     public function __construct(ClientRepositoryInterface $clientRepo)
     {
         $this->clientRepo = $clientRepo;
-        
+
     }
 
     /**
@@ -30,9 +31,9 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $this->authorizeForUser($request->user('api'), 'customers_view', Client::class);
-        
+
         if ($request->filled('search')) {
             $clients = $this->clientRepo->multiSearch($request)
             ->paginate($request->perPage);
@@ -60,7 +61,7 @@ class ClientController extends Controller
         $clientCreated = $this->clientRepo->create($request);
 
         if ($clientCreated)
-            return $this->succWithData(new ClientResource($clientCreated));
+            return $this->succWithData(new ClientResource($clientCreated), "client created successfully");
         else
             return $this->errMsg("customer not created!");
 
@@ -86,7 +87,9 @@ class ClientController extends Controller
         if(!$client)
             return $this->errMsg('This customer doesn\'t exist');
         else
-            return $this->succWithData(new ClientResource($client),'clint found');
+
+            return $this->succWithData(new ClientResource($client), "client details");
+
     }
 
     /**
@@ -96,16 +99,23 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientRequest $request, $id)
+    public function update(UpdatedClientRequest $request, $id)
     {
-        
+
+
         $this->authorizeForUser($request->user('api'), 'update', Client::class);
-        
+
+        $client = Client::find($id);
+        if(!$client)
+            return $this->errMsg("This client doesn\'t exist");
+
         $clientUpdated = $this->clientRepo->update($request, $id);
+
         if ($clientUpdated)
-            return $this->succWithData(new ClientResource($clientUpdated));
+            return $this->succWithData(new ClientResource($clientUpdated), "client updated successfully");
         else
             return $this->errMsg("Customer not updated!");
+
     }
 
     /**
@@ -117,7 +127,7 @@ class ClientController extends Controller
     public function destroy($id,Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'delete', Client::class);
-        
+
         $client = Client::find($id);
         if(!$client)
             return $this->errMsg('This customer doesn\'t exist');

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ClientRequest extends FormRequest
 {
@@ -25,12 +26,11 @@ class ClientRequest extends FormRequest
     {
         return [
             'name'      => ['required', 'string', 'min:4'],
-            'code'      => ['required', 'unique:clients,code', 'integer'],
-            'email'     => ['required', 'email:filter', 'unique:clients,email'],
+            'email'     => ['required', 'email:filter', 'unique:clients,email', Rule::unique('clients')->whereNull('deleted_at')],
             'country'   => ['required'],
             'city'      => ['required'],
-            'phone'     => ['required', 'unique:clients,phone', 'regex:/^01[0125][0-9]{8}$/'],
-            'adresse'   => ['required']
+            'phone'     => ['required', 'unique:clients,phone', Rule::unique('clients')->whereNull('deleted_at'), 'regex:/^01[0125][0-9]{8}$/'],
+            'address'   => ['required']
         ];
     }
 
