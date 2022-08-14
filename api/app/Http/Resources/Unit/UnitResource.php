@@ -15,6 +15,7 @@ class UnitResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=> $this->id,
             'name' => $this->name,
             'ShortName'      => $this->ShortName,
             'base_unit'      => $this->baseunit? $this->baseunit->name: "-",

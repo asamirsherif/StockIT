@@ -291,11 +291,11 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/setting/permission/createpermission/createpermission.module').then(m => m.CreatepermissionModule)
   },{
-    path: 'productdetails',
+    path: 'productdetails/:id',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/products/productdetatils/productdetails.module').then(m => m.ProductdetatilsModule)
   },{
-    path: 'productupdate',
+    path: 'productupdate/:id',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/products/productupdate/productupdate.module').then(m => m.ProductupdateComponentModule)
   },{
