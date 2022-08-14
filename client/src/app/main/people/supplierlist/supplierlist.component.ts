@@ -75,6 +75,7 @@ AddSupplier() {
 
         const observer = {
             next: (res) => {
+                this.closeModel(this.contentModel);
                 this.data.push(res.data)
             },
             error: (error)=>{
