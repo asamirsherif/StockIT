@@ -5,7 +5,7 @@ import { ClientservService } from 'app/auth/service/client/clientserv.service';
 import { Iclient } from 'app/interfaces/iclient';
 import { Router } from "@angular/router";
 //import { ToastrService } from "ngx-toastr";
-import { HttpErrorResponse } from "@angular/common/http";
+import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 @Component({
     selector: 'app-customerlist',
     templateUrl: './customerlist.component.html',
@@ -15,6 +15,7 @@ export class CustomerlistComponent implements OnInit {
     public pageBasicText = 3;
     data: Iclient[];
     clientForEdit!: Iclient;
+    clientForShow!: Iclient;
 
     createcustomerform: FormGroup;
     editClientForm: FormGroup;
@@ -64,7 +65,6 @@ export class CustomerlistComponent implements OnInit {
         const observer = {
             next: (res) => {
                 this.data = res.data
-                console.log(res.data)
             },
             error: (error) => {
                 console.log(error);
@@ -78,14 +78,14 @@ export class CustomerlistComponent implements OnInit {
         this.submitted = true;
         if (this.createcustomerform.valid) {
 
-            return;
             const observer = {
                 next: (res) => {
-
+                    this.data.push(res.data)
                 },
-                error: (err) => {
-
+                error: (error)=>{
+                    console.log(error);
                 }
+                
             }
             this.clientserv.AddClient(this.createcustomerform.value).subscribe(observer);
         }
@@ -96,7 +96,6 @@ export class CustomerlistComponent implements OnInit {
         const observer = {
             next: (res) => {
                 this.clientForEdit = res.data;
-                console.log(this.clientForEdit);
 
                 this.editClientForm.get("name").setValue(this.clientForEdit.name);
                 this.editClientForm.get("email").setValue(this.clientForEdit.email);
@@ -130,11 +129,29 @@ export class CustomerlistComponent implements OnInit {
     }
 
 
-    deleteWare(id: any) {
-        console.log(id);
-        this.clientserv.deleteClient(id).subscribe((res) => {
-            this.AllData();
-        });
+    deleteClient(id: number) {
+        const observer = {
+            next: (res) => {
+                this.AllData()
+            },
+            error: (err) => {
+                this.errors = err.error.errros;
+            }
+        }
+        this.clientserv.deleteClient(id).subscribe(observer)
+    }
+
+
+    showClient(id: number) {
+        const observer = {
+            next: (res) => {
+                this.clientForShow = res.data
+            },
+            error: (err) => {
+                this.errors = err.error.errros;
+            }
+        }
+        this.clientserv.getClientid(id).subscribe(observer);
     }
 
 

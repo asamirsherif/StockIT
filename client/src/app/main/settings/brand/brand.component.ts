@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { IBrand } from "app/interfaces/ibrand";
 import { HttpErrorResponse } from "@angular/common/http";
-import { ThisReceiver } from "@angular/compiler";
+
 
 @Component({
   selector: "app-brand",
@@ -82,7 +82,6 @@ export class BrandComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
          this.errors = error.error.errors;
-         console.log(this.errors)
         },
       };
       this.brand.AddBrand(this.createbrand.value).subscribe(observer);

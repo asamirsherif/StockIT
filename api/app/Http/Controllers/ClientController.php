@@ -40,7 +40,7 @@ class ClientController extends Controller
         } else
             $clients = Client::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
 
-        return new ClientCollection($clients);
+        return ClientResource::collection($clients);
 
         // return new CategoryCollection(Category::all());
         // return new ClientCollection(Client::all());

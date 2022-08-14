@@ -1,5 +1,6 @@
 export interface Iclient {
     id?:number,
+    code?:string,
     name:string,
     city:string,
     phone:number,
