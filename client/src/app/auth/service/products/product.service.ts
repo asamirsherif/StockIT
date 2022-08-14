@@ -29,5 +29,29 @@ export class ProductService {
   store(data:IProduct): Observable<any> {
     return this._http.post(`${this.host}`, data, { headers: this.header });
   }
+
+  get(){
+    return this._http.get(`${this.host}`)
+  }
+  
+  /**
+   * 
+   * @param id 
+   * @returns show data of product by id
+   */
+  show(id:number){
+    return this._http.get(`${this.host}${id}`, { headers: this.header })
+  } 
+
+  /**
+   * 
+   * @param id 
+   * @returns show data of product by id
+   */
+  update(id:number,data:IProduct): Observable<any>{
+    return this._http.put(`${this.host}${id}`,data,{ headers: this.header })
+  } 
+
+
   
 }
