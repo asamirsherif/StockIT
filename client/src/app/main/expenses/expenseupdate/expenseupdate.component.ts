@@ -3,12 +3,17 @@ import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { IExpense } from 'app/interfaces/iexpense';
 import { ExpenseService } from 'app/auth/service/expense/expense.service';
+import { WarehousservService } from 'app/auth/service/warehous/warehousserv.service';
+import { ExpenseCategoryService } from 'app/auth/service/expense/expense-category.service';
+import { IExpenseCategory } from 'app/interfaces/iexpense-category';
 @Component({
   selector: 'app-expenseupdate',
   templateUrl: './expenseupdate.component.html',
   styleUrls: ['./expenseupdate.component.scss']
 })
 export class ExpenseupdateComponent implements OnInit {
+  WarehousArray:any[]=[];
+  expenseCategories: IExpenseCategory[]=[];
   expense:IExpense[];
   public pageBasicText = 3;
 
@@ -19,7 +24,7 @@ export class ExpenseupdateComponent implements OnInit {
   errors:any = {};
   editexpence:FormGroup;
 
-  constructor(private fb:FormBuilder,public _router:Router,private expenseService:ExpenseService,public _activateRouter:ActivatedRoute) {
+  constructor(private fb:FormBuilder,public _router:Router,private expenseService:ExpenseService,public _activateRouter:ActivatedRoute,public wareser:WarehousservService,private expenseCategoryService :ExpenseCategoryService ) {
     this.editexpence = new FormGroup({
       amount: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
@@ -34,6 +39,36 @@ export class ExpenseupdateComponent implements OnInit {
     this.edit(id);
     console.log(id);
 
+
+    //get select from database
+
+    this.wareser.allware().subscribe(
+
+      (res) => {
+
+        this.WarehousArray=res.data;
+
+        console.log(this.WarehousArray);
+      },
+
+      (err:any) => {
+
+        console.log(err);
+
+      }
+
+    );
+
+   const  expCatObserver = {
+      next:(res)=>{
+        this.expenseCategories = res.data                
+      },
+      error:(error)=>{
+        console.log(error);
+      }
+    }
+
+    this.expenseCategoryService.getall().subscribe(expCatObserver)
   }
   
   edit(id:number) {
