@@ -16,7 +16,7 @@ import { basename } from "path";
 export class UnitComponent implements OnInit {
   public pageBasicText = 3;
   Op: any = ["/", "+", "*"];
-  Base: any = [];
+  Base: any = ['80','89'];
   data: Array<Unit> = [];
   
   // if(data){
@@ -44,8 +44,8 @@ export class UnitComponent implements OnInit {
       name: new FormControl("", Validators.required),
       ShortName: new FormControl("", Validators.required),
       base_unit: new FormControl(null),
-      operator: new FormControl("", Validators.required),
-      operator_value: new FormControl("", Validators.required),
+      operator: new FormControl(null),
+      operator_value: new FormControl(null),
     });
     this.editUnitForm = new FormGroup({
       name: new FormControl("", Validators.required),

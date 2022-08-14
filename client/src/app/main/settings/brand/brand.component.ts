@@ -15,7 +15,7 @@ import { ThisReceiver } from "@angular/compiler";
 })
 export class BrandComponent implements OnInit {
   public pageBasicText = 3;
-
+  submitted = false;
   data: Array<IBrand> = [];
   brandForEdit!: IBrand;
 
@@ -37,14 +37,13 @@ export class BrandComponent implements OnInit {
 
     this.createbrand = new FormGroup({
       name: new FormControl("", Validators.required),
-      description: new FormControl("", Validators.required),
-
-      image: new FormControl(null)
+      image: new FormControl(null),
+      description: new FormControl(null),
     });
 
     this.editBrandForm = new FormGroup({
       name: new FormControl("", Validators.required),
-      description: new FormControl("", Validators.required),
+      description: new FormControl(null),
       image: new FormControl(null),
     });
   }
@@ -72,7 +71,9 @@ export class BrandComponent implements OnInit {
 
 
   AddBrand() {
+    this.submitted = true;
     if (this.createbrand.valid) {
+
       const observer = {
         next: (res) => {
           this.closeModel(this.contentModel);
