@@ -22,7 +22,7 @@ export class AdjustmentservService {
     return this._Http.get(`${this.host}`, { headers: this.headers, params: this.params })
   }
 
-  store(data): Observable<any> {
+  store(data:Iadjustment): Observable<any> {
     return this._Http.post(`${this.host}`, data, { headers: this.headers })
   }
   destroy(id:number):Observable<any>{
@@ -30,11 +30,13 @@ export class AdjustmentservService {
 
   }
   //update item by id
-  update(id:number,data): Observable<any> {
+  update(id:number,data:Iadjustment): Observable<any> {
     return this._Http.put(`${this.host}${id}`, data, { headers: this.headers });
   }
   show(id:number): Observable<any>{
    return this._Http.get(`${this.host}${id}`,{headers:this.headers});
   }
- 
+  getAddjuestid(id: number): Observable<any> {
+    return this._Http.get(`${this.host}${id}`);
+  }
 }
