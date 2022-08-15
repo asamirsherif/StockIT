@@ -64,7 +64,8 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
     {
         $adjustments = Adjustment::filter($request)->where(function ($q) use ($request) {
             return $q->where('date', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('Ref', 'LIKE', "%" . $request->search . "%");
+                    ->orWhere('Ref', 'LIKE', "%" . $request->search . "%")
+                    ->orWhere('warehouse_id', 'LIKE', "%" . $request->search . "%");
         });
 
         return $adjustments;
@@ -83,5 +84,26 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             $code = 'AD_1111';
         }
         return $code;
+    }
+
+    // create Adjustment Details function
+    public function createAdjustmentDetails(Request $request, $id): array
+    {
+        $adjustment = $this->read($id);
+        $adjustmentDetails = [];
+        foreach ($request->adjustmentDetails as $adjDetail) {
+            $adjustmentDetailModel = $adjustment->adjustmentDeatils();
+            DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
+                $adjustmentDetailModel->create([
+                    'adjustment_id' => $id,
+                    'quantity' => $adjDetail['quantity'],
+                    'product_id' => $adjDetail['product_id'],
+                    'product_variant_id' => isset($adjDetail['product_variant_id'])? $adjDetail['product_variant_id'] : null,
+                    'type' => $adjDetail['type'],
+                ]);
+            }, 3);
+            $adjustmentDetails[] = $adjustmentDetailModel;
+        }
+        return $adjustmentDetails;
     }
 }

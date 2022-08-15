@@ -9,5 +9,5 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 interface AdjustmentRepositoryInterface extends CrudInterface, MultiSearchInterface, CodeableInterface {
-    //
+    public function createAdjustmentDetails(Request $request, int $id): array;
 }
