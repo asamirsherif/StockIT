@@ -91,27 +91,27 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
     public function createAdjustmentDetails(Request $request, $id): array
     {
         $adjustment = $this->read($id);
-        $adjustmentDetails = [];
-        foreach ($request->adjustmentDetails as $adjDetail) {
+        $adjustmentDeatils = [];
+        foreach ($request->adjustmentDeatils as $adjDetail) {
             $adjustmentDetailModel = $adjustment->adjustmentDeatils();
             DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
                 $adjustmentDetailModel->create([
                     'adjustment_id' => $id,
                     'quantity' => $adjDetail['quantity'],
                     'product_id' => $adjDetail['product_id'],
-                    'product_variant_id' => isset($adjDetail['product_variant_id'])? $adjDetail['product_variant_id'] : null,
+                    'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id'] : null,
                     'type' => $adjDetail['type'],
                 ]);
             }, 3);
-            $adjustmentDetails[] = $adjustmentDetailModel;
+            $adjustmentDeatils[] = $adjustmentDetailModel;
         }
-        return $adjustmentDetails;
+        return $adjustmentDeatils;
     }
 
     // add in product warehouse
     public function addProductWarehouse(Request $request)
     {
-        foreach ($request->adjustmentDetails as $adjDetail) {
+        foreach ($request->adjustmentDeatils as $adjDetail) {
             $productWarehouseModel= new ProductWarehouse();
             DB::transaction(function() use ($productWarehouseModel, $adjDetail, $request) {
                 $productWarehouseModel->create([
@@ -132,30 +132,30 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
 
         // start update of new details
         $adjustment = $this->read($id);
-        $adjustmentDetails = [];
-            foreach ($request->adjustmentDetails as $adjDetail) {
+        $adjustmentDeatils = [];
+            foreach ($request->adjustmentDeatils as $adjDetail) {
                 $adjustmentDetailModel = $adjustment->adjustmentDeatils();
                 DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
                     $adjustmentDetailModel->updateOrCreate([
                         'adjustment_id' => $id,
                         'quantity' => $adjDetail['quantity'],
                         'product_id' => $adjDetail['product_id'],
-                        'product_variant_id' => isset($adjDetail['product_variant_id'])? $adjDetail['product_variant_id'] : null,
+                        'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id'] : null,
                         'type' => $adjDetail['type'],
                     ]);
                 }, 3);
-                $adjustmentDetails[] = $adjustmentDetailModel;
+                $adjustmentDeatils[] = $adjustmentDetailModel;
             }
-        return $adjustmentDetails;
+        return $adjustmentDeatils;
     }
 
     // delete adj details
     public function deleteAdjustmentDetails(Request $request, int $id): bool
     {
-        $adjustmentDetails = $this->read($id)->adjustmentDeatils()->get('adjustment_id')->toArray();
-        foreach ($adjustmentDetails as $adjDetail) {
+        $adjustmentDeatils = $this->read($id)->adjustmentDeatils()->get('adjustment_id')->toArray();
+        foreach ($adjustmentDeatils as $adjDetail) {
             $adjDetail = $adjDetail['adjustment_id'];
-            if(!in_array($adjDetail, $request->$adjustmentDetails)) {
+            if(!in_array($adjDetail, $request->$adjustmentDeatils)) {
                 $this->read($id)->adjustmentDeatils()->where('adjustment_id', $adjDetail)->delete();
             }
         }

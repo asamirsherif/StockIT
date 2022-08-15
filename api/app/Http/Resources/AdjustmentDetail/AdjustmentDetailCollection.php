@@ -15,7 +15,7 @@ class AdjustmentDetailCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'AdjustmentDetails' => $this->collection,
+            'adjustmentDeatils' => $this->collection,
         ];
     }
 }

@@ -57,6 +57,7 @@ class AdjustmentController extends Controller
         $adjustmentCreated = $this->adjustmentRepo->create($request);
 
         $this->adjustmentRepo->createAdjustmentDetails($request, $adjustmentCreated->id);
+
         $this->adjustmentRepo->addProductWarehouse($request);
 
         if ($adjustmentCreated)

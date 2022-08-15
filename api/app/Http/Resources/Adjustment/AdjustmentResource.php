@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Adjustment;
 
 use App\Http\Resources\AdjustmentDetail\AdjustmentDetailCollection;
+use App\Http\Resources\AdjustmentDetail\AdjustmentDetailResource;
 use App\Http\Resources\Warehouse\WarehouseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
