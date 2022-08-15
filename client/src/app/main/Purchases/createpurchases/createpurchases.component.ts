@@ -11,5 +11,9 @@ export class CreatepurchasesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  countChange(value) {
+    // this.dateValue = value;
+    console.log(value);
+  }
 
 }
