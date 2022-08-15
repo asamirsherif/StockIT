@@ -3,6 +3,7 @@
 namespace App\Repositories\Adjustment;
 
 use App\Models\Adjustment;
+use App\Models\ProductWarehouse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -105,5 +106,21 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             $adjustmentDetails[] = $adjustmentDetailModel;
         }
         return $adjustmentDetails;
+    }
+
+    // add in product warehouse
+    public function addProductWarehouse(Request $request)
+    {
+        foreach ($request->adjustmentDetails as $adjDetail) {
+            $productWarehouseModel= new ProductWarehouse();
+            DB::transaction(function() use ($productWarehouseModel, $adjDetail, $request) {
+                $productWarehouseModel->create([
+                    'product_id'         => $adjDetail['product_id'],
+                    'warehouse_id'       => $request['warehouse_id'],
+                    'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id']: null,
+                    'qte'                => $adjDetail['quantity'],
+                ]);
+            }, 3);
+        }
     }
 }
