@@ -91,6 +91,7 @@ AddSupplier() {
 
 
 editSupplier(id: number) {
+   
     const observer = {
         next: (res) => {
             this.supplierForEdit = res.data;
@@ -112,7 +113,8 @@ editSupplier(id: number) {
 
 
 updateSupplier() {
-
+    this.submitted = true;
+    if (this.editsupplierForm.valid){
     const observer = {
         next: (res) => {
             this.closeModel(this.contentModel);
@@ -124,7 +126,7 @@ updateSupplier() {
     };
     this.supplierserv.updateSupplier(this.supplierForEdit?.id, this.editsupplierForm.value)
         .subscribe(observer);
-}
+}}
 
 
 deleteSupplier(id: number) {
