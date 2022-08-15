@@ -31,3 +31,19 @@ table{
 button{
     background-color: blueviolet;
 }
+ul{
+    list-style: none;
+    margin: 0 auto;
+    text-align: left;
+    margin-right: 10px;
+  }
+  
+  ul li{
+    padding: 5px;
+    overflow: hidden;
+  }
+  
+  ul li p{
+    font-weight: bold;
+    padding-top: 7px;
+  }

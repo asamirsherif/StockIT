@@ -21,12 +21,27 @@ export class CreateadjustmentComponent implements OnInit {
   errors:any = {};
 
   createadjustmentform:FormGroup;
- 
+  public searchInput: String = '';
+  public searchResult: Array<any> = [];
+  public toggle: Boolean = false;
+  public selectedInput: any = {};
+  public seriesList: Array<any> = [
+    {"name": "t-sherit",
+    "code": "3",
+    "stock": "erkllker"},
+    {"name": "t-hghd",
+    "code": "2",
+    "stock": "erkllker"},
+    {"name": "t-krk",
+    "code": "1",
+    "stock": "erkllker"}
+  ]
   constructor(private fb:FormBuilder,public _router:Router,public wareser:WarehousservService,private adjuestmentserv:AdjustmentservService) {
     this.createadjustmentform = new FormGroup({
       warehouse_id: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
-      notes:new FormControl(null)
+      notes:new FormControl(null),
+      search:new FormControl(null),
   })
 }
 
@@ -48,10 +63,7 @@ ngOnInit(): void {
 
   );
 }
-countChange(value) {
-  // this.dateValue = value;
-  console.log(value);
-}
+
 AddAdjustment(){
   this.submitted = true;
   if(this.createadjustmentform.valid){
@@ -81,5 +93,23 @@ console.log(data);
      
   
 }   
+}
+
+
+fetchSeries(value: String){
+  if(value === '') {
+    return this.searchResult = []
+  }
+  
+  this.searchResult = this.seriesList.filter(function(series) {
+    return series.name.startsWith(value)
+    
+  })
+  this.toggle = false;}
+
+showDetails(series) {
+     this.selectedInput = series;
+     this.toggle = true;
+     this.searchInput = series.name;
 }
 }
