@@ -1,39 +1,46 @@
+import { Iclient } from './../../../interfaces/iclient';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
-export class AddbrandService {
-  public brandData = { data: "" };
-  host = environment.apiUrl + "/api/brands/";
-  header = new HttpHeaders({
-    Accept: "application/json",
-  });
+export class ClientservService {
 
-  params:HttpParams
+  host = environment.apiUrl + "/api/clients/";
+
+  header: HttpHeaders;
+  params: HttpParams;
 
   constructor(private _http: HttpClient) {
     this.params = new HttpParams();
+    this.header = new HttpHeaders({
+      Accept: "application/json",
+    });
   }
 
-  AddBrand(data: any): Observable<any> {
+
+  AddClient(data: Iclient): Observable<any> {
     return this._http.post(`${this.host}`, data, { headers: this.header });
   }
-  allbrand(): Observable<any> {
-    return this._http.get(`${this.host}`, { headers: this.header, params:this.params });
+
+
+  allClient(): Observable<any> {
+    return this._http.get(`${this.host}`, { headers: this.header, params: this.params });
   }
 
-  deleteBrand(id: any): Observable<any> {
+  deleteClient(id: any): Observable<any> {
     return this._http.delete(`${this.host}${id}`);
   }
-  updateBrand(id: number, data: any): Observable<any> {
+  updateClient(id: number, data: Iclient): Observable<any> {
     return this._http.patch(`${this.host}${id}`, data);
   }
 
-  getBrandid(id: any): Observable<any> {
+  getClientid(id: number): Observable<any> {
     return this._http.get(`${this.host}${id}`);
   }
 }
+
+

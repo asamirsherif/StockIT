@@ -1,6 +1,5 @@
-export interface Iclient {
+export interface Isupplier {
     id?:number,
-    code?:string,
     name:string,
     city:string,
     phone:number,
