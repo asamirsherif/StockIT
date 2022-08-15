@@ -113,6 +113,15 @@
             <div class="col-md-12">
               <input class="form-control form-control col-md-12" type="text" placeholder="Brand Name" aria-label="Date"
                 id="name" name="name" formControlName="name" />
+              <div id="BrandName"
+                *ngIf="editBrandForm.controls['name'].touched && editBrandForm.controls['name'].invalid || submitted && editBrandForm.controls['name'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="editBrandForm.controls['name'].errors?.['required']">This field is
+                  required</small>
+              </div>
+              <div class="form-text text-danger">
+                <small *ngIf="errors?.name">{{errors?.name}}</small>
+              </div>
             </div>
           </div>
           <div class="form-group col-md-12">
