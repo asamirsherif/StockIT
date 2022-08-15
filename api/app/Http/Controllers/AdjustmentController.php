@@ -98,10 +98,13 @@ class AdjustmentController extends Controller
 
         // update
         $adjustmentUpdated = $this->adjustmentRepo->update($request, $id);
+
+        $this->adjustmentRepo->updateAdjustmentDetails($request, $adjustmentUpdated->id);
+
         if ($adjustmentUpdated)
             return $this->succWithData(new AdjustmentResource($adjustmentUpdated), "Adjustment updated successfully");
         else
-            return $this->errMsg("adjustment not updated!");
+            return $this->errMsg("adjustment doesn\'t updated!");
     }
 
     /**
