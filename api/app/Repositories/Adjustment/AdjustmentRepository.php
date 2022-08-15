@@ -123,4 +123,28 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             }, 3);
         }
     }
+
+    // update updateAdjustmentDetails
+    public function updateAdjustmentDetails(Request $request, $id): array
+    {
+        // delete old
+
+        // start update
+        $adjustment = $this->read($id);
+        $adjustmentDetails = [];
+            foreach ($request->adjustmentDetails as $adjDetail) {
+                $adjustmentDetailModel = $adjustment->adjustmentDeatils();
+                DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
+                    $adjustmentDetailModel->updateOrCreate([
+                        'adjustment_id' => $id,
+                        'quantity' => $adjDetail['quantity'],
+                        'product_id' => $adjDetail['product_id'],
+                        'product_variant_id' => isset($adjDetail['product_variant_id'])? $adjDetail['product_variant_id'] : null,
+                        'type' => $adjDetail['type'],
+                    ]);
+                }, 3);
+                $adjustmentDetails[] = $adjustmentDetailModel;
+            }
+        return $adjustmentDetails;
+    }
 }
