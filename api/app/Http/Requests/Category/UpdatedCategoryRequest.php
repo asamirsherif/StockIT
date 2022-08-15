@@ -5,7 +5,7 @@ namespace App\Http\Requests\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CategoryRequest extends FormRequest
+class UpdatedCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required', Rule::unique('categories')->whereNull('deleted_at')],
-            'name' => ['required', Rule::unique('categories')->whereNull('deleted_at')]
+            'code' => ['sometimes','required', Rule::unique('categories')->ignore($this->route('category'))->whereNull('deleted_at')],
+            'name' => ['sometimes','required', Rule::unique('categories')->ignore($this->route('category'))->whereNull('deleted_at')],
         ];
     }
 }
