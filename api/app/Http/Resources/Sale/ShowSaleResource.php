@@ -3,6 +3,8 @@
 namespace App\Http\Resources\Sale;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Warehouse\WarehouseResource;
+use App\Http\Resources\Client\ClientResource;
 
 class ShowSaleResource extends JsonResource
 {
@@ -27,18 +29,13 @@ class ShowSaleResource extends JsonResource
             'status' => $this->status,
             'discount' => $this->discount,
             'shipping' => $this->shipping,
-            'warehouse_name' => $this->warehouse->name,
-            'client_id' => $this->client->id,
-            'client_name' => $this->client->name,
-            'client_email' => $this->client->email,
-            'client_tele' => $this->client->phone,
-            'client_code' => $this->client->code,
-            'client_adr' => $this->client->address,
+            'warehouse' => new WarehouseResource($this->warehouse),
+            'client' => new ClientResource($this->client),
             'GrandTotal' => $grandtotal,
             'paid_amount' => $paid_amount,
             'due' => $due,
             'payment_status' => $this->payment_status,
-            'details' => SaleDetailsResource::collection($this->details)
+            'items' => SaleDetailsResource::collection($this->details)
 
         ];
     }
