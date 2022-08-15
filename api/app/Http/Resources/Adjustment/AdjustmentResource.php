@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Adjustment;
 
+use App\Http\Resources\AdjustmentDetail\AdjustmentDetailCollection;
 use App\Http\Resources\Warehouse\WarehouseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,6 +24,7 @@ class AdjustmentResource extends JsonResource
             'warehouse_id'  => new WarehouseResource($this->warehouse),
             'items'         => $this->items,
             'notes'         => $this->notes,
+            'details'       => new AdjustmentDetailCollection($this->adjustmentDeatils)
         ];
     }
 }
