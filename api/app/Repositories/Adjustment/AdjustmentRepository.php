@@ -127,9 +127,10 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
     // update updateAdjustmentDetails
     public function updateAdjustmentDetails(Request $request, $id): array
     {
-        // delete old
+        // delete old details firstly
+        $this->deleteAdjustmentDetails($request, $id);
 
-        // start update
+        // start update of new details
         $adjustment = $this->read($id);
         $adjustmentDetails = [];
             foreach ($request->adjustmentDetails as $adjDetail) {
@@ -146,5 +147,18 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
                 $adjustmentDetails[] = $adjustmentDetailModel;
             }
         return $adjustmentDetails;
+    }
+
+    // delete adj details
+    public function deleteAdjustmentDetails(Request $request, int $id): bool
+    {
+        $adjustmentDetails = $this->read($id)->adjustmentDeatils()->get('adjustment_id')->toArray();
+        foreach ($adjustmentDetails as $adjDetail) {
+            $adjDetail = $adjDetail['adjustment_id'];
+            if(!in_array($adjDetail, $request->$adjustmentDetails)) {
+                $this->read($id)->adjustmentDeatils()->where('adjustment_id', $adjDetail)->delete();
+            }
+        }
+        return true;
     }
 }

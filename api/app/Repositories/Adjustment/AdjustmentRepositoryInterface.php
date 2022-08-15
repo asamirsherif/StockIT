@@ -12,4 +12,5 @@ interface AdjustmentRepositoryInterface extends CrudInterface, MultiSearchInterf
     public function createAdjustmentDetails(Request $request, int $id): array;
     public function addProductWarehouse(Request $request);
     public function updateAdjustmentDetails(Request $request, int $id): array;
+    public function deleteAdjustmentDetails(Request $request, int $id): bool;
 }
