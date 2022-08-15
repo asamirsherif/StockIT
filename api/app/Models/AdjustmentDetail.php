@@ -9,6 +9,7 @@ class AdjustmentDetail extends Model
 {
     use HasFactory;
 
+    protected $table = 'adjustment_details';
     protected $fillable = [
         'product_id', 'adjustment_id', 'product_variant_id', 'quantity', 'type'
     ];
