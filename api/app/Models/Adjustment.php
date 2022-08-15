@@ -19,7 +19,7 @@ class Adjustment extends Model
 
     // filteration
     public function scopeFilter(Builder $builder, Request $request) {
-        
+
         return (new AdjustmentFilter($request))->filter($builder);
     }
 
@@ -32,5 +32,10 @@ class Adjustment extends Model
     public function warehouse()
     {
         return $this->belongsTo(Warehouse::class);
+    }
+
+    // adjustmentDEtails relation
+    public function adjustmentDeatils() {
+        return $this->hasMany(AdjustmentDetail::class);
     }
 }
