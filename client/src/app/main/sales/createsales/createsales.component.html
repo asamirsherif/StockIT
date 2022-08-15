@@ -13,7 +13,9 @@
             <label class="col-md-8 control-label " for="customer">Customer</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Customer</option>
+                    <option *ngFor="let item of clientArray" [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
             </div>
         </div>
@@ -21,7 +23,9 @@
             <label class="col-md-8 control-label " for="category"> Warehouse</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Warehouse</option>
+                    <option *ngFor="let item of WarehousArray" [value]="item.id">
+                        {{ item.name }}
+                    </option>                
                 </select>
             </div>
         </div>
@@ -29,9 +33,13 @@
     <div class="col-md-12">
         <label class="col-md-4 control-label" for="product">Product</label>
         <div class="col-md-12 row">
-            <span class="switch-icon-left col-md-1 icon "><i data-feather="search"></i></span>
-            <input class="form-control form-control col-md-11" type="text" placeholder="Search Product by name"
-                aria-label="Search">
+            <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
+            <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput" (keyup)="fetchSeries(searchbar.value)" placeholder="Search Here" formControlName="search" />
+            <ul class="col-md-11">
+                <li *ngFor="let show of searchResult" (click)="showDetails(show)" [hidden]="toggle">
+                    <p> {{ show.name }}</p>
+                </li>
+            </ul>
         </div>
     </div><br>
     <h4>Order items</h4>
@@ -50,10 +58,10 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-                <tr>
-                    <td>1</td>
-                    <td>(earphones)</td>
-                    <td>63417341</td>
+                <tr *ngFor="let x of selectedInput; let i =index">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.code }}</td>
+                    <td>{{ x.stock }}</td>
                     <td>
                         <div class="badge badge-pill badge-light-warning">496.95 ك</div>
                     </td>
@@ -63,7 +71,7 @@
                     <td >ريال 276.00</td> 
                         
                    <td><div class="col-md-4">
-                        <button class="btn btn-sm btn-danger"><i data-feather="x-circle" [size]="24"></i></button>
+                        <button (click)="deleteSeris(i)" class="btn btn-sm btn-danger"><i data-feather="x-circle" [size]="24"></i></button>
                     </div>
                     </td>
                 </tr>
