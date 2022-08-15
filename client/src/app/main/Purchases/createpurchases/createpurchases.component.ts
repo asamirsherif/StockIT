@@ -45,5 +45,9 @@ export class CreatepurchasesComponent implements OnInit {
     });
 
   }
+  countChange(value) {
+    // this.dateValue = value;
+    console.log(value);
+  }
 
 }

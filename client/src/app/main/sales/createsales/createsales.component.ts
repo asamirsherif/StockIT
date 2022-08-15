@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-createsales',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatesalesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public _router:Router) { }
 
   ngOnInit(): void {
+    
+  }
+  countChange(value) {
+    // this.dateValue = value;
+    console.log(value);
   }
 
+  
 }
