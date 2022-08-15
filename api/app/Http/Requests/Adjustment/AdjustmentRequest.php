@@ -24,12 +24,12 @@ class AdjustmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'       => ['required', 'integer'],
-            'date'          => ['required', 'date'],
-            'warehouse_id'  => ['required', 'integer'],
-            'items'         => ['required'],
-            'notes'         => ['string', 'min:5'],
-
+            'user_id'             => ['required', 'integer'],
+            'date'                => ['required', 'date'],
+            'warehouse_id'        => ['required', 'integer'],
+            'items'               => ['required'],
+            'notes'               => ['string', 'min:5'],
+            'adjustmentDeatils.*' => ['required']
         ];
     }
 }
