@@ -92,12 +92,16 @@
                             <div class="col-md-12 ">
                                 <input class="form-control form-control col-md-12" type="email" placeholder="email"
                                     aria-label="Date" id="email" name="email" formControlName="email">
-                                <div id="email"
+                                    <div id="email"
                                     *ngIf="createsupplierform.controls['email'].touched &&createsupplierform.controls['email'].invalid|| submitted && createsupplierform.controls['email'].invalid"
                                     class="form-text text-danger">
                                     <small *ngIf="createsupplierform.controls['email'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                        is required</small>
+                                    <small *ngIf="createsupplierform.controls['email'].errors?.['email']">This field is
+                                        email</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.email">{{errors?.email}}</small>
                                 </div>
                             </div>
                         </div>
@@ -106,12 +110,16 @@
                             <div class="col-md-12 ">
                                 <input class="form-control form-control col-md-12" type="text" placeholder="phone"
                                     aria-label="Date" id="phone" name="phone" formControlName="phone">
-                                <div id="phone"
+                                    <div id="phone"
                                     *ngIf="createsupplierform.controls['phone'].touched &&createsupplierform.controls['phone'].invalid|| submitted && createsupplierform.controls['phone'].invalid"
                                     class="form-text text-danger">
                                     <small *ngIf="createsupplierform.controls['phone'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                        is required</small>
+                                    <small *ngIf="createsupplierform.controls['phone'].errors?.['phone']">This field is
+                                        phone</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.phone">{{errors?.phone}}</small>
                                 </div>
                             </div>
                         </div>
