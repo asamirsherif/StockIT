@@ -50,16 +50,23 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+                <tr>
+                    <td>1</td>
+                    <td>(earphones)</td>
+                    <td>63417341</td>
+                    <td>
+                        <div class="badge badge-pill badge-light-warning">496.95 ك</div>
+                    </td>
+                    <td><core-touchspin [numberValue]="0" (onChange)="countChange($event)"></core-touchspin></td>
+                    <td>ريال 0.00	</td>
+                    <td>ريال 36.00	</td>
+                    <td >ريال 276.00</td> 
+                        
+                   <td><div class="col-md-4">
+                        <button class="btn btn-sm btn-danger"><i data-feather="x-circle" [size]="24"></i></button>
+                    </div>
+                    </td>
+                </tr>
         </tbody>
     </table>
 
