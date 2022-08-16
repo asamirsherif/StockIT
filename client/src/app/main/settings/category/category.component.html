@@ -33,7 +33,10 @@
                                         class="form-text text-danger">
                                         <small *ngIf="createCategoryForm.controls['CategoryCode'].errors?.['required']">This field is
                                             required</small>
-                                    </div>     
+                                    </div>   
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.code">{{errors?.code}}</small>
+                                      </div>  
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
@@ -47,6 +50,9 @@
                                         <small *ngIf="createCategoryForm.controls['CategoryName'].errors?.['required']">This field is
                                             required</small>
                                     </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                      </div>
                                 </div>
                             </div>
                          
@@ -94,6 +100,14 @@
                                         <input class="form-control form-control col-md-12" type="text"
                                             placeholder="Category Code" aria-label="Date" id="CategoryCode"
                                             name="CategoryCode" formControlName="CategoryCode">  
+                                            <div id="CategoryCode" *ngIf="editCategoryForm.controls['CategoryCode'].touched &&editCategoryForm.controls['CategoryCode'].invalid|| submitted && editCategoryForm.controls['CategoryCode'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editCategoryForm.controls['CategoryCode'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>   
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.code">{{errors?.code}}</small>
+                                      </div>    
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12">
@@ -102,6 +116,14 @@
                                         <input class="form-control form-control col-md-12" type="text"
                                             placeholder="Category Name" aria-label="Date" id="CategoryName"
                                             name="CategoryName" formControlName="CategoryName">
+                                            <div id="CategoryName" *ngIf="editCategoryForm.controls['CategoryName'].touched &&editCategoryForm.controls['CategoryName'].invalid|| submitted && editCategoryForm.controls['CategoryName'].invalid "
+                                            class="form-text text-danger">
+                                            <small *ngIf="editCategoryForm.controls['CategoryName'].errors?.['required']">This field is
+                                                required</small>
+                                        </div>
+                                        <div class="form-text text-danger">
+                                            <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                          </div>
                                     </div>
                                 </div>
                              
