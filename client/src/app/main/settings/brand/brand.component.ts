@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { IBrand } from "app/interfaces/ibrand";
 import { HttpErrorResponse } from "@angular/common/http";
-import { ThisReceiver } from "@angular/compiler";
+
 
 @Component({
   selector: "app-brand",
@@ -37,6 +37,7 @@ export class BrandComponent implements OnInit {
 
     this.createbrand = new FormGroup({
       name: new FormControl("", Validators.required),
+      image: new FormControl(null),
       description: new FormControl(null),
     });
 
@@ -80,7 +81,7 @@ export class BrandComponent implements OnInit {
           this.data.push(res.data);
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.status);
+         this.errors = error.error.errors;
         },
       };
       this.brand.AddBrand(this.createbrand.value).subscribe(observer);
@@ -98,9 +99,9 @@ export class BrandComponent implements OnInit {
           .get("description")
           .setValue(this.brandForEdit.description);
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error: HttpErrorResponse) => {
+        this.errors = error.error.errors;
+       },
     };
 
     this.brand.getBrandid(id).subscribe(observer);

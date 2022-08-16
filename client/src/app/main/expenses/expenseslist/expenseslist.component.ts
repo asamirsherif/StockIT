@@ -14,42 +14,35 @@ export class ExpenseslistComponent implements OnInit {
   searchInput = "";
   searchInputDate = "";
   searchInputRef = "";
-  searchInputWare =[];
+  searchInputWare = [];
   searchInputExp = [];
-  WarehousArray:any[]=[];
-  expenseCategories: any[]=[];
-  constructor(private expenseService:ExpenseService,public wareser:WarehousservService,private expenseCategoryService :ExpenseCategoryService ) { }
+  WarehousArray: any[] = [];
+  expenseCategories: any[] = [];
+  constructor(private expenseService: ExpenseService, public wareser: WarehousservService, private expenseCategoryService: ExpenseCategoryService) { }
 
   ngOnInit(): void {
     this.getall();
-       this.wareser.allware().subscribe(
-
+    this.wareser.allware().subscribe(
       (res) => {
-
-        this.WarehousArray=res.data;
-
-        console.log(this.WarehousArray);
+        this.WarehousArray = res.data;
       },
-
-      (err:any) => {
-
+      (err: any) => {
         console.log(err);
-
       }
-
     );
 
-   const  expCatObserver = {
-      next:(res)=>{
-        this.expenseCategories = res.data                
+    const expCatObserver = {
+      next: (res) => {
+        this.expenseCategories = res.data
       },
-      error:(error)=>{
+      error: (error) => {
         console.log(error);
       }
     }
 
-   this.expenseCategoryService.getall().subscribe(expCatObserver)
+    this.expenseCategoryService.getall().subscribe(expCatObserver)
   }
+
   getall() {
     //then
     const observer = {
@@ -66,7 +59,9 @@ export class ExpenseslistComponent implements OnInit {
     //first
     this.expenseService.getall().subscribe(observer)
   }
-  destroy(id:number) {
+
+  
+  destroy(id: number) {
     //then
     const observer = {
       next: (res) => {
@@ -79,7 +74,7 @@ export class ExpenseslistComponent implements OnInit {
     }
     //first
     this.expenseService.destroy(id).subscribe(observer)
-    
+
   }
   search(event) {
     this.expenseService.params = this.expenseService.params.set("search", event)

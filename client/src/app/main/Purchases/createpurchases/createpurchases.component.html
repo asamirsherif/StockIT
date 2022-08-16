@@ -4,7 +4,7 @@
     </h2>
     <hr>
     <div class="col-md-12 row">
-       
+
         <div class="form-group col-md-4">
             <label class="col-md-4 control-label " for="category">Date</label>
             <div class="col-md-12 ">
@@ -16,6 +16,9 @@
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
                     <option selected>Choose Supplier</option>
+                    <option *ngFor="let supplier of suppliers; let i =index" [value]="supplier.id">
+                        {{supplier.name}}
+                    </option>
                 </select>
             </div>
         </div>
@@ -24,17 +27,19 @@
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
                     <option selected>Choose Warehouse</option>
+                    <option *ngFor="let warehouse of warehouses; let i =index" [value]="warehouse.id">
+                        {{warehouse.name}}
+                    </option>
                 </select>
             </div>
         </div>
     </div>
     <div class="col-md-12">
         <label class="col-md-4 control-label" for="product">Product</label>
-        <div class="col-md-12 row">
-            <span class="switch-icon-left col-md-1 icon "><i data-feather="search"></i></span>
-            <input class="form-control form-control col-md-11" type="text" placeholder="Search Product by name"
-                aria-label="Search">
-        </div>
+        <form class="form-inline col-md-12 mb-1">
+            <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+            <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="purchaseSearch($event)" class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search By product name or variants" aria-label="Search" />
+        </form>
     </div>
     <h4>Order items</h4>
     <table class="table col-md-11">
@@ -48,18 +53,26 @@
                 <th scope="col">Discount</th>
                 <th scope="col">Tax</th>
                 <th scope="col">Subtotal</th>
+                <th></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                    <td>(earphones)</td>
+                    <td>63417341</td>
+                    <td>
+                        <div class="badge badge-pill badge-light-warning">496.95 ك</div>
+                    </td>
+                    <td><core-touchspin [numberValue]="0" (onChange)="countChange($event)"></core-touchspin></td>
+                    <td>ريال 0.00	</td>
+                    <td>ريال 36.00	</td>
+                    <td >ريال 276.00</td> 
+                        
+                   <td><div class="col-md-4">
+                        <button class="btn btn-sm btn-danger"><i data-feather="x-circle" [size]="24"></i></button>
+                    </div>
+                    </td>
             </tr>
         </tbody>
     </table>
@@ -84,39 +97,36 @@
             </tr>
         </tbody>
     </table>
-<div class="col-md-12 row">
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
-        <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
+    <div class="col-md-12 row">
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
+            <div class="col-md-12">
+                <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required="" type="text">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Discount</label>
-        <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="ordertax">Discount</label>
+            <div class="col-md-12">
+                <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required="" type="text">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Shipping</label>
-        <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label" for="ordertax">Shipping</label>
+            <div class="col-md-12">
+                <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required="" type="text">
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="col-md-8 control-label " for="status">Status</label>
+            <div class="col-md-12 ">
+                <select class="form-select col-md-12 " aria-label="Default select example">
+                    <option selected>Completed</option>
+                </select>
+            </div>
         </div>
     </div>
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label " for="status">Status</label>
-        <div class="col-md-12 ">
-            <select class="form-select col-md-12 " aria-label="Default select example">
-                <option selected>Completed</option>
-            </select>
-        </div>
-    </div>
-</div>
     <div class="form-group col-md-12 ">
         <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
         <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -126,8 +136,4 @@
             <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
         </div>
     </div>
-
 </body>
-
-
-

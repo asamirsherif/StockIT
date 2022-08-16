@@ -4,6 +4,7 @@ import {FormGroup,FormControl,Validators,FormBuilder} from "@angular/forms";
 import { CategorytService } from "app/auth/service/category/category.service";
 import { observable } from "rxjs";
 import { ICategory } from "app/interfaces/icategory";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-category",
@@ -16,7 +17,7 @@ export class CategoryComponent implements OnInit {
   categories: ICategory[];
   contentModal:any;
   searchInput= "";
-
+  errors: any = {};
   createCategoryForm: FormGroup;
   editCategoryForm: FormGroup;
 
@@ -64,7 +65,9 @@ export class CategoryComponent implements OnInit {
         next: (res) => {
           this.modalService.dismissAll(this.contentModal);
           this.categories.push(res.data);
-        },
+        }, error: (error: HttpErrorResponse) => {
+          this.errors = error.error.errors;
+         },
       };
 
       this.categorytService.store(data).subscribe(observed);
@@ -103,7 +106,9 @@ export class CategoryComponent implements OnInit {
         next: (res) => {
           this.modalService.dismissAll(this.contentModal);
           this.getCategories();
-        },
+        }, error: (error: HttpErrorResponse) => {
+          this.errors = error.error.errors;
+         },
       };
 
       this.categorytService.update(id, data).subscribe(observed);
