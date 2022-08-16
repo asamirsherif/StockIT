@@ -99,9 +99,9 @@ export class BrandComponent implements OnInit {
           .get("description")
           .setValue(this.brandForEdit.description);
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error: HttpErrorResponse) => {
+        this.errors = error.error.errors;
+       },
     };
 
     this.brand.getBrandid(id).subscribe(observer);

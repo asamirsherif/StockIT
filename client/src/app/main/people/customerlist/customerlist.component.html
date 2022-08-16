@@ -84,8 +84,7 @@
                                     *ngIf="createcustomerform.controls['name'].touched &&createcustomerform.controls['name'].invalid || submitted && createcustomerform.controls['name'].invalid"
                                     class="form-text text-danger">
                                     <small *ngIf="createcustomerform.controls['name'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                        is required</small>
                                 </div>
                             </div>
                         </div>
@@ -98,8 +97,12 @@
                                     *ngIf="createcustomerform.controls['email'].touched &&createcustomerform.controls['email'].invalid|| submitted && createcustomerform.controls['email'].invalid"
                                     class="form-text text-danger">
                                     <small *ngIf="createcustomerform.controls['email'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                        is required</small>
+                                    <small *ngIf="createcustomerform.controls['email'].errors?.['email']">This field is
+                                        email</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.email">{{errors?.email}}</small>
                                 </div>
                             </div>
                         </div>
@@ -112,8 +115,12 @@
                                     *ngIf="createcustomerform.controls['phone'].touched &&createcustomerform.controls['phone'].invalid|| submitted && createcustomerform.controls['phone'].invalid"
                                     class="form-text text-danger">
                                     <small *ngIf="createcustomerform.controls['phone'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                        is required</small>
+                                    <small *ngIf="createcustomerform.controls['phone'].errors?.['pattern']">This field
+                                        is required phone is beginning 010/012/011 && lenght 11</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.phone">{{errors?.phone}}</small>
                                 </div>
                             </div>
                         </div>
@@ -126,8 +133,7 @@
                                     *ngIf="createcustomerform.controls['country'].touched &&createcustomerform.controls['country'].invalid|| submitted && createcustomerform.controls['country'].invalid"
                                     class="form-text text-danger">
                                     <small *ngIf="createcustomerform.controls['country'].errors?.['required']">This
-                                        field is
-                                        required</small>
+                                        field is required</small>
                                 </div>
                             </div>
                         </div>
@@ -140,8 +146,7 @@
                                     *ngIf="createcustomerform.controls['city'].touched &&createcustomerform.controls['city'].invalid|| submitted && createcustomerform.controls['city'].invalid"
                                     class="form-text text-danger">
                                     <small *ngIf="createcustomerform.controls['city'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                        is required</small>
                                 </div>
                             </div>
                         </div>
@@ -154,8 +159,7 @@
                                     *ngIf="createcustomerform.controls['address'].touched &&createcustomerform.controls['address'].invalid|| submitted && createcustomerform.controls['address'].invalid"
                                     class="form-text text-danger">
                                     <small *ngIf="createcustomerform.controls['address'].errors?.['required']">This
-                                        field is
-                                        required</small>
+                                        field is required</small>
                                 </div>
                             </div>
                         </div>
@@ -219,6 +223,11 @@
                                     <input class="form-control form-control col-md-12" type="text"
                                         placeholder="Customer Name" aria-label="Date" id="name" name="name"
                                         formControlName="name">
+                                    <div id="name"
+                                        *ngIf="editClientForm.controls['name'].touched &&editClientForm.controls['name'].invalid || submitted && editClientForm.controls['name'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editClientForm.controls['name'].errors?.['required']">This field is required</small>
+                                    </div>
 
                                 </div>
                             </div>
@@ -227,7 +236,15 @@
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="email" placeholder="email"
                                         aria-label="Date" id="email" name="email" formControlName="email">
-
+                                    <div id="email"
+                                        *ngIf="editClientForm.controls['email'].touched &&editClientForm.controls['email'].invalid|| submitted && editClientForm.controls['email'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editClientForm.controls['email'].errors?.['required']">This field is required</small>
+                                        <small *ngIf="editClientForm.controls['email'].errors?.['email']">This field is email</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.email">{{errors?.email}}</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -235,7 +252,17 @@
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text" placeholder="phone"
                                         aria-label="Date" id="phone" name="phone" formControlName="phone">
-
+                                    <div id="phone"
+                                        *ngIf="editClientForm.controls['phone'].touched &&editClientForm.controls['phone'].invalid|| submitted && editClientForm.controls['phone'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editClientForm.controls['phone'].errors?.['required']">This
+                                            field is required</small>
+                                        <small *ngIf="editClientForm.controls['phone'].errors?.['pattern']">This
+                                            field is required phone is beginning 010/012/011 && lenght 11</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.phone">{{errors?.phone}}</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -243,7 +270,11 @@
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text" placeholder="country"
                                         aria-label="Date" id="country" name="country" formControlName="country">
-
+                                    <div id="country"
+                                        *ngIf="editClientForm.controls['country'].touched &&editClientForm.controls['country'].invalid|| submitted && editClientForm.controls['country'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editClientForm.controls['country'].errors?.['required']">This field is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -251,7 +282,11 @@
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text" placeholder="city"
                                         aria-label="Date" id="city" name="city" formControlName="city">
-
+                                    <div id="city"
+                                        *ngIf="editClientForm.controls['city'].touched &&editClientForm.controls['city'].invalid|| submitted && editClientForm.controls['city'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editClientForm.controls['city'].errors?.['required']">This field is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -259,7 +294,11 @@
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text" placeholder="address"
                                         aria-label="Date" id="address" name="address" formControlName="address">
-
+                                    <div id="address"
+                                        *ngIf="editClientForm.controls['address'].touched &&editClientForm.controls['address'].invalid|| submitted && editClientForm.controls['address'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editClientForm.controls['address'].errors?.['required']">This field is required</small>
+                                    </div>
                                 </div>
                             </div>
 
