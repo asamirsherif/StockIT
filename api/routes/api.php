@@ -95,7 +95,7 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
     Route::apiResource('salesReturn', SalesReturnController::class);
 
     //product warehouse search
-    Route::get('purchesProductSearch', [ProductWarehouseSearchController::class, 'purchaseSearch']);
+    Route::get('purchaseProductSearch', [ProductWarehouseSearchController::class, 'purchaseSearch']);
 
     // sale prodcut warehouse search
     Route::get('saleProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'saleSearch']);

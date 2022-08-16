@@ -4,6 +4,8 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
 import { Isupplier } from 'app/interfaces/isupplier';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
 @Component({
 selector: 'app-supplierlist',
 templateUrl: './supplierlist.component.html',
@@ -78,9 +80,9 @@ AddSupplier() {
                 this.closeModel(this.contentModel);
                 this.data.push(res.data)
             },
-            error: (error)=>{
-                console.log(error);
-            }
+            error: (error: HttpErrorResponse) => {
+                this.errors = error.error.errors;
+                }
             
         }
         this.supplierserv.AddSupplier(this.createsupplierform.value).subscribe(observer);
@@ -89,6 +91,7 @@ AddSupplier() {
 
 
 editSupplier(id: number) {
+   
     const observer = {
         next: (res) => {
             this.supplierForEdit = res.data;
@@ -110,19 +113,20 @@ editSupplier(id: number) {
 
 
 updateSupplier() {
-
+    this.submitted = true;
+    if (this.editsupplierForm.valid){
     const observer = {
         next: (res) => {
             this.closeModel(this.contentModel);
             this.AllData();
         },
-        error: (error) => {
-            console.log(error);
-        },
+        error: (error: HttpErrorResponse) => {
+            this.errors = error.error.errors;
+            }
     };
     this.supplierserv.updateSupplier(this.supplierForEdit?.id, this.editsupplierForm.value)
         .subscribe(observer);
-}
+}}
 
 
 deleteSupplier(id: number) {
