@@ -25,9 +25,9 @@ class SaleRequest extends FormRequest
     {
         return [
             'date'=> ['required'],
-            'GrandTotal'=>['required','number'],
-            'client_id' => ['required'],
-            'warehouse_id' => ['required'],
+            'GrandTotal'=>['required','numeric'],
+            'client_id' => ['required','numeric'],
+            'warehouse_id' => ['required','numeric'],
             'status'=> ['required'],
             'details' => ['required'],
             'payment' => ['required']

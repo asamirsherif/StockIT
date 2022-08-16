@@ -89,7 +89,7 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
     // purchase
     Route::apiResource('purchases', PurchaseController::class);
     // sale
-    Route::apiResource('sale',SaleController::class);
+    Route::apiResource('sales',SaleController::class);
 
     //SalesReturn
     Route::apiResource('salesReturn', SalesReturnController::class);
