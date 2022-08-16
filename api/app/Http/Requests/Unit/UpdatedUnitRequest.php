@@ -5,7 +5,7 @@ namespace App\Http\Requests\Unit;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UnitRequest extends FormRequest
+class UpdatedUnitRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,8 @@ class UnitRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', Rule::unique('units')->whereNull('deleted_at'), 'string', 'min:3'],
-            'ShortName' => ['required', Rule::unique('units')->whereNull('deleted_at'), 'string'],
-            // 'base_unit' => ['integer'],
-            // 'operator' => ['required'],
-            // 'operator_value' => ['required', 'numeric'],
+            'name'      => ['sometimes', 'required', Rule::unique('units')->ignore($this->route('unit'))->whereNull('deleted_at'), 'string', 'min:3'],
+            'ShortName' => ['sometimes', 'required', Rule::unique('units')->ignore($this->route('unit'))->whereNull('deleted_at'), 'string'],
         ];
     }
 }
