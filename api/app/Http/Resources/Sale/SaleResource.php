@@ -22,8 +22,9 @@ class SaleResource extends JsonResource
         $paid_amount = number_format($this->paint_amount, 2, '.', '');
 
         return [
-            
+
             'id' => $this->id,
+            'date'=> $this->date,
             'code' => $this->code ? $this->code : "-",
             'Ref' => $this->Ref,
             'created_by' => $this->user->username,

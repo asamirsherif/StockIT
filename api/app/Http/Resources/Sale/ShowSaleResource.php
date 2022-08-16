@@ -23,6 +23,7 @@ class ShowSaleResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'date'=>$this->date,
             'code' => $this->code ? $this->code : "-",
             'Ref' => $this->Ref,
             'created_by' => $this->user->username,

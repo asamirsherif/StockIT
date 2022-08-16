@@ -6,6 +6,7 @@ use App\Models\Sale;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Unit;
 use App\Models\SaleDetail;
 use App\Models\ProductVariant;
 use App\Models\ProductWarehouse;
@@ -24,10 +25,10 @@ class SaleRepository implements SaleRepositoryInterface
     }
 
     public function create(Request $request): Model
-    {
-        DB::transaction(function () use ($request) {
+    {   
+        $order = new Sale();
 
-            $order = new Sale();
+        DB::transaction(function () use ($request,$order) {
 
             $order->is_pos = 0;
             $order->date = $request->date;
@@ -42,7 +43,7 @@ class SaleRepository implements SaleRepositoryInterface
             $order->status = $request->status;
             $order->payment_status = 'unpaid';
             $order->notes = $request->notes;
-            $order->user_id = /* Auth::user()->id; */ 1;
+            $order->user_id = Auth::user()->id;
 
             $order->save();
 
@@ -56,20 +57,20 @@ class SaleRepository implements SaleRepositoryInterface
                     'sale_id' => $order->id,
                     'sale_unit_id' =>  $value['sale_unit_id'],
                     'quantity' => $value['quantity'],
-                    'price' => $value['Unit_price'],
+                    'price' => $value['unit_price'],
                     'TaxNet' => $value['tax_percent'],
                     'tax_method' => $value['tax_method'],
                     'discount' => $value['discount'],
-                    'discount_method' => $value['discount_Method'],
+                    'discount_method' => $value['discount_method'],
                     'product_id' => $value['product_id'],
-                    'product_variant_id' => $value['product_variant_id'],
+                    'product_variant_id' => $value['product_variant_id'] ?? null,
                     'total' => $value['subtotal'],
                 ];
 
 
                 if ($order->status == "completed") {
                     if ($value['product_variant_id'] !== null) {
-                        $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                        $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                             ->where('warehouse_id', $order->warehouse_id)
                             ->where('product_id', $value['product_id'])
                             ->where('product_variant_id', $value['product_variant_id'])
@@ -85,7 +86,7 @@ class SaleRepository implements SaleRepositoryInterface
                         }
 
                     } else {
-                        $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                        $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                             ->where('warehouse_id', $order->warehouse_id)
                             ->where('product_id', $value['product_id'])
                             ->first();
@@ -227,7 +228,7 @@ class SaleRepository implements SaleRepositoryInterface
                             }
 
                         } else {
-                            $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                            $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                                 ->where('warehouse_id', $current_Sale->warehouse_id)
                                 ->where('product_id', $value['product_id'])
                                 ->first();
@@ -259,7 +260,7 @@ class SaleRepository implements SaleRepositoryInterface
                     if ($request['status'] == "completed") {
 
                         if ($prod_detail['product_variant_id'] !== null) {
-                            $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                            $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                                 ->where('warehouse_id', $request->warehouse_id)
                                 ->where('product_id', $prod_detail['product_id'])
                                 ->where('product_variant_id', $prod_detail['product_variant_id'])
@@ -275,7 +276,7 @@ class SaleRepository implements SaleRepositoryInterface
                             }
 
                         } else {
-                            $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                            $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                                 ->where('warehouse_id', $request->warehouse_id)
                                 ->where('product_id', $prod_detail['product_id'])
                                 ->first();
@@ -298,7 +299,7 @@ class SaleRepository implements SaleRepositoryInterface
                     $orderDetails['TaxNet'] = $prod_detail['tax_percent'];
                     $orderDetails['tax_method'] = $prod_detail['tax_method'];
                     $orderDetails['discount'] = $prod_detail['discount'];
-                    $orderDetails['discount_method'] = $prod_detail['discount_Method'];
+                    $orderDetails['discount_method'] = $prod_detail['discount_method'];
                     $orderDetails['quantity'] = $prod_detail['quantity'];
                     $orderDetails['product_id'] = $prod_detail['product_id'];
                     $orderDetails['product_variant_id'] = $prod_detail['product_variant_id'];
