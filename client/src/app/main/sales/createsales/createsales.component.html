@@ -1,12 +1,33 @@
 <body>
     <h2>Create Sale</h2>
     <hr>
+    <form
+    class="row col-md-12"
+    [formGroup]="createSaleForm"
+    (ngSubmit)="AddSale()"
+  >
+
     <div class="col-md-12 row">
        
         <div class="form-group col-md-4">
             <label class="col-md-4 control-label " for="category">Date</label>
             <div class="col-md-12 ">
-                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
+                <input 
+                class="form-control form-control col-md-11" 
+                type="date" 
+                placeholder="Date" 
+                aria-label="Date">
+
+                <div
+            id="date"
+            *ngIf="
+              (createSaleForm.controls['date'].touched &&
+              createSaleForm.controls['date'].invalid) ||
+              (submitted && createSaleForm.controls['date'].invalid)
+            "
+            class="form-text text-danger"
+          >
+          </div>
             </div>
         </div>
         <div class="form-group col-md-4">
@@ -15,6 +36,13 @@
                 <select class="form-select col-md-12 " aria-label="Default select example">
                     <option selected>Choose Customer</option>
                 </select>
+                <div id="client_id "
+                *ngIf="createSaleForm.controls['type_barcode'].touched &&createSaleForm.controls['type_barcode'].invalid || submitted && createSaleForm.controls['type_barcode'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createSaleForm.controls['type_barcode'].errors?.['required']">This field is
+                    required</small>
+            </div>
+
             </div>
         </div>
         <div class="form-group col-md-4">
@@ -133,5 +161,5 @@
             <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
         </div>
     </div>
-
+</form>
 </body>

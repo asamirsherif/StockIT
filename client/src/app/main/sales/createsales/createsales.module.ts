@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CoreCommonModule } from '@core/common.module';
 
-import { CreatesalesComponent } from './Createsales.component';
+import { CreatesalesComponent } from './createsales.component';
 
 
 const routes = [

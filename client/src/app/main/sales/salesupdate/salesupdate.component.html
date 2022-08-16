@@ -1,14 +1,28 @@
 <body>
     <h2>Edit Sale</h2>
     <hr>
-    <div class="col-md-12 row">
-
+    <form class="row col-md-12" 
+    [formGroup]="editsale" 
+    (ngSubmit)="update(data)">
+        <div class="col-md-12 row">
+            
         <div class="form-group col-md-4">
             <label class="col-md-4 control-label " for="category">Date</label>
             <div class="col-md-12 ">
-                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
+                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date"
+                formControlName="date" [(ngModel)]="data.date" ngModel>
+                <div id="datet"
+                *ngIf="editsale.controls['date'].touched &&editsale.controls['date'].invalid || submitted && editsale.controls['date'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="editsale.controls['date'].errors?.['required']">This field is
+                  required</small>
+              </div>
+    
+              <div class="form-text text-danger">
+                <small *ngIf="errors?.date">{{errors?.date}}</small>
+              </div>
             </div>
-        </div>
+          </div>
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label " for="customer">Customer</label>
             <div class="col-md-12 ">
@@ -18,63 +32,148 @@
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="category"> Warehouse</label>
+            <label class="col-md-8 control-label " for="warehouse_id"> Warehouse</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Warehouse</option>
+                    <option *ngFor="let item of WarehousArray" [value]="item.id" >
+
+                        {{ item.name }}
+          
+                      </option>
                 </select>
+                <div id="warehouse_id"
+            *ngIf="editsale.controls['warehouse_id'].touched &&editsale.controls['warehouse_id'].invalid || submitted && editsale.controls['warehouse_id'].invalid"
+            class="form-text text-danger">
+            <small *ngIf="editsale.controls['warehouse_id'].errors?.['required']">This field is
+              required</small>
+          </div>
+
+          <div class="form-text text-danger">
+            <small *ngIf="errors?.warehouse_id">{{errors?.warehouse_id}}</small>
+          </div>
             </div>
         </div>
     </div>
     <div class="col-md-12 row">
         <div class="form-group col-md-4">
-            <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
+            <label class="col-md-8 control-label" for="tax_rate">Order Tax</label>
             <div class="col-md-12">
-                <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                    type="text">
+                <input id="tax_rate" name="tax_rate" placeholder="0" class="form-control input-md" required=""
+                    type="text" formControlName="ordertax" [(ngModel)]="data.tax_rate" ngModel>
             </div>
+            <div id="tax_rate"
+            *ngIf="editsale.controls['tax_rate'].touched &&editsale.controls['tax_rate'].invalid || submitted && editsale.controls['tax_rate'].invalid"
+            class="form-text text-danger">
+            <small *ngIf="editexpence.controls['tax_rate'].errors?.['required']">This field is
+              required</small>
+          </div>
+
+          <div class="form-text text-danger">
+            <small *ngIf="errors?.tax_rate">{{errors?.tax_rate}}</small>
+          </div>
         </div>
 
         <div class="form-group col-md-4">
-            <label class="col-md-8 control-label" for="ordertax">Discount</label>
+            <label class="col-md-8 control-label" for="discount">Discount</label>
             <div class="col-md-12">
-                <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                    type="text">
+                <input id="discount" name="discount" placeholder="0" class="form-control input-md" required=""
+                    type="text" formControlName="discount" [(ngModel)]="data.discount" ngModel>
             </div>
+            <div id="discount"
+            *ngIf="editsale.controls['discount'].touched &&editsale.controls['discount'].invalid || submitted && editsale.controls['discount'].invalid"
+            class="form-text text-danger">
+            <small *ngIf="editexpence.controls['discount'].errors?.['required']">This field is
+              required</small>
+          </div>
+
+          <div class="form-text text-danger">
+            <small *ngIf="errors?.discount">{{errors?.discount}}</small>
+          </div>
         </div>
 
         <div class="form-group col-md-4">
-            <label class="col-md-8 control-label" for="ordertax">Shipping</label>
+            <label class="col-md-8 control-label" for="shipping">Shipping</label>
             <div class="col-md-12">
-                <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                    type="text">
+                <input id="shipping" name="shipping" placeholder="0" class="form-control input-md" required=""
+                    type="text" formControlName="shipping" [(ngModel)]="data.shipping" ngModel>
             </div>
+            <div id="shipping"
+            *ngIf="editsale.controls['shipping'].touched &&editsale.controls['shipping'].invalid || submitted && editsale.controls['shipping'].invalid"
+            class="form-text text-danger">
+            <small *ngIf="editsale.controls['shipping'].errors?.['required']">This field is
+              required</small>
+          </div>
+
+          <div class="form-text text-danger">
+            <small *ngIf="errors?.shipping">{{errors?.shipping}}</small>
+          </div>
         </div>
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label " for="status">Status</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Completed</option>
+                    <option [(ngModel)]="data.status" ngModel >
+
+                        {{ data.status }}
+          
+                      </option>
                 </select>
             </div>
+            <div id="status"
+            *ngIf="editsale.controls['status'].touched &&editsale.controls['status'].invalid || submitted && editsale.controls['status'].invalid"
+            class="form-text text-danger">
+            <small *ngIf="editsale.controls['status'].errors?.['required']">This field is
+              required</small>
+          </div>
+
+          <div class="form-text text-danger">
+            <small *ngIf="errors?.status">{{errors?.status}}</small>
+          </div>
         </div>
         <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="status">Payment Status</label>
+            <label class="col-md-8 control-label " for="payment_status">Payment Status</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Pending</option>
+                    <option [(ngModel)]="data.status" ngModel >
+
+                        {{ data.payment_status }}
                 </select>
             </div>
         </div>
+        <div id="payment_status"
+        *ngIf="editsale.controls['payment_status'].touched &&editsale.controls['payment_status'].invalid || submitted && editsale.controls['payment_status'].invalid"
+        class="form-text text-danger">
+        <small *ngIf="editsale.controls['payment_status'].errors?.['required']">This field is
+          required</small>
+      </div>
+
+      <div class="form-text text-danger">
+        <small *ngIf="errors?.payment_status">{{errors?.payment_status}}</small>
+      </div>
     </div>
-    <div class="form-group col-md-12 ">
-        <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-        <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
+   <!-- Note -->
+   <div class="form-group col-md-8 ">
+    <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
+    <textarea class="form-control " id="note" rows="3" formControlName="note" name="note"
+      formControlName="notes"></textarea>
+
+    <div id="notes"
+      *ngIf="editsale.controls['notes'].touched &&editsale.controls['notes'].invalid || submitted && editsale.controls['notes'].invalid"
+      class="form-text text-danger">
+      <small *ngIf="editsale.controls['notes'].errors?.['required']">This field is
+        required</small>
     </div>
+
+    <div class="form-text text-danger">
+      <small *ngIf="errors?.notes">{{errors?.notes}}</small>
+    </div>
+
+  </div>
     <div class="form-group col-md-12">
         <div class="col-md-4">
             <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
         </div>
     </div>
+</form>
 
 </body>

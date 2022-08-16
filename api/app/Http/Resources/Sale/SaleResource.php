@@ -13,7 +13,7 @@ class SaleResource extends JsonResource
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
-    {   
+    {
 
         $due = number_format($this->GrandTotal - $this->paid_amount,2,'.','');
         $grandtotal = number_format($this->GrandTotal, 2, '.', '');
@@ -21,6 +21,7 @@ class SaleResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'date' => $this->date,
             'code' => $this->code ? $this->code : "-",
             'Ref' => $this->Ref,
             'created_by' => $this->user->username,
@@ -38,7 +39,7 @@ class SaleResource extends JsonResource
             'paid_amount' => $paid_amount,
             'due' => $due,
             'payment_status' => $this->payment_status,
-            
+
 
         ];
     }

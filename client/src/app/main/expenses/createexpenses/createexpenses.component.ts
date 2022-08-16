@@ -94,7 +94,7 @@ export class CreateexpensesComponent implements OnInit {
 
       //first
       this.expenseServise.store(data).subscribe(observer)
-console.log(data);
+      console.log(data);
       this._router.navigate(['expenseslist'])
        
     

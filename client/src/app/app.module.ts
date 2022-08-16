@@ -307,7 +307,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/quotations/quotationupdate/quotationupdate.module').then(m => m.QuotationupdateModule)
   },{
-    path: 'salesupdate',
+    path: 'salesupdate/:id',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/sales/salesupdate/salesupdate.module').then(m => m.SalesupdateModule)
   },
