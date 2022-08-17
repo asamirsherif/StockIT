@@ -84,17 +84,19 @@
         </div>
         <div class="col-md-12">
             <label class="col-md-4 control-label" for="product">Product</label>
-            <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+            <form class=" col-md-12 mb-1  row panel panel-primary">
+                <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
                 <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="purchaseSearch($event)" class="form-control form-control ml-1 fs-5 w-75"
+                    (ngModelChange)="purchaseSearch($event)" class=" form-control col-md-11 text-left"
                     type="text" placeholder="Search By product name or variants" aria-label="Search" />
-                <ul class="col-md-11">
-                    <li style="list-style: none; cursor: pointer;" *ngFor="let product of products; let i = index"
+                    <div class="col-md-12 list-group">
+                    <ul class="col-md-12">
+                    <li class="list-group-item" style="list-style: none; cursor: pointer;" *ngFor="let product of products; let i = index"
                         (click)="addPurchDetail(i)">
                         {{product.name}}
                     </li>
                 </ul>
+                </div>
             </form>
         </div>
         <h4>Order items</h4>
