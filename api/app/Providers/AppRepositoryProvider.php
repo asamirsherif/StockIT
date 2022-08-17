@@ -32,6 +32,8 @@ use App\Repositories\Unit\UnitRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Sale\SaleRepositoryInterface;
 use App\Repositories\Sale\SaleRepository;
+use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\User\UserRepository;
 
 class AppRepositoryProvider extends ServiceProvider
 {
@@ -93,6 +95,9 @@ class AppRepositoryProvider extends ServiceProvider
         //SalesReturn
          //provider
          $this->app->bind(Sales_returnRepositoryInterface::class, Sales_returnRepository::class);
+
+         //User
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**
