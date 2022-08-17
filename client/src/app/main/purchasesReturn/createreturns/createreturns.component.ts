@@ -32,6 +32,20 @@ export class CreatereturnsComponent implements OnInit {
       "name": "t-krk",
       "code": "1",
       "stock": "erkllker"
+    },{
+      "name": "t-sherit",
+      "code": "3",
+      "stock": "erkllker"
+    },
+    {
+      "name": "t-hghd",
+      "code": "2",
+      "stock": "erkllker"
+    },
+    {
+      "name": "t-krk",
+      "code": "1",
+      "stock": "erkllker"
     }
   ]
   constructor(public wareser: WarehousservService,public clientService:ClientservService) {
