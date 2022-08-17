@@ -1,42 +1,58 @@
 <div *ngIf="horizontalMenu" class="navbar-header d-xl-block d-none">
-  <!-- Navbar brand -->
-  <ul class="nav navbar-nav flex-row">
-    <li class="nav-item">
-      <a class="navbar-brand" [routerLink]="['/']">
-        <span class="brand-logo">
-          <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="36" />
-        </span>
-        <h2 class="brand-text mb-0">{{ coreConfig.app.appName }}</h2>
-      </a>
-    </li>
-  </ul>
-  <!--/ Navbar brand -->
+    <!-- Navbar brand -->
+    <ul class="nav navbar-nav flex-row">
+        <li class="nav-item">
+            <a class="navbar-brand" [routerLink]="['/']">
+                <span class="brand-logo">
+                    <img
+                        src="{{ coreConfig.app.appLogoImage }}"
+                        alt="brand-logo"
+                        width="36"
+                    />
+                </span>
+                <h2 class="brand-text mb-0">{{ coreConfig.app.appName }}</h2>
+            </a>
+        </li>
+    </ul>
+    <!--/ Navbar brand -->
 </div>
 
 <div class="navbar-container d-flex content">
-  <div class="bookmark-wrapper d-flex align-items-center">
-    <!-- Menu Toggler | Menu icon will be hidden in case of layout without menu -->
-    <ul class="nav navbar-nav d-xl-none" *ngIf="!coreConfig.layout.menu.hidden">
-      <li class="nav-item">
-        <a class="nav-link menu-toggle" (click)="toggleSidebar('menu')">
-          <span [data-feather]="'menu'" [class]="'ficon'"></span>
-        </a>
-      </li>
-    </ul>
-    <!--/ Menu Toggler -->
+    <div class="bookmark-wrapper d-flex align-items-center">
+        <!-- Menu Toggler | Menu icon will be hidden in case of layout without menu -->
+        <ul
+            class="nav navbar-nav d-xl-none"
+            *ngIf="!coreConfig.layout.menu.hidden"
+        >
+            <li class="nav-item">
+                <a class="nav-link menu-toggle" (click)="toggleSidebar('menu')">
+                    <span [data-feather]="'menu'" [class]="'ficon'"></span>
+                </a>
+            </li>
+        </ul>
+        <!--/ Menu Toggler -->
 
-    <!-- Toggle skin -->
-    <li class="nav-item d-none d-lg-block">
-      <a type="button" class="nav-link nav-link-style btn" (click)="toggleDarkSkin()">
-        <span [ngClass]="currentSkin === 'dark' ? 'icon-sun' : 'icon-moon'" class="ficon font-medium-5 feather"></span>
-      </a>
-    </li>
-    <!--/ Toggle skin -->
-  </div>
+        <!-- Toggle skin -->
+        <li class="nav-item d-none d-lg-block">
+            <a
+                type="button"
+                class="nav-link nav-link-style btn"
+                (click)="toggleDarkSkin()"
+            >
+                <span
+                    [ngClass]="
+                        currentSkin === 'dark' ? 'icon-sun' : 'icon-moon'
+                    "
+                    class="ficon font-medium-5 feather"
+                ></span>
+            </a>
+        </li>
+        <!--/ Toggle skin -->
+    </div>
 
-  <ul class="nav navbar-nav align-items-center ml-auto">
-    <!-- ? Language selection | Uncomment if needed-->
-    <!-- <li ngbDropdown class="nav-item dropdown dropdown-language">
+    <ul class="nav navbar-nav align-items-center ml-auto">
+        <!-- ? Language selection | Uncomment if needed-->
+        <!-- <li ngbDropdown class="nav-item dropdown dropdown-language">
       <a class="nav-link dropdown-toggle" id="dropdown-flag" ngbDropdownToggle>
         <i class="flag-icon flag-icon-{{ languageOptions[_translateService.currentLang].flag }}"></i
         ><span class="selected-language">{{ languageOptions[_translateService.currentLang].title }}</span></a
@@ -47,9 +63,60 @@
         </a>
       </div>
     </li> -->
-    <!--/ Language selection -->
+        <!--/ Language selection -->
 
-<!-- User Dropdown -->
+        <!-- User Dropdown -->
+        <li ngbDropdown class="nav-item dropdown-user">
+            <a
+                class="nav-link dropdown-toggle dropdown-user-link"
+                id="dropdown-user"
+                ngbDropdownToggle
+                id="navbarUserDropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
+                <ng-container *ngIf="this.currentUser">
+                    <div class="user-nav d-sm-flex d-none">
+                        <span class="user-name font-weight-bolder"
+                            >{{ this.currentUser.firstName }}
+                            {{ this.currentUser.lastName }}</span
+                        >
+                    </div>
+                    <span class="avatar"
+                        ><img
+                            class="round"
+                            src="assets/images/portrait/small/{{
+                                this.currentUser.avatar
+                            }}"
+                            alt="avatar"
+                            height="40"
+                            width="40" /><span
+                            class="avatar-status-online"
+                        ></span
+                    ></span>
+                </ng-container>
+            </a>
+            <div
+                ngbDropdownMenu
+                aria-labelledby="navbarUserDropdown"
+                class="dropdown-menu dropdown-menu-right"
+            >
+                <a ngbDropdownItem [routerLink]="['/']"
+                    ><span [data-feather]="'user'" [class]="'mr-50'"></span>
+                    Profile</a
+                >
+                <a
+                    ngbDropdownItem
+                    
+                    [routerLink]="[]"
+                    (click)="logout()"
+                    ><span [data-feather]="'power'" [class]="'mr-50'"></span>
+                    Logout
+                    </a>
+            </div>
+        </li>
+        <!--/ User Dropdown -->
+        <!-- User Dropdown
 <li ngbDropdown class="nav-item dropdown-user">
   <a
     class="nav-link dropdown-toggle dropdown-user-link"
@@ -59,26 +126,23 @@
     aria-haspopup="true"
     aria-expanded="false"
   >
-    <ng-container *ngIf="this.currentUser">
-      <div class="user-nav d-sm-flex d-none">
-        <span class="user-name font-weight-bolder"
-          >{{ this.currentUser.firstName }} {{ this.currentUser.lastName }}</span
-        ><span class="user-status">{{ this.currentUser.role }}</span>
-      </div>
-      <span class="avatar"
-        ><img
-          class="round"
-          src="assets/images/portrait/small/{{ this.currentUser.avatar }}"
-          alt="avatar"
-          height="40"
-          width="40"/><span class="avatar-status-online"></span
-      ></span>
-    </ng-container>
+    <div class="user-nav d-sm-flex d-none">
+      <span class="user-name font-weight-bolder">John Doe</span><span class="user-status">Sample</span>
+    </div>
+    <span class="avatar"
+      ><img
+        class="round"
+        src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
+        alt="avatar"
+        height="40"
+        width="40" /><span class="avatar-status-online"></span
+    ></span>
   </a>
-</li>
-<!--/ User Dropdown -->
-<!-- <li><app-navbar-search></app-navbar-search></li>
+  
+</li> -->
+        <!--/ User Dropdown -->
+        <!-- <li><app-navbar-search></app-navbar-search></li>
 <li><app-navbar-bookmark></app-navbar-bookmark></li>
 <li><app-navbar-notification></app-navbar-notification></li> -->
-  </ul>
+    </ul>
 </div>
