@@ -75,6 +75,7 @@ import { PurchasesupdateComponent } from './main/Purchases/purchasesupdate/purch
 import { SalesupdateComponent } from './main/sales/salesupdate/salesupdate.component';
 import { GrouppermissingupdateComponent } from './main/settings/grouppermissingupdate/grouppermissingupdate.component';
 import { UpdatetransferComponent } from './main/transfer/updatetransfer/updatetransfer.component';
+import { ProfileComponent } from './main/profile/profile.component';
 
 
 const appRoutes: Routes = [
@@ -317,6 +318,9 @@ const appRoutes: Routes = [
   },{
     path: 'ternsupdate',
     loadChildren: () => import('./main/transfer/updatetransfer/updatetransfer.module').then(m => m.UpdatetransferModule)
+  },{
+    path: 'profile',
+    loadChildren: () => import('./main/profile/profile.module').then(m => m.ProfileModule)
   },
   {
     path: '**',
