@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreCommonModule } from '@core/common.module';
 
-import { ReturnlistComponent } from './Returnlist.component';
+import { ReturnlistComponent } from './returnlist.component';
 
 
 const routes = [

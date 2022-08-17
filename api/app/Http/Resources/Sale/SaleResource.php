@@ -27,6 +27,7 @@ class SaleResource extends JsonResource
             'date' => $this->date,
             'code' => $this->code ? $this->code : "-",
             'Ref' => $this->Ref,
+            'tax_rate' => $this->tax_rate,
             'created_by' => $this->user->username,
             'status' => $this->status,
             'discount' => $this->discount,
@@ -37,6 +38,7 @@ class SaleResource extends JsonResource
             'paid_amount' => $paid_amount,
             'due' => $due,
             'payment_status' => $this->payment_status,
+            'notes' => $this->notes,
 
 
         ];

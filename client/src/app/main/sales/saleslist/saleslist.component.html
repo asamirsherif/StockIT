@@ -117,14 +117,14 @@
             <tr *ngFor="let sale of sales; let i = index">
               <td>{{ sale.date }}</td>
               <td>{{ sale.Ref }}</td>
-              <td>{{ sale.client_name }}</td>
-              <td>{{ sale.warehouse_name }}</td>
+              <td>{{ sale.client.name }}</td>
+              <td>{{ sale.warehouse_name.name }}</td>
               <td><button type="button" class="btn btn-outline-success ">{{ sale.status }}</button></td>
               <td>{{ sale.GrandTotal }}</td>
               <td>{{ sale.paid_amount }}</td>
               <td>{{ sale.due }}</td>
               <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td>
-              <td> <button class="btn btn-sm btn-success" [routerLink]="['../salesupdate/{{sale.id}}']"><i data-feather="edit" [size]="24" >
+              <td> <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'><i data-feather="edit" [size]="24" >
               </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
               </button></td>
           </tr>

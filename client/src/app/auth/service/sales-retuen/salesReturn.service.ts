@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ISale } from "app/interfaces/isale";
+import { ISaleReturn } from "app/interfaces/isales-return";
 import { environment } from "environments/environment";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
@@ -8,10 +8,10 @@ import { catchError } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class SaleService {
+export class SaleReturnService {
 
   //api link
-  host = environment.apiUrl + "/api/sales/";
+  host = environment.apiUrl + "/api/salesReturn/";
 
   // paramters and header declration
   params:HttpParams
@@ -26,11 +26,11 @@ export class SaleService {
     );
   }
 
-  getAllSales() {
+  getAllSalesReturn() {
     return this._http.get(`${this.host}`, { headers: this.header, params: this.params })
   }
 
-  store(data:ISale): Observable<any> {
+  store(data:ISaleReturn): Observable<any> {
     return this._http.post(`${this.host}`, data, { headers: this.header });
   }
 
@@ -52,11 +52,11 @@ export class SaleService {
    * @param id 
    * @returns show data of product by id
    */
-  update(id:number,data:ISale): Observable<any>{
+  update(id:number,data:ISaleReturn): Observable<any>{
     return this._http.put(`${this.host}${id}`,data,{ headers: this.header })
   } 
 
-  deleteٍSale(id: any): Observable<any> {
+  deleteSalesReturn(id: any): Observable<any> {
     return this._http.delete(`${this.host}${id}`);
   }
   

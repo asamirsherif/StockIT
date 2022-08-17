@@ -1,21 +1,21 @@
 import { Iclient } from "./iclient";
 import { Warehous } from "./warehous";
-export interface ISale {
+import { IProduct } from "./iproduct";
+import { Unit } from "./unit";
+export interface ISaleDetails {
    
     id? : number,
-    Ref ?: string,
-    status : string,
-    GrandTotal :number,
-    paid_amount : number,
-    payment_status :string,
+    product : IProduct,
+    quantity :number,
+    total : number,
+    price : number,
+    unit : Unit;
+    discount_method :string,
     date: string,
-    due : string,
+    Unit_price : string,
     shipping : number,
     discount : number,
     tax_rate : number,
-    notes : string,
-    client :Iclient,
-    warehouse_name :Warehous
 
     // client_id : number,
     // client_name :string,

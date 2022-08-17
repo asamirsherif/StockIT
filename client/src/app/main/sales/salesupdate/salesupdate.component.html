@@ -24,47 +24,61 @@
             </div>
           </div>
         <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="customer">Customer</label>
+            <label class="col-md-8 control-label " for="category">Customer</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Customer</option>
+                    <option *ngFor="let item of ClientArray" [value]="item.id" >
+                        {{ item.name }}
                 </select>
             </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="warehouse_id"> Warehouse</label>
-            <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option *ngFor="let item of WarehousArray" [value]="item.id" >
-
-                        {{ item.name }}
-          
-                      </option>
-                </select>
-                <div id="warehouse_id"
-            *ngIf="editsale.controls['warehouse_id'].touched &&editsale.controls['warehouse_id'].invalid || submitted && editsale.controls['warehouse_id'].invalid"
+            <div id="client"
+            *ngIf="editsale.controls['client'].touched &&editsale.controls['client'].invalid || submitted && editsale.controls['client'].invalid"
             class="form-text text-danger">
-            <small *ngIf="editsale.controls['warehouse_id'].errors?.['required']">This field is
+            <small *ngIf="editsale.controls['client'].errors?.['required']">This field is
               required</small>
           </div>
 
           <div class="form-text text-danger">
-            <small *ngIf="errors?.warehouse_id">{{errors?.warehouse_id}}</small>
+            <small *ngIf="errors?.client">{{errors?.client}}</small>
           </div>
-            </div>
         </div>
-    </div>
+         <!-- warehouse -->
+      <div class="form-group col-md-4">
+        <label class="col-md-8 control-label " for="category"> Warehouse</label>
+        <div class="col-md-12 ">
+          <select class="form-select col-md-12 " aria-label="Default select example">
+            <option *ngFor="let item of WarehousArray" [value]="item.id" >
+
+              {{ item.name}}
+
+            </option>
+          </select>
+
+          <div id="warehouse_name"
+            *ngIf="editsale.controls['warehouse_name'].touched &&editsale.controls['warehouse_name'].invalid || submitted && editsale.controls['warehouse_name'].invalid"
+            class="form-text text-danger">
+            <small *ngIf="editsale.controls['warehouse_name'].errors?.['required']">This field is
+              required</small>
+          </div>
+
+          <div class="form-text text-danger">
+            <small *ngIf="errors?.warehouse_name">{{errors?.warehouse_name}}</small>
+          </div>
+        </div>
+      </div>
+      </div>
+
     <div class="col-md-12 row">
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label" for="tax_rate">Order Tax</label>
             <div class="col-md-12">
                 <input id="tax_rate" name="tax_rate" placeholder="0" class="form-control input-md" required=""
-                    type="text" formControlName="ordertax" [(ngModel)]="data.tax_rate" ngModel>
+                    type="text" formControlName="tax_rate" [(ngModel)]="data.tax_rate" ngModel>
             </div>
             <div id="tax_rate"
             *ngIf="editsale.controls['tax_rate'].touched &&editsale.controls['tax_rate'].invalid || submitted && editsale.controls['tax_rate'].invalid"
             class="form-text text-danger">
-            <small *ngIf="editexpence.controls['tax_rate'].errors?.['required']">This field is
+            <small *ngIf="editsale.controls['tax_rate'].errors?.['required']">This field is
               required</small>
           </div>
 
@@ -82,7 +96,7 @@
             <div id="discount"
             *ngIf="editsale.controls['discount'].touched &&editsale.controls['discount'].invalid || submitted && editsale.controls['discount'].invalid"
             class="form-text text-danger">
-            <small *ngIf="editexpence.controls['discount'].errors?.['required']">This field is
+            <small *ngIf="editsale.controls['discount'].errors?.['required']">This field is
               required</small>
           </div>
 
@@ -111,8 +125,8 @@
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label " for="status">Status</label>
             <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option [(ngModel)]="data.status" ngModel >
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="status" [(ngModel)]="data.status" ngModel>
+                    <option >
 
                         {{ data.status }}
           
@@ -133,8 +147,8 @@
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label " for="payment_status">Payment Status</label>
             <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option [(ngModel)]="data.status" ngModel >
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="payment_status" [(ngModel)]="data.payment_status" ngModel>
+                    <option >
 
                         {{ data.payment_status }}
                 </select>
@@ -154,8 +168,12 @@
    <!-- Note -->
    <div class="form-group col-md-8 ">
     <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-    <textarea class="form-control " id="note" rows="3" formControlName="note" name="note"
-      formControlName="notes"></textarea>
+    <textarea class="form-control " id="notes" rows="3" 
+    formControlName="notes" name="notes"
+     [(ngModel)]="data.notes" ngModel >
+    
+     {{ data.notes }}
+    </textarea>
 
     <div id="notes"
       *ngIf="editsale.controls['notes'].touched &&editsale.controls['notes'].invalid || submitted && editsale.controls['notes'].invalid"

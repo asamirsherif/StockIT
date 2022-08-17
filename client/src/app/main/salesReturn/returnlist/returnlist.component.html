@@ -99,16 +99,15 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let saleReturn of salesReturn; let i = index">                <td></td>
+                <td>{{ saleReturn.date }}</td>
+                <td>{{ saleReturn.Ref }}</td>
+                <td>{{ saleReturn.client_id.name }}</td>
+                <td>{{ saleReturn.warehouse_id.name }}</td>
+                <td>{{ saleReturn.GrandTotal }}</td>
+                <td>{{ saleReturn.paid_amount }}</td>
+                <td>{{ saleReturn.due }}</td>
+                <td>{{ saleReturn.payment_status }}</td>
                 <td><button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i></button></td>
             </tr>
         </tbody>
