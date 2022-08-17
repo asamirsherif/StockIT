@@ -279,7 +279,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/people/userlist/userlist.module').then(m => m.UserlistModule)
   },
   {
-    path: 'adjustupdate',
+    path: 'adjustupdate/:id',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Adjustment/adjustupdate/adjustupdate.module').then(m => m.AdjustupdateModule)
   },{

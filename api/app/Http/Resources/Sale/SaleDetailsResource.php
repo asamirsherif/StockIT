@@ -4,7 +4,7 @@ namespace App\Http\Resources\Sale;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Unit\UnitResource;
-// use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Product\ProductResource;
 
 class SaleDetailsResource extends JsonResource
 {
@@ -18,9 +18,10 @@ class SaleDetailsResource extends JsonResource
     {   
         
         return [
+
             'id' => $this->id,
             'date' => $this->date,
-            // 'product' => New ProductResource($this->product),
+            'product' => New ProductResource($this->product),
             'quantity' => $this->quantity,
             'total' => $this->total,
             'price' => $this->price,

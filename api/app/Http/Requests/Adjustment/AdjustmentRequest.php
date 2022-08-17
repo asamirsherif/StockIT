@@ -26,9 +26,8 @@ class AdjustmentRequest extends FormRequest
         return [
             'user_id' => ['required', 'integer'],
             'date' => ['required', 'date'],
-            'Ref' => ['required', 'string', 'min:3'],
             'warehouse_id' => ['required', 'integer'],
-            'items' => ['required', 'numeric'],
+            'items' => [],
             'notes' => ['string', 'min:5'],
 
         ];

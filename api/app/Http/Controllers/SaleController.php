@@ -72,7 +72,7 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaleRequest $request)
     {
         //$this->authorizeForUser($request->user('api'), 'create', Sale::class);
 
@@ -84,7 +84,7 @@ class SaleController extends Controller
 
     }
 
-    public function update(Request $request, $id)
+    public function update(SaleRequest $request, $id)
     {
         // $this->authorizeForUser($request->user('api'), 'update', Sale::class);
 

@@ -22,52 +22,52 @@
             <span aria-hidden="true">&times;</span>
           </button>
 
-</div>
-          <div class="modal-body centered">
-            <form class="col-md-12" [formGroup]="createbrand" (ngSubmit)="AddBrand()">
-              <div class="form-group col-md-12">
-                <label class="col-md-12 control-label " for="Brand Name">Brand Name</label>
-                <div class="col-md-12 ">
-                  <input class="form-control form-control col-md-12" type="text" placeholder="Brand Name"
-                    aria-label="Date" id="name" name="name" formControlName="name">
-                  <div id="BrandName"
-                    *ngIf="createbrand.controls['name'].touched && createbrand.controls['name'].invalid || submitted && createbrand.controls['name'].invalid"
-                    class="form-text text-danger">
-                    <small *ngIf="createbrand.controls['name'].errors?.['required']">This field is
-                      required</small>
-                  </div>
-                  <div class="form-text text-danger">
-                    <small *ngIf="errors?.name">{{errors?.name}}</small>
-                  </div>
-
+        </div>
+        <div class="modal-body centered">
+          <form class="col-md-12" [formGroup]="createbrand" (ngSubmit)="AddBrand()">
+            <div class="form-group col-md-12">
+              <label class="col-md-12 control-label " for="Brand Name">Brand Name</label>
+              <div class="col-md-12 ">
+                <input class="form-control form-control col-md-12" type="text" placeholder="Brand Name"
+                  aria-label="Date" id="name" name="name" formControlName="name">
+                <div id="BrandName"
+                  *ngIf="createbrand.controls['name'].touched && createbrand.controls['name'].invalid || submitted && createbrand.controls['name'].invalid"
+                  class="form-text text-danger">
+                  <small *ngIf="createbrand.controls['name'].errors?.['required']">This field is
+                    required</small>
                 </div>
+                <div class="form-text text-danger">
+                  <small *ngIf="errors?.name">{{errors?.name}}</small>
+                </div>
+
               </div>
-              <div class="form-group col-md-12 ">
-                <label for="exampleFormControlTextarea1" class="form-label col-md-12 ">Brand Description</label>
-                <div class="col-md-12">
+            </div>
+            <div class="form-group col-md-12 ">
+              <label for="exampleFormControlTextarea1" class="form-label col-md-12 ">Brand Description</label>
+              <div class="col-md-12">
                 <textarea class="form-control " id="description" name="description" rows="3"
                   formControlName="description"></textarea>
-                </div>
               </div>
-              <div class="form-group col-md-12">
-                <label class="col-md-12 control-label " for="Brand Image">Brand Image</label>
-                <div class="col-md-12 ">
-                  <input class="form-control form-control col-md-12" type="file" placeholder="image" aria-label="Date"
-                    id="image" name="image" formControlName="image">
+            </div>
+            <div class="form-group col-md-12">
+              <label class="col-md-12 control-label " for="Brand Image">Brand Image</label>
+              <div class="col-md-12 ">
+                <input class="form-control form-control col-md-12" type="file" placeholder="image" aria-label="Date"
+                  id="image" name="image" formControlName="image">
 
-                </div>
               </div>
+            </div>
 
 
-              <div class="form-group col-md-12">
-                <div class="col-md-4">
-                  <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-                </div>
+            <div class="form-group col-md-12">
+              <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
               </div>
-            </form>
+            </div>
+          </form>
 
 
-          </div>
+        </div>
 
       </ng-template>
     </div>
@@ -113,15 +113,24 @@
             <div class="col-md-12">
               <input class="form-control form-control col-md-12" type="text" placeholder="Brand Name" aria-label="Date"
                 id="name" name="name" formControlName="name" />
+              <div id="BrandName"
+                *ngIf="editBrandForm.controls['name'].touched && editBrandForm.controls['name'].invalid || submitted && editBrandForm.controls['name'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="editBrandForm.controls['name'].errors?.['required']">This field is
+                  required</small>
+              </div>
+              <div class="form-text text-danger">
+                <small *ngIf="errors?.name">{{errors?.name}}</small>
+              </div>
             </div>
           </div>
           <div class="form-group col-md-12">
             <label for="exampleFormControlTextarea1" class="form-label col-md-12">Brand Description</label>
             <div class="col-md-12">
-            <textarea class="form-control" id="description" name="description" rows="3"
-              formControlName="description"></textarea>
+              <textarea class="form-control" id="description" name="description" rows="3"
+                formControlName="description"></textarea>
+            </div>
           </div>
-        </div>
           <div class="form-group col-md-12">
             <label class="col-md-12 control-label" for="Brand Image">Brand Image</label>
             <div class="col-md-12">

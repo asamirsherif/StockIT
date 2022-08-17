@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { WarehousservService } from 'app/auth/service/warehous/warehousserv.service';
 import { ISale } from 'app/interfaces/isale';
 
+import { ClientservService } from 'app/auth/service/client/clientserv.service';
 @Component({
   selector: 'app-createsales',
   templateUrl: './createsales.component.html',

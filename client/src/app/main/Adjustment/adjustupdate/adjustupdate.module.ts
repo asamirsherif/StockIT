@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreCommonModule } from '@core/common.module';
+import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module';
 
 
 
@@ -18,7 +19,7 @@ const routes = [
 
 @NgModule({
   declarations: [AdjustupdateComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,CoreTouchspinModule],
   exports: [AdjustupdateComponent ]
 })
 export class AdjustupdateModule {}

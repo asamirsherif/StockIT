@@ -3,6 +3,8 @@
 namespace App\Http\Resources\Sale;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Warehouse\WarehouseResource;
+use App\Http\Resources\Client\ClientResource;
 
 class SaleResource extends JsonResource
 {
@@ -20,6 +22,7 @@ class SaleResource extends JsonResource
         $paid_amount = number_format($this->paint_amount, 2, '.', '');
 
         return [
+
             'id' => $this->id,
             'date' => $this->date,
             'code' => $this->code ? $this->code : "-",
@@ -28,13 +31,8 @@ class SaleResource extends JsonResource
             'status' => $this->status,
             'discount' => $this->discount,
             'shipping' => $this->shipping,
-            'warehouse_name' => $this->warehouse->name,
-            'client_id' => $this->client->id,
-            'client_name' => $this->client->name,
-            'client_email' => $this->client->email,
-            'client_tele' => $this->client->phone,
-            'client_code' => $this->client->code,
-            'client_adr' => $this->client->address,
+            'warehouse_name' => new WarehouseResource($this->warehouse),
+            'client' => new ClientResource($this->client),
             'GrandTotal' => $grandtotal,
             'paid_amount' => $paid_amount,
             'due' => $due,

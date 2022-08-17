@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Expense;
 
+use App\Http\Resources\ExpenseCategory\ExpenseCategoryResource;
+use App\Http\Resources\Warehouse\WarehouseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ExpenseResource extends JsonResource
@@ -21,8 +23,8 @@ class ExpenseResource extends JsonResource
             "details" => $this->details,
             "amount" => $this->amount,
             "user_id" => $this->user->name,
-            "expense_category_id" => $this->expense_category_id,
-            "warehouse_id" => $this->warehouse_id
+            "expense_category" => new ExpenseCategoryResource($this->expense_category),
+            "warehouse" => new WarehouseResource($this->warehouse)
         ];
     }
 }

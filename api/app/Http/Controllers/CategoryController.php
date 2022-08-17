@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\CategoryCollection;
 use App\Http\Requests\Category\CategoryRequest;
+use App\Http\Requests\Category\UpdatedCategoryRequest;
 use App\Models\Category;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Traits\ResponseTrait;
@@ -56,7 +57,7 @@ class CategoryController extends Controller
         $created = $this->categoryRepo->create($request);
 
         if ($created)
-            return $this->succWithData(new CategoryResource($created));
+            return $this->succWithData(new CategoryResource($created), "category created successfully");
         else
             return $this->errMsg("category not created!");
 
@@ -99,14 +100,14 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(UpdatedCategoryRequest $request, $id)
     {
 
         $this->authorizeForUser($request->user('api'), 'view', Category::class);
 
         $updated = $this->categoryRepo->update($request, $id);
         if ($updated)
-            return $this->succWithData(new CategoryResource($updated));
+            return $this->succWithData(new CategoryResource($updated), "category updated successfully");
         else
             return $this->errMsg("category not updated!");
 

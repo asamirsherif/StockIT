@@ -5,58 +5,64 @@
         <div class="col-md-4">
             <form class="form-inline col-md-12 mb-1">
                 <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
+                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+                    class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search" />
             </form>
         </div>
         <div class="col-md-8 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
 
                 <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
-                    data-feather="filter"></i>Filter</button>
+                        data-feather="filter"></i>Filter</button>
                 <div ngbDropdownMenu style="width:400px;height: 450px;">
-                  <form class="px-2 py-2">
-                    <h3 style="font-weight:bold ;">Filter</h3>
-      
-                    <div class="form-group mb-1 ">
-                      <label for="exampleDropdownFormDate1">Supplier Code</label>
-                      <input type="text" class="form-control" id="exampleDropdownFormDate1"placeholder="Search by code" />
-                    </div>
-      
-                    <div class="form-group mb-1">
-                      <label for="exampleDropdownFormReference1">Supplier Name</label>
-                      <input type="text" class="form-control" id="exampleDropdownFormReference1" placeholder="Search by name" />
-                    </div>
-                    <div class="form-group mb-1">
-                        <label for="exampleDropdownFormReference1">Phone</label>
-                        <input type="number" class="form-control" id="exampleDropdownFormReference1" placeholder="Search by phone" />
-                      </div>
-                      <div class="form-group mb-1">
-                        <label for="exampleDropdownFormReference1">Email</label>
-                        <input type="email" class="form-control" id="exampleDropdownFormReference1" placeholder="Search by email" />
-                      </div>
-                    <div class="row">
-                      <div class="col-lg-6 col-md-12 ">
-                        <div class="form-group">
-                          <button type="button" class="btn btn-primary btn-block" rippleEffect><i
-                              data-feather="filter"></i>Filter</button>
+                    <form class="px-2 py-2">
+                        <h3 style="font-weight:bold ;">Filter</h3>
+
+                        <div class="form-group mb-1 ">
+                            <label for="exampleDropdownFormDate1">Supplier Code</label>
+                            <input type="text" class="form-control" id="exampleDropdownFormDate1"
+                                placeholder="Search by code" />
                         </div>
-                      </div>
-                      <div class="col-lg-6 col-md-12">
-                        <div class="form-group">
-                          <button type="button" class="btn btn-danger btn-block" rippleEffect><i
-                              data-feather="alert-circle"></i>
-                            Reset</button>
+
+                        <div class="form-group mb-1">
+                            <label for="exampleDropdownFormReference1">Supplier Name</label>
+                            <input type="text" class="form-control" id="exampleDropdownFormReference1"
+                                placeholder="Search by name" />
                         </div>
-                      </div>
-                    </div>
-                  </form>
-      
+                        <div class="form-group mb-1">
+                            <label for="exampleDropdownFormReference1">Phone</label>
+                            <input type="number" class="form-control" id="exampleDropdownFormReference1"
+                                placeholder="Search by phone" />
+                        </div>
+                        <div class="form-group mb-1">
+                            <label for="exampleDropdownFormReference1">Email</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormReference1"
+                                placeholder="Search by email" />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 ">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary btn-block" rippleEffect><i
+                                            data-feather="filter"></i>Filter</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-danger btn-block" rippleEffect><i
+                                            data-feather="alert-circle"></i>
+                                        Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
-            </div>            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+            </div> <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
             <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
             <button type="button" class="btn btn-primary "><i data-feather="download"></i>Import Products</button>
-            <button type="button" class="btn btn-secondary" (click)="openModal(contentModal)"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-secondary" (click)="openModal(contentModal)"><i
+                    data-feather="plus-circle"></i>Create</button>
             <!-- Modal -->
             <ng-template #contentModal let-c="close" let-d="dismiss">
                 <div class="modal-header">
@@ -66,85 +72,98 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12"[formGroup]="createsuplier" (ngSubmit)="formSubmit()">
-                            <div class="form-group col-md-6">
-                                <label class="col-md-12 control-label " for="SupplierName">Supplier Name</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Supplier Name" aria-label="Date" id="SupplierName"
-                                        name="SupplierName" formControlName="SupplierName">
-                                        <div id="SupplierName" *ngIf="createsuplier.controls['SupplierName'].touched &&createsuplier.controls['SupplierName'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createsuplier.controls['SupplierName'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>   
-                                    </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="Email">Email</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="email"
-                                        placeholder="email" aria-label="Date" id="email"
-                                        name="email" formControlName="email">
-                                        <div id="email" *ngIf="createsuplier.controls['email'].touched &&createsuplier.controls['email'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createsuplier.controls['email'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>       
+                    <form class="row col-md-12" [formGroup]="createsupplierform" (ngSubmit)="AddSupplier()">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-12 control-label " for="SupplierName">Supplier Name</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="Supplier Name" aria-label="Date" id="name" name="name"
+                                    formControlName="name">
+                                <div id="name"
+                                    *ngIf="createsupplierform.controls['name'].touched &&createsupplierform.controls['name'].invalid|| submitted && createsupplierform.controls['name'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="createsupplierform.controls['name'].errors?.['required']">This field is
+                                        required</small>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="phone">Phone</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="phone" aria-label="Date" id="phone"
-                                        name="phone" formControlName="phone">
-                                        <div id="phone" *ngIf="createsuplier.controls['phone'].touched &&createsuplier.controls['phone'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createsuplier.controls['phone'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>      
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="Email">Email</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="email" placeholder="email"
+                                    aria-label="Date" id="email" name="email" formControlName="email">
+                                    <div id="email"
+                                    *ngIf="createsupplierform.controls['email'].touched &&createsupplierform.controls['email'].invalid|| submitted && createsupplierform.controls['email'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="createsupplierform.controls['email'].errors?.['required']">This field
+                                        is required</small>
+                                    <small *ngIf="createsupplierform.controls['email'].errors?.['email']">This field is
+                                        email</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.email">{{errors?.email}}</small>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="Country">Country</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="country" aria-label="Date" id="country"
-                                        name="country" formControlName="country">
-                                        <div id="country" *ngIf="createsuplier.controls['country'].touched &&createsuplier.controls['country'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createsuplier.controls['country'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>      
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="phone">Phone</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="phone"
+                                    aria-label="Date" id="phone" name="phone" formControlName="phone">
+                                    <div id="phone"
+                                    *ngIf="createsupplierform.controls['phone'].touched &&createsupplierform.controls['phone'].invalid|| submitted && createsupplierform.controls['phone'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="createsupplierform.controls['phone'].errors?.['required']">This field
+                                        is required</small>
+                                    <small *ngIf="createsupplierform.controls['phone'].errors?.['pattern']">This field is
+                                        phone</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.phone">{{errors?.phone}}</small>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="city">City</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="city" aria-label="Date" id="city"
-                                        name="city" formControlName="city">
-                                        <div id="city" *ngIf="createsuplier.controls['city'].touched &&createsuplier.controls['city'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createsuplier.controls['city'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>       
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="Country">Country</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="country"
+                                    aria-label="Date" id="country" name="country" formControlName="country">
+                                <div id="country"
+                                    *ngIf="createsupplierform.controls['country'].touched &&createsupplierform.controls['country'].invalid|| submitted && createsupplierform.controls['country'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="createsupplierform.controls['country'].errors?.['required']">This field
+                                        is
+                                        required</small>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-md-4 control-label " for="address">Address</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="address" aria-label="Date" id="address"
-                                        name="address" formControlName="address">
-                                        <div id="address" *ngIf="createsuplier.controls['address'].touched &&createsuplier.controls['address'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="createsuplier.controls['address'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>      
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="city">City</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="city"
+                                    aria-label="Date" id="city" name="city" formControlName="city">
+                                <div id="city"
+                                    *ngIf="createsupplierform.controls['city'].touched &&createsupplierform.controls['city'].invalid|| submitted && createsupplierform.controls['city'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="createsupplierform.controls['city'].errors?.['required']">This field is
+                                        required</small>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label " for="address">Address</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="address"
+                                    aria-label="Date" id="address" name="address" formControlName="address">
+                                <div id="address"
+                                    *ngIf="createsupplierform.controls['address'].touched &&createsupplierform.controls['address'].invalid || submitted && createsupplierform.controls['address'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="createsupplierform.controls['address'].errors?.['required']">This field
+                                        is
+                                        required</small>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="form-group col-md-12">
                             <div class="col-md-4">
@@ -170,137 +189,188 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <td>1</td>
-                <td>jkkkfr</td>
-                <td>019393</td>
-                <td>s@s.com</td>
-                <td>12</td>
-                <td>sekar</td>
-                <td> <button class="btn btn-sm btn-primary" (click)="openModal3(contentModal3)"><i data-feather="eye"[size]="22"></i>
-                </button><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
-                </button></td>  
-                  <!-- Modal2 -->
-              <ng-template #contentModal2 let-c="close" let-d="dismiss">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-primary-title">Edit</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                        <span aria-hidden="true">&times;</span>
+            <tr *ngFor="let Supplier of data">
+                <td>{{Supplier.code}}</td>
+                <td>{{Supplier.name}}</td>
+                <td>{{Supplier.phone}}</td>
+                <td>{{Supplier.email}}</td>
+                <td>{{Supplier.country}}</td>
+                <td>{{Supplier.city}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary"
+                        (click)="openModal3(contentModal3);showSupplier(Supplier.id)">
+                        <i data-feather="eye" [size]="22"></i>
                     </button>
-                </div>
-                <div class="modal-body centered">
-                    <form class="row col-md-12">
-                        <div class="form-group col-md-6">
-                            <label class="col-md-12 control-label " for="SupplierName">Supplier Name</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text"
-                                    placeholder="Supplier Name" aria-label="Date" id="SupplierName"
-                                    name="SupplierName" formControlName="SupplierName">
-                                </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label " for="Email">Email</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="email"
-                                    placeholder="email" aria-label="Date" id="email"
-                                    name="email" formControlName="email">   
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label " for="phone">Phone</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text"
-                                    placeholder="phone" aria-label="Date" id="phone"
-                                    name="phone" formControlName="phone">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label " for="Country">Country</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text"
-                                    placeholder="country" aria-label="Date" id="country"
-                                    name="country" formControlName="country">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label " for="city">City</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text"
-                                    placeholder="city" aria-label="Date" id="city"
-                                    name="city" formControlName="city">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label " for="address">Address</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text"
-                                    placeholder="address" aria-label="Date" id="address"
-                                    name="address" formControlName="address">
-                            </div>
-                        </div>
-
-                    <div class="form-group col-md-12">
-                        <div class="col-md-4">
-                            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-                        </div>
+                    <button class="btn btn-sm btn-success"
+                        (click)="openModal2(contentModal2);editSupplier(Supplier.id)">
+                        <i data-feather="edit" [size]="24">
+                        </i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteSupplier(Supplier.id)">
+                        <i data-feather="x-circle" [size]="24"></i>
+                    </button>
+                </td>
+                <!-- Modal2 -->
+                <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </form>
+                    <div class="modal-body centered">
+                        <form class="row col-md-12" [formGroup]="editsupplierForm" (ngSubmit)="updateSupplier()">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label " for="CustomerName">Customer Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="Customer Name" aria-label="Date" id="name" name="name"
+                                        formControlName="name">
+                                        <div id="name"
+                                    *ngIf="editsupplierForm.controls['name'].touched &&editsupplierForm.controls['name'].invalid|| submitted && editsupplierForm.controls['name'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="editsupplierForm.controls['name'].errors?.['required']">This field is
+                                        required</small>
+                                </div>
 
-                </div>
-            </ng-template>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Email">Email</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="email" placeholder="email"
+                                        aria-label="Date" id="email" name="email" formControlName="email">
+                                        <div id="email"
+                                        *ngIf="editsupplierForm.controls['email'].touched &&editsupplierForm.controls['email'].invalid|| submitted && editsupplierForm.controls['email'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editsupplierForm.controls['email'].errors?.['required']">This field is
+                                            required</small>
+                                    </div>
 
-             <!-- Modal3 -->
-             <ng-template #contentModal3 let-c="close" let-d="dismiss">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-primary-title">Supplier Details</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body centered">
-                    <table class="table table-striped table-hover">
-                      <tr>
-                        <td>Supplier Code</td>
-                        <td>104</td>
-                      </tr>
-                      <tr>
-                        <td>Supplier Name</td>
-                        <td>samar</td>
-                      </tr>
-                      <tr>
-                        <td>phone</td>
-                        <td>0102878943</td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                        <td>s@s.com</td>
-                      </tr>
-                      <tr>
-                        <td>Country</td>
-                        <td>jfkkl</td>
-                      </tr>
-                      <tr>
-                        <td>City</td>
-                        <td>kjkjk</td>
-                      </tr>
-                      <tr>
-                        <td>Address</td>
-                        <td>jfkkl</td>
-                      </tr>
-                      </table>
-                </div>
-            </ng-template>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="phone">Phone</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text" placeholder="phone"
+                                        aria-label="Date" id="phone" name="phone" formControlName="phone">
+                                        <div id="phone"
+                                        *ngIf="editsupplierForm.controls['phone'].touched &&editsupplierForm.controls['phone'].invalid|| submitted && editsupplierForm.controls['phone'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editsupplierForm.controls['phone'].errors?.['required']">This field
+                                            is required</small>
+                                        <small *ngIf="editsupplierForm.controls['phone'].errors?.['pattern']">This field is
+                                            phone</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.phone">{{errors?.phone}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Country">Country</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text" placeholder="country"
+                                        aria-label="Date" id="country" name="country" formControlName="country">
+                                        <div id="country"
+                                        *ngIf="editsupplierForm.controls['country'].touched &&editsupplierForm.controls['country'].invalid || submitted && editsupplierForm.controls['country'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editsupplierForm.controls['country'].errors?.['required']">This field
+                                            is
+                                            required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="city">City</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text" placeholder="city"
+                                        aria-label="Date" id="city" name="city" formControlName="city">
+                                        <div id="city"
+                                        *ngIf="editsupplierForm.controls['city'].touched &&editsupplierForm.controls['city'].invalid || submitted && editsupplierForm.controls['city'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editsupplierForm.controls['city'].errors?.['required']">This field
+                                            is
+                                            required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="address">Address</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text" placeholder="address"
+                                        aria-label="Date" id="address" name="address" formControlName="address">
+                                        <div id="address"
+                                        *ngIf="editsupplierForm.controls['address'].touched &&editsupplierForm.controls['address'].invalid || submitted && editsupplierForm.controls['address'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="editsupplierForm.controls['address'].errors?.['required']">This field
+                                            is
+                                            required</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4">
+                                    <button id="singlebutton" name="singlebutton"
+                                        class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </ng-template>
+
+                <!-- Modal3 -->
+                <ng-template #contentModal3 let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-primary-title">Supplier Details</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body centered">
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <td>Supplier Code</td>
+                                <td>{{SupplierForShow?.code}}</td>
+                            </tr>
+                            <tr>
+                                <td>Supplier Name</td>
+                                <td>{{SupplierForShow?.name}}</td>
+                            </tr>
+                            <tr>
+                                <td>phone</td>
+                                <td>{{SupplierForShow?.phone}}</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>{{SupplierForShow?.email}}</td>
+                            </tr>
+                            <tr>
+                                <td>Country</td>
+                                <td>{{SupplierForShow?.country}}</td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td>{{SupplierForShow?.city}}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>{{SupplierForShow?.address}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </ng-template>
             </tr>
         </tbody>
     </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+    <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
+        aria-label="Custom pagination">
+        <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
+                [class]="'font-weight-bolder'"></span>Prev
         </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+        <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
         </ng-template>
-      </ngb-pagination>
+    </ngb-pagination>
 </body>
-
