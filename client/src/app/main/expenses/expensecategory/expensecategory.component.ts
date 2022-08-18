@@ -90,11 +90,12 @@ export class ExpensecategoryComponent implements OnInit {
       this.expenseCategoryService.store(data).subscribe(observer)
     }
   }
-  destroy(id) {
+  destroy(index) {
+    let id = this.expenseCategoies[index].id;
     //then
     const observer = {
       next: (res) => {
-        this.getall();
+        this.expenseCategoies.splice(index,1);
       },
       error: (error) => {
         console.log(error)
@@ -116,13 +117,14 @@ export class ExpensecategoryComponent implements OnInit {
     //first
     this.expenseCategoryService.show(id).subscribe(observer)
   }
-  update(id) {
+  update(index) {
     this.submitted = true;
+    let id = this.expenseCategoies[index].id;
     if (this.editCategoryForm.valid) {
       const observer = {
         next: (res) => {
           this.modalService.dismissAll(this.contentmodel)
-          this.getall();
+          this.expenseCategoies[index] = res.data
         },
         error: (error) => {
           console.log(error);

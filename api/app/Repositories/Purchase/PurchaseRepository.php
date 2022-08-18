@@ -37,6 +37,9 @@ class PurchaseRepository implements PurchaseRepositoryInterface
             $purchase->notes            = $request->notes;
 
             $purchase->save();
+
+            $this->createPurchaseDateails($request, $purchase->id);
+            $this->addProductWarehouse($request);
         }, 3);
 
         return $purchase;
@@ -62,9 +65,9 @@ class PurchaseRepository implements PurchaseRepositoryInterface
             $purchase->notes = $request->notes ? $request->notes : $purchase->notes;
 
             $purchase->save();
-    }, 3);
+        }, 3);
 
-    return $purchase;
+        return $purchase;
     }
 
     public function delete(int $id): bool
@@ -112,7 +115,7 @@ class PurchaseRepository implements PurchaseRepositoryInterface
         $purchaseDetails = [];
         foreach ($request->purchaseDetails as $purchDetail) {
             $purchaseDetailModel = $purchase->purchaseDetails();
-            DB::transaction(function() use ($purchaseDetailModel, $purchDetail, $id) {
+            DB::transaction(function () use ($purchaseDetailModel, $purchDetail, $id) {
                 $purchaseDetailModel->create([
                     'purchase_id' => $id,
                     'product_id' => $purchDetail['product_id'],
@@ -121,9 +124,9 @@ class PurchaseRepository implements PurchaseRepositoryInterface
                     'purchase_unit_id' => $purchDetail['purchase_unit_id'],
                     'TaxNet' => $purchDetail['TaxNet'],
                     'tax_method' => $purchDetail['tax_method'],
-                    'discount' => $purchDetail['discount'],
-                    'discount_method' => $purchDetail['discount_method'],
-                    'product_variant_id' => isset($purchDetail['product_variant_id'])?$purchDetail['product_variant_id'] : null,
+                    'discount' => 0,
+                    // 'discount_method' => "",
+                    'product_variant_id' => isset($purchDetail['product_variant_id']) ? $purchDetail['product_variant_id'] : null,
                     'total' => $purchDetail['total'],
                 ]);
             }, 3);
@@ -136,15 +139,30 @@ class PurchaseRepository implements PurchaseRepositoryInterface
     public function addProductWarehouse(Request $request)
     {
         foreach ($request->purchaseDetails as $purchDetail) {
-            $productWarehouseModel= new ProductWarehouse();
-            DB::transaction(function() use ($productWarehouseModel, $purchDetail, $request) {
-                $productWarehouseModel->create([
-                    'product_id' => $purchDetail['product_id'],
-                    'warehouse_id' => $request['warehouse_id'],
-                    'product_variant_id' => isset($purchDetail['product_variant_id'])?$purchDetail['product_variant_id']: null,
-                    'qte' => $purchDetail['quantity'],
+
+            //if product already exist in warehouse
+            $warehouseProducts = ProductWarehouse::where('product_id', $purchDetail['product_id'])
+                ->where('warehouse_id', $request['warehouse_id'])
+                ->where('product_variant_id', isset($purchDetail['product_variant_id']) ? $purchDetail['product_variant_id'] : null)
+                ->first();
+
+            //if exist change quantity
+            if ($warehouseProducts) {
+                $warehouseProducts->update([
+                    'qte' => $warehouseProducts->qte + $purchDetail['quantity'],
                 ]);
-            }, 3);
+            } else {
+                $productWarehouseModel = new ProductWarehouse();
+                DB::transaction(function () use ($productWarehouseModel, $purchDetail, $request) {
+                    // if not create new 
+                    $productWarehouseModel->create([
+                        'product_id' => $purchDetail['product_id'],
+                        'warehouse_id' => $request['warehouse_id'],
+                        'product_variant_id' => isset($purchDetail['product_variant_id']) ? $purchDetail['product_variant_id'] : null,
+                        'qte' => $purchDetail['quantity'],
+                    ]);
+                }, 3);
+            }
         }
     }
 
@@ -158,7 +176,7 @@ class PurchaseRepository implements PurchaseRepositoryInterface
         $purchaseDetails = [];
         foreach ($request->purchaseDetails as $purchDetail) {
             $purchaseDetailModel = $purchase->purchaseDetails();
-            DB::transaction(function() use ($purchaseDetailModel, $purchDetail, $id) {
+            DB::transaction(function () use ($purchaseDetailModel, $purchDetail, $id) {
                 $purchaseDetailModel->updateOrCreate([
                     'purchase_id' => $id,
                     'product_id' => $purchDetail['product_id'],
@@ -169,7 +187,7 @@ class PurchaseRepository implements PurchaseRepositoryInterface
                     'tax_method' => $purchDetail['tax_method'],
                     'discount' => $purchDetail['discount'],
                     'discount_method' => $purchDetail['discount_method'],
-                    'product_variant_id' => isset($purchDetail['product_variant_id'])? $purchDetail['product_variant_id']: null,
+                    'product_variant_id' => isset($purchDetail['product_variant_id']) ? $purchDetail['product_variant_id'] : null,
                     'total' => $purchDetail['total'],
                 ]);
             }, 3);
@@ -182,9 +200,9 @@ class PurchaseRepository implements PurchaseRepositoryInterface
     public function deletePurchaseDateails(Request $request, int $id): bool
     {
         $purchaseDetails = $this->read($id)->purchaseDetails()->get('purchase_id')->toArray();
-        foreach($purchaseDetails as $purchDetail) {
+        foreach ($purchaseDetails as $purchDetail) {
             $purchDetail = $purchDetail['purchase_id'];
-            if(!in_array($purchDetail, $request->purchaseDetails)) {
+            if (!in_array($purchDetail, $request->purchaseDetails)) {
                 $this->read($id)->purchaseDetails()->where('purchase_id', $purchDetail)->delete();
             }
         }

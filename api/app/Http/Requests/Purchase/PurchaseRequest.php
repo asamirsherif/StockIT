@@ -29,9 +29,7 @@ class PurchaseRequest extends FormRequest
             'provider_id'       => ['required', 'integer'],
             'warehouse_id'      => ['required', 'integer'],
             'status'            => ['string'],
-            'notes'             => ['min:5'],
             'purchaseDetails.*'   => ['required']
-
         ];
     }
 }
