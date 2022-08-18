@@ -8,6 +8,6 @@ class PaymentStatusFilter
 {
     public function filter(Builder $builder, $value)
     {
-        return $builder->orWhere('payment_status', "LIKe", "%" . $value . "%");
+        return $builder->Where('payment_status', "LIKe", "%" . $value . "%");
     }
 }

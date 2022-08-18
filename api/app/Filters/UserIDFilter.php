@@ -8,6 +8,6 @@ class UserIDFilter
 {
     public function filter(Builder $builder, $value)
     {
-        return $builder->orWhere('user_id', $value);
+        return $builder->Where('user_id', $value);
     }
 }
