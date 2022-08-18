@@ -104,7 +104,6 @@
         <th scope="col">Status</th>
         <th scope="col">Grand Total</th>
         <th scope="col">Paid</th>
-        <th scope="col">Due</th>
         <th scope="col">Payment Status</th>
         <th scope="col">Action</th>
       </tr>
@@ -118,10 +117,9 @@
         <td><button type="button" class="btn btn-outline-success">{{purchase.status}}</button></td>
         <td>{{purchase.GrandTotal}}</td>
         <td>{{purchase.GrandTotal}}</td>
-        <td>N/D</td>
         <td> <button type="button" class="btn btn-outline-danger ">PAID</button></td>
         <td>
-          <button class="btn btn-sm btn-success" [routerLink]="['../purchasesupdate']">
+          <button class="btn btn-sm btn-success" [routerLink]="['../purchasesupdate/',purchase.id]">
             <i data-feather="edit" [size]="24"></i>
           </button>
           <button (click)="delete(i)" class="btn btn-sm btn-danger">

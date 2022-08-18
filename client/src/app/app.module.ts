@@ -300,7 +300,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/products/productupdate/productupdate.module').then(m => m.ProductupdateComponentModule)
   }, {
-    path: 'purchasesupdate',
+    path: 'purchasesupdate/:id',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Purchases/purchasesupdate/purchasesupdate.module').then(m => m.PurchasesupdateModule)
   }, {

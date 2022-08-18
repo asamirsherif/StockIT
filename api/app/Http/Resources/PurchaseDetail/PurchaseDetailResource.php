@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\PurchaseDetail;
 
+use App\Http\Resources\Product\ShowProductResource;
+use App\Http\Resources\Purchase\PurchaseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PurchaseDetailResource extends JsonResource
@@ -22,8 +24,8 @@ class PurchaseDetailResource extends JsonResource
             'tax_method' => $this->tax_method,
             'discount' => $this->discount,
             'discount_method' => $this->discount_method,
-            'purchase_id' => $this->purchase_id,
-            'product_id' => $this->product_id,
+            //'purchase' => new PurchaseResource($this->purchase),
+            'product' => new ShowProductResource($this->product),
             'product_variant_id' => $this->product_variant_id,
             'total' => $this->total,
             'quantity' => $this->quantity
