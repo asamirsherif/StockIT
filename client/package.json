@@ -1,5 +1,5 @@
 {
-  "name": "vuexy-admin-template",
+  "name": "StockIT-admin-template",
   "version": "8.0.0",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,7 @@
     "build-stats": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --stats-json",
     "build:prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production",
     "build:prod-stats": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production --stats-json",
-    "bundle-analyzer": "webpack-bundle-analyzer dist/vuexy/stats.json",
+    "bundle-analyzer": "webpack-bundle-analyzer dist/StockIT/stats.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
