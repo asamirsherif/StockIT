@@ -22,33 +22,33 @@ import { User, Role } from 'app/auth/models';
 
 // Users with role
 const users: User[] = [
-  {
-    id: 1,
-    email: 'admin@demo.com',
-    password: 'admin',
-    firstName: 'John',
-    lastName: 'Doe',
-    avatar: 'avatar-s-11.jpg',
-    role: Role.Admin
-  },
-  {
-    id: 2,
-    email: 'client@demo.com',
-    password: 'client',
-    firstName: 'Nataly',
-    lastName: 'Doe',
-    avatar: 'avatar-s-2.jpg',
-    role: Role.Client
-  },
-  {
-    id: 3,
-    email: 'user@demo.com',
-    password: 'user',
-    firstName: 'Rose',
-    lastName: 'Doe',
-    avatar: 'avatar-s-3.jpg',
-    role: Role.User
-  }
+  // {
+  //   id: 1,
+  //   email: 'admin@demo.com',
+  //   password: 'admin',
+  //   firstName: 'John',
+  //   lastName: 'Doe',
+  //   avatar: 'avatar-s-11.jpg',
+  //   role: Role.Admin
+  // },
+  // {
+  //   id: 2,
+  //   email: 'client@demo.com',
+  //   password: 'client',
+  //   firstName: 'Nataly',
+  //   lastName: 'Doe',
+  //   avatar: 'avatar-s-2.jpg',
+  //   role: Role.Client
+  // },
+  // {
+  //   id: 3,
+  //   email: 'user@demo.com',
+  //   password: 'user',
+  //   firstName: 'Rose',
+  //   lastName: 'Doe',
+  //   avatar: 'avatar-s-3.jpg',
+  //   role: Role.User
+  // }
 ];
 
 @Injectable()
@@ -83,18 +83,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const user = users.find(x => x.email === email && x.password === password);
       if (!user) return error('Username or password is incorrect');
       return ok({
-        id: user.id,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        avatar: user.avatar,
-        role: user.role,
-        token: `fake-jwt-token.${user.id}`
+        // id: user.id,
+        // email: user.email,
+        // firstName: user.firstName,
+        // lastName: user.lastName,
+        // avatar: user.avatar,
+        // role: user.role,
+        // token: `fake-jwt-token.${user.id}`
       });
     }
 
     function getUsers() {
-      if (!isAdmin()) return unauthorized();
+      // if (!isAdmin()) return unauthorized();
       return ok(users);
     }
 
@@ -102,7 +102,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!isLoggedIn()) return unauthorized();
 
       // only admins can access other user records
-      if (!isAdmin() && currentUser().id !== idFromUrl()) return unauthorized();
+      // if (!isAdmin() && currentUser().id !== idFromUrl()) return unauthorized();
 
       const user = users.find(x => x.id === idFromUrl());
       return ok(user);
@@ -128,7 +128,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function isAdmin() {
-      return isLoggedIn() && currentUser().role === Role.Admin;
+      // return isLoggedIn() && currentUser().role === Role.Admin;
     }
 
     function currentUser() {

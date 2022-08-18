@@ -26,6 +26,8 @@ class ExpenseController extends Controller
      */
     public function index(Request $request)
     {
+      //  $this->authorizeForUser($request->user('api'), 'view', Expense::class);
+
         if ($request->filled('search')) {
             $expenses = $this->expRepo->multiSearch($request)
                 ->paginate($request->perPage);
@@ -51,7 +53,9 @@ class ExpenseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ExpenseRequest $request)
-    {
+    {   
+       // $this->authorizeForUser($request->user('api'), 'create', Expense::class);
+
         $created = $this->expRepo->create($request);
         if ($created)
             return $this->succWithData(new ExpenseResource($created), "Expense created");
@@ -65,9 +69,14 @@ class ExpenseController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+
+    public function show(int $id, Request $request)
+
     {
-        $expense = $this->expRepo->read($id);
+
+       // $this->authorizeForUser($request->user('api'), 'view', Expense::class);
+        
+        $expense = Expense::find($id);
         if ($expense)
             return $this->succWithData(new ExpenseResource($expense), "Expense found");
         else
@@ -82,7 +91,10 @@ class ExpenseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(ExpenseRequest $request, int $id)
-    {
+    {    
+
+       // $this->authorizeForUser($request->user('api'), 'update', Expense::class);
+
         $expense = Expense::find($id);
         if (!$expense)
             return $this->errMsg("This Exepense doesnt exist!");
@@ -99,8 +111,10 @@ class ExpenseController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
-    {
+    public function destroy(int $id,Request $request)
+    {   
+      //  $this->authorizeForUser($request->user('api'), 'delete', Expense::class);
+
         $expense = Expense::find($id);
         if (!$expense)
             return $this->errMsg("This Exepense doesnt exist!");

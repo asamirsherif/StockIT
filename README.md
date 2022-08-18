@@ -18,8 +18,9 @@ Using Laravel & Angular
 cd api
 composer install
 npm install
+php artisan migrate --seed
 php aritsan passport:install
-php artisan migrate
+
 ```
 
 `3- Create passport oauth Client ID & secret (using password grant type)`

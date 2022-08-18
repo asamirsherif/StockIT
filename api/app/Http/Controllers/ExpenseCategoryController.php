@@ -28,6 +28,8 @@ class ExpenseCategoryController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', ExpenseCategory::class);
+
         if ($request->filled('search')) {
             $expenseCategory = $this->expCatRepo->multiSearch($request)
                 ->paginate($request->perPage);
@@ -47,6 +49,8 @@ class ExpenseCategoryController extends Controller
      */
     public function store(ExpenseCategoryRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'create', ExpenseCategory::class);
+
         $created = $this->expCatRepo->create($request);
         if ($created)
             return $this->succWithData(new ExpenseCategoryResource($created), 'Expense category created');
@@ -61,9 +65,12 @@ class ExpenseCategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+
+    public function show(int $id, Request $request)
     {
-        $expenseCategory = $this->expCatRepo->read($id);
+        $this->authorizeForUser($request->user('api'), 'view', ExpenseCategory::class);
+        $expenseCategory = ExpenseCategory::find($id);
+
         if ($expenseCategory)
             return $this->succWithData(new ExpenseCategoryResource($expenseCategory));
         else
@@ -78,6 +85,8 @@ class ExpenseCategoryController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        $this->authorizeForUser($request->user('api'), 'update', ExpenseCategory::class);
+
         if (!$this->expCatRepo->read($id))
             return $this->errMsg("this Expense category does not exist!");
         $updated = $this->expCatRepo->update($request, $id);
@@ -93,8 +102,13 @@ class ExpenseCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy(int $id,Request $request)
+
     {
+
+
+        $this->authorizeForUser($request->user('api'), 'delete', ExpenseCategory::class);
+
         $expenseCategory = ExpenseCategory::find($id);
         if (!$expenseCategory)
             return $this->errMsg("the Expense category not exist");

@@ -30,7 +30,7 @@
     <div class="col-md-12">
         <label class="col-md-4 control-label" for="product">Product</label>
         <div class="col-md-12 row">
-            <span class="switch-icon-left col-md-1 icon "><i data-feather="search"></i></span>
+            <span class="switch-icon-left col-md-1 icon "><i data-feather="search" [size]="30"></i></span>
             <input class="form-control form-control col-md-11" type="text" placeholder="Search Product by name"
                 aria-label="Search">
         </div>
@@ -46,18 +46,26 @@
                 <th scope="col">Discount</th>
                 <th scope="col">Tax</th>
                 <th scope="col">Subtotal</th>
+                <th></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                    <td>(earphones)</td>
+                    <td>63417341</td>
+                    <td>
+                        <div class="badge badge-pill badge-light-warning">496.95 ك</div>
+                    </td>
+                    <td><core-touchspin [numberValue]="0" (onChange)="countChange($event)"></core-touchspin></td>
+                    <td>ريال 0.00	</td>
+                    <td>ريال 36.00	</td>
+                    <td >ريال 276.00</td> 
+                        
+                   <td><div class="col-md-4">
+                        <button class="btn btn-sm btn-danger"><i data-feather="x-circle" [size]="24"></i></button>
+                    </div>
+                    </td>
             </tr>
         </tbody>
     </table>

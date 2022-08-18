@@ -36,5 +36,13 @@
                     </tr>
                 </tbody>
             </table>
+            <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+              </ngb-pagination>
         </body>
         

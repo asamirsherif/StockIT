@@ -3,6 +3,9 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Unit\UnitResource;
+use App\Http\Resources\Brand\BrandResource;
+use App\Http\Resources\Category\CategoryResource;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShowProductResource extends JsonResource
@@ -15,20 +18,30 @@ class ShowProductResource extends JsonResource
      */
     public function toArray($request)
     {
-
         //----------------------------------------------------
+
         $price = $this->unitSale->operator == '/' ?
             (int)$this->price / (int) $this->unitSale->operator_value :
             (int)$this->price * (int)$this->unitSale->operator_value;
 
         $cost = $this->unitPurchase->operator == '/' ?
-            (int)$this->price / (int)$this->unitPurchase->operator_value :
-            (int)$this->price * (int)$this->unitPurchase->operator_value;
+            (int)$this->cost / (int)$this->unitPurchase->operator_value :
+            (int)$this->cost * (int)$this->unitPurchase->operator_value;
 
 
         if ($this->TaxNet !== 0.0) {
             //Exclusive
-            if ($this->tax_method == '1') {
+            if ($this->tax_method == 'Exclusive') {
+                $tax_price = 0; //$price * $this->TaxNet / 100;
+                $tax_cost = 0; //$cost * $this->TaxNet / 100;
+
+                $total_cost = $cost; //+ $tax_cost;
+                $total_price = $price; //+ $tax_price;
+                $net_cost = $cost;
+                $net_price = $price;
+
+                // Inxclusive
+            } else {
                 $tax_price = $price * $this->TaxNet / 100;
                 $tax_cost = $cost * $this->TaxNet / 100;
 
@@ -36,15 +49,6 @@ class ShowProductResource extends JsonResource
                 $total_price = $price + $tax_price;
                 $net_cost = $cost;
                 $net_price = $price;
-
-                // Inxclusive
-            } else {
-                $total_cost = $cost;
-                $total_price = $price;
-                $net_cost = $cost / (($this->TaxNet / 100) + 1);
-                $net_price = $price / (($this->TaxNet / 100) + 1);
-                $tax_cost = $total_cost - $net_cost;
-                $tax_price = $total_price - $net_price;
             }
         } else {
             $total_cost = $cost;
@@ -62,7 +66,9 @@ class ShowProductResource extends JsonResource
             'code' => $this->code,
             'name' => $this->name,
             'type_barcode' => $this->Type_barcode,
-            'brand' => $this->brand?->name ? $this->brand->name : "N/D",
+            'brand' => new BrandResource($this->brand),
+            'category' => new CategoryResource($this->category),
+            'variants' => ProductVariantResource::collection($this->productVariants),
             'unit' => new UnitResource($this->unit),
             'unitPurchase' => new UnitResource($this->unitPurchase),
             'unitSale' => new UnitResource($this->unitSale),

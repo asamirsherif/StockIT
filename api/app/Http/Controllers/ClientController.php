@@ -21,6 +21,7 @@ class ClientController extends Controller
     public function __construct(ClientRepositoryInterface $clientRepo)
     {
         $this->clientRepo = $clientRepo;
+
     }
 
     /**
@@ -30,6 +31,9 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
+
+        //$this->authorizeForUser($request->user('api'), 'customers_view', Client::class);
+
         if ($request->filled('search')) {
             $clients = $this->clientRepo->multiSearch($request)
             ->paginate($request->perPage);
@@ -37,10 +41,8 @@ class ClientController extends Controller
         } else
             $clients = Client::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
 
-        return new ClientCollection($clients);
+        return ClientResource::collection($clients);
 
-        // return new CategoryCollection(Category::all());
-        // return new ClientCollection(Client::all());
     }
 
     /**
@@ -52,12 +54,14 @@ class ClientController extends Controller
     public function store(ClientRequest $request)
     {
 
+       // $this->authorizeForUser($request->user('api'), 'create', Client::class);
+
         $clientCreated = $this->clientRepo->create($request);
 
         if ($clientCreated)
             return $this->succWithData(new ClientResource($clientCreated), "client created successfully");
         else
-            return $this->errMsg("client not created!");
+            return $this->errMsg("customer not created!");
 
         //********************** */
         // $clientCreated = Client::create($request->all());
@@ -79,10 +83,11 @@ class ClientController extends Controller
         $client = Client::find($id);
 
         if(!$client)
-            return $this->errMsg('This client doesn\'t exist');
+            return $this->errMsg('This customer doesn\'t exist');
         else
+
             return $this->succWithData(new ClientResource($client), "client details");
-            // return $this->clientRepo->read($id);
+
     }
 
     /**
@@ -94,6 +99,8 @@ class ClientController extends Controller
      */
     public function update(UpdatedClientRequest $request, $id)
     {
+        //$this->authorizeForUser($request->user('api'), 'update', Client::class);
+
         $client = Client::find($id);
         if(!$client)
             return $this->errMsg("This client doesn\'t exist");
@@ -103,7 +110,8 @@ class ClientController extends Controller
         if ($clientUpdated)
             return $this->succWithData(new ClientResource($clientUpdated), "client updated successfully");
         else
-            return $this->errMsg("client doesn\'t updated");
+            return $this->errMsg("Customer not updated!");
+
     }
 
     /**
@@ -112,17 +120,19 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
+        //$this->authorizeForUser($request->user('api'), 'delete', Client::class);
+
         $client = Client::find($id);
         if(!$client)
-            return $this->errMsg('This client doesn\'t exist');
+            return $this->errMsg('This customer doesn\'t exist');
 
         $clientDeleted = $this->clientRepo->delete($id);
         if($clientDeleted)
-            return $this->succWithData(new ClientResource($client), "client deleted successfully");
+            return $this->succWithData(new ClientResource($client), "Customer Deleted successfully");
         else
-            return $this->errMsg("client not deleted");
+            return $this->errMsg("Customer not deleted");
 
         //******************** */
         // $client = Client::find($id);

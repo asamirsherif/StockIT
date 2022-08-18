@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Unit\UnitRequest;
+use App\Http\Requests\Unit\UpdatedUnitRequest;
 use App\Http\Resources\Unit\UnitCollection;
 use App\Http\Resources\Unit\UnitResource;
 use App\Models\Unit;
@@ -19,6 +20,7 @@ class UnitController extends Controller
     public function __construct(UnitRepositoryInterface $unitRepo)
     {
         $this->unitRepo = $unitRepo;
+
     }
     /**
      * Display a listing of the resource.
@@ -27,6 +29,8 @@ class UnitController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Unit::class);
+
         if ($request->filled('search')) {
             $units = $this->unitRepo->multiSearch($request)
                         ->paginate($request->perPage);
@@ -45,12 +49,14 @@ class UnitController extends Controller
      */
     public function store(UnitRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Unit::class);
+
         $unitCreated = $this->unitRepo->create($request);
 
         if ($unitCreated)
-        return $this->succWithData(new UnitResource($unitCreated));
+            return $this->succWithData(new UnitResource($unitCreated), "unit created successfully");
         else
-        return $this->errMsg("client not created!");
+            return $this->errMsg("unit not created!");
     }
 
     /**
@@ -59,14 +65,16 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Unit::class);
+
         $unit = Unit::find($id);
 
         if(!$unit)
             return $this->errMsg('This unit doesn\'t exist');
         else
-            return $this->unitRepo->read($id);
+            return $this->succWithData(new UnitResource($unit),'unit found');
     }
 
     /**
@@ -76,11 +84,13 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UnitRequest $request, $id)
+    public function update(UpdatedUnitRequest $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Unit::class);
+
         $unitUpdated = $this->unitRepo->update($request, $id);
         if ($unitUpdated)
-            return $this->succWithData(new UnitResource($unitUpdated));
+            return $this->succWithData(new UnitResource($unitUpdated), "unit updated successfully");
         else
             return $this->errMsg("unit not updated!");
     }
@@ -91,8 +101,10 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Unit::class);
+
         $unit = Unit::find($id);
 
         if(!$unit)

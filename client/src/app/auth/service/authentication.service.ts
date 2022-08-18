@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'environments/environment';
 import { User, Role } from 'app/auth/models';
 import { ToastrService } from 'ngx-toastr';
+
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -20,7 +22,7 @@ export class AuthenticationService {
    * @param {HttpClient} _http
    * @param {ToastrService} _toastrService
    */
-  constructor(private _http: HttpClient, private _toastrService: ToastrService) {
+  constructor(private _http: HttpClient, private _toastrService: ToastrService, private _user:UserService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -34,16 +36,16 @@ export class AuthenticationService {
    *  Confirms if user is admin
    */
   get isAdmin() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Admin;
+    return this.currentUser && this.currentUserSubject.value.role_id === 1;
   }
 
   /**
    *  Confirms if user is client
    */
   get isClient() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Client;
+    return this.currentUser && this.currentUserSubject.value.role_id > 1;
   }
-
+ 
   /**
    * User login
    *
@@ -57,17 +59,30 @@ export class AuthenticationService {
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response
-          if (user && user.token) {
+          if (user && user.access_token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
+            
+            localStorage.setItem('currentUser', JSON.stringify(user))
+
+            
+            if(localStorage.getItem('currentUser')){
+
+              this._user.getLoggedUser().subscribe((res)=>{
+                user = {...user , ...res}
+              })
+
+              this._user.getUserPermissions().subscribe((res)=>{
+                user.permissions = Object.values(res);
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                })  
+            }
+           
 
             // Display welcome toast!
             setTimeout(() => {
               this._toastrService.success(
-                'You have successfully logged in as an ' +
-                  user.role +
-                  ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
-                '👋 Welcome, ' + user.firstName + '!',
+                'You have successfully logged in' + 'to StockIT. Now you can start to explore. Enjoy! 🎉',
+                '👋 Welcome, ' + user.firstname + '!',
                 { toastClass: 'toast ngx-toastr', closeButton: true }
               );
             }, 2500);

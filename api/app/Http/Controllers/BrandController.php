@@ -19,7 +19,7 @@ class BrandController extends Controller
     private BrandRepositoryInterface $brandRepo;
 
     public function __construct(BrandRepositoryInterface $brandRepo)
-    {
+    {   
         $this->brandRepo = $brandRepo;
     }
     /**
@@ -50,8 +50,8 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(BrandRequest $request)
-    {
-        $this->authorizeForUser($request->user('api'), 'create', Brand::class);
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Brand::class);
 
         $created = $this->brandRepo->create($request);
         if ($created)
@@ -66,9 +66,17 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
-        $this->brandRepo->read($id);
+        $this->authorizeForUser($request->user('api'), 'view', Brand::class);
+        // $this->brandRepo->read($id);
+        
+        $brand = Brand::find($id);
+        if($brand){
+            return $this->succWithData(new BrandResource($brand),'brand found');
+        }else
+            return $this->errMsg('Brand not exist!');
+
     }
 
     /**
@@ -79,7 +87,9 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateBrandRequest $request, $id)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Brand::class);
+        
         if (!$this->brandRepo->read($id))
             return $this->errMsg("This brand dose not exist!");
         $updated = $this->brandRepo->update($request, $id);
@@ -96,7 +106,10 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+
+       // $this->authorizeForUser($request->user('api'), 'view', Brand::class);
+
         $brand = Brand::find($id);
         if (!$brand)
             return $this->errMsg("This brand doesnt exist");

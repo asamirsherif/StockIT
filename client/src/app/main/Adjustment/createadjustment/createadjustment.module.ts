@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoreCommonModule } from '@core/common.module';
 
 import { CreateadjustmentComponent } from './createadjustment.component';
-
+import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module';
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
 
 @NgModule({
   declarations: [CreateadjustmentComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,CoreTouchspinModule],
   exports: [CreateadjustmentComponent ]
 })
 export class CreateadjustmentModule {}

@@ -158,7 +158,9 @@ class ProductRepository implements ProductRepositoryInterface
         foreach ($productVariants as $proVariant) {
             $proVariant = $proVariant['name'];
             if (!in_array($proVariant, $request->variants)) {
-                $this->read($id)->productVariants()->where('name', $proVariant)->delete();
+                DB::transaction(function () use ($id, $proVariant) {
+                    $this->read($id)->productVariants()->where('name', $proVariant)->delete();
+                }, 3);
             }
         }
 
