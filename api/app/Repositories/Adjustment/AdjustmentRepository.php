@@ -3,6 +3,7 @@
 namespace App\Repositories\Adjustment;
 
 use App\Models\Adjustment;
+use App\Models\ProductWarehouse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -64,7 +65,8 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
     {
         $adjustments = Adjustment::filter($request)->where(function ($q) use ($request) {
             return $q->where('date', 'LIKE', "%" . $request->search . "%")
-                ->orWhere('Ref', 'LIKE', "%" . $request->search . "%");
+                    ->orWhere('Ref', 'LIKE', "%" . $request->search . "%")
+                    ->orWhere('warehouse_id', 'LIKE', "%" . $request->search . "%");
         });
 
         return $adjustments;
@@ -83,5 +85,80 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             $code = 'AD_1111';
         }
         return $code;
+    }
+
+    // create Adjustment Details function
+    public function createAdjustmentDetails(Request $request, $id): array
+    {
+        $adjustment = $this->read($id);
+        $adjustmentDeatils = [];
+        foreach ($request->adjustmentDeatils as $adjDetail) {
+            $adjustmentDetailModel = $adjustment->adjustmentDeatils();
+            DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
+                $adjustmentDetailModel->create([
+                    'adjustment_id' => $id,
+                    'quantity' => $adjDetail['quantity'],
+                    'product_id' => $adjDetail['product_id'],
+                    'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id'] : null,
+                    'type' => $adjDetail['type'],
+                ]);
+            }, 3);
+            $adjustmentDeatils[] = $adjustmentDetailModel;
+        }
+        return $adjustmentDeatils;
+    }
+
+    // add in product warehouse
+    public function addProductWarehouse(Request $request)
+    {
+        foreach ($request->adjustmentDeatils as $adjDetail) {
+            $productWarehouseModel= new ProductWarehouse();
+            DB::transaction(function() use ($productWarehouseModel, $adjDetail, $request) {
+                $productWarehouseModel->create([
+                    'product_id'         => $adjDetail['product_id'],
+                    'warehouse_id'       => $request['warehouse_id'],
+                    'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id']: null,
+                    'qte'                => $adjDetail['quantity'],
+                ]);
+            }, 3);
+        }
+    }
+
+    // update updateAdjustmentDetails
+    public function updateAdjustmentDetails(Request $request, $id): array
+    {
+        // delete old details firstly
+        $this->deleteAdjustmentDetails($request, $id);
+
+        // start update of new details
+        $adjustment = $this->read($id);
+        $adjustmentDeatils = [];
+            foreach ($request->adjustmentDeatils as $adjDetail) {
+                $adjustmentDetailModel = $adjustment->adjustmentDeatils();
+                DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
+                    $adjustmentDetailModel->updateOrCreate([
+                        'adjustment_id' => $id,
+                        'quantity' => $adjDetail['quantity'],
+                        'product_id' => $adjDetail['product_id'],
+                        'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id'] : null,
+                        'type' => $adjDetail['type'],
+                    ]);
+                }, 3);
+                $adjustmentDeatils[] = $adjustmentDetailModel;
+            }
+        return $adjustmentDeatils;
+    }
+
+    // delete adj details
+    public function deleteAdjustmentDetails(Request $request, int $id): bool
+    {
+        $adjustmentDeatils = $this->read($id)->adjustmentDeatils()->get('adjustment_id')->toArray();
+        foreach ($adjustmentDeatils as $adjDetail) {
+            $adjDetail = $adjDetail['adjustment_id'];
+            if(!in_array($adjDetail, $request->$adjustmentDeatils)) {
+                $this->read($id)->adjustmentDeatils()->where('adjustment_id', $adjDetail)->delete();
+            }
+        }
+        return true;
     }
 }

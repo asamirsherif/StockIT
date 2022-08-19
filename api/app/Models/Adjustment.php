@@ -33,4 +33,9 @@ class Adjustment extends Model
     {
         return $this->belongsTo(Warehouse::class);
     }
+
+    // adjustmentDEtails relation
+    public function adjustmentDeatils() {
+        return $this->hasMany(AdjustmentDetail::class);
+    }
 }
