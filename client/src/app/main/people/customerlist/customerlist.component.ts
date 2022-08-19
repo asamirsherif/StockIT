@@ -7,151 +7,163 @@ import { Router } from "@angular/router";
 //import { ToastrService } from "ngx-toastr";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 @Component({
-selector: 'app-customerlist',
-templateUrl: './customerlist.component.html',
-styleUrls: ['./customerlist.component.scss']
+    selector: 'app-customerlist',
+    templateUrl: './customerlist.component.html',
+    styleUrls: ['./customerlist.component.scss']
 })
 export class CustomerlistComponent implements OnInit {
-public pageBasicText = 3;
-data: Iclient[];
-clientForEdit!: Iclient;
-clientForShow!: Iclient;
+    public pageBasicText = 3;
+    data: Iclient[];
+    clientForEdit!: Iclient;
+    clientForShow!: Iclient;
 
-createcustomerform: FormGroup;
-editClientForm: FormGroup;
+    createcustomerform: FormGroup;
+    editClientForm: FormGroup;
 
-contentModel: any;
-submitted = false;
-errors: any = {};
+    contentModel: any;
+    submitted = false;
+    errors: any = {};
 
-searchInput: string = "";
-constructor(private modalService: NgbModal, private fb: FormBuilder, private clientserv: ClientservService, public _router: Router) {
-this.createcustomerform = new FormGroup({
-name: new FormControl('', Validators.required),
-email: new FormControl('', [Validators.required, Validators.email]),
-phone: new FormControl('', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]),
-country: new FormControl('', Validators.required),
-city: new FormControl('', Validators.required),
-address: new FormControl('', Validators.required)
-});
-this.editClientForm = new FormGroup({
-name: new FormControl('', Validators.required),
-email: new FormControl('', [Validators.required, Validators.email]),
-phone: new FormControl('', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]),
-country: new FormControl('', Validators.required),
-city: new FormControl('', Validators.required),
-address: new FormControl('', Validators.required),
-})
-}
-openModal(contentModal) {
-this.contentModel = contentModal;
-this.modalService.open(contentModal);
-}
-closeModel(contentModal) {
-this.modalService.dismissAll(contentModal);
-}
-openModal2(contentModal2) {
-this.contentModel = contentModal2;
-this.modalService.open(contentModal2);
-}
-openModal3(contentModal3) {
+    searchInput: string = "";
 
-this.modalService.open(contentModal3);
-}
-ngOnInit(): void {
-this.AllData();
-}
-AllData() {
-const observer = {
-next: (res) => {
-this.data = res.data
-},
-error: (error) => {
-console.log(error);
-}
-}
-this.clientserv.allClient().subscribe(observer)
-}
+    p: number = 1;
+    total: number = 0;
+    constructor(private modalService: NgbModal, private fb: FormBuilder, private clientserv: ClientservService, public _router: Router) {
+        this.createcustomerform = new FormGroup({
+            name: new FormControl('', Validators.required),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            phone: new FormControl('', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]),
+            country: new FormControl('', Validators.required),
+            city: new FormControl('', Validators.required),
+            address: new FormControl('', Validators.required)
+        });
+        this.editClientForm = new FormGroup({
+            name: new FormControl('', Validators.required),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            phone: new FormControl('', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]),
+            country: new FormControl('', Validators.required),
+            city: new FormControl('', Validators.required),
+            address: new FormControl('', Validators.required),
+        })
+    }
+    openModal(contentModal) {
+        this.contentModel = contentModal;
+        this.modalService.open(contentModal);
+    }
+    closeModel(contentModal) {
+        this.modalService.dismissAll(contentModal);
+    }
+    openModal2(contentModal2) {
+        this.contentModel = contentModal2;
+        this.modalService.open(contentModal2);
+    }
+    openModal3(contentModal3) {
 
-AddClient() {
-this.submitted = true;
-if (this.createcustomerform.valid) {
+        this.modalService.open(contentModal3);
+    }
+    ngOnInit(): void {
+        this.AllData();
+    }
+    AllData() {
+        const observer = {
+            next: (res) => {
+                this.data = res.data
+                //console.log(res)
+                //this.total=res.meta.total
+                //console.log(this.total)
 
-const observer = {
-next: (res) => {
-this.closeModel(this.contentModel)
-this.data.push(res.data)
-}, error: (error: HttpErrorResponse) => {
-this.errors = error.error.errors;
-}
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        }
+        this.clientserv.allClient().subscribe(observer)
+    }
 
-}
-this.clientserv.AddClient(this.createcustomerform.value).subscribe(observer);
-}
-}
+    AddClient() {
+        this.submitted = true;
+        if (this.createcustomerform.valid) {
 
-editClient(id: number) {
-const observer = {
-next: (res) => {
-this.clientForEdit = res.data;
+            const observer = {
+                next: (res) => {
+                    this.closeModel(this.contentModel)
+                    this.data.push(res.data)
+                }, error: (error: HttpErrorResponse) => {
+                    this.errors = error.error.errors;
+                }
 
-this.editClientForm.get("name").setValue(this.clientForEdit.name);
-this.editClientForm.get("email").setValue(this.clientForEdit.email);
-this.editClientForm.get("phone").setValue(this.clientForEdit.phone);
-this.editClientForm.get("country").setValue(this.clientForEdit.country);
-this.editClientForm.get("city").setValue(this.clientForEdit.city);
-this.editClientForm.get("address").setValue(this.clientForEdit.address);
-},
-error: (error) => {
-console.log(error);
-},
-};
+            }
+            this.clientserv.AddClient(this.createcustomerform.value).subscribe(observer);
+        }
+    }
 
-this.clientserv.getClientid(id).subscribe(observer);
-}
+    editClient(id: number) {
+        const observer = {
+            next: (res) => {
+                this.clientForEdit = res.data;
 
-updateClient() {
+                this.editClientForm.get("name").setValue(this.clientForEdit.name);
+                this.editClientForm.get("email").setValue(this.clientForEdit.email);
+                this.editClientForm.get("phone").setValue(this.clientForEdit.phone);
+                this.editClientForm.get("country").setValue(this.clientForEdit.country);
+                this.editClientForm.get("city").setValue(this.clientForEdit.city);
+                this.editClientForm.get("address").setValue(this.clientForEdit.address);
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        };
 
-const observer = {
-next: (res) => {
-this.closeModel(this.contentModel);
-this.AllData();
-}, error: (error: HttpErrorResponse) => {
-this.errors = error.error.errors;
-}
-};
-this.clientserv.updateClient(this.clientForEdit?.id, this.editClientForm.value)
-.subscribe(observer);
-}
+        this.clientserv.getClientid(id).subscribe(observer);
+    }
 
-deleteClient(id: number) {
-const observer = {
-next: (res) => {
-this.AllData()
-},
-error: (err) => {
-this.errors = err.error.errros;
-}
-}
-this.clientserv.deleteClient(id).subscribe(observer)
-}
+    updateClient() {
 
-showClient(id: number) {
-const observer = {
-next: (res) => {
-this.clientForShow = res.data
-},
-error: (err) => {
-this.errors = err.error.errros;
-}
-}
-this.clientserv.getClientid(id).subscribe(observer);
-}
+        const observer = {
+            next: (res) => {
+                this.closeModel(this.contentModel);
+                this.AllData();
+            }, error: (error: HttpErrorResponse) => {
+                this.errors = error.error.errors;
+            }
+        };
+        this.clientserv.updateClient(this.clientForEdit?.id, this.editClientForm.value)
+            .subscribe(observer);
+    }
 
-search(event) {
+    deleteClient(id: number) {
+        const observer = {
+            next: (res) => {
+                this.AllData()
+            },
+            error: (err) => {
+                this.errors = err.error.errros;
+            }
+        }
+        this.clientserv.deleteClient(id).subscribe(observer)
+    }
 
-this.clientserv.params = this.clientserv.params.set("search", event);
+    showClient(id: number) {
+        const observer = {
+            next: (res) => {
+                this.clientForShow = res.data
+            },
+            error: (err) => {
+                this.errors = err.error.errros;
+            }
+        }
+        this.clientserv.getClientid(id).subscribe(observer);
+    }
 
-this.AllData();
-}
+    search(event) {
+
+        this.clientserv.params = this.clientserv.params.set("search", event);
+
+        this.AllData();
+    }
+
+    pageChangeEvent(event: number) {
+        this.p = event;
+        this.AllData();
+    }
 }

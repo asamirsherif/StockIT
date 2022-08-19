@@ -188,7 +188,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let client of data">
+            <tr *ngFor="let client of data | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}">
                 <td>{{client.code}}</td>
                 <td>{{client.name}}</td>
                 <td>{{client.phone}}</td>
@@ -226,7 +226,8 @@
                                     <div id="name"
                                         *ngIf="editClientForm.controls['name'].touched &&editClientForm.controls['name'].invalid || submitted && editClientForm.controls['name'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="editClientForm.controls['name'].errors?.['required']">This field is required</small>
+                                        <small *ngIf="editClientForm.controls['name'].errors?.['required']">This field
+                                            is required</small>
                                     </div>
 
                                 </div>
@@ -239,8 +240,10 @@
                                     <div id="email"
                                         *ngIf="editClientForm.controls['email'].touched &&editClientForm.controls['email'].invalid|| submitted && editClientForm.controls['email'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="editClientForm.controls['email'].errors?.['required']">This field is required</small>
-                                        <small *ngIf="editClientForm.controls['email'].errors?.['email']">This field is email</small>
+                                        <small *ngIf="editClientForm.controls['email'].errors?.['required']">This field
+                                            is required</small>
+                                        <small *ngIf="editClientForm.controls['email'].errors?.['email']">This field is
+                                            email</small>
                                     </div>
                                     <div class="form-text text-danger">
                                         <small *ngIf="errors?.email">{{errors?.email}}</small>
@@ -273,7 +276,8 @@
                                     <div id="country"
                                         *ngIf="editClientForm.controls['country'].touched &&editClientForm.controls['country'].invalid|| submitted && editClientForm.controls['country'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="editClientForm.controls['country'].errors?.['required']">This field is required</small>
+                                        <small *ngIf="editClientForm.controls['country'].errors?.['required']">This
+                                            field is required</small>
                                     </div>
                                 </div>
                             </div>
@@ -285,7 +289,8 @@
                                     <div id="city"
                                         *ngIf="editClientForm.controls['city'].touched &&editClientForm.controls['city'].invalid|| submitted && editClientForm.controls['city'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="editClientForm.controls['city'].errors?.['required']">This field is required</small>
+                                        <small *ngIf="editClientForm.controls['city'].errors?.['required']">This field
+                                            is required</small>
                                     </div>
                                 </div>
                             </div>
@@ -297,7 +302,8 @@
                                     <div id="address"
                                         *ngIf="editClientForm.controls['address'].touched &&editClientForm.controls['address'].invalid|| submitted && editClientForm.controls['address'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="editClientForm.controls['address'].errors?.['required']">This field is required</small>
+                                        <small *ngIf="editClientForm.controls['address'].errors?.['required']">This
+                                            field is required</small>
                                     </div>
                                 </div>
                             </div>
@@ -362,12 +368,6 @@
 
         </tbody>
     </table>
-    <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
-        aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
-                [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-    </ngb-pagination>
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+    </pagination-controls>
 </body>
