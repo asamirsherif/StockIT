@@ -12,11 +12,8 @@ import { IProduct } from 'app/interfaces/iproduct';
 export class ProductlistComponent implements OnInit {
   public pageBasicText = 3;
   products:IProduct;
-
-  constructor(
-    private _productService:ProductService,
-    private _activeRouter:ActivatedRoute
-    ) { }
+  searchInput = "";
+  constructor(private _productService:ProductService,private _activeRouter:ActivatedRoute) { }
 
 
 
@@ -37,6 +34,25 @@ export class ProductlistComponent implements OnInit {
   }
 
 
+  destroy(id: number) {
 
+    const observer = {
+      next: (res) => {
+        console.log(id);
+        this.getAllProducts();
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    }
+ 
+    this._productService.destroy(id).subscribe(observer)
+
+  }
+
+  search(event) {
+    this._productService.params = this._productService.params.set("search", event)
+    this.getAllProducts();
+  }
 
 }

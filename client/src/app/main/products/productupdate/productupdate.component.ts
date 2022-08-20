@@ -1,9 +1,6 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
+import { FormGroup, FormControl,Validators,FormBuilder,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AddbrandService } from "app/auth/service/addbrand.service";
@@ -183,6 +180,9 @@ export class ProductupdateComponent implements OnInit {
         const observed = {
           next: (res) => {
             this._router.navigate(['productlist'])
+          },
+          error: (error: HttpErrorResponse) => {
+            this.errors = error.error.errors;
           },
         };
 

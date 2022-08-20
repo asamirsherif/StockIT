@@ -3,11 +3,11 @@
     <hr>
     <div class="container row">
         <div class="col-md-4">
-            <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
-            </form>
+          <form class="form-inline col-md-12 mb-1">
+            <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+            <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+              class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
+          </form>
         </div>
         <div class="col-md-8 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
@@ -74,8 +74,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Image</th>
+                
                 <th scope="col">Name</th>
+                <th scope="col">Image</th>
                 <th scope="col">Code</th>
                 <th scope="col">Category</th>
                 <th scope="col">Brand</th>
@@ -87,8 +88,9 @@
         </thead>
         <tbody class="table-group-divider">
             <tr *ngFor="let product of products; let i = index">
-                <td><img src="{{ product.images }}"></td>
+                
                 <td>{{ product.name }}</td>
+                <td><img src="{{ product.images }}"></td>
                 <td>{{ product.code }}</td>
                 <td>{{ product.category }}</td>
                 <td>{{ product.brand }}</td>
@@ -97,7 +99,7 @@
                 <td>99</td>
                 <td> <button class="btn btn-sm btn-primary" routerLink="../productdetails/{{product.id}}"><i data-feather="eye"[size]="22"></i>
                 </button><button class="btn btn-sm btn-success" routerLink="../productupdate/{{product.id}}"><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </i></button>  <button class="btn btn-sm btn-danger" (click)="destroy(product.id)"><i data-feather="x-circle"  [size]="24"></i>
                 </button></td>    
             </tr>
         </tbody>
