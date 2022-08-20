@@ -161,22 +161,22 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="salesUnit">Sales Unit</label>
       <div class="col-md-12">
-        <select class="form-select col-md-12" aria-label="Default select example" formControlName="unit_sale_id"
+        <select class="form-select col-md-12" aria-label="Default select example" required="" formControlName="unit_sale_id"
           [(ngModel)]="sale_unit">
           <option selected *ngFor="let unit of units" [value]="unit.id">
             {{ unit.name }}
           </option>
         </select>
-        <div id="unit_sale_id" *ngIf="
-            (productupdateForm.controls['unit_sale_id'].touched &&
-              productupdateForm.controls['unit_sale_id'].invalid) ||
-            (submitted && productupdateForm.controls['unit_sale_id'].invalid)
-          " class="form-text text-danger">
-          <small *ngIf="productupdateForm.controls['unit_sale_id'].errors?.['required']">This field is required</small>
-        </div>
-        <div class="form-text text-danger">
-          <small *ngIf="errors?.unit_sale_id">{{ errors?.unit_sale_id }}</small>
-        </div>
+        <div id="unit_sale_id"
+        *ngIf="productupdateForm.controls['unit_sale_id'].touched && productupdateForm.controls['unit_sale_id'].invalid || submitted && productupdateForm.controls['unit_sale_id'].invalid"
+        class="form-text text-danger">
+        <small *ngIf="productupdateForm.controls['unit_sale_id'].errors?.['required']">This field is
+            required</small>
+    </div>
+
+    <div class="form-text text-danger">
+        <small *ngIf="errors?.unit_sale_id">{{errors?.unit_sale_id}}</small>
+    </div>
       </div>
     </div>
 

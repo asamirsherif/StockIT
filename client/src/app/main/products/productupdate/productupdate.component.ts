@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl,Validators,FormBuilder,
 } from "@angular/forms";
@@ -42,10 +43,6 @@ export class ProductupdateComponent implements OnInit {
   productupdateForm: FormGroup;
 
   constructor(
-
-
-
-    
     private fb: FormBuilder,
     public _router: Router,
     private _productService: ProductService,
@@ -183,6 +180,9 @@ export class ProductupdateComponent implements OnInit {
         const observed = {
           next: (res) => {
             this._router.navigate(['productlist'])
+          },
+          error: (error: HttpErrorResponse) => {
+            this.errors = error.error.errors;
           },
         };
 

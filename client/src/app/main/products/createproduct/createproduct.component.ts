@@ -9,6 +9,8 @@ import { AddbrandService } from "app/auth/service/addbrand.service";
 import { ICategory } from 'app/interfaces/icategory';
 import { Unit } from 'app/interfaces/unit';
 import { IProduct } from 'app/interfaces/iproduct';
+import { ToastrService } from 'ngx-toastr';
+
 import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: "app-createproduct",
@@ -29,8 +31,10 @@ export class CreateproductComponent implements OnInit {
   data: any
   errors: any = {};
 
+
   createProductForm: FormGroup;
-  constructor(private fb: FormBuilder, public _router: Router, public brandserv: AddbrandService, public categoryserv: CategorytService, public unitserv: UnitservService, public productserv: ProductService) {
+  constructor(private fb: FormBuilder, public _router: Router, public brandserv: AddbrandService, public categoryserv: CategorytService, public unitserv: UnitservService, public productserv: ProductService,    private _toastr: ToastrService,
+    ) {
     this.createProductForm = new FormGroup({
       name: new FormControl("", Validators.required),
       code: new FormControl("", Validators.required),
@@ -97,20 +101,24 @@ export class CreateproductComponent implements OnInit {
 
   AddProduct() {
     this.submitted = true;
+
     if (this.createProductForm.valid) {
 
       const observer = {
         next: (res) => {
+          this._toastr.success('New product has been added');
           console.log(res, 'done');
+          this._router.navigate(['productlist'])
+
         },
         error: (error: HttpErrorResponse) => {
+          this._toastr.error('Make sure for your data!');
           this.errors = error.error.errors;
         },
       }
 
       this.productserv.store(this.createProductForm.value).subscribe(observer)
       console.log(this.createProductForm.value);
-      this._router.navigate(['productlist'])
 
 
     }
