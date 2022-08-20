@@ -8,6 +8,6 @@ class RefFilter
 {
     public function filter(Builder $builder, $value)
     {
-        return $builder->orWhere('Ref', "LIKe", "%" . $value . "%");
+        return $builder->Where('Ref', "LIKe", "%" . $value . "%");
     }
 }

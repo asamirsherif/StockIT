@@ -6,6 +6,7 @@ import { CoreCommonModule } from '@core/common.module';
 
 import { CreatepurchasesComponent } from './Createpurchases.component';
 
+import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module';
 
 const routes = [
   {
@@ -17,7 +18,7 @@ const routes = [
 
 @NgModule({
   declarations: [CreatepurchasesComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,CoreTouchspinModule],
   exports: [CreatepurchasesComponent ]
 })
 export class CreatepurchasesModule {}

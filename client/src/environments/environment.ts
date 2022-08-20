@@ -5,10 +5,12 @@
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: 'https://stockit.test/api/public',
-  client_id: 1,
-  client_secret: 'nUb63Hp6B5nU5tGgkqt5PaoPXNVoSj6cdtK4dhbO',
-  grant_type: 'password'
+
+  apiUrl: "http://localhost:8000",
+  client_id: 7,
+  client_secret: "cjydB78Yoqf4k7ypOXZcMWPnEdrUAmjJCjqkqiBG",
+  grant_type: "password",
+
 };
 
 /*

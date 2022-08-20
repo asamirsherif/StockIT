@@ -8,6 +8,6 @@ class PurproviderIDFilter
 {
     public function filter(Builder $builder, $value)
     {
-        return $value ? $builder->orWhere('provider_id', $value) : $builder;
+        return $builder->Where('provider_id', $value);
     }
 }

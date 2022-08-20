@@ -1,17 +1,73 @@
 <body>
-    <h2>Currency
-    </h2>
+    <h2>Currency</h2>
     <hr>
     <div class=" row">
         <div class="col-md-9">
             <form class="form-inline col-md-12 mb-1">
                 <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
+                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+                    class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search" />
             </form>
         </div>
         <div class="col-md-3 ">
-            <button type="button" class="btn btn-primary"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-primary" (click)="openModal(contentModal)"><i
+                    data-feather="plus-circle"></i>Create</button>
+            <!-- Modal -->
+            <ng-template #contentModal let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Create</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class=" col-md-12" [formGroup]="createcurrency" (ngSubmit)="AddCurr()">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label " for="Currency Code">Currency Code</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="Currency Code" aria-label="Date" id="CurrencyCode" name="code"
+                                    formControlName="code">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label " for="Currency Name">Currency Name</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="Currency Name"
+                                    placeholder="Currency Name" aria-label="Date" id="CurrencyName" name="CurrencyName"
+                                    formControlName="name" minlength="2" maxlength="192">
+                                <div id="name"
+                                    *ngIf="createcurrency.controls['name'].touched && createcurrency.controls['name'].invalid || submitted && createcurrency.controls['name'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="createcurrency.controls['name'].errors?.['required']">This field is
+                                        required</small>
+                                    <small *ngIf="createcurrency.controls['name'].errors?.['minlength']">minlength is
+                                        more 2</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label " for="Symbol">Symbol</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="Symbol"
+                                    aria-label="Date" id="Symbol" name="symbol" formControlName="symbol">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </ng-template>
         </div>
     </div>
     <table class="table">
@@ -23,12 +79,82 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody class="table-group-divider" *ngFor="let currency of data; let i = index">
             <tr>
-                <td>EGP</td>
-                <td>jkk</td>
-                <td>ddvvv</td>
-                <td><i data-feather="edit" class="btn-outline-success" [size]="24"></i><i data-feather="x-circle" class="btn-outline-danger" [size]="24"></i></td>
+                <td>{{ currency.code }}</td>
+                <td>{{ currency.name }}</td>
+                <td>{{ currency.symbol }}</td>
+                <td>
+                    <button class="btn btn-sm btn-success" (click)="editCurr(currency.id); openModal2(contentModal2)">
+                        <i data-feather="edit" [size]="24"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteCurr(currency.id)">
+                        <i data-feather="x-circle" [size]="24"></i>
+                    </button>
+                </td>
             </tr>
+            <!-- Modal -->
+            <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form class=" col-md-12" [formGroup]="editCurrForm" (ngSubmit)="updateCurr()">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label " for="Currency Code">Currency Code</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text"
+                                    placeholder="Currency Code" aria-label="Date" id="CurrencyCode" name="code"
+                                    formControlName="code">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label " for="Currency Name">Currency Name</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="Currency Name"
+                                    placeholder="Currency Name" aria-label="Date" id="CurrencyName" name="name"
+                                    formControlName="name">
+                            </div>
+                            <div id="name"
+                                *ngIf="editCurrForm.controls['name'].touched && editCurrForm.controls['name'].invalid || submitted && editCurrForm.controls['name'].invalid"
+                                class="form-text text-danger">
+                                <small *ngIf="editCurrForm.controls['name'].errors?.['required']">This field is
+                                    required</small>
+                                <small *ngIf="editCurrForm.controls['name'].errors?.['minlength']">minlength is more
+                                    2</small>
+                            </div>
+                            <div class="form-text text-danger">
+                                <small *ngIf="errors?.name">{{errors?.name}}</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label " for="Symbol">Symbol</label>
+                            <div class="col-md-12 ">
+                                <input class="form-control form-control col-md-12" type="text" placeholder="Symbol"
+                                    aria-label="Date" id="Symbol" name="symbol" formControlName="symbol">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </ng-template>
         </tbody>
     </table>
+    <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
+        aria-label="Custom pagination">
+        <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
+                [class]="'font-weight-bolder'"></span>Prev
+        </ng-template>
+        <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+        </ng-template>
+    </ngb-pagination>

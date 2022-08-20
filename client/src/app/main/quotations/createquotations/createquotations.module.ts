@@ -6,6 +6,8 @@ import { CoreCommonModule } from '@core/common.module';
 
 import {CreatequotationsComponent} from './Createquotations.component';
 
+import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module';
+
 
 const routes = [
   {
@@ -17,7 +19,7 @@ const routes = [
 
 @NgModule({
   declarations: [CreatequotationsComponent],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,CoreTouchspinModule],
   exports: [CreatequotationsComponent]
 })
 export class CreatequotationsModule {}

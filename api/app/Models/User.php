@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Filters\User\UserFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class User extends Authenticatable
 {
@@ -69,5 +72,9 @@ class User extends Authenticatable
         return !!$role->intersect($this->roles)->count();
     }
     
+    public function scopeFilter(Builder $builder, Request $request)
+    {
+        return (new UserFilter($request))->filter($builder);
+    }
     
 }

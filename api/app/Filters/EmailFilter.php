@@ -6,6 +6,6 @@ class EmailFilter
 {
     public function filter($builder, $value)
     {
-        return $builder->orWhere('email', $value);
+        return $builder->Where('email', "LIKE", "%" . $value . "%");
     }
 }

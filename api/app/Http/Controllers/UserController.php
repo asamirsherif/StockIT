@@ -15,63 +15,45 @@ use Illuminate\Validation\Rule;
 use Laravel\Passport\RefreshToken;
 use Laravel\Passport\Token;
 
+use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\User\UserRepository;
+use App\Traits\ResponseTrait;
+use App\Http\Resources\User\UserResource;
+
 class UserController extends BaseController
 {
-    public function index(request $request)
+    use ResponseTrait;
+
+    private UserRepositoryInterface $saleRepo;
+
+    public function __construct(UserRepositoryInterface $userRepo)
+    {
+        $this->userRepo = $userRepo;
+    }
+
+    public function index(Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'view', User::class);
-        // How many items do you want to display.
-        $perPage = $request->limit;
-        $pageStart = \Request::get('page', 1);
-        // Start displaying items from this number;
-        $offSet = ($pageStart * $perPage) - $perPage;
-        $order = $request->SortField;
-        $dir = $request->SortType;
-        $helpers = new helpers();
-        // Filter fields With Params to retrieve
-        $columns = array(0 => 'username', 1 => 'status', 2 => 'phone', 3 => 'email');
-        $param = array(0 => 'like', 1 => '=', 2 => 'like', 3 => 'like');
-        $data = array();
+        
+        if ($request->filled('search')) {
+            $users = $this->userRepo->multiSearch($request)
+                ->paginate($request->perPage);
+            $users->appends(['search' => $request->search]);
+        } else
+            $users = User::filter($request)->paginate($request->perPage);
 
-        $Role = Auth::user()->roles()->first();
-        $ShowRecord = Role::findOrFail($Role->id)->inRole('record_view');
 
-        $users = User::where(function ($query) use ($ShowRecord) {
-            if (!$ShowRecord) {
-                return $query->where('id', '=', Auth::user()->id);
-            }
-        });
-
-        //Multiple Filter
-        $Filtred = $helpers->filter($users, $columns, $param, $request)
-        // Search With Multiple Param
-            ->where(function ($query) use ($request) {
-                return $query->when($request->filled('search'), function ($query) use ($request) {
-                    return $query->where('username', 'LIKE', "%{$request->search}%")
-                        ->orWhere('firstname', 'LIKE', "%{$request->search}%")
-                        ->orWhere('lastname', 'LIKE', "%{$request->search}%")
-                        ->orWhere('email', 'LIKE', "%{$request->search}%")
-                        ->orWhere('phone', 'LIKE', "%{$request->search}%");
-                });
-            });
-        $totalRows = $Filtred->count();
-        if($perPage == "-1"){
-            $perPage = $totalRows;
-        }
-        $users = $Filtred->offset($offSet)
-            ->limit($perPage)
-            ->orderBy($order, $dir)
-            ->get();
-
-        $roles = Role::where('deleted_at', null)->get(['id', 'name']);
-        // $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
-
-        return response()->json([
-            'users' => $users,
-            'roles' => $roles,
-            // 'warehouses' => $warehouses,
-            'totalRows' => $totalRows,
-        ]);
+            $users->appends([
+                "firstname" => $request->firstname,
+                "lastname" => $request->lastname,
+                "username" => $request->username,
+                "email" => $request->email,
+                "phone" => $request->phone,
+                "status" => $request->status,
+                "perPage" => $request->perPage
+            ]);
+            
+            return UserResource::collection($users);
     }
 
     public function getUserAuth(Request $request)
@@ -289,9 +271,7 @@ class UserController extends BaseController
         $data = [];
         if ($roles) {
             foreach ($roles->permissions as $permission) {
-                $item[$permission->name]['slug'] = $permission->name;
-                $item[$permission->name]['id'] = $permission->id;
-
+                $item[] = $permission->name;
             }
             $data[] = $item;
         }

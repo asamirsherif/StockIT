@@ -1,31 +1,39 @@
 <h2>Create Product</h2>
 <hr>
 
-<form class="row col-md-12" [formGroup]="createproduct" (ngSubmit)="formSubmit()">
+<form class="row col-md-12" [formGroup]="createProductForm" (ngSubmit)="AddProduct()">
     <div class="col-md-8 row">
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="product_name">PRODUCT NAME</label>
+            <label class="col-md-8 control-label" for="name">PRODUCT NAME</label>
             <div class="col-md-12">
-                <input id="product_name" name="productname" placeholder="PRODUCT NAME" class="form-control input-md"
-                    required type="text" formControlName="productname">
-                <div id="productname" *ngIf="createproduct.controls['productname'].touched &&createproduct.controls['productname'].invalid"
+                <input id="name" name="name" placeholder="PRODUCT NAME" class="form-control input-md" required
+                    type="text" formControlName="name">
+                <div id="name"
+                    *ngIf="createProductForm.controls['name'].touched &&createProductForm.controls['name'].invalid || submitted && createProductForm.controls['name'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['productname'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['name'].errors?.['required']">This field is
                         required</small>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.name">{{errors?.name}}</small>
                 </div>
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="product_id">PRODUCT ID</label>
+            <label class="col-md-8 control-label" for="code">PRODUCT Code</label>
             <div class="col-md-12">
-                <input id="product_id" name="product_id" placeholder="PRODUCT ID" class="form-control input-md"
-                    required="" type="text" formControlName="productid">
-                <div id="productid"
-                    *ngIf="createproduct.controls['productid'].touched &&createproduct.controls['productid'].invalid"
+                <input id="code" name="product_id" placeholder="PRODUCT Code" class="form-control input-md" required=""
+                    type="text" formControlName="code">
+                <div id="code"
+                    *ngIf="createProductForm.controls['code'].touched &&createProductForm.controls['code'].invalid || submitted && createProductForm.controls['code'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['productid'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['code'].errors?.['required']">This field is
                         required</small>
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.code">{{errors?.code}}</small>
                 </div>
             </div>
         </div>
@@ -33,9 +41,22 @@
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label " for="category">Category</label>
             <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Open this select menu</option>
+                <select class="form-select col-md-12 " aria-label="Default select example"
+                    formControlName="category_id">
+                    <option *ngFor="let item of CategoryArray" [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
+                <div id="category_id"
+                    *ngIf="createProductForm.controls['category_id'].touched &&createProductForm.controls['category_id'].invalid || submitted && createProductForm.controls['category_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createProductForm.controls['category_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.category_id">{{errors?.category_id}}</small>
+                </div>
             </div>
         </div>
 
@@ -43,72 +64,136 @@
             <label class="col-md-8 control-label" for="Brand">Brand</label>
             <div class="col-md-12">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>choose Brand</option>
+                    <option *ngFor="let item of BrandArray" [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
+
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="Barcode Symbology">Barcode Symbology</label>
+            <label class="col-md-8 control-label" for="type_barcode">Barcode Symbology</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
+                <select class="form-select col-md-12 " aria-label="Default select example"
+                    formControlName="type_barcode">
                     <option selected>Choose Symbology</option>
                 </select>
+                <div id="type_barcode"
+                    *ngIf="createProductForm.controls['type_barcode'].touched &&createProductForm.controls['type_barcode'].invalid || submitted && createProductForm.controls['type_barcode'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createProductForm.controls['type_barcode'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.type_barcode">{{errors?.type_barcode}}</small>
+                </div>
+
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="productCost">PRODUCT Cost</label>
+            <label class="col-md-8 control-label" for="cost">PRODUCT Cost</label>
             <div class="col-md-12">
-                <input id="productcost" name="productcost" placeholder="PRODUCT COST" class="form-control input-md"
-                    required="" type="text" formControlName="productcost">
-                <div id="productcost"
-                    *ngIf="createproduct.controls['productcost'].touched &&createproduct.controls['productcost'].invalid"
+                <input id="cost" name="cost" placeholder="PRODUCT COST" class="form-control input-md" required=""
+                    type="number" formControlName="cost">
+                <div id="type_barcode"
+                    *ngIf="createProductForm.controls['cost'].touched &&createProductForm.controls['cost'].invalid || submitted && createProductForm.controls['cost'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['productcost'].errors?.['required']">This field is
-                        required</small>
+                    <small *ngIf="createProductForm.controls['cost'].errors?.['required']">This field is
+                        required number</small>  
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.cost">{{errors?.cost}}</small>
                 </div>
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="productprice">PRODUCT price</label>
+            <label class="col-md-8 control-label" for="price">PRODUCT price</label>
             <div class="col-md-12">
-                <input id="productprice" name="productprice" placeholder="PRODUCT PRICE" class="form-control input-md"
-                    required="" type="text" formControlName="productprice">
-                <div id="productprice"
-                    *ngIf="createproduct.controls['productprice'].touched &&createproduct.controls['productprice'].invalid"
+                <input id="price" name="price" placeholder="PRODUCT PRICE" class="form-control input-md" required=""
+                    type="number" formControlName="price">
+                <div id="price"
+                    *ngIf="createProductForm.controls['price'].touched &&createProductForm.controls['price'].invalid || submitted && createProductForm.controls['price'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['productprice'].errors?.['required']">This field is
+                    <small *ngIf="createProductForm.controls['price'].errors?.['required']">This field is
                         required</small>
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.price">{{errors?.price}}</small>
                 </div>
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="ProductUnit">Product Unit</label>
+            <label class="col-md-8 control-label" for="unit_id">Product Unit</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose ProductUnit</option>
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="unit_id">
+                    <option *ngFor="let item of UnitArray" [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
+                <div id="unit_id"
+                    *ngIf="createProductForm.controls['unit_id'].touched &&createProductForm.controls['unit_id'].invalid || submitted && createProductForm.controls['unit_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createProductForm.controls['unit_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.unit_id">{{errors?.unit_id}}</small>
+                </div>
+
             </div>
         </div>
 
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="salesUnit">Sales Unit</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Sales Unit</option>
+                <select class="form-select col-md-12 " aria-label="Default select example"
+                    formControlName="unit_sale_id">
+                    <option *ngFor="let item of UnitArray" [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
+
+                <div id="unit_sale_id"
+                    *ngIf="createProductForm.controls['unit_sale_id'].touched &&createProductForm.controls['unit_sale_id'].invalid || submitted && createProductForm.controls['unit_sale_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createProductForm.controls['unit_sale_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.unit_sale_id">{{errors?.unit_sale_id}}</small>
+                </div>
             </div>
         </div>
 
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="ProductUnit">Purchase Unit</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12" aria-label="Default select example">
-                    <option selected>Choose PurchaseUnit</option>
+                <select class="form-select col-md-12" aria-label="Default select example"
+                    formControlName="unit_purchase_id">
+                    <option *ngFor="let item of UnitArray" [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
+
+                <div id="unit_purchase_id"
+                    *ngIf="createProductForm.controls['unit_purchase_id'].touched &&createProductForm.controls['unit_purchase_id'].invalid || submitted && createProductForm.controls['unit_purchase_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createProductForm.controls['unit_purchase_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.unit_purchase_id">{{errors?.unit_purchase_id}}</small>
+                </div>
             </div>
         </div>
 
@@ -116,25 +201,24 @@
             <label class="col-md-8 control-label" for="stockalert">Stock Alert</label>
             <div class="col-md-12">
                 <input id="stockalert" name="stockalert" placeholder="0" class="form-control input-md" required=""
-                    type="text" formControlName="stockalert">
-                <div id="stockalert"
-                    *ngIf="createproduct.controls['stockalert'].touched &&createproduct.controls['stockalert'].invalid"
-                    class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['stockalert'].errors?.['required']">This field is
-                        required</small>
-                </div>
+                    type="number" formControlName="stockalert">
+
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
+            <label class="col-md-8 control-label" for="order_tax">Order Tax</label>
             <div class="col-md-12">
-                <input id="ordertax" name="ordertax" placeholder="Order Tax" class="form-control input-md" required=""
-                    type="text" formControlName="ordertax">
-                <div id="ordertax"
-                    *ngIf="createproduct.controls['ordertax'].touched &&createproduct.controls['ordertax'].invalid"
+                <input id="order_tax" name="order_tax" placeholder="Order Tax" class="form-control input-md" required=""
+                    type="number" formControlName="order_tax">
+                <div id="order_tax"
+                    *ngIf="createProductForm.controls['order_tax'].touched &&createProductForm.controls['order_tax'].invalid  || submitted && createProductForm.controls['order_tax'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="createproduct.controls['ordertax'].errors?.['required']">This field is required</small>
+                    <small *ngIf="createProductForm.controls['order_tax'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.order_tax">{{errors?.order_tax}}</small>
                 </div>
             </div>
         </div>
@@ -142,9 +226,19 @@
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="ProductUnit">Tax Type</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Extusive</option>
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="tax_method">
+                    <option selected>Exclusive</option>
+                    <option selected>Inclusive</option>
                 </select>
+                <div id="tax_method"
+                    *ngIf="createProductForm.controls['tax_method'].touched &&createProductForm.controls['tax_method'].invalid  || submitted && createProductForm.controls['tax_method'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="createProductForm.controls['tax_method'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.tax_method">{{errors?.tax_method}}</small>
+                </div>
             </div>
         </div>
         <div class="form-group col-md-12 ">
@@ -153,7 +247,7 @@
         </div>
     </div>
 
-    <div class="col-md-4"> 
+    <div class="col-md-4">
         <div class="frame form-group col-md-12">
             <div class="center">
                 <div class="title">
@@ -162,7 +256,7 @@
 
                 <div class="dropzone">
                     <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
-                    <input type="file" class="upload-input" formControlName="image"/>
+                    <input type="file" class="upload-input" formControlName="image" />
                 </div>
 
                 <button type="button" class="btn" name="uploadbutton">Upload file</button>

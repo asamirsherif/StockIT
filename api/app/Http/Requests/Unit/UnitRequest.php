@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Unit;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UnitRequest extends FormRequest
 {
@@ -24,11 +25,11 @@ class UnitRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','unique:units,name', 'string', 'min:3'],
-            'ShortName' => ['required', 'unique:units,ShortName', 'string'],
-            'base_unit' => ['integer'],
-            'operator' => ['required'],
-            'operator_value' => ['required', 'numeric'],
+            'name' => ['required', Rule::unique('units')->whereNull('deleted_at'), 'string', 'min:3'],
+            'ShortName' => ['required', Rule::unique('units')->whereNull('deleted_at'), 'string'],
+            // 'base_unit' => ['integer'],
+            // 'operator' => ['required'],
+            // 'operator_value' => ['required', 'numeric'],
         ];
     }
 }

@@ -53,7 +53,7 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user)
     {
         $permission = Permission::where('name', 'users_edit')->first();
         return $user->hasRole($permission->roles);
@@ -66,7 +66,7 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user)
     {
         $permission = Permission::where('name', 'users_delete')->first();
         return $user->hasRole($permission->roles);
@@ -79,7 +79,7 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user)
     {
         //
     }

@@ -5,20 +5,21 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoreCommonModule } from '@core/common.module';
 
 import { ProfitAndLossComponent } from './profit-and-loss.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-
+import { FooterModule } from 'app/layout/components/footer/footer.module';
+//  chart 
 const routes = [
   {
     path: '',
-    component: ProfitAndLossComponent ,
+    component: ProfitAndLossComponent,
     data: { animation: 'sample' }
   }
 ];
 
 @NgModule({
-  declarations: [ProfitAndLossComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule],
-  exports: [ProfitAndLossComponent ]
+  declarations: [ProfitAndLossComponent],
+  imports: [RouterModule.forChild(routes), TranslateModule, CoreCommonModule, NgbModule, FooterModule],
+  exports: [ProfitAndLossComponent]
 })
-export class ProfitAndLossModule {}
+export class ProfitAndLossModule { }

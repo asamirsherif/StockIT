@@ -4,6 +4,7 @@ namespace App\Http\Resources\Purchase;
 
 use App\Http\Resources\Provider\ProviderResource;
 use App\Http\Resources\PurchaseDetail\PurchaseDetailCollection;
+use App\Http\Resources\PurchaseDetail\PurchaseDetailResource;
 use App\Http\Resources\Warehouse\WarehouseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -33,7 +34,7 @@ class PurchaseResource extends JsonResource
             'status'         => $this->status,
             'payment_status' => $this->payment_status,
             'notes'          => $this->notes,
-            'details'        => new PurchaseDetailCollection($this->purchaseDetails)
+            'purchaseDetails' => PurchaseDetailResource::collection($this->purchaseDetails)
 
         ];
     }

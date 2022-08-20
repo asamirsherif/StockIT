@@ -10,6 +10,7 @@ use App\Models\Currency;
 use App\Repositories\Currency\CurrencyRepositoryInterface;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
+use App\Models\Permission;
 
 
 
@@ -24,7 +25,10 @@ class CurrencyController extends Controller
 
     public function __construct(CurrencyRepositoryInterface $currencyRepo)
     {
+        
         $this->currencyRepo = $currencyRepo;
+        // $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
     }
 
 
@@ -35,7 +39,9 @@ class CurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
         if ($request->filled('search')) {
             $currencies = $this->currencyRepo->multiSearch($request)
                 ->paginate($request->perPage);
@@ -54,7 +60,9 @@ class CurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CurrencyRequest $request)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
         $created = $this->currencyRepo->create($request);
         if ($created)
             return $this->succWithData(new CurrencyResource($created));
@@ -68,9 +76,18 @@ class CurrencyController extends Controller
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $this->currencyRepo->read($id);
+    public function show($id,Request $request)
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
+        // $this->currencyRepo->read($id);
+        
+        $currency = Currency::find($id);
+        if($currency)
+            return $this->succWithData(new CurrencyResource($currency),'currency found');
+        else
+            return $this->errMsg('currency not exist!');
+            
     }
 
     /**
@@ -81,7 +98,9 @@ class CurrencyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCurrencyRequest $request, $id)
-    {
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+
         $updated = $this->currencyRepo->update($request, $id);
         if ($updated)
             return $this->succWithData(new CurrencyResource($updated));
@@ -95,12 +114,14 @@ class CurrencyController extends Controller
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id,Request $request)
+    {   
+        $this->authorizeForUser($request->user('api'), 'view', Currency::class);
+        
         $currency = Currency::find($id);
         if (!$currency)
             return $this->errMsg("This Currency doesnt exist");
-        $deleted = $this->brandRepo->delete($id);
+        $deleted = $this->currencyRepo->delete($id);
         if ($deleted)
             return $this->succWithData(new CurrencyResource($currency), "Brand deleted");
         else

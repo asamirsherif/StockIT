@@ -2,11 +2,16 @@
 
 export class User {
   id: number;
+  username: string;
+  phone: string;
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   avatar: string;
-  role: Role;
-  token?: string;
+  role_id: number;
+  status: number;
+  access_token: string;
+  permissions: string[];
+  success: boolean;
 }

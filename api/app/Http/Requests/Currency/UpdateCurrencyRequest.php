@@ -14,7 +14,7 @@ class UpdateCurrencyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class UpdateCurrencyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['sometimes','required', Rule::unique('brands')->ignore($this->route('brand'))->whereNull('deleted_at'), 'min:2', 'max:192'],
+            'name' => ['sometimes','required', Rule::unique('currencies')->ignore($this->route('currency'))->whereNull('deleted_at'), 'min:2', 'max:192'],
 
         ];
     }

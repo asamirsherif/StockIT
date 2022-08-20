@@ -13,25 +13,35 @@
             <label class="col-md-8 control-label " for="supplier">Supplier</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Supplier</option>
-                </select>
+                    <option *ngFor="let item of clientArray" [value]="item.id">
+                        {{ item.name }}
+                    </option> 
+                                </select>
             </div>
         </div>
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label " for="category"> Warehouse</label>
             <div class="col-md-12 ">
                 <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Warehouse</option>
-                </select>
+                    <option *ngFor="let item of WarehousArray" [value]="item.id">
+                        {{ item.name }}
+                    </option>          
+                      </select>
             </div>
         </div>
     </div>
     <div class="col-md-12">
         <label class="col-md-4 control-label" for="product">Product</label>
-        <div class="col-md-12 row">
-            <span class="switch-icon-left col-md-1 icon "><i data-feather="search"></i></span>
-            <input class="form-control form-control col-md-11" type="text" placeholder="Search Product by name"
-                aria-label="Search">
+        <div class="col-md-12 row panel panel-primary">
+            <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
+            <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput" (keyup)="fetchSeries(searchbar.value)" placeholder="Search Here" formControlName="search" />
+           <div class="col-md-12 list-group">
+            <ul class="col-md-12  ">
+                <li class="list-group-item" *ngFor="let show of searchResult" (click)="showDetails(show)" [hidden]="toggle">
+                    <p> {{ show.name }}</p>
+                </li>
+            </ul>
+        </div>
         </div>
     </div>
     <h4>Order items</h4>
@@ -46,18 +56,26 @@
                 <th scope="col">Discount</th>
                 <th scope="col">Tax</th>
                 <th scope="col">Subtotal</th>
+                <th></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let x of selectedInput; let i =index">
+                <td>{{ x.name }}</td>
+                <td>{{ x.code }}</td>
+                <td>{{ x.stock }}</td>
+                    <td>
+                    <div class="badge badge-pill badge-light-warning">496.95 ك</div>
+                    </td>
+                    <td><core-touchspin [numberValue]="0" (onChange)="countChange($event)"></core-touchspin></td>
+                    <td>ريال 0.00	</td>
+                    <td>ريال 36.00	</td>
+                    <td >ريال 276.00</td> 
+                        
+                   <td><div class="col-md-4">
+                        <button class="btn btn-sm btn-danger"><i data-feather="x-circle" [size]="24"></i></button>
+                    </div>
+                    </td>
             </tr>
         </tbody>
     </table>
