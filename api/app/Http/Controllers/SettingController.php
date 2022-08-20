@@ -25,10 +25,9 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // $setting = $this->settingRepo->create($request);
-        return new SettingCollection($request);
+        return new SettingCollection(Setting::all());
     }
 
     /**
