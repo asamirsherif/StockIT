@@ -24,8 +24,9 @@ class PurchaseDetailResource extends JsonResource
             'tax_method' => $this->tax_method,
             'discount' => $this->discount,
             'discount_method' => $this->discount_method,
-            //'purchase' => new PurchaseResource($this->purchase),
+            'purchase_id' => $this->purchase->id,
             'product' => new ShowProductResource($this->product),
+            'product_id'=>$this->product->id,
             'product_variant_id' => $this->product_variant_id,
             'total' => $this->total,
             'quantity' => $this->quantity
