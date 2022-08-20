@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,5 +84,8 @@ Route::middleware([])->group(function () {
     Route::apiResource('products', ProductController::class);
     // purchase
     Route::apiResource('purchases', PurchaseController::class);
+
+    // settings
+    Route::apiResource('settings', SettingController::class);
 
 });

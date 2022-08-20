@@ -28,7 +28,7 @@ class SettingRepository implements SettingRepositoryInterface
             $setting->logo = $this->uploadImage($request, "/images/settings/");
             $setting->footer = $request->footer;
             $setting->developed_by = $request->developed_by;
-            $setting->default_language = $request->default_language;
+            $setting->default_language = "English";
             $setting->currency_id = $request->currency_id;
             $setting->client_id = $request->client_id;
             $setting->warehouse_id = $request->warehouse_id;
