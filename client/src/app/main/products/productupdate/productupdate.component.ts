@@ -11,6 +11,8 @@ import { IBrand } from "app/interfaces/ibrand";
 import { ICategory } from "app/interfaces/icategory";
 import { IProduct } from "app/interfaces/iproduct";
 import { Unit } from "app/interfaces/unit";
+import { ToastrService } from 'ngx-toastr';
+
 AddbrandService;
 
 @Component({
@@ -49,7 +51,8 @@ export class ProductupdateComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _brandService: AddbrandService,
     private _categorytService: CategorytService,
-    private _unitservService: UnitservService
+    private _unitservService: UnitservService,
+    private _toastr: ToastrService
   ) {
     this.productupdateForm = new FormGroup({
       name: new FormControl("", Validators.required),
@@ -179,9 +182,13 @@ export class ProductupdateComponent implements OnInit {
         
         const observed = {
           next: (res) => {
+            this._toastr.success(' product has been updated');
+
             this._router.navigate(['productlist'])
           },
           error: (error: HttpErrorResponse) => {
+            this._toastr.error('Make sure for your data!');
+
             this.errors = error.error.errors;
           },
         };
