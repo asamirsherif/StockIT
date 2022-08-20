@@ -25,6 +25,8 @@ use App\Repositories\Provider\ProviderRepository;
 use App\Repositories\Provider\ProviderRepositoryInterface;
 use App\Repositories\Purchase\PurchaseRepository;
 use App\Repositories\Purchase\PurchaseRepositoryInterface;
+use App\Repositories\Setting\SettingRepository;
+use App\Repositories\Setting\SettingRepositoryInterface;
 use App\Repositories\Sales_return\Sales_returnRepository;
 use App\Repositories\Sales_return\Sales_returnRepositoryInterface;
 use App\Repositories\Unit\UnitRepository;
@@ -34,6 +36,7 @@ use App\Repositories\Sale\SaleRepositoryInterface;
 use App\Repositories\Sale\SaleRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\User\UserRepository;
+
 
 class AppRepositoryProvider extends ServiceProvider
 {
@@ -89,6 +92,10 @@ class AppRepositoryProvider extends ServiceProvider
         // purchase
         $this->app->bind(PurchaseRepositoryInterface::class, PurchaseRepository::class);
 
+
+        // setting
+        $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
+
         //Sale
         $this->app->bind(SaleRepositoryInterface::class, SaleRepository::class);
 
@@ -98,6 +105,7 @@ class AppRepositoryProvider extends ServiceProvider
 
          //User
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+
     }
 
     /**

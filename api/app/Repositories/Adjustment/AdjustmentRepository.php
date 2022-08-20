@@ -114,7 +114,7 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
         foreach ($request->adjustmentDeatils as $adjDetail) {
             $productWarehouseModel= new ProductWarehouse();
             DB::transaction(function() use ($productWarehouseModel, $adjDetail, $request) {
-                $productWarehouseModel->create([
+                $productWarehouseModel->updateOrCreate([
                     'product_id'         => $adjDetail['product_id'],
                     'warehouse_id'       => $request['warehouse_id'],
                     'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id']: null,
@@ -128,7 +128,7 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
     public function updateAdjustmentDetails(Request $request, $id): array
     {
         // delete old details firstly
-        $this->deleteAdjustmentDetails($request, $id);
+        // $this->deleteAdjustmentDetails($request, $id);
 
         // start update of new details
         $adjustment = $this->read($id);
@@ -136,7 +136,7 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             foreach ($request->adjustmentDeatils as $adjDetail) {
                 $adjustmentDetailModel = $adjustment->adjustmentDeatils();
                 DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
-                    $adjustmentDetailModel->updateOrCreate([
+                    $adjustmentDetailModel->update([
                         'adjustment_id' => $id,
                         'quantity' => $adjDetail['quantity'],
                         'product_id' => $adjDetail['product_id'],
