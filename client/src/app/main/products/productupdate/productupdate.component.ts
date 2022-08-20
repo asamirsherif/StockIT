@@ -1,9 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
+import { FormGroup, FormControl,Validators,FormBuilder,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AddbrandService } from "app/auth/service/addbrand.service";
@@ -46,6 +42,10 @@ export class ProductupdateComponent implements OnInit {
   productupdateForm: FormGroup;
 
   constructor(
+
+
+
+    
     private fb: FormBuilder,
     public _router: Router,
     private _productService: ProductService,
