@@ -8,11 +8,8 @@
       <div class="col-md-12">
         <input id="name" name="name" placeholder="PRODUCT NAME" class="form-control input-md" required type="text"
           formControlName="name" />
-        <div id="name" *ngIf="
-            (productupdateForm.controls['name'].touched &&
-              productupdateForm.controls['name'].invalid) ||
-            (submitted && productupdateForm.controls['name'].invalid)
-          " class="form-text text-danger">
+        <div id="name" *ngIf="(productupdateForm.controls['name'].touched && productupdateForm.controls['name'].invalid) ||
+            (submitted && productupdateForm.controls['name'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['name'].errors?.['required']">This field is required</small>
         </div>
         <div class="form-text text-danger">
@@ -22,15 +19,12 @@
     </div>
 
     <div class="form-group col-md-6">
-      <label class="col-md-8 control-label" for="code">PRODUCT ID</label>
+      <label class="col-md-8 control-label" for="code">PRODUCT Code</label>
       <div class="col-md-12">
-        <input id="code" name="product_id" placeholder="PRODUCT ID" class="form-control input-md" required=""
+        <input id="code" name="product_id" placeholder="PRODUCT Code" class="form-control input-md" required=""
           type="text" formControlName="code" />
-        <div id="code" *ngIf="
-            (productupdateForm.controls['code'].touched &&
-              productupdateForm.controls['code'].invalid) ||
-            (submitted && productupdateForm.controls['code'].invalid)
-          " class="form-text text-danger">
+        <div id="code" *ngIf="(productupdateForm.controls['code'].touched &&productupdateForm.controls['code'].invalid) ||
+            (submitted && productupdateForm.controls['code'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['code'].errors?.['required']">This field is required</small>
         </div>
 
@@ -50,10 +44,8 @@
           </option>
         </select>
         <div id="category_id" *ngIf="
-            (productupdateForm.controls['category_id'].touched &&
-              productupdateForm.controls['category_id'].invalid) ||
-            (submitted && productupdateForm.controls['category_id'].invalid)
-          " class="form-text text-danger">
+            (productupdateForm.controls['category_id'].touched &&productupdateForm.controls['category_id'].invalid) ||
+            (submitted && productupdateForm.controls['category_id'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['category_id'].errors?.['required']">This field is required</small>
         </div>
 
@@ -72,6 +64,14 @@
             {{ brand.name }}
           </option>
         </select>
+        <div id="brand" *ngIf="(productupdateForm.controls['brand'].touched &&productupdateForm.controls['brand'].invalid) ||
+        (submitted && productupdateForm.controls['brand'].invalid)" class="form-text text-danger">
+      <small *ngIf="productupdateForm.controls['brand'].errors?.['required']">This field is required</small>
+    </div>
+
+    <div class="form-text text-danger">
+      <small *ngIf="errors?.brand">{{ errors?.brand }}</small>
+    </div>
       </div>
     </div>
 
@@ -84,11 +84,8 @@
             {{ type }}
           </option>
         </select>
-        <div id="type_barcode" *ngIf="
-            (productupdateForm.controls['type_barcode'].touched &&
-              productupdateForm.controls['type_barcode'].invalid) ||
-            (submitted && productupdateForm.controls['type_barcode'].invalid)
-          " class="form-text text-danger">
+        <div id="type_barcode" *ngIf="(productupdateForm.controls['type_barcode'].touched &&productupdateForm.controls['type_barcode'].invalid) ||
+            (submitted && productupdateForm.controls['type_barcode'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['type_barcode'].errors?.['required']">This field is required</small>
         </div>
 
@@ -103,11 +100,8 @@
       <div class="col-md-12">
         <input id="cost" name="cost" placeholder="PRODUCT COST" class="form-control input-md" required="" type="number"
           formControlName="cost" />
-        <div id="type_barcode" *ngIf="
-            (productupdateForm.controls['cost'].touched &&
-              productupdateForm.controls['cost'].invalid) ||
-            (submitted && productupdateForm.controls['cost'].invalid)
-          " class="form-text text-danger">
+        <div id="type_barcode" *ngIf="(productupdateForm.controls['cost'].touched &&productupdateForm.controls['cost'].invalid) ||
+            (submitted && productupdateForm.controls['cost'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['cost'].errors?.['required']">This field is required number</small>
         </div>
 
@@ -122,11 +116,8 @@
       <div class="col-md-12">
         <input id="price" name="price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="number"
           formControlName="price" />
-        <div id="price" *ngIf="
-            (productupdateForm.controls['price'].touched &&
-              productupdateForm.controls['price'].invalid) ||
-            (submitted && productupdateForm.controls['price'].invalid)
-          " class="form-text text-danger">
+        <div id="price" *ngIf="(productupdateForm.controls['price'].touched &&productupdateForm.controls['price'].invalid) ||
+            (submitted && productupdateForm.controls['price'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['price'].errors?.['required']">This field is required number</small>
         </div>
 
@@ -145,11 +136,8 @@
             {{ unit.name }}
           </option>
         </select>
-        <div id="unit_id" *ngIf="
-            (productupdateForm.controls['unit_id'].touched &&
-              productupdateForm.controls['unit_id'].invalid) ||
-            (submitted && productupdateForm.controls['unit_id'].invalid)
-          " class="form-text text-danger">
+        <div id="unit_id" *ngIf="(productupdateForm.controls['unit_id'].touched &&productupdateForm.controls['unit_id'].invalid) ||
+            (submitted && productupdateForm.controls['unit_id'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['unit_id'].errors?.['required']">This field is required</small>
         </div>
 
@@ -190,11 +178,8 @@
           </option>
         </select>
 
-        <div id="unit_purchase_id" *ngIf="
-            (productupdateForm.controls['unit_purchase_id'].touched &&
-              productupdateForm.controls['unit_purchase_id'].invalid) ||
-            (submitted && productupdateForm.controls['unit_purchase_id'].invalid)
-          " class="form-text text-danger">
+        <div id="unit_purchase_id" *ngIf="(productupdateForm.controls['unit_purchase_id'].touched &&productupdateForm.controls['unit_purchase_id'].invalid) ||
+            (submitted && productupdateForm.controls['unit_purchase_id'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['unit_purchase_id'].errors?.['required']">This field is
             required</small>
         </div>
@@ -218,11 +203,8 @@
       <div class="col-md-12">
         <input id="product_tax" name="product_tax" placeholder="Product Tax" class="form-control input-md" required=""
           type="number" formControlName="product_tax" />
-        <div id="product_tax" *ngIf="
-            (productupdateForm.controls['product_tax'].touched &&
-              productupdateForm.controls['product_tax'].invalid) ||
-            (submitted && productupdateForm.controls['product_tax'].invalid)
-          " class="form-text text-danger">
+        <div id="product_tax" *ngIf="(productupdateForm.controls['product_tax'].touched &&productupdateForm.controls['product_tax'].invalid) ||
+            (submitted && productupdateForm.controls['product_tax'].invalid)" class="form-text text-danger">
           <small *ngIf="productupdateForm.controls['product_tax'].errors?.['required']">This field is required number</small>
         </div>
         <div class="form-text text-danger">
