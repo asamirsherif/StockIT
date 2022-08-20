@@ -216,7 +216,7 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="TaxType">Tax Type</label>
       <div class="col-md-12">
-        <select formControlName="tax_method" [(ngModel)]="tax_type">
+        <select class="col-md-12" formControlName="tax_method" [(ngModel)]="tax_type">
           <option selected *ngFor="let type of tax_types" [value]="type">
             {{ type }}
           </option>
