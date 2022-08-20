@@ -77,6 +77,9 @@ export class CreatepurchasesComponent implements OnInit {
     this._productSearchService.purchaseSearch(event).subscribe({
       next: (res) => {
         this.products = res.data;
+      },
+      error:(err)=>{
+        this._toastr.error('Something wrong with product search!')
       }
     });
 
