@@ -28,6 +28,7 @@ use App\Repositories\Purchase\PurchaseRepositoryInterface;
 use App\Repositories\Unit\UnitRepository;
 use App\Repositories\Unit\UnitRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use PHPUnit\TextUI\XmlConfiguration\IniSettingCollectionIterator;
 
 class AppRepositoryProvider extends ServiceProvider
 {
@@ -82,6 +83,9 @@ class AppRepositoryProvider extends ServiceProvider
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         // purchase
         $this->app->bind(PurchaseRepositoryInterface::class, PurchaseRepository::class);
+
+        // setting
+        // $this->app->bind()
     }
 
     /**
