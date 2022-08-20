@@ -14,8 +14,10 @@ use App\Http\Controllers\ProductWarehouseSearchController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SalesReturnController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +99,10 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
     //product warehouse search
     Route::get('purchaseProductSearch', [ProductWarehouseSearchController::class, 'purchaseSearch']);
 
+    // settings
+    Route::apiResource('settings', SettingController::class);
+
     // sale prodcut warehouse search
     Route::get('saleProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'saleSearch']);
+
 });
