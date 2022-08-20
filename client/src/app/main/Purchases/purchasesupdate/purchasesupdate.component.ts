@@ -95,14 +95,13 @@ export class PurchasesupdateComponent implements OnInit {
         this.purchase = res.data
         this.purchDetails = res.data.purchaseDetails
         this.editPurchForm.get('date').setValue(this.purchase.date)
-        this.editPurchForm.get('tax_rate').setValue(this.purchase.TaxNet)
+        this.editPurchForm.get('tax_rate').setValue(this.purchase.tax_rate)
         this.editPurchForm.get('discount').setValue(this.purchase.discount)
         this.editPurchForm.get('shipping').setValue(this.purchase.shipping)
         this.editPurchForm.get('notes').setValue(this.purchase.notes)
         this.editPurchForm.get('warehouse_id').setValue(this.purchase.warehouse.id)
         this.editPurchForm.get('supplier_id').setValue(this.purchase.provider.id)
 
-        console.log(this.purchase);
         
         this.countTotal()
         this.countGrandTotal()
@@ -126,9 +125,11 @@ export class PurchasesupdateComponent implements OnInit {
     if (this.editPurchForm.valid && this.wannaPass) {
       const formData = this.editPurchForm.value;
       const user = JSON.parse(localStorage.getItem(`currentUser`))
+      this.countGrandTotal();
       const data: IPurchase = {
         date: formData.date,
         discount: formData.discount,
+        tax_rate: formData.tax_rate,
         notes: formData.notes,
         shipping: formData.shipping,
         status: formData.status,
@@ -139,14 +140,13 @@ export class PurchasesupdateComponent implements OnInit {
         user_id: user.id,
         purchaseDetails: this.purchDetails,
       }
+      
 
       const observer = {
         next: (res) => {
-          this._toastr.success('New purchase has been added');
-          //reset all
-          this.purchDetails = []
-          this.editPurchForm.reset()
-          this.countGrandTotal()
+          this._toastr.success('purchase has been updated');
+          //redirect 
+          this._route.navigate(['purchaseslist']);     
         },
         error: (err) => {
           this.errors = err.error.errors;
@@ -209,9 +209,10 @@ export class PurchasesupdateComponent implements OnInit {
   // remove purchase detail from Array with index from table
   removePurchDetail(i) {
     this.purchDetails.splice(i, 1);
-
+    //this.purchDetails[i].quantity=0;
     // count totals for preview
     this.countTotal()
+    //this.purchDetails[i].total = this.countSubTotal(this.purchDetails[i].quantity, this.purchDetails[i].product.tax_cost, this.purchDetails[i].product.cost)
     this.countGrandTotal()
 
   }
@@ -269,7 +270,6 @@ export class PurchasesupdateComponent implements OnInit {
   //for touchspin bug
   passMe() {
     this.wannaPass = true;
-    
   }
 
 }

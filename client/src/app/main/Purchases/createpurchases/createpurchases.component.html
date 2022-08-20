@@ -87,15 +87,15 @@
             <form class=" col-md-12 mb-1  row panel panel-primary">
                 <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
                 <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="purchaseSearch($event)" class=" form-control col-md-11 text-left"
-                    type="text" placeholder="Search By product name or variants" aria-label="Search" />
-                    <div class="col-md-12 list-group">
+                    (ngModelChange)="purchaseSearch($event)" class=" form-control col-md-11 text-left" type="text"
+                    placeholder="Search By product name or variants" aria-label="Search" />
+                <div class="col-md-12 list-group">
                     <ul class="col-md-12">
-                    <li class="list-group-item" style="list-style: none; cursor: pointer;" *ngFor="let product of products; let i = index"
-                        (click)="addPurchDetail(i)">
-                        {{product.name}}
-                    </li>
-                </ul>
+                        <li class="list-group-item" style="list-style: none; cursor: pointer;"
+                            *ngFor="let product of products; let i = index" (click)="addPurchDetail(i)">
+                            {{product.name}}
+                        </li>
+                    </ul>
                 </div>
             </form>
         </div>
@@ -118,7 +118,8 @@
                     <td>{{purchDetail.product.name}}</td>
                     <td>{{purchDetail.product.cost}}</td>
                     <td>
-                        <core-touchspin [minValue]="1"  [numberValue]="purchDetail.quantity" (onChange)="countChange($event,i)">
+                        <core-touchspin [minValue]="1" [numberValue]="purchDetail.quantity"
+                            (onChange)="countChange($event,i)">
                         </core-touchspin>
                     </td>
                     <td>{{ countTax(purchDetail.quantity,purchDetail.product.tax_cost) }}</td>
@@ -159,9 +160,8 @@
             <div class="form-group col-md-4">
                 <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
                 <div class="col-md-12">
-                    <input id="ordertax"  (ngModelChange)="countOrderTax();countGrandTotal()"
-                        formControlName="tax_rate" placeholder="0" class="form-control input-md" required=""
-                        type="text">
+                    <input id="ordertax" (ngModelChange)="countOrderTax();countGrandTotal()" formControlName="tax_rate"
+                        placeholder="0" class="form-control input-md" required="" type="text">
                 </div>
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.tax_rate">{{errors?.tax_rate}}</small>
@@ -171,8 +171,8 @@
             <div class="form-group col-md-4">
                 <label class="col-md-8 control-label" for="ordertax">Discount</label>
                 <div class="col-md-12">
-                    <input id="ordertax" (ngModelChange)="countDiscount();countGrandTotal()" formControlName="discount" placeholder="0"
-                        class="form-control input-md" required="" type="text">
+                    <input id="ordertax" (ngModelChange)="countDiscount();countGrandTotal()" formControlName="discount"
+                        placeholder="0" class="form-control input-md" required="" type="text">
                 </div>
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.discount">{{errors?.discount}}</small>
@@ -182,8 +182,8 @@
             <div class="form-group col-md-4">
                 <label class="col-md-8 control-label" for="ordertax">Shipping</label>
                 <div class="col-md-12">
-                    <input id="ordertax" (ngModelChange)="countShipping();countGrandTotal()" formControlName="shipping" placeholder="0"
-                        class="form-control input-md" required="" type="text">
+                    <input id="ordertax" (ngModelChange)="countShipping();countGrandTotal()" formControlName="shipping"
+                        placeholder="0" class="form-control input-md" required="" type="text">
                 </div>
 
                 <div class="form-text text-danger">
