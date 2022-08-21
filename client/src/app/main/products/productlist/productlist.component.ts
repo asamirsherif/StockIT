@@ -13,6 +13,8 @@ export class ProductlistComponent implements OnInit {
   public pageBasicText = 3;
   products:IProduct;
   searchInput = "";
+  p: number = 1;
+    total: number = 0;
   constructor(private _productService:ProductService,private _activeRouter:ActivatedRoute) { }
 
 
@@ -54,5 +56,10 @@ export class ProductlistComponent implements OnInit {
     this._productService.params = this._productService.params.set("search", event)
     this.getAllProducts();
   }
+
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.getAllProducts();
+}
 
 }
