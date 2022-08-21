@@ -25,7 +25,10 @@ export class CustomerlistComponent implements OnInit {
     errors: any = {};
 
     searchInput: string = "";
-
+    searchInputcode= "";
+    searchInputname = "";
+    searchInputemail = "";
+    searchInputphone = "";
     p: number = 1;
     total: number = 0;
     constructor(private modalService: NgbModal, private fb: FormBuilder, private clientserv: ClientservService, public _router: Router) {

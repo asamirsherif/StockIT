@@ -19,7 +19,15 @@ SupplierForShow!: Isupplier;
 
 createsupplierform: FormGroup;
 editsupplierForm: FormGroup;
+
 searchInput:any;
+searchInputcode= "";
+searchInputname = "";
+searchInputemail = "";
+searchInputphone = "";
+p: number = 1;
+total: number = 0;
+
 contentModel: any;
 submitted = false;
 errors: any = {};
@@ -159,6 +167,11 @@ search(event) {
 
     this.supplierserv.params = this.supplierserv.params.set("search", event);
 
+    this.AllData();
+}
+
+pageChangeEvent(event: number) {
+    this.p = event;
     this.AllData();
 }
 }
