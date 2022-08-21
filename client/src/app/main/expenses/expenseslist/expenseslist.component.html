@@ -91,7 +91,7 @@
     </thead>
     <tbody class="table-group-divider">
       <tr
-        *ngFor="let createExpenses of expense|filter: searchInputDate:'date'|filter:searchInputRef:'details'; let i = index">
+        *ngFor="let createExpenses of expense|filter: searchInputDate:'date'|filter:searchInputRef:'ref' | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
         <td>{{createExpenses.date}}</td>
         <td>{{createExpenses.ref}}</td>
         <td>{{createExpenses.details}}</td>
@@ -106,11 +106,6 @@
       </tr>
     </tbody>
   </table>
-  <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
-    aria-label="Custom pagination">
-    <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-    </ng-template>
-    <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-    </ng-template>
-  </ngb-pagination>
+  <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+  </pagination-controls>
 </body>

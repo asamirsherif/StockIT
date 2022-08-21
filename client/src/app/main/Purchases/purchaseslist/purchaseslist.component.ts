@@ -27,6 +27,10 @@ export class PurchaseslistComponent implements OnInit {
   public warehouses: any[] = [];
   public suppliers: Isupplier[] = [];
 
+  //for pagination 
+  p: number = 1;
+  total: number = 0;
+
   //for forms
   public filterForm: FormGroup;
 
@@ -134,4 +138,10 @@ export class PurchaseslistComponent implements OnInit {
     })
   }
 
+
+  //for pagination
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.getAll();
+  }
 }

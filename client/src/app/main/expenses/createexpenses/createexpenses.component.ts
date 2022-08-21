@@ -6,6 +6,7 @@ import { ExpenseCategoryService } from 'app/auth/service/expense/expense-categor
 import { IExpenseCategory } from 'app/interfaces/iexpense-category';
 import { ExpenseService } from 'app/auth/service/expense/expense.service';
 import { IExpense } from 'app/interfaces/iexpense';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-createexpenses',
   templateUrl: './createexpenses.component.html',
@@ -24,7 +25,8 @@ export class CreateexpensesComponent implements OnInit {
   errors: any = {};
   createExpenseForm: FormGroup;
   constructor(private fb: FormBuilder, public _router: Router,
-    public wareser: WarehousservService, private expenseCategoryService: ExpenseCategoryService, private expenseServise: ExpenseService) {
+    public wareser: WarehousservService, private expenseCategoryService: ExpenseCategoryService, private expenseServise: ExpenseService, private _toastr: ToastrService,
+    ) {
     this.createExpenseForm = new FormGroup({
       amount: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
@@ -74,13 +76,18 @@ export class CreateexpensesComponent implements OnInit {
       const formdata = this.createExpenseForm.value;
       const observer = {
         next: (result) => {
+          this._toastr.success('New expense has been added');
 
           console.log(result, 'asdasd');
           // this.expense.push(result.data);
+          this._router.navigate(['expenseslist'])
+
 
         },
         error: (error) => {
           console.log(error);
+          this._toastr.error('Make sure for your data!');
+
         }
       }
       let data: IExpense = {
@@ -95,7 +102,6 @@ export class CreateexpensesComponent implements OnInit {
       //first
       this.expenseServise.store(data).subscribe(observer)
       console.log(data);
-      this._router.navigate(['expenseslist'])
 
 
     }
