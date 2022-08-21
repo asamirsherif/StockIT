@@ -25,6 +25,7 @@ export interface IProduct {
     category?: any,
     brand?: string,
     unit: Unit,
+    unitSale: Unit,
     unitPurchase:Unit,
     total_cost:number,
     total_price:number,

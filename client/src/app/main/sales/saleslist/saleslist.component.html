@@ -40,7 +40,7 @@
 
                         <div class="form-group ">
                             <label for="exampleDropdownFormWarehouse1">Warehouse</label>
-                            <select formControlName="warehouse_name" class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
+                            <select formControlName="warehouse" class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
                             <option selected>Choose Warehouse</option>
                             <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>
                             

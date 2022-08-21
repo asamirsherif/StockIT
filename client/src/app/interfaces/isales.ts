@@ -1,3 +1,4 @@
+import { AnyRecordWithTtl } from "dns";
 import { Iclient } from "./iclient";
 import { ISaleDetails } from "./isale-details";
 import { Warehous } from "./warehous";
@@ -16,11 +17,11 @@ export interface ISale {
     discount : number,
     tax_rate : number,
     notes : string,
-    client :Iclient,
-    warehouse_name :Warehous,
-    
+    client? :Iclient,
+    client_id: number,
+    warehouse_name? :Warehous,
     warehouse_id: number,
-    saleDetails: Array<ISaleDetails>,
-
+    details: Array<ISaleDetails>,
+    payment: any,
     
 }

@@ -82,17 +82,14 @@ export class SaleslistComponent implements OnInit {
 
   /// get all
   getAll() {
-    const observer = {
-      next: (res) => {
-        this.sales = res.data.sales;
-        console.log(this.sales);
 
-      },
-      error: (err) => {
-        this._toastr.error("something wrong!");
-      }
-    }
-    this._saleService.getAll().subscribe(observer);
+    this._saleService.getAll().subscribe({
+        next: (res) => {
+        this.sales = res.data;
+        console.log(this.sales + 'a7a')
+        },
+        error: (err)=> console.log(err)
+      });
   }
 
   //delete
