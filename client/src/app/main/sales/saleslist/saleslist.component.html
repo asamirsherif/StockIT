@@ -40,7 +40,7 @@
 
                         <div class="form-group ">
                             <label for="exampleDropdownFormWarehouse1">Warehouse</label>
-                            <select formControlName="warehouse" class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
+                            <select formControlName="warehouse_name" class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
                             <option selected>Choose Warehouse</option>
                             <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>
                             
@@ -97,9 +97,9 @@
                 <th scope="col">Warehouse</th>
                 <th scope="col">Status</th>
                 <th scope="col">Grand Total</th>
-                <th scope="col">Paid</th>
+                <!-- <th scope="col">Paid</th>
                 <th scope="col">Due</th>
-                <th scope="col">Payment Status</th>
+                <th scope="col">Payment Status</th> -->
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -125,11 +125,11 @@
               <td>{{ sale.warehouse_name.name }}</td>
               <td><button type="button" class="btn btn-outline-success ">{{ sale.status }}</button></td>
               <td>{{ sale.GrandTotal }}</td>
-              <td>{{ sale.paid_amount }}</td>
+              <!-- <td>{{ sale.paid_amount }}</td>
               <td>{{ sale.due }}</td>
-              <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td>
+              <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td> -->
               <td> <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'><i data-feather="edit" [size]="24" >
-              </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+              </i></button>  <button (click)="delete(i)" class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
               </button></td>
           </tr>
         </tbody>
