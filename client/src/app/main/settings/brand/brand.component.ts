@@ -28,6 +28,9 @@ export class BrandComponent implements OnInit {
 
   searchInput: string = "";
 
+  p: number = 1;
+  total: number = 0;
+
   constructor(
     private modalService: NgbModal,
     private brand: AddbrandService,
@@ -137,4 +140,9 @@ export class BrandComponent implements OnInit {
 
     this.AllData();
   }
+
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.AllData();
+  }  
 }

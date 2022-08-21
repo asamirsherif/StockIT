@@ -79,7 +79,7 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider" *ngFor="let currency of data; let i = index">
+        <tbody class="table-group-divider" *ngFor="let currency of data | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
             <tr>
                 <td>{{ currency.code }}</td>
                 <td>{{ currency.name }}</td>
@@ -150,11 +150,5 @@
             </ng-template>
         </tbody>
     </table>
-    <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
-        aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
-                [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-    </ngb-pagination>
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+    </pagination-controls>

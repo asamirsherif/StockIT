@@ -25,6 +25,9 @@ export class WarehouseComponent implements OnInit {
 
   searchInput: string = "";
 
+
+  p: number = 1;
+  total: number = 0;
   constructor(private modalService: NgbModal, private _ware: WarehousservService,
     public _router: Router,
     private toaster: ToastrService) { 
@@ -129,4 +132,9 @@ export class WarehouseComponent implements OnInit {
         
           this.AllData();
           }
+
+          pageChangeEvent(event: number) {
+            this.p = event;
+            this.AllData();
+        }  
 }

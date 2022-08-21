@@ -30,6 +30,9 @@ export class UnitComponent implements OnInit {
   createunit: FormGroup;
   editUnitForm: FormGroup;
 
+  p: number = 1;
+  total: number = 0;
+
   contentModel: any;
   submitted = false;
   errors: any = {};
@@ -177,4 +180,9 @@ export class UnitComponent implements OnInit {
 
     this.AllData();
   }
+
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.AllData();
+  }  
 }

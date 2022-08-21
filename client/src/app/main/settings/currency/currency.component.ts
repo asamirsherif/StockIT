@@ -22,6 +22,9 @@ data:Array<Icurreny>=[];
   submitted = false;
   errors: any = {};
 
+  p: number = 1;
+  total: number = 0;
+  
   searchInput: string = "";
   constructor(private modalService: NgbModal ,private fb:FormBuilder,
   private _curr: CurrencyService,
@@ -116,4 +119,9 @@ data:Array<Icurreny>=[];
 
   this.AllData();
   }
+
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.AllData();
+  }  
   }

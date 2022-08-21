@@ -20,7 +20,8 @@ export class CategoryComponent implements OnInit {
   errors: any = {};
   createCategoryForm: FormGroup;
   editCategoryForm: FormGroup;
-
+  p: number = 1;
+  total: number = 0;
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
@@ -130,4 +131,9 @@ export class CategoryComponent implements OnInit {
     this.getCategories();
 
     }
+
+    pageChangeEvent(event: number) {
+      this.p = event;
+      this.getCategories();
+  }    
 }
