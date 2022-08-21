@@ -3,48 +3,50 @@
     <hr>
     <div class=" row">
         <div class="col-md-6">
-            <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search" [size]="25"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
-            </form>
-        </div>
+           <!-- search -->
+      <form class="form-inline col-md-12 mb-1">
+        <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+        <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+          class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
+      </form>
+    </div>
         <div class="col-md-6 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
 
             <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i data-feather="filter"></i>Filter</button>
 
             <div ngbDropdownMenu style="width:400px;height: auto;">
-                <form class="px-2 py-2">
+                <form class="px-2 py-2"  [formGroup]="filterForm">
                     <h3 style="font-weight:bold ;">Filter</h3>
 
                   <div class="form-group  ">
                     <label  for="exampleDropdownFormDate1">Date</label>
-                    <input  type="date" class="form-control" id="exampleDropdownFormDate1"  />
-                  </div>
+                    <input formControlName="date" type="date" class="form-control" id="exampleDropdownFormDate1" />
+                </div>
 
                   <div class="form-group ">
                     <label  for="exampleDropdownFormReferenc1">Referenc</label>
-                    <input  type="text" class="form-control" id="exampleDropdownFormReferenc1"  placeholder="Referenc" />
-                  </div>
+                    <input formControlName="Ref" type="text" class="form-control" id="exampleDropdownFormReferenc1"
+                    placeholder="Referenc" />
+                      </div>
 
                     <div class="form-group ">
                         <label for="exampleDropdownFormCustomer1">Customer</label>
-                        <select class="form-control" aria-label="Default select example" id="exampleDropdownFormCustomer1" >
+                        <select  formControlName="client"  class="form-control" aria-label="Default select example" id="exampleDropdownFormCustomer1" >
                         <option selected>Choose Customer</option>
-                        <option>walk-in-customer</option>
-                        </select>
+                        <option *ngFor="let client of clients;" [value]="client.id">{{client.name}}</option>
+                    </select>
                         </div>
 
                         <div class="form-group ">
                             <label for="exampleDropdownFormWarehouse1">Warehouse</label>
-                            <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
+                            <select formControlName="warehouse_name" class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
                             <option selected>Choose Warehouse</option>
-                            <option>الرئيسي </option>
-                        <option>officic annim </option>
+                            <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>
+                            
                             </select>
                             </div>
-                            <div class="form-group ">
+                            <!-- <div class="form-group ">
                                 <label for="exampleDropdownFormStatus1">Status</label>
                                 <select class="form-control" aria-label="Default select example" id="exampleDropdownFormStatus1" >
                                 <option selected>Choose Status</option>
@@ -61,17 +63,19 @@
                                 <option>partial </option>
                                 <option>Unpaid</option>
                                     </select>
-                                    </div>
+                                    </div> -->
                         <div class="row">
                         <div class="col-lg-6 col-md-12 ">
                             <div class="form-group">
-                              <button type="button" class="btn btn-primary btn-block" rippleEffect><i data-feather="filter"></i>Filter</button>
-                            </div>
+                                <button (click)="filter()" type="button" class="btn btn-primary btn-block" rippleEffect><i
+                                    data-feather="filter"></i>Filter</button>                            </div>
                           </div>
                           <div class="col-lg-6 col-md-12">
                             <div class="form-group">
-                              <button type="button" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i> Reset</button>
-                            </div>
+                                <button (click)="resetFilter()" type="button" class="btn btn-danger btn-block" rippleEffect>
+                                    <i data-feather="alert-circle"></i> Reset
+                                  </button>
+                             </div>
                          </div> 
                         </div>
                          </form> 
@@ -100,20 +104,34 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <td>2022-7-25</td>
-                <td>AD-1111</td>
-                <td>N/D</td>
-                <td>12</td>
+            <!-- <tr *ngFor="let sale of sales; let i = index">
+                <td>{{ sale.date }}</td>
+                <td>{{ sale.Ref }}</td>
+                <td>{{ sale.client_id }}</td>
+                <td>Ezzat</td>
                 <td><button type="button" class="btn btn-outline-success ">completed</button></td>
-                <td>AD-1111</td>
-                <td>N/D</td>
-                <td>12</td>
-                <td>  <button type="button" class="btn btn-outline-success ">paid</button></td>
-                <td> <button class="btn btn-sm btn-success" [routerLink]="['../salesupdate']"><i data-feather="edit" [size]="24" >
+                <td>{{ sale.GrandTotal }}</td>
+                <td>{{ sale.paid_amount }}</td>
+                <td>{{ sale.status }}</td>
+                <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td>
+                <td> <button class="btn btn-sm btn-success" [routerLink]="['../salesupdate/{{sale.id}}']"><i data-feather="edit" [size]="24" >
                 </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
                 </button></td>
-            </tr>
+            </tr> -->
+            <tr *ngFor="let sale of sales; let i = index">
+              <td>{{ sale.date }}</td>
+              <td>{{ sale.Ref }}</td>
+              <td>{{ sale.client.name }}</td>
+              <td>{{ sale.warehouse_name.name }}</td>
+              <td><button type="button" class="btn btn-outline-success ">{{ sale.status }}</button></td>
+              <td>{{ sale.GrandTotal }}</td>
+              <td>{{ sale.paid_amount }}</td>
+              <td>{{ sale.due }}</td>
+              <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td>
+              <td> <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'><i data-feather="edit" [size]="24" >
+              </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+              </button></td>
+          </tr>
         </tbody>
     </table>
     <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">

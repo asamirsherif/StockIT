@@ -24,4 +24,9 @@ export class ProductSearchService {
     this.params = this.params.set('search',search)
     return this._http.get(`${this.host}purchaseProductSearch`, { headers: this.headers, params: this.params })
   }
+
+  salesSearch(search: string , warehouse_id:number): Observable<any> {
+    this.params = this.params.set('search',search)
+    return this._http.get(`${this.host}salesProductSearch/${warehouse_id}`, { headers: this.headers, params: this.params })
+  }
 }
