@@ -87,7 +87,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let product of products; let i = index">
+            <tr *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}">
                 
                 <td>{{ product.name }}</td>
                 <td><img src="{{ product.images }}"></td>
@@ -104,12 +104,6 @@
             </tr>
         </tbody>
     </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-      </ngb-pagination>  
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+    </pagination-controls>  
 </body>
