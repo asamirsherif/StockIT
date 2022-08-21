@@ -91,7 +91,7 @@
     </thead>
     <tbody class="table-group-divider">
       <tr
-        *ngFor="let createExpenses of expense|filter: searchInputDate:'date'|filter:searchInputRef:'ref' | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
+        *ngFor="let createExpenses of expense |filter: searchInputDate:'date'|filter:searchInputRef:'ref' | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
         <td>{{createExpenses.date}}</td>
         <td>{{createExpenses.ref}}</td>
         <td>{{createExpenses.details}}</td>
