@@ -34,7 +34,7 @@ export class WarehouseComponent implements OnInit {
     this.createwarehous = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('',Validators.email),
-      mobile: new FormControl(null),
+      mobile: new FormControl('',Validators.required),
       country: new FormControl(null),
       city: new FormControl(null),
       zip:new FormControl(null)
@@ -78,7 +78,8 @@ export class WarehouseComponent implements OnInit {
     this.data.push(res.data);
     },
     error: (error: HttpErrorResponse) => {
-    console.log(error.status);
+      this.errors = error.error.errors;
+      this.toaster.error('Make sure for your data!');
     },
     };
     this._ware.AddWare(this.createwarehous.value).subscribe(observer);
@@ -98,8 +99,9 @@ export class WarehouseComponent implements OnInit {
       this.editWareForm.get("city").setValue(this.wareForEdit.city);
       this.editWareForm.get("zip").setValue(this.wareForEdit.zip);
       },
-      error: (error) => {
-      console.log(error);
+      error: (error: HttpErrorResponse) => {
+        this.errors = error.error.errors;
+        this.toaster.error('Make sure for your data!');
       },
       };
     
@@ -109,6 +111,7 @@ export class WarehouseComponent implements OnInit {
        
         const observer = {
         next: (res) => {this.closeModel(this.contentModel);
+          this.toaster.success("warehouse updated");
         this.AllData();
         },
         error: (error) => {

@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ClientservService } from 'app/auth/service/client/clientserv.service';
 import { Iclient } from 'app/interfaces/iclient';
 import { Router } from "@angular/router";
-//import { ToastrService } from "ngx-toastr";
+import { ToastrService } from "ngx-toastr";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 @Component({
     selector: 'app-customerlist',
@@ -31,7 +31,7 @@ export class CustomerlistComponent implements OnInit {
     searchInputphone = "";
     p: number = 1;
     total: number = 0;
-    constructor(private modalService: NgbModal, private fb: FormBuilder, private clientserv: ClientservService, public _router: Router) {
+    constructor(private modalService: NgbModal, private fb: FormBuilder,private _toastr: ToastrService,private clientserv: ClientservService, public _router: Router) {
         this.createcustomerform = new FormGroup({
             name: new FormControl('', Validators.required),
             email: new FormControl('', [Validators.required, Validators.email]),
@@ -90,9 +90,11 @@ export class CustomerlistComponent implements OnInit {
             const observer = {
                 next: (res) => {
                     this.closeModel(this.contentModel)
+                    this._toastr.success('New Client has been added');
                     this.data.push(res.data)
                 }, error: (error: HttpErrorResponse) => {
                     this.errors = error.error.errors;
+                    this._toastr.error('Make sure for your data!');
                 }
 
             }
@@ -125,6 +127,7 @@ export class CustomerlistComponent implements OnInit {
         const observer = {
             next: (res) => {
                 this.closeModel(this.contentModel);
+                this._toastr.success('customer has been updated');
                 this.AllData();
             }, error: (error: HttpErrorResponse) => {
                 this.errors = error.error.errors;

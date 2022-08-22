@@ -20,9 +20,10 @@ export class SaleslistComponent implements OnInit {
 
   //my vars
   public searchInput = "";
-  public pageBasicText = 3;
 
 
+  p: number = 1;
+  total: number = 0;
   //for listing
   public sales: ISale[] = [];
   public warehouses: any[] = [];
@@ -142,4 +143,8 @@ export class SaleslistComponent implements OnInit {
     })
   }
 
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.getAll();
+}
 }

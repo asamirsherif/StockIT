@@ -168,7 +168,7 @@
                 <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
                 <div class="col-md-12">
                     <input id="ordertax" (ngModelChange)="countOrderTax(); countGrandTotal()" formControlName="tax_rate"
-                        placeholder="0" class="form-control input-md" required="" type="text" />
+                        placeholder="0" class="form-control input-md" required="" type="number" />
 
                 </div>
                 <div class="form-text text-danger">
@@ -182,7 +182,7 @@
                 <label class="col-md-8 control-label" for="ordertax">Discount</label>
                 <div class="col-md-12">
                     <input id="ordertax" (ngModelChange)="countDiscount(); countGrandTotal()" formControlName="discount"
-                        placeholder="0" class="form-control input-md" required="" type="text" />
+                        placeholder="0" class="form-control input-md" required="" type="number" />
                 </div>
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.discount">{{
@@ -195,7 +195,7 @@
                 <label class="col-md-8 control-label" for="ordertax">Shipping</label>
                 <div class="col-md-12">
                     <input id="ordertax" (ngModelChange)="countShipping(); countGrandTotal()" formControlName="shipping"
-                        placeholder="0" class="form-control input-md" required="" type="text" />
+                        placeholder="0" class="form-control input-md" required="" type="number" />
 
                 </div>
 
