@@ -25,7 +25,7 @@ class SaleRepository implements SaleRepositoryInterface
     }
 
     public function create(Request $request): Model
-    {   
+    {
         $order = new Sale();
 
         DB::transaction(function () use ($request,$order) {
@@ -60,8 +60,8 @@ class SaleRepository implements SaleRepositoryInterface
                     'price' => $value['unit_price'],
                     'TaxNet' => $value['tax_percent'],
                     'tax_method' => $value['tax_method'],
-                    'discount' => $value['discount'],
-                    'discount_method' => $value['discount_method'],
+                    // 'discount' => $value['discount'],
+                    // 'discount_method' => $value['discount_method'],
                     'product_id' => $value['product_id'],
                     'product_variant_id' => $value['product_variant_id'] ?? null,
                     'total' => $value['subtotal'],
@@ -107,58 +107,58 @@ class SaleRepository implements SaleRepositoryInterface
             $role = Auth::user()->roles()->first();
             $view_records = Role::findOrFail($role->id)->inRole('record_view');
 
-            if ($request->payment['status'] != 'pending') {
-                $sale = Sale::findOrFail($order->id);
-                // Check If User Has Permission view All Records
-                if (!$view_records) {
-                    // Check If User->id === sale->id
-                    $this->authorizeForUser($request->user('api'), 'check_record', $sale);
-                }
+            // if ($request->payment['status'] !== 'Pending') {
+            //     $sale = Sale::findOrFail($order->id);
+            //     // Check If User Has Permission view All Records
+            //     if (!$view_records) {
+            //         // Check If User->id === sale->id
+            //         $this->authorizeForUser($request->user('api'), 'check_record', $sale);
+            //     }
 
 
-                try {
+            //     try {
 
-                    $total_paid = $sale->paid_amount + $request['amount'];
-                    $due = $sale->GrandTotal - $total_paid;
-                    
-                    if ($due === 0.0 || $due < 0.0) {
-                        $payment_status = 'paid';
-                    } else if ($due != $sale->GrandTotal) {
-                        $payment_status = 'partial';
-                    } else if ($due == $sale->GrandTotal) {
-                        $payment_status = 'unpaid';
-                    }
-                    
-                    if($request['amount'] > 0){
-                        if($request->payment['Reglement'] == 'credit card'){
-                            
-                            // ADD LATER ( CREDIT CARDS )
+            //         $total_paid = $sale->paid_amount + $request['amount'];
+            //         $due = $sale->GrandTotal - $total_paid;
 
-                        // Paying Method Cash
-                        }else{
+            //         if ($due === 0.0 || $due < 0.0) {
+            //             $payment_status = 'paid';
+            //         } else if ($due != $sale->GrandTotal) {
+            //             $payment_status = 'partial';
+            //         } else if ($due == $sale->GrandTotal) {
+            //             $payment_status = 'unpaid';
+            //         }
 
-                            // PaymentSale::create([
-                            //     'sale_id' => $order->id,
-                            //     'Ref' => app('App\Http\Controllers\PaymentSalesController')->getNumberOrder(),
-                            //     'date' => Carbon::now(),
-                            //     'Reglement' => $request->payment['Reglement'],
-                            //     'montant' => $request['amount'],
-                            //     'change' => $request['change'],
-                            //     'user_id' => Auth::user()->id,
-                            // ]);
+            //         if($request['amount'] > 0){
+            //             if($request->payment['Reglement'] == 'credit card'){
 
-                            $sale->update([
-                                'paid_amount' => $total_paid,
-                                'payment_status' => $payment_status,
-                            ]);
-                        }
-                    }
-                } catch (Exception $e) {
-                    
-                    return response()->json(['Error adding payment, Please try again!' => $e->getMessage()], 500);
-                }
-                
-            }
+            //                 // ADD LATER ( CREDIT CARDS )
+
+            //             // Paying Method Cash
+            //             }else{
+
+            //                 // PaymentSale::create([
+            //                 //     'sale_id' => $order->id,
+            //                 //     'Ref' => app('App\Http\Controllers\PaymentSalesController')->getNumberOrder(),
+            //                 //     'date' => Carbon::now(),
+            //                 //     'Reglement' => $request->payment['Reglement'],
+            //                 //     'montant' => $request['amount'],
+            //                 //     'change' => $request['change'],
+            //                 //     'user_id' => Auth::user()->id,
+            //                 // ]);
+
+            //                 $sale->update([
+            //                     'paid_amount' => $total_paid,
+            //                     'payment_status' => $payment_status,
+            //                 ]);
+            //             }
+            //         }
+            //     } catch (Exception $e) {
+
+            //         return response()->json(['Error adding payment, Please try again!' => $e->getMessage()], 500);
+            //     }
+
+            // }
 
         }, 5);
 
@@ -197,7 +197,7 @@ class SaleRepository implements SaleRepositoryInterface
             $old_products_id = [];
             foreach ($old_sale_details as $key => $value) {
                 $old_products_id[] = $value->id;
-                
+
                 //check if detail has sale_unit_id Or Null
                 if($value['sale_unit_id'] !== null){
                     $old_unit = Unit::where('id', $value['sale_unit_id'])->first();
@@ -252,7 +252,7 @@ class SaleRepository implements SaleRepositoryInterface
 
             // Update Data with New request
             foreach ($new_sale_details as $prd => $prod_detail) {
-                
+
                 if($prod_detail['no_unit'] !== 0){
 
                     $unit_prod = Unit::where('id', $prod_detail['sale_unit_id'])->first();
@@ -304,7 +304,7 @@ class SaleRepository implements SaleRepositoryInterface
                     $orderDetails['product_id'] = $prod_detail['product_id'];
                     $orderDetails['product_variant_id'] = $prod_detail['product_variant_id'];
                     $orderDetails['total'] = $prod_detail['subtotal'];
-                    
+
                     if (!in_array($prod_detail['id'], $old_products_id)) {
                         $orderDetails['date'] = Carbon::now();
                         $orderDetails['sale_unit_id'] = $unit_prod ? $unit_prod->id : Null;
