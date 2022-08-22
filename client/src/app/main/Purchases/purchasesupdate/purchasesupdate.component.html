@@ -118,7 +118,8 @@
                     <td>{{purchDetail.product.name}}</td>
                     <td>{{purchDetail.product.cost}}</td>
                     <td>
-                        <core-touchspin [minValue]="1"  [numberValue]="purchDetail.quantity" (onChange)="countChange($event,i)">
+                        <core-touchspin [minValue]="1" [numberValue]="purchDetail.quantity"
+                            (onChange)="countChange($event,i)">
                         </core-touchspin>
                     </td>
                     <td>{{ countTax(purchDetail.quantity,purchDetail.product.tax_cost) }}</td>
@@ -160,7 +161,7 @@
                 <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
                 <div class="col-md-12">
                     <input id="ordertax" (ngModelChange)="countOrderTax();countGrandTotal()" formControlName="tax_rate"
-                        placeholder="0" class="form-control input-md" required="" type="text">
+                        placeholder="0" class="form-control input-md" required="" type="number">
                 </div>
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.tax_rate">{{errors?.tax_rate}}</small>
@@ -171,7 +172,7 @@
                 <label class="col-md-8 control-label" for="ordertax">Discount</label>
                 <div class="col-md-12">
                     <input id="ordertax" (ngModelChange)="countDiscount();countGrandTotal()" formControlName="discount"
-                        placeholder="0" class="form-control input-md" required="" type="text">
+                        placeholder="0" class="form-control input-md" required="" type="number">
                 </div>
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.discount">{{errors?.discount}}</small>
@@ -182,7 +183,7 @@
                 <label class="col-md-8 control-label" for="ordertax">Shipping</label>
                 <div class="col-md-12">
                     <input id="ordertax" (ngModelChange)="countShipping();countGrandTotal()" formControlName="shipping"
-                        placeholder="0" class="form-control input-md" required="" type="text">
+                        placeholder="0" class="form-control input-md" required="" type="number">
                 </div>
 
                 <div class="form-text text-danger">
@@ -198,10 +199,12 @@
                 </div>
             </div>
         </div>
-        <div class="form-group col-md-12 ">
-            <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-            <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
-                formControlName="notes"></textarea>
+        <div class="container">
+            <div class="form-group col-md-12 ">
+                <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
+                <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                    formControlName="notes"></textarea>
+            </div>
         </div>
         <div class="form-group col-md-12">
             <div class="col-md-4">

@@ -9,6 +9,7 @@
             <div class="col-md-6">
                 <label class="col-md-4 control-label " for="category">Warehouse</label>
                 <div class="col-md-12 ">
+
                     <select formControlName="warehouse_id" class="form-select col-md-12"
                         aria-label="Default select example" [(ngModel)]="warehouse_id"
                         (ngModelChange)="getWarehouse($event)">
@@ -21,6 +22,7 @@
                         *ngIf="createAdjForm.controls['warehouse_id'].touched && createAdjForm.controls['warehouse_id'].invalid || submitted && createAdjForm.controls['warehouse_id'].invalid"
                         class="form-text text-danger">
                         <small *ngIf="createAdjForm.controls['warehouse_id'].errors?.['required']">This field is
+
                             required</small>
                     </div>
                     <div class="form-text text-danger">
@@ -40,6 +42,7 @@
                         *ngIf="createAdjForm.controls['date'].touched &&createAdjForm.controls['date'].invalid || submitted && createAdjForm.controls['date'].invalid"
                         class="form-text text-danger">
                         <small *ngIf="createAdjForm.controls['date'].errors?.['required']">This field is
+
                             required</small>
                     </div>
                     <div class="form-text text-danger">
@@ -56,6 +59,7 @@
                 <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
                 <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput"
                     (keyup)="adjSearch(searchbar.value)" placeholder="Search Here" formControlName="search" />
+
                 <ul class="col-md-11">
                     <li class="list-group-item" style="list-style: none; cursor: pointer;"
                         *ngFor="let product of products; let i = index" (click)="addAdjDetail(i)">
@@ -99,19 +103,23 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
+
                                 <button (click)="removeAdjDetail(i)" class="btn btn-sm btn-danger">
                                     <i data-feather="x-circle" [size]="24"></i>
                                 </button>
+
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
         <div class="form-group col-md-12 ">
             <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
             <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
                 formControlName="notes"></textarea>
+
         </div>
         <div class="form-group col-md-12">
             <div class="col-md-4">

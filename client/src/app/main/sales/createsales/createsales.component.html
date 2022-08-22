@@ -123,6 +123,7 @@
                     <td>
                         <core-touchspin [minValue]="1" [maxValue]="saleDetail.product.in_stock"
                             [numberValue]="saleDetail.quantity" (onChange)="countChange($event, i)">
+
                         </core-touchspin>
                     </td>
                     <td>{{ countTax(saleDetail.quantity,saleDetail.product.tax_cost) }}</td>
@@ -168,6 +169,7 @@
                 <div class="col-md-12">
                     <input id="ordertax" (ngModelChange)="countOrderTax(); countGrandTotal()" formControlName="tax_rate"
                         placeholder="0" class="form-control input-md" required="" type="text" />
+
                 </div>
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.tax_rate">{{
@@ -194,6 +196,7 @@
                 <div class="col-md-12">
                     <input id="ordertax" (ngModelChange)="countShipping(); countGrandTotal()" formControlName="shipping"
                         placeholder="0" class="form-control input-md" required="" type="text" />
+
                 </div>
 
                 <div class="form-text text-danger">
@@ -223,6 +226,7 @@
         <div class="form-group col-md-12">
             <label for="exampleFormControlTextarea1" class="form-label">Note</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="notes"></textarea>
+
         </div>
         <div class="form-group col-md-12">
             <div class="col-md-4">

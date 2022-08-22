@@ -63,12 +63,21 @@
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="Brand">Brand</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="brand_id">
                     <option *ngFor="let item of BrandArray" [value]="item.id">
                         {{ item.name }}
                     </option>
                 </select>
+                <div id="brand_id"
+                *ngIf="createProductForm.controls['brand_id'].touched &&createProductForm.controls['brand_id'].invalid || submitted && createProductForm.controls['brand_id'].invalid"
+                class="form-text text-danger">
+                <small *ngIf="createProductForm.controls['brand_id'].errors?.['required']">This field is
+                    required</small>
+            </div>
 
+            <div class="form-text text-danger">
+                <small *ngIf="errors?.brand_id">{{errors?.brand_id}}</small>
+            </div>
             </div>
         </div>
 
@@ -102,7 +111,7 @@
                     *ngIf="createProductForm.controls['cost'].touched &&createProductForm.controls['cost'].invalid || submitted && createProductForm.controls['cost'].invalid"
                     class="form-text text-danger">
                     <small *ngIf="createProductForm.controls['cost'].errors?.['required']">This field is
-                        required number</small>  
+                        required number</small>
                 </div>
 
                 <div class="form-text text-danger">
@@ -209,7 +218,7 @@
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="order_tax">Order Tax</label>
             <div class="col-md-12">
-                <input  id="order_tax" name="order_tax" placeholder="Order Tax" class="form-control input-md" required=""
+                <input id="order_tax" name="order_tax" placeholder="Order Tax" class="form-control input-md" required=""
                     type="number" formControlName="order_tax">
                 <div id="order_tax"
                     *ngIf="createProductForm.controls['order_tax'].touched &&createProductForm.controls['order_tax'].invalid  || submitted && createProductForm.controls['order_tax'].invalid"
@@ -222,7 +231,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="ProductUnit">Tax Type</label>
             <div class="col-md-12">
@@ -241,9 +250,11 @@
                 </div>
             </div>
         </div>
-        <div class="form-group col-md-12 ">
-            <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-            <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
+        <div class="container">
+            <div class="form-group col-md-12 ">
+                <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
+                <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
         </div>
     </div>
 
