@@ -68,12 +68,12 @@ class SaleRepository implements SaleRepositoryInterface
                 ];
 
 
-                if ($order->status == "completed") {
-                    if ($value['product_variant_id'] !== null) {
+                if ($order->status == "Completed") {
+                    if ($value['product_id'] !== null) {
                         $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                             ->where('warehouse_id', $order->warehouse_id)
                             ->where('product_id', $value['product_id'])
-                            ->where('product_variant_id', $value['product_variant_id'])
+                           // ->where('product_variant_id', $value['product_variant_id'])
                             ->first();
 
                         if ($unit && $product_warehouse) {

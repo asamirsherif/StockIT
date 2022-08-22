@@ -53,7 +53,7 @@ export class CreatesalesComponent implements OnInit {
             shipping: new FormControl(0),
             tax_rate: new FormControl(0),
             discount: new FormControl(0),
-            status: new FormControl("PAID"),
+            status: new FormControl("Completed"),
             payment_status: new FormControl("PENDING"),
             notes: new FormControl(""),
         });
@@ -76,8 +76,8 @@ export class CreatesalesComponent implements OnInit {
     }
 
     getWarehous(res) {
-        // let selected  = res.target.value;
-        this.warehouse_id;
+        this.products = [];
+        this.saleDetails = [];
     }
 
     //// search from search service
@@ -89,7 +89,8 @@ export class CreatesalesComponent implements OnInit {
                 .subscribe({
                     next: (res) => {
                         this.products = res.data;
-                        
+                        console.log(this.products);
+
                     },
                 });
     }
@@ -193,10 +194,10 @@ export class CreatesalesComponent implements OnInit {
         this.countDiscount();
         this.countShipping();
     }
-    ////////////////////////////////      store Purchase     /////////////////////////////////
+    ////////////////////////////////      store Sale     /////////////////////////////////
     storeSale() {
         this.submitted = true;
-        //if no product in purchase
+        //if no product in Sale
         if (this.saleDetails.length == 0) {
             this._toastr.error("please choose product!", "Error");
             return;
@@ -224,11 +225,11 @@ export class CreatesalesComponent implements OnInit {
                 payment: 1,
             };
 
-           
+
 
             const observer = {
                 next: (res) => {
-                    this._toastr.success("New purchase has been added");
+                    this._toastr.success("New sale done");
                     //reset all
                     this.saleDetails = [];
                     this.createSaleForm.reset();

@@ -4,31 +4,18 @@
     <form action="" [formGroup]="createSaleForm" (ngSubmit)="storeSale()">
         <div class="col-md-12 row">
             <div class="form-group col-md-4">
-                <label class="col-md-4 control-label" for="category"
-                    >Date</label
-                >
+                <label class="col-md-4 control-label" for="category">Date</label>
                 <div class="col-md-12">
-                    <input
-                        formControlName="date"
-                        class="form-control form-control col-md-11"
-                        type="date"
-                        placeholder="Date"
-                        aria-label="Date"
-                    />
+                    <input formControlName="date" class="form-control form-control col-md-11" type="date"
+                        placeholder="Date" aria-label="Date" />
                     <!-- validation -->
-                    <div
-                        id=""
-                        *ngIf="
+                    <div id="" *ngIf="
                             (createSaleForm.controls['date'].touched &&
                                 createSaleForm.controls['date'].invalid) ||
                             (submitted &&
                                 createSaleForm.controls['date'].invalid)
-                        "
-                        class="form-text text-danger"
-                    >
-                        <small
-                            *ngIf="createSaleForm.controls['date'].errors?.['required']"
-                        >
+                        " class="form-text text-danger">
+                        <small *ngIf="createSaleForm.controls['date'].errors?.['required']">
                             This field is required
                         </small>
                     </div>
@@ -38,84 +25,58 @@
                 </div>
             </div>
             <div class="form-group col-md-4">
-                <label class="col-md-8 control-label" for="customer"
-                    >Customer</label
-                >
+                <label class="col-md-8 control-label" for="customer">Customer</label>
                 <div class="col-md-12">
-                    <select
-                        formControlName="client"
-                        class="form-select col-md-12"
-                        aria-label="Default select example"
-                    >
+                    <select formControlName="client" class="form-select col-md-12" aria-label="Default select example">
                         <option *ngFor="let item of clients" [value]="item.id">
                             {{ item.name }}
                         </option>
                     </select>
                     <!-- validation -->
-                    <div
-                        id=""
-                        *ngIf="
+                    <div id="" *ngIf="
                             (createSaleForm.controls['client'].touched &&
                                 createSaleForm.controls['client'].invalid) ||
                             (submitted &&
                                 createSaleForm.controls['client'].invalid)
-                        "
-                        class="form-text text-danger"
-                    >
-                        <small
-                            *ngIf="createSaleForm.controls['client'].errors?.['required']"
-                        >
+                        " class="form-text text-danger">
+                        <small *ngIf="createSaleForm.controls['client'].errors?.['required']">
                             This field is required
                         </small>
                     </div>
                     <div class="form-text text-danger">
                         <small *ngIf="errors?.client">{{
                             errors?.client
-                        }}</small>
+                            }}</small>
                     </div>
                 </div>
             </div>
             <div class="form-group col-md-4">
                 <label class="col-md-8 control-label" for="category">
-                    Warehouse</label
-                >
+                    Warehouse</label>
                 <div class="col-md-12">
-                    <select
-                        formControlName="warehouse"
-                        class="form-select col-md-12"
-                        aria-label="Default select example"
-                        [(ngModel)]="warehouse_id"
-                        (ngModelChange)="getWarehous($event)"
-                    >
-                        <option
-                            *ngFor="let item of warehouses"
-                            [value]="item.id"
-                        >
+                    <select formControlName="warehouse" class="form-select col-md-12"
+                        aria-label="Default select example" [(ngModel)]="warehouse_id"
+                        (ngModelChange)="getWarehous($event)">
+                        <option *ngFor="let item of warehouses" [value]="item.id">
                             {{ item.name }}
                         </option>
                     </select>
                     <!-- validation -->
-                    <div
-                        id=""
-                        *ngIf="
+                    <div id="" *ngIf="
                             (createSaleForm.controls['warehouse'].touched &&
                                 createSaleForm.controls['warehouse']
                                     .invalid) ||
                             (submitted &&
                                 createSaleForm.controls['warehouse'].invalid)
-                        "
-                        class="form-text text-danger"
-                    >
-                        <small
-                            *ngIf="createSaleForm.controls['warehouse'].errors?.['required']"
-                        >
+                        " class="form-text text-danger">
+                        <small *ngIf="createSaleForm.controls['warehouse'].errors?.['required']">
                             This field is required
                         </small>
                     </div>
                     <div class="form-text text-danger">
                         <small *ngIf="errors?.warehouse">{{
                             errors?.warehouse
-                        }}</small>
+                            }}</small>
                     </div>
                 </div>
             </div>
@@ -123,26 +84,14 @@
         <div class="col-md-12">
             <label class="col-md-4 control-label" for="product">Product</label>
             <form class="col-md-12 mb-1 row panel panel-primary">
-                <span class="switch-icon-left col-md-1"
-                    ><i data-feather="search" [size]="30"></i
-                ></span>
-                <input
-                    [ngModel]="searchInput"
-                    [ngModelOptions]="{ standalone: true }"
-                    (ngModelChange)="salesSearch($event)"
-                    class="form-control col-md-11 text-left"
-                    type="text"
-                    placeholder="Search By product name or variants"
-                    aria-label="Search"
-                />
+                <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
+                <input [ngModel]="searchInput" [ngModelOptions]="{ standalone: true }"
+                    (ngModelChange)="salesSearch($event)" class="form-control col-md-11 text-left" type="text"
+                    placeholder="Search By product name or variants" aria-label="Search" />
                 <div class="col-md-12 list-group">
                     <ul class="col-md-12">
-                        <li
-                            class="list-group-item"
-                            style="list-style: none; cursor: pointer"
-                            *ngFor="let product of products; let i = index"
-                            (click)="addSaleDetail(i)"
-                        >
+                        <li class="list-group-item" style="list-style: none; cursor: pointer"
+                            *ngFor="let product of products; let i = index" (click)="addSaleDetail(i)">
                             {{ product.name }}
                         </li>
                     </ul>
@@ -156,16 +105,12 @@
                     <th scope="col">#</th>
                     <th scope="col">Product</th>
                     <th scope="col">Net Unit Code</th>
-
+                    <th scope="col">in Stock</th>
                     <th scope="col">Quantity</th>
-                    <th scope="col">Discount</th>
-
+                    <th scope="col">Tax</th>
                     <th scope="col">Subtotal</th>
                     <th scope="col">
-                        <i
-                            data-feather="x-circle"
-                            class="btn-outline-secondary"
-                        ></i>
+                        <i data-feather="x-circle" class="btn-outline-secondary"></i>
                     </th>
                 </tr>
             </thead>
@@ -174,20 +119,18 @@
                     <td>{{ i + 1 }}</td>
                     <td>{{ saleDetail.product.name }}</td>
                     <td>{{ saleDetail.product.cost }}</td>
+                    <td>{{saleDetail.product.in_stock }}</td>
                     <td>
-                        <core-touchspin
-                            [minValue]="1"
-                            [numberValue]="saleDetail.quantity"
-                            (onChange)="countChange($event, i)"
-                        >
+                        <core-touchspin [minValue]="1" [maxValue]="saleDetail.product.in_stock"
+                            [numberValue]="saleDetail.quantity" (onChange)="countChange($event, i)">
                         </core-touchspin>
                     </td>
-                    <td>{{ saleDetail.discount }}</td>
-                    <td>{{ saleDetail.total }}</td>
+                    <td>{{ countTax(saleDetail.quantity,saleDetail.product.tax_cost) }}</td>
+                    <td>{{ saleDetail.subtotal }}</td>
 
                     <td>
                         <div class="col-md-4">
-                            <button class="btn btn-sm btn-danger">
+                            <button (click)="removeSaleDetail(i)" class="btn btn-sm btn-danger">
                                 <i data-feather="x-circle" [size]="24"></i>
                             </button>
                         </div>
@@ -221,119 +164,69 @@
         </table>
         <div class="col-md-12 row">
             <div class="form-group col-md-4">
-                <label class="col-md-8 control-label" for="ordertax"
-                    >Order Tax</label
-                >
+                <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
                 <div class="col-md-12">
-                    <input
-                        id="ordertax"
-                        (ngModelChange)="countOrderTax(); countGrandTotal()"
-                        formControlName="tax_rate"
-                        placeholder="0"
-                        class="form-control input-md"
-                        required=""
-                        type="text"
-                    />
+                    <input id="ordertax" (ngModelChange)="countOrderTax(); countGrandTotal()" formControlName="tax_rate"
+                        placeholder="0" class="form-control input-md" required="" type="text" />
                 </div>
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.tax_rate">{{
                         errors?.tax_rate
-                    }}</small>
+                        }}</small>
                 </div>
             </div>
 
             <div class="form-group col-md-4">
-                <label class="col-md-8 control-label" for="ordertax"
-                    >Discount</label
-                >
+                <label class="col-md-8 control-label" for="ordertax">Discount</label>
                 <div class="col-md-12">
-                    <input
-                        id="ordertax"
-                        (ngModelChange)="countDiscount(); countGrandTotal()"
-                        formControlName="discount"
-                        placeholder="0"
-                        class="form-control input-md"
-                        required=""
-                        type="text"
-                    />
+                    <input id="ordertax" (ngModelChange)="countDiscount(); countGrandTotal()" formControlName="discount"
+                        placeholder="0" class="form-control input-md" required="" type="text" />
                 </div>
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.discount">{{
                         errors?.discount
-                    }}</small>
+                        }}</small>
                 </div>
             </div>
 
             <div class="form-group col-md-4">
-                <label class="col-md-8 control-label" for="ordertax"
-                    >Shipping</label
-                >
+                <label class="col-md-8 control-label" for="ordertax">Shipping</label>
                 <div class="col-md-12">
-                    <input
-                        id="ordertax"
-                        (ngModelChange)="countShipping(); countGrandTotal()"
-                        formControlName="shipping"
-                        placeholder="0"
-                        class="form-control input-md"
-                        required=""
-                        type="text"
-                    />
+                    <input id="ordertax" (ngModelChange)="countShipping(); countGrandTotal()" formControlName="shipping"
+                        placeholder="0" class="form-control input-md" required="" type="text" />
                 </div>
 
                 <div class="form-text text-danger">
                     <small *ngIf="errors?.shipping">{{
                         errors?.shipping
-                    }}</small>
+                        }}</small>
                 </div>
             </div>
             <div class="form-group col-md-4">
-                <label class="col-md-8 control-label" for="status"
-                    >Status</label
-                >
+                <label class="col-md-8 control-label" for="status">Status</label>
                 <div class="col-md-12">
-                    <select
-                        class="form-select col-md-12"
-                        aria-label="Default select example"
-                        formControlName="status"
-                    >
+                    <select class="form-select col-md-12" aria-label="Default select example" formControlName="status">
                         <option selected>Completed</option>
                     </select>
                 </div>
             </div>
             <div class="form-group col-md-4">
-                <label class="col-md-8 control-label" for="status"
-                    >Payment Status</label
-                >
+                <label class="col-md-8 control-label" for="status">Payment Status</label>
                 <div class="col-md-12">
-                    <select
-                        class="form-select col-md-12"
-                        aria-label="Default select example"
-                        formControlName="payment_status"
-                    >
+                    <select class="form-select col-md-12" aria-label="Default select example"
+                        formControlName="payment_status">
                         <option selected>Pending</option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="form-group col-md-12">
-            <label for="exampleFormControlTextarea1" class="form-label"
-                >Note</label
-            >
-            <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                formControlName="notes"
-            ></textarea>
+            <label for="exampleFormControlTextarea1" class="form-label">Note</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="notes"></textarea>
         </div>
         <div class="form-group col-md-12">
             <div class="col-md-4">
-                <button
-                    (click)="passMe()"
-                    id="singlebutton"
-                    name="singlebutton"
-                    class="btn btn-primary"
-                >
+                <button (click)="passMe()" id="singlebutton" name="singlebutton" class="btn btn-primary">
                     Submit
                 </button>
             </div>
