@@ -29,4 +29,9 @@ export class ProductSearchService {
     this.params = this.params.set('search',search)
     return this._http.get(`${this.host}saleProdcutSearch/${warehouse_id}`, { headers: this.headers, params: this.params })
   }
+
+  adjSearch(search: string , warehouse_id:number): Observable<any> {
+    this.params = this.params.set('search',search)
+    return this._http.get(`${this.host}adjProdcutSearch/${warehouse_id}`, { headers: this.headers, params: this.params })
+  }
 }
