@@ -76,6 +76,8 @@ export class CreateadjustmentComponent implements OnInit {
         },
         error: (error) => {
           this._toastr.error('Something went wrong!');
+          console.log(error);
+          
         }
       }
       let data: Iadjustment = {
@@ -84,11 +86,12 @@ export class CreateadjustmentComponent implements OnInit {
         notes: formdata.notes,
         user_id: user.id,
         details: this.adjDetails,
-        items: 0
+        items: Number(this.adjDetails.length)
       }
 
       //first
       this._adjustmentService.store(data).subscribe(observer)
+      
       //this._router.navigate(['listadjustment'])
     }
   }

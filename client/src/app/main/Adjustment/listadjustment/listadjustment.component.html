@@ -17,40 +17,41 @@
                     <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
                             data-feather="filter"></i>Filter</button>
                     <div ngbDropdownMenu style="width:400px;height: 450px;">
-                        <form class="px-2 py-2">
+                        <form class="px-2 py-2" [formGroup]="filterForm" (ngSubmit)="filter()">
                             <h3 style="font-weight:bold ;">Filter</h3>
 
                             <div class="form-group mb-1 ">
                                 <label for="exampleDropdownFormDate1">Date</label>
-                                <input type="date" class="form-control" id="exampleDropdownFormDate1" />
+                                <input formControlName="date" type="date" class="form-control" id="exampleDropdownFormDate1" />
                             </div>
 
                             <div class="form-group mb-1">
                                 <label for="exampleDropdownFormReference1">Reference</label>
-                                <input type="text" class="form-control" id="exampleDropdownFormReference1"
+                                <input formControlName="ref" type="text" class="form-control" id="exampleDropdownFormReference1"
                                     placeholder="Reference" />
                             </div>
 
                             <div class="form-group mb-2">
                                 <label for="exampleDropdownFormReference1">Warehouse</label>
-                                <select class="form-control" aria-label="Default select example"
+                                <select formControlName="warehouse_id" class="form-control" aria-label="Default select example"
                                     id="exampleDropdownFormWarehouse1" placeholder="Choose Warehouse">
-                                    <option selected>Choose Warehouse</option>
-                                    <option>الرئيسي</option>
-                                    <option>office annim </option>
+                                    <option *ngFor="let warehouse of warehouses;" value="{{warehouse.id}}">
+                                        {{warehouse.name}}</option>
                                 </select>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 ">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-primary btn-block" rippleEffect><i
-                                                data-feather="filter"></i>Filter</button>
+                                        <button type="submit" class="btn btn-primary btn-block" rippleEffect>
+                                            <i data-feather="filter"></i>Filter
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-danger btn-block" rippleEffect><i
-                                                data-feather="alert-circle"></i> Reset</button>
+                                        <button (click)="resetFilter()" type="button" class="btn btn-danger btn-block" rippleEffect>
+                                            <i data-feather="alert-circle"></i> Reset
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -76,19 +77,25 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let item of adjustment; let i = index">
-                    <td>{{item.date}}</td>
-                    <td>{{item.ref}}</td>
-                    <td>{{item.warehouse_id}}</td>
-                    <td></td>
-                    <td> <button class="btn btn-sm btn-primary"
-                            (click)="openModal(contentModal);ShowAdjustment(item.id)"><i data-feather="eye"
-                                [size]="22"></i>
-                        </button><button class="btn btn-sm btn-success" routerLink="../adjustupdate/{{item.id}}"><i
-                                data-feather="edit" [size]="24">
-                            </i></button> <button class="btn btn-sm btn-danger"(click)="destroy(item.id)"><i data-feather="x-circle" [size]="24"
-                                ></i>
-                        </button></td>
+                <tr *ngFor="let adjustment of adjustments; let i = index">
+                    <td>{{adjustment.date}}</td>
+                    <td>{{adjustment.ref}}</td>
+                    <td>{{adjustment.warehouse.name}}</td>
+                    <td>{{adjustment.items}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="openModal(contentModal);ShowAdjustment(i)">
+                            <i data-feather="eye" [size]="22">
+                            </i>
+                        </button>
+                        <button class="btn btn-sm btn-success" routerLink="../adjustupdate/{{adjustment.id}}">
+                            <i data-feather="edit" [size]="24">
+                            </i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" (click)="destroy(i)">
+                            <i data-feather="x-circle" [size]="24">
+                            </i>
+                        </button>
+                    </td>
                     <!-- Modal -->
                     <ng-template #contentModal let-c="close" let-d="dismiss" let-model>
                         <div class="modal-header">
@@ -108,11 +115,11 @@
                                     </tr>
                                     <tr>
                                         <td>Reference</td>
-                                        <td>AD_1114</td>
+                                        <td>{{adjustmentForShow?.ref}}</td>
                                     </tr>
                                     <tr>
                                         <td>Warehouse</td>
-                                        <td>{{adjustmentForShow?.warehouse_id}}</td>
+                                        <td>{{adjustmentForShow?.warehouse.name}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -126,31 +133,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                    <tr>
-                                        <td>earphones </td>
-                                        <td>63417341 </td>
-                                        <td>49.00 pc</td>
-                                        <td>Addition</td>
+                                    <tr *ngFor="let adjDetail of adjustmentForShow?.details;">
+                                        <td>{{adjDetail.product.name}}</td>
+                                        <td>{{adjDetail.product.code}}</td>
+                                        <td>{{adjDetail.quantity}}</td>
+                                        <td>{{adjDetail.type}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>earphones </td>
-                                        <td>63417341 </td>
-                                        <td>49.00 pc</td>
-                                        <td>Addition</td>
-                                    </tr>
-                                    <tr>
-                                        <td>earphones </td>
-                                        <td>63417341 </td>
-                                        <td>49.00 pc</td>
-                                        <td>Addition</td>
-                                    </tr>
-                                    <tr>
-                                        <td>earphones </td>
-                                        <td>63417341 </td>
-                                        <td>49.00 pc</td>
-                                        <td>Addition</td>
-                                    </tr>
-
                                 </tbody>
                             </table>
 
