@@ -29,7 +29,7 @@
 
             <div class="form-group ">
               <label for="exampleDropdownFormReferenc1">Referenc</label>
-              <input formControlName="ref" type="text" class="form-control" id="exampleDropdownFormReferenc1"
+              <input formControlName="ref" type="text" class="form-control" id="FormReferenc1"
                 placeholder="Referenc" />
             </div>
 
@@ -43,9 +43,9 @@
             </div>
 
             <div class="form-group ">
-              <label for="exampleDropdownFormWarehouse1">Warehouse</label>
+              <label for="FormWarehouse1">Warehouse</label>
               <select formControlName="warehouse_id" class="form-control" aria-label="Default select example"
-                id="exampleDropdownFormWarehouse1">
+                id="FormWarehouse">
                 <option selected>Choose Warehouse</option>
                 <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>
               </select>
