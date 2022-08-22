@@ -128,7 +128,7 @@ updateSupplier() {
     const observer = {
         next: (res) => {
             this.closeModel(this.contentModel);
-            this._toastr.success('Supplier has been updated');
+            this._toastr.success('Supplier updated');
             this.AllData();
         },
         error: (error: HttpErrorResponse) => {

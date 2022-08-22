@@ -6,6 +6,7 @@ import { ExpenseService } from 'app/auth/service/expense/expense.service';
 import { WarehousservService } from 'app/auth/service/warehous/warehousserv.service';
 import { ExpenseCategoryService } from 'app/auth/service/expense/expense-category.service';
 import { IExpenseCategory } from 'app/interfaces/iexpense-category';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-expenseupdate',
   templateUrl: './expenseupdate.component.html',
@@ -24,7 +25,7 @@ export class ExpenseupdateComponent implements OnInit {
   errors:any = {};
   editexpence:FormGroup;
 
-  constructor(private fb:FormBuilder,public _router:Router,private expenseService:ExpenseService,public _activateRouter:ActivatedRoute,public wareser:WarehousservService,private expenseCategoryService :ExpenseCategoryService ) {
+  constructor(private fb:FormBuilder,public _router:Router,private expenseService:ExpenseService, private _toastr: ToastrService,public _activateRouter:ActivatedRoute,public wareser:WarehousservService,private expenseCategoryService :ExpenseCategoryService ) {
     this.editexpence = new FormGroup({
       amount: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
@@ -92,6 +93,7 @@ export class ExpenseupdateComponent implements OnInit {
     if (this.editexpence.valid) {
       const observer = {
         next: (res) => {
+          this._toastr.success('expense updated');
           console.log(res);
         },
         error: (error) => {

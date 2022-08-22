@@ -127,7 +127,7 @@ export class CustomerlistComponent implements OnInit {
         const observer = {
             next: (res) => {
                 this.closeModel(this.contentModel);
-                this._toastr.success('customer has been updated');
+                this._toastr.success('customer updated');
                 this.AllData();
             }, error: (error: HttpErrorResponse) => {
                 this.errors = error.error.errors;
