@@ -122,12 +122,8 @@ class SaleController extends Controller
         $deleted = $this->saleRepo->delete($id);
         if ($deleted)
             return $this->succWithData(new SaleResource($sale), "sale deleted");
-            
+
     }
-
-
-
-
 
 
 

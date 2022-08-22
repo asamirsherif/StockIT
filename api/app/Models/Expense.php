@@ -21,7 +21,7 @@ class Expense extends Model
     ];
 
 
-    //for filter
+    // for filter
     public function scopeFilter(Builder $builder, Request $request)
     {
         return (new ExpenseFilter($request))->filter($builder);

@@ -16,6 +16,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SalesReturnController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,4 +100,14 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
 
     // sale prodcut warehouse search
     Route::get('saleProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'saleSearch']);
+
+
+    //    -------------------- Reports (charts) ---------------------------------- //
+
+    Route::get("chart/report_with_echart", [ReportController::class, 'report_with_echart']);
+
+
+    //    -------------------- Report ---------------------------------- //
+    Route::get("report/profit-loss", [ReportController::class, 'ProfitAndLoss']);
+
 });
