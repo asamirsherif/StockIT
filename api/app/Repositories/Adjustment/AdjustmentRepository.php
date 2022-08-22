@@ -25,7 +25,7 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             $adjustment->warehouse_id = $request->warehouse_id;
             $adjustment->date         = $request->date;
             $adjustment->Ref          = $this->makeCode();
-            $adjustment->items        = $request->items ? $request : 0;
+            $adjustment->items        = $request->items ? $request->items : 0;
             $adjustment->notes        = $request->notes;
 
             $adjustment->save();
