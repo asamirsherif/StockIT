@@ -39,6 +39,7 @@ export class CreateproductComponent implements OnInit {
       name: new FormControl("", Validators.required),
       code: new FormControl("", Validators.required),
       category_id: new FormControl("", Validators.required),
+      brand_id: new FormControl("", Validators.required),
       type_barcode: new FormControl("", Validators.required),
       cost: new FormControl("", Validators.required),
       price: new FormControl("", Validators.required),
