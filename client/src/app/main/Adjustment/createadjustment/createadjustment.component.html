@@ -59,13 +59,14 @@
                 <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
                 <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput"
                     (keyup)="adjSearch(searchbar.value)" placeholder="Search Here" formControlName="search" />
-
-                <ul class="col-md-11">
-                    <li class="list-group-item" style="list-style: none; cursor: pointer;"
-                        *ngFor="let product of products; let i = index" (click)="addAdjDetail(i)">
-                        <p> {{ product.name }}</p>
-                    </li>
-                </ul>
+                <div class="col-md-12 list-group">
+                    <ul class="col-md-12">
+                        <li class="list-group-item" style="list-style: none; cursor: pointer;"
+                            *ngFor="let product of products; let i = index" (click)="addAdjDetail(i)">
+                            <p> {{ product.name }}</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 

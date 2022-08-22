@@ -19,6 +19,10 @@ export class ListadjustmentComponent implements OnInit {
   adjustmentForShow!: Iadjustment;
   errors: any = {};
 
+ //for pagination 
+ p: number = 1;
+ total: number = 0;
+
 
   //filter form
   public filterForm:FormGroup;
@@ -125,5 +129,11 @@ export class ListadjustmentComponent implements OnInit {
       }
     }
     this._adjustmentService.getAddjuestid(this.adjustments[i].id).subscribe(observer);
+  }
+
+  //for pagination
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.getall();
   }
 }
