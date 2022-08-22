@@ -124,6 +124,7 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
 
                 $newQunatity = $adjDetail['type'] == 'Subtraction' ?
                     $warehouseProducts->qte - $adjDetail['quantity'] : $warehouseProducts->qte + $adjDetail['quantity'];
+                $newQunatity = $newQunatity < 0 ? 0: $newQunatity;
                 //increase quantity
                 $warehouseProducts->update([
                     'qte' => $newQunatity,
