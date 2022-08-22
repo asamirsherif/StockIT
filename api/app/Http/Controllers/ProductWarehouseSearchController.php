@@ -47,7 +47,7 @@ class ProductWarehouseSearchController extends Controller
             })->paginate($request->perPage);
         }
 
-        return $products ? ShowProductResource::collection($products) : [];
+        return $products ? ShowProductResource::collectionOfWarehouse($products,$id) : [];
 
     }
 }
