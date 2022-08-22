@@ -1,5 +1,5 @@
 <body>
-    <h2>Create Sale</h2>
+    <h2>Update Sale</h2>
     <hr />
     <form action="" [formGroup]="editSaleForm" (ngSubmit)="updateSale()">
         <div class="col-md-12 row">
@@ -141,9 +141,8 @@
                             class="list-group-item"
                             style="list-style: none; cursor: pointer"
                             *ngFor="let product of products; let i = index"
-                            (click)="addSaleDetail(i)"
-                        >
-                            {{ product.name }}
+                            (click)="addSaleDetail(i)">
+                           <p>{{ product.name }}</p> 
                         </li>
                     </ul>
                 </div>
