@@ -35,7 +35,7 @@ export class BrandComponent implements OnInit {
     private modalService: NgbModal,
     private brand: AddbrandService,
     public _router: Router,
-    private toaster: ToastrService
+    private _toastr: ToastrService
   ) {
 
     this.createbrand = new FormGroup({
@@ -79,11 +79,14 @@ export class BrandComponent implements OnInit {
 
       const observer = {
         next: (res) => {
+          this._toastr.success("New brand added successfuly")
+
           this.closeModel(this.contentModel);
-          this.toaster.success(res.message);
           this.data.push(res.data);
         },
         error: (error: HttpErrorResponse) => {
+          this._toastr.error("Make shure for your data!", 'Error')
+
          this.errors = error.error.errors;
         },
       };

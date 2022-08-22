@@ -5,6 +5,7 @@ import { CategorytService } from "app/auth/service/category/category.service";
 import { observable } from "rxjs";
 import { ICategory } from "app/interfaces/icategory";
 import { HttpErrorResponse } from "@angular/common/http";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-category",
@@ -25,7 +26,9 @@ export class CategoryComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private categorytService: CategorytService
+    private categorytService: CategorytService,
+    private _toastr: ToastrService
+
   ) {
     this.createCategoryForm = new FormGroup({
       CategoryCode: new FormControl("", Validators.required),
@@ -64,9 +67,13 @@ export class CategoryComponent implements OnInit {
 
       const observed = {
         next: (res) => {
+          this._toastr.success(res.message)
+
           this.modalService.dismissAll(this.contentModal);
           this.categories.push(res.data);
         }, error: (error: HttpErrorResponse) => {
+          this._toastr.error("Make shure for your data!", 'Error')
+
           this.errors = error.error.errors;
          },
       };
@@ -105,6 +112,8 @@ export class CategoryComponent implements OnInit {
 
       const observed = {
         next: (res) => {
+          this._toastr.success(res.message)
+
           this.modalService.dismissAll(this.contentModal);
           this.getCategories();
         }, error: (error: HttpErrorResponse) => {
