@@ -136,9 +136,9 @@ export class SaleslistComponent implements OnInit {
     // set init valus for form
     this.filterForm = new FormGroup({
       date: new FormControl(""),
-      ref: new FormControl(""),
-      provider_id: new FormControl(""),
-      warehouse_id: new FormControl(""),
+      Ref: new FormControl(""),
+      client: new FormControl(""),
+      warehouse_name: new FormControl(""),
     })
   }
 
