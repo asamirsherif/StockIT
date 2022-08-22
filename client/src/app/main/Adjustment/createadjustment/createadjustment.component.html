@@ -7,12 +7,15 @@
             <div class="col-md-6">
                 <label class="col-md-4 control-label " for="category">Warehouse</label>
                 <div class="col-md-12 ">
-                    <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
+                    <select class="form-select col-md-12 " aria-label="Default select example"
+                        formControlName="warehouse_id">
                         <option *ngFor="let item of WarehousArray" [value]="item.id">
                             {{ item.name }}
                         </option>
                     </select>
-                    <div id="warehouse_id" *ngIf="createadjustmentform.controls['warehouse_id'].touched &&createadjustmentform.controls['warehouse_id'].invalid || submitted && createadjustmentform.controls['warehouse_id'].invalid" class="form-text text-danger">
+                    <div id="warehouse_id"
+                        *ngIf="createadjustmentform.controls['warehouse_id'].touched &&createadjustmentform.controls['warehouse_id'].invalid || submitted && createadjustmentform.controls['warehouse_id'].invalid"
+                        class="form-text text-danger">
                         <small *ngIf="createadjustmentform.controls['warehouse_id'].errors?.['required']">This field is
                             required</small>
                     </div>
@@ -25,8 +28,11 @@
             <div class="form-group col-md-6">
                 <label class="col-md-6 control-label " for="category">Date</label>
                 <div class="col-md-12 ">
-                    <input class="form-control form-control col-md-12" type="date" placeholder="Date" aria-label="Date" formControlName="date">
-                    <div id="date" *ngIf="createadjustmentform.controls['date'].touched &&createadjustmentform.controls['date'].invalid || submitted && createadjustmentform.controls['date'].invalid" class="form-text text-danger">
+                    <input class="form-control form-control col-md-12" type="date" placeholder="Date" aria-label="Date"
+                        formControlName="date">
+                    <div id="date"
+                        *ngIf="createadjustmentform.controls['date'].touched &&createadjustmentform.controls['date'].invalid || submitted && createadjustmentform.controls['date'].invalid"
+                        class="form-text text-danger">
                         <small *ngIf="createadjustmentform.controls['date'].errors?.['required']">This field is
                             required</small>
                     </div>
@@ -41,7 +47,8 @@
             <label class="col-md-4 control-label" for="items">Product</label>
             <div class="col-md-12 row">
                 <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
-                <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput" (keyup)="fetchSeries(searchbar.value)" placeholder="Search Here" formControlName="search" />
+                <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput"
+                    (keyup)="fetchSeries(searchbar.value)" placeholder="Search Here" formControlName="search" />
                 <ul class="col-md-11">
                     <li *ngFor="let show of searchResult" (click)="showDetails(show)" [hidden]="toggle">
                         <p> {{ show.name }}</p>
@@ -81,17 +88,20 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <button (click)="deleteSeris(i)" class="btn btn-sm btn-danger"><i data-feather="x-circle"
-                                        [size]="24"></i></button>
+                                <button (click)="deleteSeris(i)" class="btn btn-sm btn-danger"><i
+                                        data-feather="x-circle" [size]="24"></i></button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="form-group col-md-12 ">
-            <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-            <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" formControlName="notes"></textarea>
+        <div class="container">
+            <div class="form-group col-md-12 ">
+                <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
+                <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                    formControlName="notes"></textarea>
+            </div>
         </div>
         <div class="form-group col-md-12">
             <div class="col-md-4">
