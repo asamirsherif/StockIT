@@ -7,6 +7,7 @@ import { IExpenseCategory } from 'app/interfaces/iexpense-category';
 import { ExpenseService } from 'app/auth/service/expense/expense.service';
 import { IExpense } from 'app/interfaces/iexpense';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-createexpenses',
   templateUrl: './createexpenses.component.html',
@@ -84,9 +85,9 @@ export class CreateexpensesComponent implements OnInit {
 
 
         },
-        error: (error) => {
-          console.log(error);
+        error: (error: HttpErrorResponse) => {
           this._toastr.error('Make sure for your data!');
+          this.errors = error.error.errors;
 
         }
       }
