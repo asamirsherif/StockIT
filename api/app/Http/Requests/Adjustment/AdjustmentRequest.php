@@ -28,7 +28,7 @@ class AdjustmentRequest extends FormRequest
             'date'                => ['required', 'date'],
             'warehouse_id'        => ['required', 'integer'],
             'items'               => ['required'],
-            'notes'               => ['string', 'min:5'],
+            'notes'               => ['nullable','string', 'min:5'],
             'adjustmentDeatils.*' => ['required']
         ];
     }

@@ -105,4 +105,7 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
     // sale prodcut warehouse search
     Route::get('saleProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'saleSearch']);
 
+    // adjustment prodcut warehouse search
+    Route::get('adjProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'adjSearch']);
+
 });

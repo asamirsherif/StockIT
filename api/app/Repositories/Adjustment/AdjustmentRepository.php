@@ -25,10 +25,13 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             $adjustment->warehouse_id = $request->warehouse_id;
             $adjustment->date         = $request->date;
             $adjustment->Ref          = $this->makeCode();
-            $adjustment->items        = $request->items;
+            $adjustment->items        = $request->items ? $request : 0;
             $adjustment->notes        = $request->notes;
 
             $adjustment->save();
+
+            $this->createAdjustmentDetails($request, $adjustment->id);
+            $this->changeProductWarehouse($request);
         }, 3);
 
         return $adjustment;
@@ -46,9 +49,9 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
             $adjustment->notes = $request->notes ? $request->notes : $adjustment->notes;
 
             $adjustment->save();
-    }, 3);
+        }, 3);
 
-    return $adjustment;
+        return $adjustment;
     }
 
     public function delete(int $id): bool
@@ -65,8 +68,8 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
     {
         $adjustments = Adjustment::filter($request)->where(function ($q) use ($request) {
             return $q->where('date', 'LIKE', "%" . $request->search . "%")
-                    ->orWhere('Ref', 'LIKE', "%" . $request->search . "%")
-                    ->orWhere('warehouse_id', 'LIKE', "%" . $request->search . "%");
+                ->orWhere('Ref', 'LIKE', "%" . $request->search . "%")
+                ->orWhere('warehouse_id', 'LIKE', "%" . $request->search . "%");
         });
 
         return $adjustments;
@@ -92,14 +95,14 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
     {
         $adjustment = $this->read($id);
         $adjustmentDeatils = [];
-        foreach ($request->adjustmentDeatils as $adjDetail) {
+        foreach ($request->details as $adjDetail) {
             $adjustmentDetailModel = $adjustment->adjustmentDeatils();
-            DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
+            DB::transaction(function () use ($adjustmentDetailModel, $adjDetail, $id) {
                 $adjustmentDetailModel->create([
                     'adjustment_id' => $id,
                     'quantity' => $adjDetail['quantity'],
                     'product_id' => $adjDetail['product_id'],
-                    'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id'] : null,
+                    'product_variant_id' => isset($adjDetail['product_variant_id']) ? $adjDetail['product_variant_id'] : null,
                     'type' => $adjDetail['type'],
                 ]);
             }, 3);
@@ -108,17 +111,22 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
         return $adjustmentDeatils;
     }
 
-    // add in product warehouse
-    public function addProductWarehouse(Request $request)
+    //  increase  product in warehouse
+    public function changeProductWarehouse(Request $request)
     {
-        foreach ($request->adjustmentDeatils as $adjDetail) {
-            $productWarehouseModel= new ProductWarehouse();
-            DB::transaction(function() use ($productWarehouseModel, $adjDetail, $request) {
-                $productWarehouseModel->updateOrCreate([
-                    'product_id'         => $adjDetail['product_id'],
-                    'warehouse_id'       => $request['warehouse_id'],
-                    'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id']: null,
-                    'qte'                => $adjDetail['quantity'],
+        foreach ($request->details as $adjDetail) {
+            DB::transaction(function () use ($adjDetail, $request) {
+                //if product already exist in warehouse
+                $warehouseProducts = ProductWarehouse::where('product_id', $adjDetail['product_id'])
+                    ->where('warehouse_id', $request['warehouse_id'])
+                    ->where('product_variant_id', isset($purchDetail['product_variant_id']) ? $purchDetail['product_variant_id'] : null)
+                    ->first();
+
+                $newQunatity = $adjDetail['type'] == 'Subtraction' ?
+                    $warehouseProducts->qte - $adjDetail['quantity'] : $warehouseProducts->qte + $adjDetail['quantity'];
+                //increase quantity
+                $warehouseProducts->update([
+                    'qte' => $newQunatity,
                 ]);
             }, 3);
         }
@@ -133,19 +141,19 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
         // start update of new details
         $adjustment = $this->read($id);
         $adjustmentDeatils = [];
-            foreach ($request->adjustmentDeatils as $adjDetail) {
-                $adjustmentDetailModel = $adjustment->adjustmentDeatils();
-                DB::transaction(function() use ($adjustmentDetailModel, $adjDetail, $id) {
-                    $adjustmentDetailModel->update([
-                        'adjustment_id' => $id,
-                        'quantity' => $adjDetail['quantity'],
-                        'product_id' => $adjDetail['product_id'],
-                        'product_variant_id' => isset($adjDetail['product_variant_id'])?$adjDetail['product_variant_id'] : null,
-                        'type' => $adjDetail['type'],
-                    ]);
-                }, 3);
-                $adjustmentDeatils[] = $adjustmentDetailModel;
-            }
+        foreach ($request->adjustmentDeatils as $adjDetail) {
+            $adjustmentDetailModel = $adjustment->adjustmentDeatils();
+            DB::transaction(function () use ($adjustmentDetailModel, $adjDetail, $id) {
+                $adjustmentDetailModel->update([
+                    'adjustment_id' => $id,
+                    'quantity' => $adjDetail['quantity'],
+                    'product_id' => $adjDetail['product_id'],
+                    'product_variant_id' => isset($adjDetail['product_variant_id']) ? $adjDetail['product_variant_id'] : null,
+                    'type' => $adjDetail['type'],
+                ]);
+            }, 3);
+            $adjustmentDeatils[] = $adjustmentDetailModel;
+        }
         return $adjustmentDeatils;
     }
 
@@ -155,7 +163,7 @@ class AdjustmentRepository implements AdjustmentRepositoryInterface
         $adjustmentDeatils = $this->read($id)->adjustmentDeatils()->get('adjustment_id')->toArray();
         foreach ($adjustmentDeatils as $adjDetail) {
             $adjDetail = $adjDetail['adjustment_id'];
-            if(!in_array($adjDetail, $request->$adjustmentDeatils)) {
+            if (!in_array($adjDetail, $request->$adjustmentDeatils)) {
                 $this->read($id)->adjustmentDeatils()->where('adjustment_id', $adjDetail)->delete();
             }
         }

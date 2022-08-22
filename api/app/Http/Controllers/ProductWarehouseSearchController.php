@@ -50,4 +50,25 @@ class ProductWarehouseSearchController extends Controller
         return $products ? ShowProductResource::collectionOfWarehouse($products,$id) : [];
 
     }
+
+
+    public function adjSearch(Request $request, int $id)
+    {
+        $products = [];
+        $warehouse = Warehouse::find($id);
+        if ($request->filled('search')) {
+            $products = $warehouse->products()->where(function ($q) use ($request) {
+                return $q->where('name', 'LIKE', "%" . $request->search . "%")
+                    ->orWhere('code', 'LIKE', "%" . $request->search . "%")
+                    ->orWhere(function ($q) use ($request) {
+                        return $q->whereHas('productVariants', function ($q) use ($request) {
+                            return $q->where('name', "LIKE", "%" . $request->search . "%");
+                        });
+                    });
+            })->paginate($request->perPage);
+        }
+
+        return $products ? ShowProductResource::collectionOfWarehouse($products,$id) : [];
+
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\AdjustmentDetail;
 
+use App\Http\Resources\Product\ShowProductResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdjustmentDetailResource extends JsonResource
@@ -16,8 +17,8 @@ class AdjustmentDetailResource extends JsonResource
     {
         return [
             'id'                 => $this->id,
-            'product_id'         => $this->product_id,
-            'adjustment_id'      => $this->adjustment_id ,
+            'product'            => new ShowProductResource($this->product),
+            'adjustment_id'      => $this->adjustment_id,
             'product_variant_id' => $this->product_variant_id,
             'type'               => $this->type,
             'quantity'           => $this->quantity

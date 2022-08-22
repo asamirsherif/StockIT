@@ -56,9 +56,9 @@ class AdjustmentController extends Controller
     {
         $adjustmentCreated = $this->adjustmentRepo->create($request);
 
-        $this->adjustmentRepo->createAdjustmentDetails($request, $adjustmentCreated->id);
+        // $this->adjustmentRepo->createAdjustmentDetails($request, $adjustmentCreated->id);
 
-        $this->adjustmentRepo->addProductWarehouse($request);
+        // $this->adjustmentRepo->addProductWarehouse($request);
 
         if ($adjustmentCreated)
             return $this->succWithData(new AdjustmentResource($adjustmentCreated), "Adjustment Created successfully");
