@@ -29,13 +29,15 @@ export class SystemsettingComponent implements OnInit {
   constructor(private fb:FormBuilder, private _toastr: ToastrService,public clientserv:ClientservService,public currencyserv:CurrencyService,public systemserv:SystemsettingService,public warehousserv:WarehousservService) {
     this.systemsettingForm = new FormGroup({
       email:new FormControl('',[Validators.required,Validators.email]),
-      name: new FormControl('', Validators.required),
-      phone: new FormControl('', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]),
+      CompanyName: new FormControl('', Validators.required),
+      CompanyPhone: new FormControl('', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]),
       client_id:new FormControl('',Validators.required),
       currency_id:new FormControl('',Validators.required),
       warehouse_id:new FormControl('',Validators.required),
       image:new FormControl(null),
-      address:new FormControl(null)
+      CompanyAddress:new FormControl(null),
+      footer:new FormControl(null),
+      developed_by:new FormControl(null)
     })
 }
 
@@ -104,8 +106,7 @@ export class SystemsettingComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           this._toastr.error('Make sure for your data!');
           this.errors = error.error.errors;
-          console.log(this.errors)
-        },
+        }
       }
 
       this.systemserv.store(this.systemsettingForm.value).subscribe(observer)

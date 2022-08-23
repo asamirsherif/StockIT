@@ -7,10 +7,12 @@ export interface Isetting {
     currency_id:Icurreny,
     warehouse_id:Warehous,
     email?:string,
-    name?:string,
-    phone?:number,
-    image?:string,
-    address?:string
+    CompanyName?:string,
+    CompanyPhone?:number,
+    logo?:string,
+    CompanyAddress?:string,
+    footer?:string,
+    developed_by?:string
 
 }
  
