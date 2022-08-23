@@ -25,7 +25,7 @@ header:HttpHeaders
   }
 
   get(){
-    return this._http.get(`${this.host}`)
+    return this._http.get(`${this.host}`,{ headers: this.header })
   }
   
   /**

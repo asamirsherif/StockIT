@@ -1,7 +1,7 @@
 <h2>System settings</h2>
 <hr>
 
-<form class="row col-md-12" [formGroup]="systemsettingForm" (ngSubmit)="AddSystem()">
+<form class="row col-md-12" [formGroup]="systemsettingForm" (ngSubmit)="setSystem(setting?.id)">
     <div class="col-md-12 p-1 m-0 mb-2" style="background-color: #f7f7f8; border-radius: 20px;">System Settings</div>
     <div class="col-md-12 row">
         <div class="form-group col-md-4">
