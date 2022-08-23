@@ -7,7 +7,7 @@ import { WarehousservService } from 'app/auth/service/warehous/warehousserv.serv
 import { ClientservService } from "app/auth/service/client/clientserv.service";
 import { ISale } from 'app/interfaces/isales';
 import { Iclient } from 'app/interfaces/iclient';
-
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: 'app-saleslist',
   templateUrl: './saleslist.component.html',
@@ -37,6 +37,7 @@ export class SaleslistComponent implements OnInit {
     private _saleService: SaleService,
     private _warehouseService: WarehousservService,
     private _clientService: ClientservService,
+    private modalService: NgbModal,
   ) {
     this.filterForm = new FormGroup({
       date: new FormControl(""),
@@ -147,4 +148,16 @@ export class SaleslistComponent implements OnInit {
     this.p = event;
     this.getAll();
 }
+
+modalOpenAD(modalAD) {
+  this.modalService.open(modalAD, {
+    centered: true,
+    size:'sm'
+  });
+}
+
+printPage() {
+    window.print();
+  }
+
 }
