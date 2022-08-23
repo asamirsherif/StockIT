@@ -26,7 +26,7 @@ export class CreateproductComponent implements OnInit {
   product: IProduct[];
 
   submitted = false;
-
+  barcode_types = ["Code 128", "Code 39", "EAN 8", "EAN 13", "UPC"];
 
   data: any
   errors: any = {};
