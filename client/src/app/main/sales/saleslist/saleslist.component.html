@@ -156,76 +156,81 @@
             <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div> 
-            <div class="modal-body" tabindex="0" ngbAutofocus>
-                <div id="printModel">
+        </div>
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+            <div id="printModel">
                 <h2 class="text-center">StockIt</h2>
                 <hr>
-                    <div>
-                        <table>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Date:</td>
-                                <td class="col-md-6">{{saleForshow?.date}}</td>
-                            </tr>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Address:</td>
-                                <td class="col-md-6">{{saleForshow?.client.address}}</td>
-                            </tr>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Email:</td>
-                                <td class="col-md-6">{{saleForshow?.client.email}}</td>
-                            </tr>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Phone:</td>
-                                <td class="col-md-6">{{saleForshow?.client.phone}}</td>
-                            </tr>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Customer:</td>
-                                <td class="col-md-6">{{saleForshow?.client.name}}</td>
-                            </tr>
-                        </table>
-                    </div><br>
-                    <tr class="col-md-12">
-                        <td class="col-md-6">
-                            <p>{{saleForshow?.items[0].product.name}}</p>
-                        </td>
-                    </tr>
-                    <tr class="col-md-12">
-                        <td class="col-md-6">
-                            <p>{{saleForshow?.items[0].quantity}} ك X {{saleForshow?.items[0].product.price}}</p>
-                        </td>
-                        <td class="col-md-3"></td>
-                        <td class="col-md-3 text-end ps-5">{{saleForshow?.items[0].total}}</td>
-                    </tr>
-
-                    <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
-                    <tr class="col-md-12 ">
-                        <td class="col-md-6"><b>Grand Total</b></td>
-                        <td class="col-md-3"></td>
-                        <td class="col-md-3 text-end">{{saleForshow?.GrandTotal}}</td>
-                    </tr>
-                    <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
-                    <table class="table text-center">
-                        <tr class="bg-light">
-                            <th>Paid By</th>
-                            <th>Amount</th>
-                            <th>Change</th>
+                <div>
+                    <table>
+                        <tr class="col-md-12">
+                            <td class="col-md-6">Date:</td>
+                            <td class="col-md-6">{{saleForshow?.date}}</td>
                         </tr>
-                        <tr>
-                            <td>{{saleForshow?.payment_status}}</td>
-                            <td>{{saleForshow?.paid_amount}}</td>
-                            <td>{{saleForshow?.shipping}}</td>
+                        <tr class="col-md-12">
+                            <td class="col-md-6">Address:</td>
+                            <td class="col-md-6">{{saleForshow?.client.address}}</td>
+                        </tr>
+                        <tr class="col-md-12">
+                            <td class="col-md-6">Email:</td>
+                            <td class="col-md-6">{{saleForshow?.client.email}}</td>
+                        </tr>
+                        <tr class="col-md-12">
+                            <td class="col-md-6">Phone:</td>
+                            <td class="col-md-6">{{saleForshow?.client.phone}}</td>
+                        </tr>
+                        <tr class="col-md-12">
+                            <td class="col-md-6">Customer:</td>
+                            <td class="col-md-6">{{saleForshow?.client.name}}</td>
                         </tr>
                     </table>
-                </div>
+                </div><br>
+                <tr class="col-md-12">
+                    <td class="col-md-6">
+                        <p>{{saleForshow?.items[0].product.name}}</p>
+                    </td>
+                </tr>
+                <tr class="col-md-12">
+                    <td class="col-md-6">
+                        <p>{{saleForshow?.items[0].quantity}} ك X {{saleForshow?.items[0].product.price}}</p>
+                    </td>
+                    <td class="col-md-3"></td>
+                    <td class="col-md-3 text-end ps-5">{{saleForshow?.items[0].total}}</td>
+                </tr>
+
+                <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
+                <tr class="col-md-12 ">
+                    <td class="col-md-6"><b>Grand Total</b></td>
+                    <td class="col-md-3"></td>
+                    <td class="col-md-3 text-end">{{saleForshow?.GrandTotal}}</td>
+                </tr>
+                <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
+                <table class="table text-center">
+                    <tr class="bg-light">
+                        <th>Paid By</th>
+                        <th>Amount</th>
+                        <th>Change</th>
+                    </tr>
+                    <tr>
+                        <td>{{saleForshow?.payment_status}}</td>
+                        <td>{{saleForshow?.paid_amount}}</td>
+                        <td>{{saleForshow?.shipping}}</td>
+                    </tr>
+                </table>
+
                 <h4 class="text-center">Thank You For Shopping With Us . Please Come Again</h4>
-                <h5 class="text-center">{{saleForshow?.Ref}}</h5>
+                <div class="text-center">
+                    <h5>{{saleForshow?.Ref}}</h5>
+                    <ngx-barcode [bc-value]="value" [bc-width]="1" [bc-height]="40" [bc-text-align]="center"
+                        [bc-display-value]="false"></ngx-barcode>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" printSectionId="printModel" ngxPrint><i
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" printSectionId="printModel" ngxPrint><i
                     data-feather="filter"></i>
-                    print
-                </button>
+                print
+            </button>
         </div>
     </ng-template>
     <!-- / Modal -->

@@ -32,6 +32,7 @@ export class SaleslistComponent implements OnInit {
   saleForshow!:ISale;
   //for forms
   public filterForm: FormGroup;
+  value;
 
   constructor(
     private _toastr: ToastrService,
@@ -163,6 +164,7 @@ showSales(id: number) {
       next: (res) => {
         console.log(id);
           this.saleForshow = res.data
+          this.value=res.data.Ref;
           console.log(res.data)
       },
       error: (err) => {
