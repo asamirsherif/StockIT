@@ -5,7 +5,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CoreCommonModule } from '@core/common.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SaleslistComponent } from './Saleslist.component';
-
+import {NgxPrintModule} from 'ngx-print';
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
 
 @NgModule({
   declarations: [ SaleslistComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,NgxPaginationModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,NgxPaginationModule,NgxPrintModule],
   exports: [ SaleslistComponent ]
 })
 export class SaleslistModule {}

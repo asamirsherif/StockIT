@@ -69,6 +69,7 @@
     "ngx-pagination": "^6.0.2",
     "ngx-perfect-scrollbar": "10.1.1",
     "ngx-plyr": "4.0.0",
+    "ngx-print": "^1.2.1",
     "ngx-quill": "14.0.0",
     "ngx-swiper-wrapper": "10.0.0",
     "ngx-toastr": "^14.0.0",

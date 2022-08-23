@@ -156,8 +156,4 @@ modalOpenAD(modalAD) {
   });
 }
 
-printPage() {
-    window.print();
-  }
-
 }

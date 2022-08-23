@@ -156,60 +156,75 @@
             <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div>
-        <div class="modal-body" tabindex="0" ngbAutofocus>
-            <h2 class="text-center">StockIt</h2>
-            <div class="body">
-                <table >
-                    <tr>
-                        <td>Date:</td>
-                        <td>27/4/2022</td>
+        </div> 
+            <div class="modal-body" tabindex="0" ngbAutofocus>
+                <div id="printModel">
+                <h2 class="text-center">StockIt</h2>
+                <hr>
+                    <div>
+                        <table>
+                            <tr class="col-md-12">
+                                <td class="col-md-6">Date:</td>
+                                <td class="col-md-6">27/4/2022</td>
+                            </tr>
+                            <tr class="col-md-12">
+                                <td class="col-md-6">Address:</td>
+                                <td class="col-md-6">Egypte</td>
+                            </tr>
+                            <tr class="col-md-12">
+                                <td class="col-md-6">Email:</td>
+                                <td class="col-md-6">s@s.com</td>
+                            </tr>
+                            <tr class="col-md-12">
+                                <td class="col-md-6">Phone:</td>
+                                <td class="col-md-6">010455667</td>
+                            </tr>
+                            <tr class="col-md-12">
+                                <td class="col-md-6">Customer:</td>
+                                <td class="col-md-6">samira</td>
+                            </tr>
+                        </table>
+                    </div><br>
+                    <tr class="col-md-12">
+                        <td class="col-md-6">
+                            <p>S-Tshirt</p>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>Address:</td>
-                        <td>Egypte</td>
+                    <tr class="col-md-12">
+                        <td class="col-md-6">
+                            <p>1.00 ك X 276.00</p>
+                        </td>
+                        <td class="col-md-3"></td>
+                        <td class="col-md-3 text-end">276.00</td>
                     </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>s@s.com</td>
-                    </tr>
-                    <tr>
-                        <td>Phone:</td>
-                        <td>010455667</td>
-                    </tr>
-                    <tr>
-                        <td>Customer:</td>
-                        <td>samira</td>
-                    </tr>
-                </table>
-            </div><br>
-            <p>S-Tshirt</p>
-            <p>1.00 X 244</p>
-            <hr>
-            <tr class="col-md-12 text-center">
-                <td class="col-md-6"><b>Grand Total</b></td>
-                <td class="col-md-6 text-end">333 SA</td>
-            </tr>
-            <hr>
 
-            <table class="table text-center">
-                <tr class="bg-light">
-                <th>Paid By</th>
-                <th>Amount</th>
-                <th>Change</th>
-                </tr>
-                <tr>
-                    <td>cash</td>
-                    <td>333</td>
-                    <td>0.00</td>
-                </tr>
-            </table>
-        </div>
-        <h4 class="text-center">Thanks you</h4>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="printPage();modal.close('Accept click')">
-                print
-            </button>
+                    <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
+                    <tr class="col-md-12 ">
+                        <td class="col-md-6"><b>Grand Total</b></td>
+                        <td class="col-md-3"></td>
+                        <td class="col-md-3 text-end">333 SA</td>
+                    </tr>
+                    <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
+                    <table class="table text-center">
+                        <tr class="bg-light">
+                            <th>Paid By</th>
+                            <th>Amount</th>
+                            <th>Change</th>
+                        </tr>
+                        <tr>
+                            <td>cash</td>
+                            <td>333</td>
+                            <td>0.00</td>
+                        </tr>
+                    </table>
+                </div>
+                <h4 class="text-center">Thank You For Shopping With Us . Please Come Again</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" printSectionId="printModel" ngxPrint><i
+                    data-feather="filter"></i>
+                    print
+                </button>
         </div>
     </ng-template>
     <!-- / Modal -->
