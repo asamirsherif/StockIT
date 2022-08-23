@@ -142,7 +142,7 @@
                             data-feather="edit" [size]="15">
                         </i></button> <button (click)="delete(i)" class="btn btn-sm btn-danger"><i
                             data-feather="x-circle" [size]="15"></i>
-                    </button><button class="btn btn-sm btn-primary" (click)="modalOpenAD(modalAD)"><i
+                    </button><button class="btn btn-sm btn-primary" (click)="modalOpenAD(modalAD);showSales(sale.id)"><i
                             data-feather="file-text" [size]="15">
                         </i></button></td>
             </tr>
@@ -165,44 +165,44 @@
                         <table>
                             <tr class="col-md-12">
                                 <td class="col-md-6">Date:</td>
-                                <td class="col-md-6">27/4/2022</td>
+                                <td class="col-md-6">{{saleForshow?.date}}</td>
                             </tr>
                             <tr class="col-md-12">
                                 <td class="col-md-6">Address:</td>
-                                <td class="col-md-6">Egypte</td>
+                                <td class="col-md-6">{{saleForshow?.client.address}}</td>
                             </tr>
                             <tr class="col-md-12">
                                 <td class="col-md-6">Email:</td>
-                                <td class="col-md-6">s@s.com</td>
+                                <td class="col-md-6">{{saleForshow?.client.email}}</td>
                             </tr>
                             <tr class="col-md-12">
                                 <td class="col-md-6">Phone:</td>
-                                <td class="col-md-6">010455667</td>
+                                <td class="col-md-6">{{saleForshow?.client.phone}}</td>
                             </tr>
                             <tr class="col-md-12">
                                 <td class="col-md-6">Customer:</td>
-                                <td class="col-md-6">samira</td>
+                                <td class="col-md-6">{{saleForshow?.client.name}}</td>
                             </tr>
                         </table>
                     </div><br>
                     <tr class="col-md-12">
                         <td class="col-md-6">
-                            <p>S-Tshirt</p>
+                            <p>{{saleForshow?.items[0].product.name}}</p>
                         </td>
                     </tr>
                     <tr class="col-md-12">
                         <td class="col-md-6">
-                            <p>1.00 ك X 276.00</p>
+                            <p>{{saleForshow?.items[0].quantity}} ك X {{saleForshow?.items[0].product.price}}</p>
                         </td>
                         <td class="col-md-3"></td>
-                        <td class="col-md-3 text-end">276.00</td>
+                        <td class="col-md-3 text-end ps-5">{{saleForshow?.items[0].total}}</td>
                     </tr>
 
                     <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
                     <tr class="col-md-12 ">
                         <td class="col-md-6"><b>Grand Total</b></td>
                         <td class="col-md-3"></td>
-                        <td class="col-md-3 text-end">333 SA</td>
+                        <td class="col-md-3 text-end">{{saleForshow?.GrandTotal}}</td>
                     </tr>
                     <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
                     <table class="table text-center">
@@ -212,13 +212,14 @@
                             <th>Change</th>
                         </tr>
                         <tr>
-                            <td>cash</td>
-                            <td>333</td>
-                            <td>0.00</td>
+                            <td>{{saleForshow?.payment_status}}</td>
+                            <td>{{saleForshow?.paid_amount}}</td>
+                            <td>{{saleForshow?.shipping}}</td>
                         </tr>
                     </table>
                 </div>
                 <h4 class="text-center">Thank You For Shopping With Us . Please Come Again</h4>
+                <h5 class="text-center">{{saleForshow?.Ref}}</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-primary" printSectionId="printModel" ngxPrint><i

@@ -20,7 +20,7 @@ export class SaleslistComponent implements OnInit {
 
   //my vars
   public searchInput = "";
-
+  errors: any = {};
 
   p: number = 1;
   total: number = 0;
@@ -28,7 +28,8 @@ export class SaleslistComponent implements OnInit {
   public sales: ISale[] = [];
   public warehouses: any[] = [];
   public clients: Iclient[] = [];
-
+  
+  saleForshow!:ISale;
   //for forms
   public filterForm: FormGroup;
 
@@ -156,4 +157,18 @@ modalOpenAD(modalAD) {
   });
 }
 
+
+showSales(id: number) {
+  const observer = {
+      next: (res) => {
+        console.log(id);
+          this.saleForshow = res.data
+          console.log(res.data)
+      },
+      error: (err) => {
+          this.errors = err.error.errros;
+      }
+  }
+  this._saleService.show(id).subscribe(observer);
+}
 }
