@@ -7,15 +7,23 @@
     <ul ngbNav #nav="ngbNav" class="nav nav-pills">
       <li ngbNavItem>
         <a ngbNavLink>Range</a>
-        <ng-template ngbNavContent>
-          <p>
-            Pastry gummi bears sweet roll candy canes topping ice cream. Candy canes fruitcake cookie carrot
-            cake pastry. Lollipop caramels sesame snaps pie tootsie roll macaroon dessert. Muffin jujubes
-            brownie dragée ice cream cheesecake icing. Danish brownie pastry cotton candy donut. Cheesecake
-            donut candy canes. Jelly beans croissant bonbon cookie toffee. Soufflé croissant lemon drops
-            tootsie roll toffee tiramisu.
-          </p>
+        <ng-template ngbNavContent >
+
+          <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t" outsideDays="hidden" class="w-100 text-center col-md-12" >
+          </ngb-datepicker>
+          
+          <ng-template #t let-date let-focused="focused" " >
+            <span class="custom-day" [class.width]="100"
+                  [class.focused]="focused"
+                  [class.range]="isRange(date)"
+                  [class.faded]="isHovered(date) || isInside(date)"
+                  (mouseenter)="hoveredDate = date"
+                  (mouseleave)="hoveredDate = null">
+              {{ date.day }}
+            </span>
+          </ng-template>
         </ng-template>
+      
       </li>
       <li ngbNavItem>
         <a ngbNavLink>Week</a>
