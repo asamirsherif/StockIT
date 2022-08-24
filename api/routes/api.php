@@ -112,6 +112,7 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
     // invoices
     Route::get('saleInvoice/{sale}',[invoiceController::class,'saleInvoice']);
     Route::get('purchaseInvoice/{purchase}',[invoiceController::class,'purchaseInvoice']);
+    Route::get('saleInvoicePDF/{sale}',[invoiceController::class,'saleInvoicePDF']);
 
 
 });
