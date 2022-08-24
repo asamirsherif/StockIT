@@ -5,6 +5,7 @@ use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\invoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -107,5 +108,10 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
 
     // adjustment prodcut warehouse search
     Route::get('adjProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'adjSearch']);
+
+    // invoices
+    Route::get('saleInvoice/{sale}',[invoiceController::class,'saleInvoice']);
+    Route::get('purchaseInvoice/{purchase}',[invoiceController::class,'purchaseInvoice']);
+
 
 });

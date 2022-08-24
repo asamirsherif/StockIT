@@ -17,7 +17,7 @@ const routes = [
 
 @NgModule({
   declarations: [ SaleslistComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,NgxPaginationModule,NgxPrintModule,NgxBarcodeModule],
+  imports: [RouterModule.forChild(routes), CoreCommonModule,NgbModule,NgxPaginationModule,NgxBarcodeModule],
   exports: [ SaleslistComponent ]
 })
 export class SaleslistModule {}
