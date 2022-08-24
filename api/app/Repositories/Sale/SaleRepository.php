@@ -32,7 +32,7 @@ class SaleRepository implements SaleRepositoryInterface
 
             $order->is_pos = 0;
             $order->date = $request->date;
-            $order->Ref = /* $this->getNumberOrder(); */ 'S_1112';
+            $order->Ref = $this->makeCode();
             $order->client_id = $request->client_id;
             $order->GrandTotal = $request->GrandTotal;
             $order->warehouse_id = $request->warehouse_id;
@@ -376,15 +376,15 @@ class SaleRepository implements SaleRepositoryInterface
     public function makeCode(): string
     {
         $last = Sale::latest('id')->first();
-
         if ($last) {
             $item = $last->Ref;
             $nwMsg = explode("_", $item);
             $inMsg = $nwMsg[1] + 1;
             $code = $nwMsg[0] . '_' . $inMsg;
         } else {
-            $code = 'EXP_1111';
+            $code = 'SL_1111';
         }
         return $code;
     }
+   
 }

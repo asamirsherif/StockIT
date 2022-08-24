@@ -13,10 +13,8 @@
         </div>
         <div class="col-md-6 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
-
                 <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
                         data-feather="filter"></i>Filter</button>
-
                 <div ngbDropdownMenu style="width:400px;height: auto;">
                     <form class="px-2 py-2" [formGroup]="filterForm">
                         <h3 style="font-weight:bold ;">Filter</h3>
@@ -138,13 +136,17 @@
                 <!-- <td>{{ sale.paid_amount }}</td>
               <td>{{ sale.due }}</td>
               <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td> -->
-                <td> <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'><i
-                            data-feather="edit" [size]="15">
-                        </i></button> <button (click)="delete(i)" class="btn btn-sm btn-danger"><i
-                            data-feather="x-circle" [size]="15"></i>
-                    </button><button class="btn btn-sm btn-primary" (click)="modalOpenAD(modalAD)"><i
-                            data-feather="file-text" [size]="15">
-                        </i></button></td>
+                <td>
+                    <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'>
+                        <i data-feather="edit" [size]="15"> </i>
+                    </button>
+                    <button (click)="delete(i)" class="btn btn-sm btn-danger">
+                        <i data-feather="x-circle" [size]="15"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary" (click)="createInvoice(i);modalOpenAD(modalAD)">
+                        <i data-feather="file-text" [size]="15"> </i>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -156,75 +158,79 @@
             <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div> 
-            <div class="modal-body" tabindex="0" ngbAutofocus>
-                <div id="printModel">
-                <h2 class="text-center">StockIt</h2>
-                <hr>
-                    <div>
-                        <table>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Date:</td>
-                                <td class="col-md-6">27/4/2022</td>
-                            </tr>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Address:</td>
-                                <td class="col-md-6">Egypte</td>
-                            </tr>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Email:</td>
-                                <td class="col-md-6">s@s.com</td>
-                            </tr>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Phone:</td>
-                                <td class="col-md-6">010455667</td>
-                            </tr>
-                            <tr class="col-md-12">
-                                <td class="col-md-6">Customer:</td>
-                                <td class="col-md-6">samira</td>
-                            </tr>
-                        </table>
-                    </div><br>
-                    <tr class="col-md-12">
-                        <td class="col-md-6">
-                            <p>S-Tshirt</p>
-                        </td>
+        </div>
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+            <h2 class="text-center">StockIt</h2>
+            <div class="body">
+                <table>
+                    <tr>
+                        <td>Date:</td>
+                        <td>{{invoiceSale?.date}}</td>
                     </tr>
-                    <tr class="col-md-12">
-                        <td class="col-md-6">
-                            <p>1.00 ك X 276.00</p>
-                        </td>
-                        <td class="col-md-3"></td>
-                        <td class="col-md-3 text-end">276.00</td>
+                    <tr>
+                        <td>Address:</td>
+                        <td>{{invoiceSetting?.CompanyAddress}}</td>
                     </tr>
-
-                    <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
-                    <tr class="col-md-12 ">
-                        <td class="col-md-6"><b>Grand Total</b></td>
-                        <td class="col-md-3"></td>
-                        <td class="col-md-3 text-end">333 SA</td>
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{invoiceSetting?.email}}</td>
                     </tr>
-                    <hr style="border:none; border-top:3px dashed rgb(236, 234, 234) ;">
-                    <table class="table text-center">
-                        <tr class="bg-light">
-                            <th>Paid By</th>
-                            <th>Amount</th>
-                            <th>Change</th>
-                        </tr>
-                        <tr>
-                            <td>cash</td>
-                            <td>333</td>
-                            <td>0.00</td>
-                        </tr>
-                    </table>
-                </div>
-                <h4 class="text-center">Thank You For Shopping With Us . Please Come Again</h4>
+                    <tr>
+                        <td>Phone:</td>
+                        <td>{{invoiceSetting?.CompanyPhone}}</td>
+                    </tr>
+                    <tr>
+                        <td>Customer:</td>
+                        <td>{{invoiceSale?.client?.name}}</td>
+                    </tr>
+                </table>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" printSectionId="printModel" ngxPrint><i
-                    data-feather="filter"></i>
-                    print
-                </button>
+            <hr>
+
+            <div *ngFor="let saleDetail of invoiceSale?.details">
+                <h5 colspan="3">{{saleDetail.product.name}}</h5>
+                <div class="d-flex justify-content-between ps-3">
+                    <div>
+                        {{saleDetail.quantity}} pc
+                        X {{saleDetail.product.price}} {{invoiceSetting?.currency?.symbol}}
+                    </div>
+                    <div>
+                        {{saleDetail.total}} {{invoiceSetting?.currency?.symbol}}
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <tr class="col-md-12 text-center">
+                <td class="col-md-6"><b>Grand Total</b></td>
+                <td class="col-md-6 text-end">{{invoiceSale?.GrandTotal}} {{invoiceSetting?.currency?.symbol}}</td>
+            </tr>
+            <hr>
+
+            <table class="table text-center">
+                <tr class="bg-light">
+                    <th>Paid By</th>
+                    <th>Amount</th>
+                    <th>Change</th>
+                </tr>
+                <tr>
+                    <td>cash</td>
+                    <td>{{invoiceSale?.GrandTotal}} {{invoiceSetting?.currency?.symbol}}</td>
+                    <td>0.00</td>
+                </tr>
+            </table>
+        </div>
+        <div class="text-center">
+            <h5>{{invoiceSale?.Ref}}</h5>
+            <ngx-barcode [bc-value]="value" [bc-width]="1" [bc-height]="40" [bc-text-align]="center"
+                [bc-display-value]="false"></ngx-barcode>
+
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" class="btn btn-primary" (click)="printPage($event);modal.close('Accept click')">
+                print
+            </button>
         </div>
     </ng-template>
     <!-- / Modal -->
