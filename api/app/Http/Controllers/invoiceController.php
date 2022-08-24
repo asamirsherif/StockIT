@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Purchase\PurchaseResource;
-use App\Http\Resources\Sale\SaleResource;
+use App\Http\Resources\Sale\ShowSaleResource;
 use App\Http\Resources\Setting\SettingResource;
 use App\Models\Purchase;
 use App\Models\Sale;
@@ -29,7 +29,7 @@ class invoiceController extends Controller
         if(!$setting) return $this->errMsg('There is no setting in your system!');
 
         $data = [
-            'sale' => new SaleResource($sale),
+            'sale' => new ShowSaleResource($sale),
             'setting'=> new SettingResource($setting)
         ];
 

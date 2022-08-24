@@ -36,7 +36,7 @@ class ShowSaleResource extends JsonResource
             'paid_amount' => $paid_amount,
             'due' => $due,
             'payment_status' => $this->payment_status,
-            'items' => SaleDetailsResource::collection($this->details)
+            'details' => SaleDetailsResource::collection($this->details)
 
         ];
     }
