@@ -22,7 +22,7 @@ export class SaleslistComponent implements OnInit {
 
   //my vars
   public searchInput = "";
-
+  errors: any = {};
 
   p: number = 1;
   total: number = 0;
@@ -31,12 +31,15 @@ export class SaleslistComponent implements OnInit {
   public warehouses: any[] = [];
   public clients: Iclient[] = [];
 
+
   //for invoice
   public invoiceSale: ISale;
   public invoiceSetting: Isetting;
 
+
   //for forms
   public filterForm: FormGroup;
+
 
   constructor(
     private _toastr: ToastrService,
@@ -179,6 +182,7 @@ export class SaleslistComponent implements OnInit {
     });
   }
 
+
   printPage(e) {
     const model = e.target.parentNode.parentNode;
     console.log(model);
@@ -198,5 +202,7 @@ export class SaleslistComponent implements OnInit {
     );
     popupWin.document.close();
   }
+
+
 
 }

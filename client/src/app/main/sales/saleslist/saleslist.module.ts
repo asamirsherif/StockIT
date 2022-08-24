@@ -6,7 +6,6 @@ import { CoreCommonModule } from '@core/common.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SaleslistComponent } from './Saleslist.component';
 
-
 const routes = [
   {
     path: '',
