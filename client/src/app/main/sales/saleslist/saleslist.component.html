@@ -152,7 +152,7 @@
     </table>
 
     <!-- Modal -->
-    <ng-template  #modalAD let-modal>
+    <ng-template #modalAD let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel6">Invoice Pos </h4>
             <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
@@ -190,8 +190,8 @@
             <div *ngFor="let saleDetail of invoiceSale?.details">
                 <h5 colspan="3">{{saleDetail.product.name}}</h5>
                 <div class="d-flex justify-content-between ps-3">
-                    <div >
-                        {{saleDetail.quantity}} pc 
+                    <div>
+                        {{saleDetail.quantity}} pc
                         X {{saleDetail.product.price}} {{invoiceSetting?.currency?.symbol}}
                     </div>
                     <div>
@@ -219,6 +219,12 @@
                     <td>0.00</td>
                 </tr>
             </table>
+        </div>
+        <div class="text-center">
+            <h5>{{invoiceSale?.Ref}}</h5>
+            <ngx-barcode [bc-value]="value" [bc-width]="1" [bc-height]="40" [bc-text-align]="center"
+                [bc-display-value]="false"></ngx-barcode>
+
         </div>
         <div class="modal-footer">
 

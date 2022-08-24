@@ -23,7 +23,7 @@ export class SaleslistComponent implements OnInit {
   //my vars
   public searchInput = "";
   errors: any = {};
-
+   
   p: number = 1;
   total: number = 0;
   //for listing
@@ -131,6 +131,8 @@ export class SaleslistComponent implements OnInit {
 
           this.invoiceSale = res.data.sale;
           this.invoiceSetting = res.data.setting;
+          console.log( this.invoiceSale)
+          this.value=this.invoiceSale.Ref;
         },
         error: (err) => { this._toastr.error(err.error.message) }
       }
