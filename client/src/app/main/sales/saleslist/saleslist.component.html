@@ -146,6 +146,9 @@
                     <button class="btn btn-sm btn-primary" (click)="createInvoice(i);modalOpenAD(modalAD)">
                         <i data-feather="file-text" [size]="15"> </i>
                     </button>
+                    <button (click)="createPDFInvoice(i)" class="btn btn-sm btn-danger">
+                        <i data-feather="x-circle" [size]="15"></i>
+                    </button>
                 </td>
             </tr>
         </tbody>

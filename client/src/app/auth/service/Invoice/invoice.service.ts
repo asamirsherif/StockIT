@@ -26,6 +26,10 @@ export class InvoiceService {
     return this._Http.get(`${this.host}/saleInvoice/${id}`, { headers: this.headers });
   }
 
+  salePDF(id: number): Observable<any> {
+    return this._Http.get(`${this.host}/saleInvoicePDF/${id}`, { headers: this.headers });
+  }
+
   purchase(id: number): Observable<any> {
     return this._Http.get(`${this.host}/purchaseInvoice/${id}`, { headers: this.headers });
   }

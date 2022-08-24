@@ -23,7 +23,7 @@ export class SaleslistComponent implements OnInit {
   //my vars
   public searchInput = "";
   errors: any = {};
-   
+
   p: number = 1;
   total: number = 0;
   //for listing
@@ -122,6 +122,7 @@ export class SaleslistComponent implements OnInit {
     this._saleService.delete(this.sales[index].id).subscribe(observer);
   }
 
+  //////////////////////////////////// Invoices ///////////////
   //create invoice
   createInvoice(i) {
     if (i) {
@@ -131,14 +132,23 @@ export class SaleslistComponent implements OnInit {
 
           this.invoiceSale = res.data.sale;
           this.invoiceSetting = res.data.setting;
-          console.log( this.invoiceSale)
-          this.value=this.invoiceSale.Ref;
+          console.log(this.invoiceSale)
+          this.value = this.invoiceSale.Ref;
         },
         error: (err) => { this._toastr.error(err.error.message) }
       }
       this._invoiceService.sale(this.sales[i].id).subscribe(observer);
     }
   }
+
+  createPDFInvoice(i) {
+    this._invoiceService.salePDF(this.sales[i].id).subscribe({
+      next: (res) => { this._toastr.success('PDF generated'); },
+      error: (err) => { console.log(err); }
+    })
+  }
+
+  /////////////////////////////////////////////////////////////////////
 
   //search
   search(event) {
