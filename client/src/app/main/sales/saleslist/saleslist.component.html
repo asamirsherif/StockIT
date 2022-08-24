@@ -138,19 +138,23 @@
                 <!-- <td>{{ sale.paid_amount }}</td>
               <td>{{ sale.due }}</td>
               <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td> -->
-                <td> <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'><i
-                            data-feather="edit" [size]="15">
-                        </i></button> <button (click)="delete(i)" class="btn btn-sm btn-danger"><i
-                            data-feather="x-circle" [size]="15"></i>
-                    </button><button class="btn btn-sm btn-primary" (click)="modalOpenAD(modalAD)"><i
-                            data-feather="file-text" [size]="15">
-                        </i></button></td>
+                <td>
+                    <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'>
+                        <i data-feather="edit" [size]="15"> </i>
+                    </button>
+                    <button (click)="delete(i)" class="btn btn-sm btn-danger">
+                        <i data-feather="x-circle" [size]="15"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary" (click)="createInvoice(i);modalOpenAD(modalAD)">
+                        <i data-feather="file-text" [size]="15"> </i>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
 
     <!-- Modal -->
-    <ng-template #modalAD let-modal>
+    <ng-template  #modalAD let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel6">Invoice Pos </h4>
             <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
@@ -160,54 +164,67 @@
         <div class="modal-body" tabindex="0" ngbAutofocus>
             <h2 class="text-center">StockIt</h2>
             <div class="body">
-                <table >
+                <table>
                     <tr>
                         <td>Date:</td>
-                        <td>27/4/2022</td>
+                        <td>{{invoiceSale?.date}}</td>
                     </tr>
                     <tr>
                         <td>Address:</td>
-                        <td>Egypte</td>
+                        <td>{{invoiceSetting?.CompanyAddress}}</td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td>s@s.com</td>
+                        <td>{{invoiceSetting?.email}}</td>
                     </tr>
                     <tr>
                         <td>Phone:</td>
-                        <td>010455667</td>
+                        <td>{{invoiceSetting?.CompanyPhone}}</td>
                     </tr>
                     <tr>
                         <td>Customer:</td>
-                        <td>samira</td>
+                        <td>{{invoiceSale?.client?.name}}</td>
                     </tr>
                 </table>
-            </div><br>
-            <p>S-Tshirt</p>
-            <p>1.00 X 244</p>
+            </div>
+            <hr>
+
+            <div *ngFor="let saleDetail of invoiceSale?.details">
+                <h5 colspan="3">{{saleDetail.product.name}}</h5>
+                <div class="d-flex justify-content-between ps-3">
+                    <div >
+                        {{saleDetail.quantity}} pc 
+                        X {{saleDetail.product.price}} {{invoiceSetting?.currency?.symbol}}
+                    </div>
+                    <div>
+                        {{saleDetail.total}} {{invoiceSetting?.currency?.symbol}}
+                    </div>
+                </div>
+            </div>
+
             <hr>
             <tr class="col-md-12 text-center">
                 <td class="col-md-6"><b>Grand Total</b></td>
-                <td class="col-md-6 text-end">333 SA</td>
+                <td class="col-md-6 text-end">{{invoiceSale?.GrandTotal}} {{invoiceSetting?.currency?.symbol}}</td>
             </tr>
             <hr>
 
             <table class="table text-center">
                 <tr class="bg-light">
-                <th>Paid By</th>
-                <th>Amount</th>
-                <th>Change</th>
+                    <th>Paid By</th>
+                    <th>Amount</th>
+                    <th>Change</th>
                 </tr>
                 <tr>
                     <td>cash</td>
-                    <td>333</td>
+                    <td>{{invoiceSale?.GrandTotal}} {{invoiceSetting?.currency?.symbol}}</td>
                     <td>0.00</td>
                 </tr>
             </table>
         </div>
         <h4 class="text-center">Thanks you</h4>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="printPage();modal.close('Accept click')">
+            <button type="button" class="btn btn-primary" (click)="printPage($event);modal.close('Accept click')">
                 print
             </button>
         </div>
