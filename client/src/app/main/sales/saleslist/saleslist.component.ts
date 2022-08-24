@@ -32,13 +32,16 @@ export class SaleslistComponent implements OnInit {
   public clients: Iclient[] = [];
 
 
+
   //for invoice
   public invoiceSale: ISale;
   public invoiceSetting: Isetting;
 
 
+
   //for forms
   public filterForm: FormGroup;
+  value;
 
 
   constructor(
@@ -173,6 +176,7 @@ export class SaleslistComponent implements OnInit {
   pageChangeEvent(event: number) {
     this.p = event;
     this.getAll();
+
   }
 
   modalOpenAD(modalAD) {
@@ -202,6 +206,7 @@ export class SaleslistComponent implements OnInit {
     );
     popupWin.document.close();
   }
+
 
 
 
