@@ -29,8 +29,7 @@
 
             <div class="form-group ">
               <label for="exampleDropdownFormReferenc1">Referenc</label>
-              <input formControlName="ref" type="text" class="form-control" id="FormReferenc1"
-                placeholder="Referenc" />
+              <input formControlName="ref" type="text" class="form-control" id="FormReferenc1" placeholder="Referenc" />
             </div>
 
             <div class="form-group ">
@@ -107,7 +106,8 @@
       </tr>
     </thead>
     <tbody class="table-group-divider">
-      <tr *ngFor="let purchase of purchases | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total} ; let i = index">
+      <tr
+        *ngFor="let purchase of purchases | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total} ; let i = index">
         <td>{{purchase.date}}</td>
         <td>{{purchase.Ref}}</td>
         <td>{{purchase.provider.name}}</td>
@@ -116,10 +116,13 @@
         <td>{{purchase.GrandTotal}}</td>
         <td>
           <button class="btn btn-sm btn-success" [routerLink]="['../purchasesupdate/',purchase.id]">
-            <i data-feather="edit" [size]="24"></i>
+            <i data-feather="edit" [size]="20"></i>
           </button>
           <button (click)="delete(i)" class="btn btn-sm btn-danger">
-            <i data-feather="x-circle" [size]="24"></i>
+            <i data-feather="x-circle" [size]="20"></i>
+          </button>
+          <button (click)="createPDFInvoice(i)" class="btn btn-sm btn-secondary">
+            <i data-feather="download" [size]="20"></i>
           </button>
         </td>
       </tr>

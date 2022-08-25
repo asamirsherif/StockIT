@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { InvoiceService } from 'app/auth/service/Invoice/invoice.service';
 import { PurchaseService } from 'app/auth/service/purchase/purchase.service';
 import { SupplierservService } from 'app/auth/service/supplier/supplierserv.service';
 import { WarehousservService } from 'app/auth/service/warehous/warehousserv.service';
@@ -39,6 +40,7 @@ export class PurchaseslistComponent implements OnInit {
     private _purchaseService: PurchaseService,
     private _warehouseService: WarehousservService,
     private _supplierService: SupplierservService,
+    private _invoiceService: InvoiceService,
   ) {
     this.filterForm = new FormGroup({
       date: new FormControl(""),
@@ -119,7 +121,7 @@ export class PurchaseslistComponent implements OnInit {
         .set('ref', formData.ref)
         .set('provider_id', formData.provider_id)
         .set('warehouse_id', formData.warehouse_id)
-        //.set('user_id', this.user.id)
+      //.set('user_id', this.user.id)
 
 
       this.getAll();
@@ -143,5 +145,14 @@ export class PurchaseslistComponent implements OnInit {
   pageChangeEvent(event: number) {
     this.p = event;
     this.getAll();
+  }
+
+
+  // PDF Invoice
+  createPDFInvoice(i) {
+    this._invoiceService.purchasePDF(this.purchases[i].id).subscribe({
+      next: (res) => { this._toastr.success('PDF generated'); },
+      error: (err) => { console.log(err); }
+    })
   }
 }

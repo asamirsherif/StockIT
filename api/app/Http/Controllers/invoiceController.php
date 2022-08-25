@@ -78,4 +78,24 @@ class invoiceController extends Controller
 
         return $pdf->download('sale.pdf');
     }
+
+
+    /**
+     * purchase Invoice PDF
+     * @param int $id
+     */
+    public function purchaseInvoicePDF(int $id)
+    {
+        $purchase = Purchase::find($id);
+        $setting = Setting::latest()->first();
+        if (!$purchase) return $this->errMsg('No Purchase to genreate PDF');
+        if (!$setting) return $this->errMsg('There is no setting in your system!');
+
+        $pdf = PDF::loadView('pdf.purchasePDF', [
+            'setting' => new SettingResource($setting),
+            'purchase' => new PurchaseResource($purchase)
+        ]);
+
+        return $pdf->download('purchase.pdf');
+    }
 }
