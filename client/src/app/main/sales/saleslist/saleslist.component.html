@@ -3,50 +3,54 @@
     <hr>
     <div class=" row">
         <div class="col-md-6">
-           <!-- search -->
-      <form class="form-inline col-md-12 mb-1">
-        <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
-        <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
-          class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
-      </form>
-    </div>
+            <!-- search -->
+            <form class="form-inline col-md-12 mb-1">
+                <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+                    class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search" />
+            </form>
+        </div>
         <div class="col-md-6 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
+                <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
+                        data-feather="filter"></i>Filter</button>
+                <div ngbDropdownMenu style="width:400px;height: auto;">
+                    <form class="px-2 py-2" [formGroup]="filterForm">
+                        <h3 style="font-weight:bold ;">Filter</h3>
 
-            <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i data-feather="filter"></i>Filter</button>
+                        <div class="form-group  ">
+                            <label for="exampleDropdownFormDate1">Date</label>
+                            <input formControlName="date" type="date" class="form-control"
+                                id="exampleDropdownFormDate1" />
+                        </div>
 
-            <div ngbDropdownMenu style="width:400px;height: auto;">
-                <form class="px-2 py-2"  [formGroup]="filterForm">
-                    <h3 style="font-weight:bold ;">Filter</h3>
+                        <div class="form-group ">
+                            <label for="exampleDropdownFormReferenc1">Referenc</label>
+                            <input formControlName="Ref" type="text" class="form-control"
+                                id="exampleDropdownFormReferenc1" placeholder="Referenc" />
+                        </div>
 
-                  <div class="form-group  ">
-                    <label  for="exampleDropdownFormDate1">Date</label>
-                    <input formControlName="date" type="date" class="form-control" id="exampleDropdownFormDate1" />
-                </div>
-
-                  <div class="form-group ">
-                    <label  for="exampleDropdownFormReferenc1">Referenc</label>
-                    <input formControlName="Ref" type="text" class="form-control" id="exampleDropdownFormReferenc1"
-                    placeholder="Referenc" />
-                      </div>
-
-                    <div class="form-group ">
-                        <label for="exampleDropdownFormCustomer1">Customer</label>
-                        <select  formControlName="client"  class="form-control" aria-label="Default select example" id="exampleDropdownFormCustomer1" >
-                        <option selected>Choose Customer</option>
-                        <option *ngFor="let client of clients;" [value]="client.id">{{client.name}}</option>
-                    </select>
+                        <div class="form-group ">
+                            <label for="exampleDropdownFormCustomer1">Customer</label>
+                            <select formControlName="client" class="form-control" aria-label="Default select example"
+                                id="exampleDropdownFormCustomer1">
+                                <option selected>Choose Customer</option>
+                                <option *ngFor="let client of clients;" [value]="client.id">{{client.name}}</option>
+                            </select>
                         </div>
 
                         <div class="form-group ">
                             <label for="exampleDropdownFormWarehouse1">Warehouse</label>
-                            <select formControlName="warehouse_name" class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
-                            <option selected>Choose Warehouse</option>
-                            <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>
-                            
+                            <select formControlName="warehouse_name" class="form-control"
+                                aria-label="Default select example" id="exampleDropdownFormWarehouse1">
+                                <option selected>Choose Warehouse</option>
+                                <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}
+                                </option>
+
                             </select>
-                            </div>
-                            <!-- <div class="form-group ">
+                        </div>
+                        <!-- <div class="form-group ">
                                 <label for="exampleDropdownFormStatus1">Status</label>
                                 <select class="form-control" aria-label="Default select example" id="exampleDropdownFormStatus1" >
                                 <option selected>Choose Status</option>
@@ -65,27 +69,30 @@
                                     </select>
                                     </div> -->
                         <div class="row">
-                        <div class="col-lg-6 col-md-12 ">
-                            <div class="form-group">
-                                <button (click)="filter()" type="button" class="btn btn-primary btn-block" rippleEffect><i
-                                    data-feather="filter"></i>Filter</button>                            </div>
-                          </div>
-                          <div class="col-lg-6 col-md-12">
-                            <div class="form-group">
-                                <button (click)="resetFilter()" type="button" class="btn btn-danger btn-block" rippleEffect>
-                                    <i data-feather="alert-circle"></i> Reset
-                                  </button>
-                             </div>
-                         </div> 
+                            <div class="col-lg-6 col-md-12 ">
+                                <div class="form-group">
+                                    <button (click)="filter()" type="button" class="btn btn-primary btn-block"
+                                        rippleEffect><i data-feather="filter"></i>Filter</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <button (click)="resetFilter()" type="button" class="btn btn-danger btn-block"
+                                        rippleEffect>
+                                        <i data-feather="alert-circle"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                         </form> 
-                                        
+                    </form>
+
                 </div>
-              </div>
+            </div>
 
             <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
             <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
-            <button type="button" class="btn btn-secondary" [routerLink]="['../createsales']"><i data-feather="plus-circle"></i>Create</button>
+            <button type="button" class="btn btn-secondary" [routerLink]="['../createsales']"><i
+                    data-feather="plus-circle"></i>Create</button>
         </div>
     </div>
     <table class="table">
@@ -118,22 +125,119 @@
                 </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
                 </button></td>
             </tr> -->
-            <tr *ngFor="let sale of sales| paginate: { itemsPerPage: 3, currentPage: p, totalItems: total} ; let i = index">
-              <td>{{ sale.date }}</td>
-              <td>{{ sale.Ref }}</td>
-              <td>{{ sale.client.name }}</td>
-              <td>{{ sale.warehouse_name.name }}</td>
-              <td><button type="button" class="btn btn-outline-success ">{{ sale.status }}</button></td>
-              <td>{{ sale.GrandTotal }}</td>
-              <!-- <td>{{ sale.paid_amount }}</td>
+            <tr
+                *ngFor="let sale of sales| paginate: { itemsPerPage: 3, currentPage: p, totalItems: total} ; let i = index">
+                <td>{{ sale.date }}</td>
+                <td>{{ sale.Ref }}</td>
+                <td>{{ sale.client.name }}</td>
+                <td>{{ sale.warehouse_name.name }}</td>
+                <td><button type="button" class="btn btn-outline-success ">{{ sale.status }}</button></td>
+                <td>{{ sale.GrandTotal }}</td>
+                <!-- <td>{{ sale.paid_amount }}</td>
               <td>{{ sale.due }}</td>
               <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td> -->
-              <td> <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'><i data-feather="edit" [size]="24" >
-              </i></button>  <button (click)="delete(i)" class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
-              </button></td>
-          </tr>
+                <td>
+                    <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'>
+                        <i data-feather="edit" [size]="15"> </i>
+                    </button>
+                    <button (click)="delete(i)" class="btn btn-sm btn-danger">
+                        <i data-feather="x-circle" [size]="15"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary" (click)="createInvoice(i);modalOpenAD(modalAD)">
+                        <i data-feather="file-text" [size]="15"> </i>
+                    </button>
+                    <button (click)="createPDFInvoice(i)" class="btn btn-sm btn-danger">
+                        <i data-feather="x-circle" [size]="15"></i>
+                    </button>
+                </td>
+            </tr>
         </tbody>
     </table>
+
+    <!-- Modal -->
+    <ng-template #modalAD let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel6">Invoice Pos </h4>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+            <h2 class="text-center">StockIt</h2>
+            <div class="body">
+                <table>
+                    <tr>
+                        <td>Date:</td>
+                        <td>{{invoiceSale?.date}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td>{{invoiceSetting?.CompanyAddress}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{invoiceSetting?.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td>{{invoiceSetting?.CompanyPhone}}</td>
+                    </tr>
+                    <tr>
+                        <td>Customer:</td>
+                        <td>{{invoiceSale?.client?.name}}</td>
+                    </tr>
+                </table>
+            </div>
+            <hr>
+
+            <div *ngFor="let saleDetail of invoiceSale?.details">
+                <h5 colspan="3">{{saleDetail.product.name}}</h5>
+                <div class="d-flex justify-content-between ps-3">
+                    <div>
+                        {{saleDetail.quantity}} pc
+                        X {{saleDetail.product.price}} {{invoiceSetting?.currency?.symbol}}
+                    </div>
+                    <div>
+                        {{saleDetail.total}} {{invoiceSetting?.currency?.symbol}}
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <tr class="col-md-12 text-center">
+                <td class="col-md-6"><b>Grand Total</b></td>
+                <td class="col-md-6 text-end">{{invoiceSale?.GrandTotal}} {{invoiceSetting?.currency?.symbol}}</td>
+            </tr>
+            <hr>
+
+            <table class="table text-center">
+                <tr class="bg-light">
+                    <th>Paid By</th>
+                    <th>Amount</th>
+                    <th>Change</th>
+                </tr>
+                <tr>
+                    <td>cash</td>
+                    <td>{{invoiceSale?.GrandTotal}} {{invoiceSetting?.currency?.symbol}}</td>
+                    <td>0.00</td>
+                </tr>
+            </table>
+        </div>
+        <div class="text-center">
+            <h5>{{invoiceSale?.Ref}}</h5>
+            <ngx-barcode [bc-value]="value" [bc-width]="1" [bc-height]="40" [bc-text-align]="center"
+                [bc-display-value]="false"></ngx-barcode>
+
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" class="btn btn-primary" (click)="printPage($event);modal.close('Accept click')">
+                print
+            </button>
+        </div>
+    </ng-template>
+    <!-- / Modal -->
+
     <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
-    </pagination-controls> 
+    </pagination-controls>
 </body>

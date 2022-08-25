@@ -1,28 +1,42 @@
 <h2>System settings</h2>
 <hr>
 
-<form class="row col-md-12" [formGroup]="systemsetting" (ngSubmit)="formSubmit()">
+<form class="row col-md-12" [formGroup]="systemsettingForm" (ngSubmit)="setSystem(setting?.id)">
     <div class="col-md-12 p-1 m-0 mb-2" style="background-color: #f7f7f8; border-radius: 20px;">System Settings</div>
     <div class="col-md-12 row">
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label " for="currency">Default Currency</label>
             <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>US Dollar</option>
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="currency_id">
+                    <option *ngFor="let item of CurrencyArray " [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
+                <div id="currency_id" *ngIf="systemsettingForm.controls['currency_id'].touched &&systemsettingForm.controls['currency_id'].invalid || submitted && systemsettingForm.controls['currency_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsettingForm.controls['currency_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.currency_id">{{errors?.currency_id}}</small>
+                </div>
             </div>
         </div>
 
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label" for="email">Default Email</label>
             <div class="col-md-12">
-                <input id="email" name="email" placeholder="admin@admin.com" class="form-control input-md" required=""
+                <input id="email" name="email" placeholder="admin@admin.com" class="form-control input-md" required
                     type="email" formControlName="email">
                 <div id="email"
-                    *ngIf="systemsetting.controls['email'].touched &&systemsetting.controls['email'].invalid"
+                    *ngIf="systemsettingForm.controls['email'].touched &&systemsettingForm.controls['email'].invalid || submitted && systemsettingForm.controls['email'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="systemsetting.controls['email'].errors?.['required']">This field is
+                    <small *ngIf="systemsettingForm.controls['email'].errors?.['required']">This field is
                         required</small>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.email">{{errors?.email}}</small>
                 </div>
             </div>
         </div>
@@ -30,20 +44,33 @@
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label " for="logo">Change Logo</label>
             <div class="col-md-12">
-                <input id="file" name="file" class="form-control input-md" required="" type="file">
+                <input id="file" name="file" class="form-control input-md"  type="file"
+                    formControlName="image">
+                    <div id="image"
+                    *ngIf="systemsettingForm.controls['image'].touched &&systemsettingForm.controls['image'].invalid || submitted && systemsettingForm.controls['image'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsettingForm.controls['image'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.image">{{errors?.image}}</small>
+                </div>   
             </div>
         </div>
 
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label" for="companyName">Company Name</label>
             <div class="col-md-12">
-                <input id="companyName" name="companyName" placeholder="smartvalied" class="form-control input-md"
-                    required="" type="text" formControlName="companyname">
-                <div id="companyname"
-                    *ngIf="systemsetting.controls['companyname'].touched &&systemsetting.controls['companyname'].invalid"
+                <input id="CompanyName" name="CompanyName" placeholder="company" class="form-control input-md" required type="text"
+                    formControlName="CompanyName">
+                <div id="CompanyName"
+                    *ngIf="systemsettingForm.controls['CompanyName'].touched &&systemsettingForm.controls['CompanyName'].invalid || submitted && systemsettingForm.controls['CompanyName'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="systemsetting.controls['companyname'].errors?.['required']">This field is
+                    <small *ngIf="systemsettingForm.controls['CompanyName'].errors?.['required']">This field is
                         required</small>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.CompanyName">{{errors?.CompanyName}}</small>
                 </div>
             </div>
         </div>
@@ -51,13 +78,18 @@
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label" for="companyPhone">Company Phone</label>
             <div class="col-md-12">
-                <input id="companyPhone" name="phone" placeholder="01019589457" class="form-control input-md"
-                    required="" type="phone"formControlName="phone" >
-                <div id="phone"
-                    *ngIf="systemsetting.controls['phone'].touched &&systemsetting.controls['phone'].invalid"
+                <input id="companyPhone" name="CompanyPhone" placeholder="01019589457" class="form-control input-md" required
+                    type="text" formControlName="CompanyPhone">
+                <div id="CompanyPhone"
+                    *ngIf="systemsettingForm.controls['CompanyPhone'].touched &&systemsettingForm.controls['CompanyPhone'].invalid || submitted && systemsettingForm.controls['CompanyPhone'].invalid"
                     class="form-text text-danger">
-                    <small *ngIf="systemsetting.controls['phone'].errors?.['required']">This field is
+                    <small *ngIf="systemsettingForm.controls['CompanyPhone'].errors?.['required']">This field is
                         required</small>
+                        <small *ngIf="systemsettingForm.controls['CompanyPhone'].errors?.['pattern']">This field is
+                            CompanyPhone</small>    
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.CompanyPhone">{{errors?.CompanyPhone}}</small>
                 </div>
             </div>
         </div>
@@ -65,59 +97,71 @@
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label" for="develobedBy">Developed by</label>
             <div class="col-md-12">
-                <input id="develobedBy" name="develobedBy" placeholder="Smartveld Systems" class="form-control input-md"
-                    required="" type="text" formControlName="developby">
-                <div id="developby"
-                    *ngIf="systemsetting.controls['developby'].touched &&systemsetting.controls['developby'].invalid"
-                    class="form-text text-danger">
-                    <small *ngIf="systemsetting.controls['developby'].errors?.['required']">This field is
-                        required</small>
-                </div>
+                <input id="develobedBy" name="develobedBy" placeholder="" class="form-control input-md"
+                     type="text" formControlName="developed_by">
             </div>
         </div>
 
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label" for="footer">footer</label>
             <div class="col-md-12">
-                <input id="footer" name="footer" placeholder="Smartveld - Ultimate Inventory With POS"
-                    class="form-control input-md" required="" type="text" formControlName="footer">
-                <div id="footer"
-                    *ngIf="systemsetting.controls['footer'].touched &&systemsetting.controls['footer'].invalid"
-                    class="form-text text-danger">
-                    <small *ngIf="systemsetting.controls['footer'].errors?.['required']">This field is
-                        required</small>
-                </div>
+                <input id="footer" name="footer" placeholder="footer"
+                    class="form-control input-md" type="text" formControlName="footer">
             </div>
         </div>
 
         <div class="form-group col-md-4">
             <label class="col-md-8 control-label" for="defultCustomer">Default Customer</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Walk-In-Customer</option>
+                <select class="form-select col-md-12 " aria-label="Default select example" formControlName="client_id">
+                    <option *ngFor="let item of ClientArray " [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
+                <div id="client_id"
+                    *ngIf="systemsettingForm.controls['client_id'].touched &&systemsettingForm.controls['client_id'].invalid || submitted && systemsettingForm.controls['client_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsettingForm.controls['client_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.client_id">{{errors?.client_id}}</small>
+                </div>
             </div>
         </div>
 
         <div class="form-group col-md-4">
-            <label class="col-md-8 control-label" for="warehouse">Default Warehouse</label>
+            <label class="col-md-12 control-label" for="warehouse">Default Warehouse</label>
             <div class="col-md-12">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>choose warehouse</option>
+                <select class="form-select col-md-12 " aria-label="Default select example"
+                    formControlName="warehouse_id">
+                    <option *ngFor="let item of WarehousArray " [value]="item.id">
+                        {{ item.name }}
+                    </option>
                 </select>
+                <div id="warehouse_id"
+                    *ngIf="systemsettingForm.controls['warehouse_id'].touched &&systemsettingForm.controls['warehouse_id'].invalid || submitted && systemsettingForm.controls['warehouse_id'].invalid"
+                    class="form-text text-danger">
+                    <small *ngIf="systemsettingForm.controls['warehouse_id'].errors?.['required']">This field is
+                        required</small>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.warehouse_id">{{errors?.warehouse_id}}</small>
+                </div>
             </div>
         </div>
 
         <div class="form-group col-md-12">
-            <label class="col-md-8 control-label" for="address">Address</label>
+            <label class="col-md-8 control-label" for="CompanyAddress">Address</label>
             <div class="col-md-12">
-                <textarea class="form-control" placeholder="المدينة المنورة، السعودية" id="address" rows="3"></textarea>
+                <textarea class="form-control" placeholder="Egypt" id="CompanyAddress" rows="3"
+                    formControlName="CompanyAddress"></textarea>
             </div>
         </div>
 
         <div class="form-group col-md-12">
             <div class="col-md-4">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
             </div>
         </div>
 
@@ -125,7 +169,7 @@
 </form>
 
 <br><br>
-<form class="row col-md-12" [formGroup]="PaymentGateway" (ngSubmit)="paymentSubmit()">
+<!-- <form class="row col-md-12" [formGroup]="PaymentGateway" (ngSubmit)="paymentSubmit()">
     <div class="col-md-12 p-1 m-0 mb-2" style="background-color: #f7f7f8; border-radius: 20px;">Payment Gateway</div>
 
     <div class="form-group col-md-6">
@@ -325,4 +369,4 @@
     </div>
 
 </form>
-
+ -->

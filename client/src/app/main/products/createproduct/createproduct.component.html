@@ -82,11 +82,13 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label class="col-md-8 control-label" for="type_barcode">Barcode Symbology</label>
+            <label class="col-md-12 control-label" for="type_barcode">Barcode Symbology</label>
             <div class="col-md-12">
                 <select class="form-select col-md-12 " aria-label="Default select example"
                     formControlName="type_barcode">
-                    <option selected>Choose Symbology</option>
+                    <option selected *ngFor="let type of barcode_types" [value]="type">
+                        {{ type }}
+                      </option>
                 </select>
                 <div id="type_barcode"
                     *ngIf="createProductForm.controls['type_barcode'].touched &&createProductForm.controls['type_barcode'].invalid || submitted && createProductForm.controls['type_barcode'].invalid"

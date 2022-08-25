@@ -7,20 +7,22 @@ import { WarehousservService } from 'app/auth/service/warehous/warehousserv.serv
 import { ClientservService } from "app/auth/service/client/clientserv.service";
 import { ISale } from 'app/interfaces/isales';
 import { Iclient } from 'app/interfaces/iclient';
-
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { InvoiceService } from 'app/auth/service/Invoice/invoice.service';
+import { Isetting } from 'app/interfaces/isetting';
 @Component({
   selector: 'app-saleslist',
   templateUrl: './saleslist.component.html',
   styleUrls: ['./saleslist.component.scss']
 })
 export class SaleslistComponent implements OnInit {
-  
+
   //spcial 
   private user = JSON.parse(localStorage.getItem('currentUser'))
 
   //my vars
   public searchInput = "";
-
+  errors: any = {};
 
   p: number = 1;
   total: number = 0;
@@ -29,22 +31,34 @@ export class SaleslistComponent implements OnInit {
   public warehouses: any[] = [];
   public clients: Iclient[] = [];
 
+
+
+  //for invoice
+  public invoiceSale: ISale;
+  public invoiceSetting: Isetting;
+
+
+
   //for forms
   public filterForm: FormGroup;
+  value;
+
 
   constructor(
     private _toastr: ToastrService,
     private _saleService: SaleService,
     private _warehouseService: WarehousservService,
     private _clientService: ClientservService,
+    private _invoiceService: InvoiceService,
+    private modalService: NgbModal,
   ) {
     this.filterForm = new FormGroup({
       date: new FormControl(""),
       Ref: new FormControl(""),
       client: new FormControl(""),
       warehouse_name: new FormControl(""),
-    //   status: new FormControl(""),
-    //   payment_status: new FormControl(""),
+      //   status: new FormControl(""),
+      //   payment_status: new FormControl(""),
 
     })
   }
@@ -77,7 +91,7 @@ export class SaleslistComponent implements OnInit {
     })
   }
 
-  
+
 
 
 
@@ -85,12 +99,12 @@ export class SaleslistComponent implements OnInit {
   getAll() {
 
     this._saleService.getAll().subscribe({
-        next: (res) => {
+      next: (res) => {
         this.sales = res.data;
-        console.log(this.sales + 'a7a')
-        },
-        error: (err)=> console.log(err)
-      });
+        console.log(this.sales)
+      },
+      error: (err) => console.log(err)
+    });
   }
 
   //delete
@@ -98,7 +112,7 @@ export class SaleslistComponent implements OnInit {
     const observer = {
       next: (res) => {
         this.sales.splice(index, 1);
-        this._toastr.success('purchase deleted succesfully');
+        this._toastr.success('Sale deleted succesfully');
       },
       error: (err) => {
         this._toastr.error("something wrong!");
@@ -107,6 +121,34 @@ export class SaleslistComponent implements OnInit {
     }
     this._saleService.delete(this.sales[index].id).subscribe(observer);
   }
+
+  //////////////////////////////////// Invoices ///////////////
+  //create invoice
+  createInvoice(i) {
+    if (i) {
+      const observer = {
+        next: (res) => {
+          console.log(res);
+
+          this.invoiceSale = res.data.sale;
+          this.invoiceSetting = res.data.setting;
+          console.log(this.invoiceSale)
+          this.value = this.invoiceSale.Ref;
+        },
+        error: (err) => { this._toastr.error(err.error.message) }
+      }
+      this._invoiceService.sale(this.sales[i].id).subscribe(observer);
+    }
+  }
+
+  createPDFInvoice(i) {
+    this._invoiceService.salePDF(this.sales[i].id).subscribe({
+      next: (res) => { this._toastr.success('PDF generated'); },
+      error: (err) => { console.log(err); }
+    })
+  }
+
+  /////////////////////////////////////////////////////////////////////
 
   //search
   search(event) {
@@ -146,5 +188,38 @@ export class SaleslistComponent implements OnInit {
   pageChangeEvent(event: number) {
     this.p = event;
     this.getAll();
-}
+
+  }
+
+  modalOpenAD(modalAD) {
+    this.modalService.open(modalAD, {
+      centered: true,
+      size: 'sm'
+    });
+  }
+
+
+  printPage(e) {
+    const model = e.target.parentNode.parentNode;
+    console.log(model);
+
+    let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print tab</title>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+          </head>
+    <body onload="window.print();window.close()">${model.innerHTML}</body>
+      </html>`
+    );
+    popupWin.document.close();
+  }
+
+
+
+
 }

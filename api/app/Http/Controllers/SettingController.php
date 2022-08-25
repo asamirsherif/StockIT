@@ -27,7 +27,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return new SettingCollection(Setting::all());
+        $setting = Setting::latest()->first();
+        return $setting ? new SettingResource($setting) : null;
     }
 
     /**
@@ -39,7 +40,7 @@ class SettingController extends Controller
     public function store(SettingRequest $request)
     {
         $settingCreated = $this->settingRepo->create($request);
-        if($settingCreated)
+        if ($settingCreated)
             return $this->succWithData(new SettingResource($settingCreated), "setting Created successfully");
         else
             return $this->errMsg("setting not created!");
@@ -55,7 +56,7 @@ class SettingController extends Controller
     {
         $setting = Setting::find($id);
 
-        if(!$setting)
+        if (!$setting)
             return $this->errMsg('This setting doesn\'t exist');
         else
             return $this->succWithData(new SettingResource($setting), "setting details");
@@ -71,12 +72,12 @@ class SettingController extends Controller
     public function update(SettingRequest $request, $id)
     {
         $setting = Setting::find($id);
-        if(!$setting)
+        if (!$setting)
             return $this->errMsg('This setting doesn\'t exist');
 
         $settingUpdated = $this->settingRepo->update($request, $id);
 
-        if($settingUpdated)
+        if ($settingUpdated)
             return $this->succWithData(new SettingResource($settingUpdated), "setting updated successfully");
         else
             return $this->errMsg("setting not updated!");
@@ -92,12 +93,12 @@ class SettingController extends Controller
     {
         $setting = Setting::find($id);
 
-        if(!$setting)
+        if (!$setting)
             return $this->errMsg('This setting doesn\'t exist');
 
         $settingDeleted = $this->settingRepo->delete($id);
 
-        if($settingDeleted)
+        if ($settingDeleted)
             return $this->succWithData(new SettingResource($setting), "setting deleted successfully");
         else
             return $this->errMsg("setting not deleted");
