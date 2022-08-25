@@ -37,6 +37,9 @@ use App\Repositories\Sale\SaleRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\User\UserRepository;
 
+use App\Repositories\Permission\PermissionRepositoryInterface;
+use App\Repositories\Permission\PermissionRepository;
+
 
 class AppRepositoryProvider extends ServiceProvider
 {
@@ -88,7 +91,7 @@ class AppRepositoryProvider extends ServiceProvider
 
         //product
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
-        
+
         // purchase
         $this->app->bind(PurchaseRepositoryInterface::class, PurchaseRepository::class);
 
@@ -105,6 +108,9 @@ class AppRepositoryProvider extends ServiceProvider
 
          //User
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+
+        //Permission
+        $this->app->bind(PermissionRepositoryInterface::class, PermissionRepository::class);
 
     }
 
