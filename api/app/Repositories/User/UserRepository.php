@@ -27,7 +27,20 @@ class UserRepository implements UserRepositoryInterface
 
     public function update(Request $request, int $id): Model
     {
-        //
+        $user =  $this->read($id);
+
+        DB::transaction(function () use ($request, $user) {
+
+            $user->firstname = $request->firstname ? $request->firstname : $user->firstname;
+            $user->lastname = $request->lastname ? $request->lastname : $user->lastname;
+            $user->username = $request->username ? $request->username : $user->username;
+            $user->email = $request->email ? $request->email : $user->email;
+            $user->password = $request->password ? $request->password : $user->password;
+            $user->status = $request->status ? $request->status : $user->status;
+            $user->avatar = $request->avatar ? $request->avatar : $user->avatar;
+
+            $user->save();
+    }, 3);
 
         return $user;
     }
