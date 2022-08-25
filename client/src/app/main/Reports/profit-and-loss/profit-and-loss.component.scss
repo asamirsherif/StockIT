@@ -2,7 +2,14 @@ li{
     display:flex;
     margin: auto;
 }
-.custom-day {
+
+  .dp-hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+  .custom-day {
     text-align: center;
     padding: 0.185rem 0.25rem;
     display: inline-block;

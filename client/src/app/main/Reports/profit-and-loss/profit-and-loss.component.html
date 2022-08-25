@@ -7,25 +7,62 @@
     <ul ngbNav #nav="ngbNav" class="nav nav-pills">
       <li ngbNavItem>
         <a ngbNavLink>Range</a>
-        <ng-template ngbNavContent >
+        <ng-template ngbNavContent  >
 
-          <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t" outsideDays="hidden" class="w-100 text-center col-md-12" >
-          </ngb-datepicker>
+          <form class="row row-cols-sm-auto col-md-8 " style="margin-left: 220px;">
+            <div class="col-md-6">
+              <div class="dp-hidden position-absolute">
+                <div class="input-group">
+                  <input name="datepicker"
+                         class="form-control"
+                         ngbDatepicker
+                         #datepicker="ngbDatepicker"
+                         [autoClose]="'outside'"
+                         (dateSelect)="onDateSelection($event)"
+                         [displayMonths]="2"
+                         [dayTemplate]="t"
+                         outsideDays="hidden"
+                         [startDate]="fromDate!"
+                         tabindex="-1">
+                  <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day"
+                          [class.focused]="focused"
+                          [class.range]="isRange(date)"
+                          [class.faded]="isHovered(date) || isInside(date)"
+                          (mouseenter)="hoveredDate = date"
+                          (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                    </span>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="input-group ">
+                <input #dpFromDate
+                       class="form-control" placeholder="yyyy-mm-dd"
+                       name="dpFromDate"
+                       [value]="formatter.format(fromDate)"
+                       (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><i
+                  data-feather="calendar"></i></button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group ">
+                <input #dpToDate
+                       class="form-control" placeholder="yyyy-mm-dd"
+                       name="dpToDate"
+                       [value]="formatter.format(toDate)"
+                       (input)="toDate = validateInput(toDate, dpToDate.value)">
+                <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><i
+                  data-feather="calendar"></i></button>
+              </div>
+            </div>
+          </form>
           
-          <ng-template #t let-date let-focused="focused" " >
-            <span class="custom-day" [class.width]="100"
-                  [class.focused]="focused"
-                  [class.range]="isRange(date)"
-                  [class.faded]="isHovered(date) || isInside(date)"
-                  (mouseenter)="hoveredDate = date"
-                  (mouseleave)="hoveredDate = null">
-              {{ date.day }}
-            </span>
-          </ng-template>
         </ng-template>
       
       </li>
-      <li ngbNavItem>
+      <!--<li ngbNavItem>
         <a ngbNavLink>Week</a>
         <ng-template ngbNavContent>
           <p>
@@ -73,12 +110,12 @@
             tart pudding.
           </p>
         </ng-template>
-      </li>
+      </li>-->
     </ul>
     <div [ngbNavOutlet]="nav" class="mt-1"></div>
     <hr>
     <div class="d-flex justify-content-around ">
-        <button id="singleebutton" name="singlebutton" class="btn btn-outline-primary ">Reset Ranges</button>
+        <button id="singleebutton" type="reset" name="singlebutton" class="btn btn-outline-primary ">Reset Ranges</button>
         <button id="singleebutton" name="singlebutton" class="btn btn-primary ">Submit</button>
     </div>
 

@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Chart,registerables } from 'chart.js';
-import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
-
+import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 Chart.register(...registerables)
 @Component({
   selector: 'app-profit-and-loss',
@@ -12,10 +11,10 @@ Chart.register(...registerables)
 export class ProfitAndLossComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
 
-  fromDate: NgbDate;
-  toDate: NgbDate | null = null;
+  fromDate: NgbDate | null;
+  toDate: NgbDate | null;
 
-  constructor(private _elementRef: ElementRef,calendar: NgbCalendar) { 
+  constructor(private _elementRef: ElementRef,private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) { 
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
@@ -23,7 +22,7 @@ export class ProfitAndLossComponent implements OnInit {
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
       this.toDate = date;
     } else {
       this.toDate = null;
@@ -32,15 +31,20 @@ export class ProfitAndLossComponent implements OnInit {
   }
 
   isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
+        date.before(this.hoveredDate);
   }
 
-  isInside(date: NgbDate) {
-    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
-  }
+  isInside(date: NgbDate) { return this.toDate && date.after(this.fromDate) && date.before(this.toDate); }
 
   isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
+    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
+        this.isHovered(date);
+  }
+
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
   ngOnInit(): void {
