@@ -313,7 +313,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/sales/salesupdate/salesupdate.module').then(m => m.SalesupdateModule)
   },
   {
-    path: 'permissionupdate',
+    path: 'permissionupdate/:id',
     loadChildren: () => import('./main/settings/grouppermissingupdate/grouppermissionupdate.module').then(m => m.GrouppermissingupdateModule)
   }, {
     path: 'ternsupdate',
