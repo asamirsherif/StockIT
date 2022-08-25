@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class PurchaseService {
 
-  host = environment.apiUrl + "/api/purchases/";
+  host = environment.apiUrl + "/api/purchases";
 
   params: HttpParams;
   headers: HttpHeaders;
@@ -31,14 +31,14 @@ export class PurchaseService {
   }
 
   show(id: number): Observable<any> {
-    return this._http.get(`${this.host}${id}`, { headers: this.headers })
+    return this._http.get(`${this.host}/${id}`, { headers: this.headers })
   }
 
   update(id: number, data: IPurchase): Observable<any> {
-    return this._http.put(`${this.host}${id}`, data, { headers: this.headers })
+    return this._http.put(`${this.host}/${id}`, data, { headers: this.headers })
   }
 
   delete(id: number): Observable<any> {
-    return this._http.delete(`${this.host}${id}`, { headers: this.headers })
+    return this._http.delete(`${this.host}/${id}`, { headers: this.headers })
   }
 }

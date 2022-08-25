@@ -32,14 +32,16 @@
     </div>
     <div class="col-md-12">
         <label class="col-md-4 control-label" for="product">Product</label>
-        <div class="col-md-12 row">
+        <div class="col-md-12 row panel panel-primary">
             <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
             <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput" (keyup)="fetchSeries(searchbar.value)" placeholder="Search Here" formControlName="search" />
-            <ul class="col-md-11">
-                <li *ngFor="let show of searchResult" (click)="showDetails(show)" [hidden]="toggle">
+           <div class="col-md-12 list-group">
+            <ul class="col-md-12  ">
+                <li class="list-group-item" *ngFor="let show of searchResult" (click)="showDetails(show)" [hidden]="toggle">
                     <p> {{ show.name }}</p>
                 </li>
             </ul>
+        </div>
         </div>
     </div>
     <h4>Order items</h4>

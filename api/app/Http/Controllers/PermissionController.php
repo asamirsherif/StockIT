@@ -10,44 +10,47 @@ use App\utils\helpers;
 use Carbon\Carbon;
 use DB;
 
+use App\Repositories\Permission\PermissionRepositoryInterface;
+use App\Repositories\Permission\PermissionRepository;
+use App\Traits\ResponseTrait;
+use App\Http\Resources\Permission\PermissionResource;
+use App\Http\Resources\Permission\RoleResource;
+
 class PermissionController extends Controller
 {
+
+    use ResponseTrait;
+
+    private PermissionRepositoryInterface $permRepo;
+
+    public function __construct(PermissionRepositoryInterface $permRepo)
+    {
+        $this->permRepo = $permRepo;
+    }
+
+
     //----------- GET ALL Roles --------------\\
 
     public function index(Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'view', Role::class);
 
-        // How many items do you want to display.
-        $perPage = $request->limit;
-        $pageStart = \Request::get('page', 1);
-        // Start displaying items from this number;
-        $offSet = ($pageStart * $perPage) - $perPage;
-        $order = $request->SortField;
-        $dir = $request->SortType;
-        $helpers = new helpers();
+        if ($request->filled('search')) {
+            $roles = $this->permRepo->multiSearch($request)
+                ->paginate($request->perPage);
+            $roles->appends(['search' => $request->search]);
+        } else
+            $roles = Role::filter($request)->paginate($request->perPage);
 
-        $roles = Role::where('deleted_at', '=', null)
-        // Search With Multiple Param
-            ->where(function ($query) use ($request) {
-                return $query->when($request->filled('search'), function ($query) use ($request) {
-                    return $query->where('name', 'LIKE', "%{$request->search}%")
-                        ->orWhere('description', 'LIKE', "%{$request->search}%");
-                });
-            });
-        $totalRows = $roles->count();
-        if($perPage == "-1"){
-            $perPage = $totalRows;
-        }
-        $roles = $roles->offset($offSet)
-            ->limit($perPage)
-            ->orderBy($order, $dir)
-            ->get();
 
-        return response()->json([
-            'roles' => $roles,
-            'totalRows' => $totalRows,
-        ]);
+            $roles->appends([
+                "name" => $request->name,
+                "label" => $request->label,
+                "description" => $request->description,
+                "status" => $request->status,
+            ]);
+
+            return RoleResource::collection($roles);
     }
 
     //----------- Store new Role --------------\\
@@ -67,7 +70,7 @@ class PermissionController extends Controller
                 $Role = new Role;
                 $Role->name = $request['role']['name'];
                 $Role->label = $request['role']['name'];
-                $Role->status = 0;
+                $Role->status = 1;
                 $Role->description = $request['role']['description'];
                 $Role->save();
 

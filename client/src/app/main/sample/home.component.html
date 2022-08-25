@@ -1,211 +1,215 @@
-<div class="content-wrapper container-xxl p-0">
-  <div class="content-body">
-    <!-- content-header component -->
-    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+<body>
+  <div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <!-- content-header component -->
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
 
-    <!-- Basic Alerts start -->
-    <section id="home-page">
-      <div class="col-md-12 row">
-        <div class="col-md-3">
-          <div class="card mb-3 ">
-            <div class="row g-0">
-              <div class="col-md-4 p-2">
-                <i data-feather="dollar-sign" [size]="50"></i>
+      <!-- Basic Alerts start -->
+      <section id="home-page">
+        <div class="col-md-12 row">
+          <div class="col-md-3">
+            <div class="card mb-3 ">
+              <div class="row g-0">
+                <div class="col-md-4 p-2">
+                  <i data-feather="dollar-sign" [size]="50"></i>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title ">Revenue</h5>
+                    <p class="card-text">0.00 ريال</p>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title ">Revenue</h5>
-                  <p class="card-text">0.00 ريال</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card mb-3 ">
+              <div class="row g-0">
+                <div class="col-md-4 p-2">
+                  <i data-feather="shopping-cart" [size]="50"></i>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title ">Purchases</h5>
+                    <p class="card-text">0.00 ريال</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card mb-3 ">
+              <div class="row g-0">
+                <div class="col-md-4 p-2">
+                  <i data-feather="navigation" [size]="50"></i>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title ">Sales Return</h5>
+                    <p class="card-text color-primary">0.00 ريال</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card mb-3 ">
+              <div class="row g-0">
+                <div class="col-md-4 p-2">
+                  <i data-feather="shopping-bag" [size]="50"></i>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title ">Profit</h5>
+                    <p class="card-text">0.00 ريال</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card mb-3 ">
-            <div class="row g-0">
-              <div class="col-md-4 p-2">
-                <i data-feather="shopping-cart" [size]="50"></i>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title ">Purchases</h5>
-                  <p class="card-text">0.00 ريال</p>
-                </div>
-              </div>
-            </div>
-          </div>
+      </section>
+      <div class="chart  row container col-md-12 ">
+        <div class="col-md-6 sec1">
+          <section class="charts-container col-md-12">
+            <canvas id="pieChart"></canvas>
+          </section>
         </div>
-        <div class="col-md-3">
-          <div class="card mb-3 ">
-            <div class="row g-0">
-              <div class="col-md-4 p-2">
-                <i data-feather="navigation" [size]="50"></i>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title ">Sales Return</h5>
-                  <p class="card-text color-primary">0.00 ريال</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card mb-3 ">
-            <div class="row g-0">
-              <div class="col-md-4 p-2">
-                <i data-feather="shopping-bag" [size]="50"></i>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title ">Profit</h5>
-                  <p class="card-text">0.00 ريال</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-5 sec2">
+          <section class="charts-container pt-1 col-md-12">
+            <h5>Top Selling Products (2022)</h5>
+            <div class="sec3 w-50"></div>
+            <i data-feather="corner-down-right" [size]="30"></i><span><b>T-shirt</b></span>
+          </section>
         </div>
       </div>
-    </section>
-    <div class="chart  row container  ">
-      <div class="col-md-6 sec1">
-        <section class="charts-container">
-          <canvas id="pieChart"></canvas>
-        </section>
-      </div>
-      <div class="col-md-5 sec2">
-        <section class="charts-container pt-1">
-          <h5 >Top Selling Products (2022)</h5>
-         <div class="sec3 w-50"></div>
-         <i data-feather="corner-down-right" [size]="30"></i><span><b>T-shirt</b></span>
-        </section>
-      </div>
-    </div>
 
-    <div class="chart  row container mt-2 ">
-      <div class="col-md-7 sec1">
-        <h3 class="pt-1">Stock Alert</h3>
-        <hr>
-        <table class="table pt-1 col-md-12">
-          <thead>
-              <tr>
-                  <th >Code</th>
-                  <th >Product</th>   
-                  <th >Warehouse</th>
-                  <th >Quantity</th>
-                  <th >Alert Quentity</th>
-                  
-              </tr>
-          </thead>
-          <tbody class="table-group-divider">
-              <tr>
+      <div class="chart  row container mt-2 col-md-12 ">
+        <div class="col-md-7 sec1">
+          <h3 class="pt-1">Stock Alert</h3>
+          <hr>
+          <div class="container w-100">
+            <table class="table pt-1">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Product</th>
+                  <th>Warehouse</th>
+                  <th>Quantity</th>
+                  <th>Alert Quentity</th>
+
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr>
                   <td>PR_1114</td>
                   <td>T-shrit</td>
                   <td>الرئيسي</td>
                   <td>0</td>
                   <td><button type="button" class="btn btn-outline-danger">5</button></td>
-              </tr>
-          </tbody>      
-      </table>
-      </div>
-      <div class="col-md-4 sec2">
-        <section class="charts-container pt-1">
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4 sec2">
+          <section class="charts-container pt-1">
             <h3 class="pt-1">Top Selling Products (August)</h3>
             <hr>
             <table class="table pt-1 col-md-12">
               <thead>
-                  <tr>
-                      <th >Product</th>   
-                      <th >Quantity</th>
-                      <th >Grand Total</th>
-                      
-                  </tr>
-              </thead>   
-          </table>
-    
-        </section>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Grand Total</th>
+
+                </tr>
+              </thead>
+            </table>
+
+          </section>
+        </div>
       </div>
-    </div>
 
-    <div class="chart  row container mt-2 ">
-      <div class="col-md-6 sec1">
-        <section class="charts-container">
-          <canvas id="pieChart2"></canvas>
-        </section>
+      <div class="chart  row container mt-2 ">
+        <div class="col-md-6 sec1">
+          <section class="charts-container">
+            <canvas id="pieChart2"></canvas>
+          </section>
+        </div>
+        <div class="col-md-5 sec2">
+          <section class="charts-container pt-1">
+            <h2>Top 5 Customers (August)</h2>
+          </section>
+        </div>
       </div>
-      <div class="col-md-5 sec2">
-        <section class="charts-container pt-1">
-         <h2>Top 5 Customers (August)</h2>
-        </section>
+
+      <div class=" container mt-2 sec5">
+        <h3 class="pt-1">Recent Sales</h3>
+        <hr>
+        <table class="table pt-1 col-md-12">
+          <thead>
+            <tr>
+              <th scope="col">Reference</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Status</th>
+              <th scope="col">Grand Total</th>
+              <th scope="col">Paid</th>
+              <th scope="col">Due</th>
+              <th scope="col">Payment Status</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr>
+              <td>PR_1114</td>
+              <td>شركة المتحدة</td>
+              <td><button type="button" class="btn btn-outline-success">completed</button></td>
+              <td>11000.00</td>
+              <td>0.00</td>
+              <td>11000.00</td>
+              <td><button type="button" class="btn btn-outline-success">paid</button></td>
+            </tr>
+          </tbody>
+          <tbody class="table-group-divider">
+            <tr>
+
+              <td>PR_1114</td>
+              <td>شركة المتحدة</td>
+              <td><button type="button" class="btn btn-outline-success ">completed</button></td>
+              <td>11000.00</td>
+              <td>0.00</td>
+              <td>11000.00</td>
+              <td><button type="button" class="btn btn-outline-success">paid</button></td>
+            </tr>
+          </tbody>
+          <tbody class="table-group-divider">
+            <tr>
+
+              <td>PR_1114</td>
+              <td>شركة المتحدة</td>
+              <td><button type="button" class="btn btn-outline-success">completed</button></td>
+              <td>11000.00</td>
+              <td>0.00</td>
+              <td>11000.00</td>
+              <td><button type="button" class="btn btn-outline-success">paid</button></td>
+            </tr>
+          </tbody>
+          <tbody class="table-group-divider">
+            <tr>
+
+              <td>PR_1114</td>
+              <td>شركة المتحدة</td>
+              <td><button type="button" class="btn btn-outline-success">completed</button></td>
+              <td>11000.00</td>
+              <td>0.00</td>
+              <td>11000.00</td>
+              <td><button type="button" class="btn btn-outline-success">paid</button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
+
     </div>
-
-    <div class=" container mt-2 sec5">
-      <h3 class="pt-1">Recent Sales</h3>
-      <hr>
-      <table class="table pt-1 col-md-12">
-        <thead>
-            <tr>
-                <th scope="col">Reference</th>
-                <th scope="col">Customer</th>   
-                <th scope="col">Status</th>
-                <th scope="col">Grand Total</th>
-                <th scope="col">Paid</th>
-                <th scope="col">Due</th>
-                <th scope="col">Payment Status</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <tr>
-                <td>PR_1114</td>
-                <td>شركة المتحدة</td>
-                <td><button type="button" class="btn btn-outline-success">completed</button></td>
-                <td>11000.00</td>
-                <td>0.00</td>
-                <td>11000.00</td>
-                <td><button type="button" class="btn btn-outline-success">paid</button></td>
-            </tr>
-        </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-             
-                <td>PR_1114</td>
-                <td>شركة المتحدة</td>
-                <td><button type="button" class="btn btn-outline-success ">completed</button></td>
-                <td>11000.00</td>
-                <td>0.00</td>
-                <td>11000.00</td>
-                <td><button type="button" class="btn btn-outline-success">paid</button></td>
-            </tr>
-        </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-                
-                <td>PR_1114</td>
-                <td>شركة المتحدة</td>
-                <td><button type="button" class="btn btn-outline-success">completed</button></td>
-                <td>11000.00</td>
-                <td>0.00</td>
-                <td>11000.00</td>
-                <td><button type="button" class="btn btn-outline-success">paid</button></td>
-            </tr>
-        </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-              
-                <td>PR_1114</td>
-                <td>شركة المتحدة</td>
-                <td><button type="button" class="btn btn-outline-success">completed</button></td>
-                <td>11000.00</td>
-                <td>0.00</td>
-                <td>11000.00</td>
-                <td><button type="button" class="btn btn-outline-success">paid</button></td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-
-
   </div>
-</div>
+</body>

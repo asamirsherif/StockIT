@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CoreCommonModule } from '@core/common.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { ExpensecategoryComponent } from './expensecategory.component';
 
@@ -17,7 +18,7 @@ const routes = [
 
 @NgModule({
   declarations: [ExpensecategoryComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgxPaginationModule],
   exports: [ExpensecategoryComponent]
 })
 export class ExpensecategoryModule {}

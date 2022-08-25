@@ -60,8 +60,8 @@ class PurchaseController extends Controller
     {
         $purchaseCreated = $this->purchaseRepo->create($request);
 
-        $this->purchaseRepo->createPurchaseDateails($request, $purchaseCreated->id);
-        $this->purchaseRepo->addProductWarehouse($request);
+        // $this->purchaseRepo->createPurchaseDateails($request, $purchaseCreated->id);
+        // $this->purchaseRepo->addProductWarehouse($request);
 
         if ($purchaseCreated)
             return $this->succWithData(new PurchaseResource($purchaseCreated), "purchase Created successfully");
@@ -101,7 +101,7 @@ class PurchaseController extends Controller
 
         $purchaseUpdated = $this->purchaseRepo->update($request, $id);
 
-        $this->purchaseRepo->updatePurchaseDateails($request, $purchaseUpdated->id);
+        //$this->purchaseRepo->updatePurchaseDateails($request, $purchaseUpdated->id);
 
         if($purchaseUpdated)
             return $this->succWithData(new PurchaseResource($purchaseUpdated), "purchase updated successfully");

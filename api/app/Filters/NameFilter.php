@@ -6,6 +6,6 @@ class NameFilter
 {
     public function filter($builder, $value)
     {
-        return $builder->orWhere('name', "LIKE", "%" . $value . "%");
+        return $builder->Where('name', "LIKE", "%" . $value . "%");
     }
 }

@@ -16,7 +16,7 @@ class PurchaseFilter extends FilterAbstract
         'ref' =>RefFilter::class,
         'date' =>DateFilter::class,
         'provider_id' => PurproviderIDFilter::class,
-        'status' => PurStatus::class,
-        'payment_status' => PurPayment_status::class
+        // 'status' => PurStatus::class,
+        // 'payment_status' => PurPayment_status::class
     ];
 }

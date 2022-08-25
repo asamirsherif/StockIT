@@ -28,7 +28,7 @@ export class ClientservService {
 
 
   allClient(): Observable<any> {
-    return this._http.get(`${this.host}`, { headers: this.header, params: this.params });
+    return this._http.get(`${this.host}?page`, { headers: this.header, params: this.params });
   }
 
   deleteClient(id: any): Observable<any> {

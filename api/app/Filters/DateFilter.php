@@ -8,6 +8,6 @@ class DateFilter
 {
     public function filter(Builder $builder, $value)
     {
-        return $builder->orWhere("date", "LIKE", "%" . $value . "%");
+        return $builder->Where("date", "LIKE", "%" . $value . "%");
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Adjustment;
 
+use App\Http\Resources\AdjustmentDetail\AdjustmentDetailResource;
+use App\Http\Resources\Warehouse\WarehouseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdjustmentResource extends JsonResource
@@ -15,16 +17,14 @@ class AdjustmentResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
+            'id'            => $this->id,
             'user_id'       => $this->user_id,
             'date'          => $this->date,
-            'Ref'           => $this->Ref,
-            'warehouse_id'  => $this->warehouse_id,
+            'ref'           => $this->Ref,
+            'warehouse'     => new WarehouseResource($this->warehouse),
             'items'         => $this->items,
             'notes'         => $this->notes,
-            'created_at'    => $this->created_at,
-            'updated_at'    => $this->updated_at,
-            'deleted_at'    => $this->deleted_at,
+            'details'       => AdjustmentDetailResource::collection($this->adjustmentDeatils)
         ];
     }
 }

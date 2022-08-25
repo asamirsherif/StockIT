@@ -25,6 +25,8 @@ use App\Repositories\Provider\ProviderRepository;
 use App\Repositories\Provider\ProviderRepositoryInterface;
 use App\Repositories\Purchase\PurchaseRepository;
 use App\Repositories\Purchase\PurchaseRepositoryInterface;
+use App\Repositories\Setting\SettingRepository;
+use App\Repositories\Setting\SettingRepositoryInterface;
 use App\Repositories\Sales_return\Sales_returnRepository;
 use App\Repositories\Sales_return\Sales_returnRepositoryInterface;
 use App\Repositories\Unit\UnitRepository;
@@ -32,6 +34,12 @@ use App\Repositories\Unit\UnitRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Sale\SaleRepositoryInterface;
 use App\Repositories\Sale\SaleRepository;
+use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\User\UserRepository;
+
+use App\Repositories\Permission\PermissionRepositoryInterface;
+use App\Repositories\Permission\PermissionRepository;
+
 
 class AppRepositoryProvider extends ServiceProvider
 {
@@ -83,9 +91,13 @@ class AppRepositoryProvider extends ServiceProvider
 
         //product
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
-        
+
         // purchase
         $this->app->bind(PurchaseRepositoryInterface::class, PurchaseRepository::class);
+
+
+        // setting
+        $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
 
         //Sale
         $this->app->bind(SaleRepositoryInterface::class, SaleRepository::class);
@@ -93,6 +105,13 @@ class AppRepositoryProvider extends ServiceProvider
         //SalesReturn
          //provider
          $this->app->bind(Sales_returnRepositoryInterface::class, Sales_returnRepository::class);
+
+         //User
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+
+        //Permission
+        $this->app->bind(PermissionRepositoryInterface::class, PermissionRepository::class);
+
     }
 
     /**

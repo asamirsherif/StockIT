@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreCommonModule } from '@core/common.module';
 import { CorePipesModule } from '@core/pipes/pipes.module';
 import { ExpenseslistComponent } from './expenseslist.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 const routes = [
@@ -17,7 +18,7 @@ const routes = [
 
 @NgModule({
   declarations: [ExpenseslistComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,CorePipesModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,CorePipesModule,NgxPaginationModule],
   exports: [ExpenseslistComponent]
 })
 export class ExpenseslistModule {}

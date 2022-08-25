@@ -2,18 +2,27 @@
     <h2>Create Adjustment</h2>
     <hr>
 
-    <form class="container col-md-12" [formGroup]="createadjustmentform" (ngSubmit)="AddAdjustment()">
+    <form class="container col-md-12" [formGroup]="createAdjForm" (ngSubmit)="storeAdjustment()">
         <div class="  col-md-12 row">
+
+            <!-- Warehouses -->
             <div class="col-md-6">
                 <label class="col-md-4 control-label " for="category">Warehouse</label>
                 <div class="col-md-12 ">
-                    <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
-                        <option *ngFor="let item of WarehousArray" [value]="item.id">
-                            {{ item.name }}
+
+                    <select formControlName="warehouse_id" class="form-select col-md-12"
+                        aria-label="Default select example" [(ngModel)]="warehouse_id"
+                        (ngModelChange)="getWarehouse($event)">
+                        <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+                            {{ warehouse.name }}
                         </option>
                     </select>
-                    <div id="warehouse_id" *ngIf="createadjustmentform.controls['warehouse_id'].touched &&createadjustmentform.controls['warehouse_id'].invalid || submitted && createadjustmentform.controls['warehouse_id'].invalid" class="form-text text-danger">
-                        <small *ngIf="createadjustmentform.controls['warehouse_id'].errors?.['required']">This field is
+                    <!-- Validation -->
+                    <div id="warehouse_id"
+                        *ngIf="createAdjForm.controls['warehouse_id'].touched && createAdjForm.controls['warehouse_id'].invalid || submitted && createAdjForm.controls['warehouse_id'].invalid"
+                        class="form-text text-danger">
+                        <small *ngIf="createAdjForm.controls['warehouse_id'].errors?.['required']">This field is
+
                             required</small>
                     </div>
                     <div class="form-text text-danger">
@@ -22,12 +31,18 @@
 
                 </div>
             </div>
+
+            <!-- Date -->
             <div class="form-group col-md-6">
                 <label class="col-md-6 control-label " for="category">Date</label>
                 <div class="col-md-12 ">
-                    <input class="form-control form-control col-md-12" type="date" placeholder="Date" aria-label="Date" formControlName="date">
-                    <div id="date" *ngIf="createadjustmentform.controls['date'].touched &&createadjustmentform.controls['date'].invalid || submitted && createadjustmentform.controls['date'].invalid" class="form-text text-danger">
-                        <small *ngIf="createadjustmentform.controls['date'].errors?.['required']">This field is
+                    <input class="form-control form-control col-md-12" type="date" placeholder="Date" aria-label="Date"
+                        formControlName="date">
+                    <div id="date"
+                        *ngIf="createAdjForm.controls['date'].touched &&createAdjForm.controls['date'].invalid || submitted && createAdjForm.controls['date'].invalid"
+                        class="form-text text-danger">
+                        <small *ngIf="createAdjForm.controls['date'].errors?.['required']">This field is
+
                             required</small>
                     </div>
                     <div class="form-text text-danger">
@@ -36,17 +51,22 @@
 
                 </div>
             </div>
+
         </div>
         <div class="col-md-12">
             <label class="col-md-4 control-label" for="items">Product</label>
             <div class="col-md-12 row">
                 <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
-                <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput" (keyup)="fetchSeries(searchbar.value)" placeholder="Search Here" formControlName="search" />
-                <ul class="col-md-11">
-                    <li *ngFor="let show of searchResult" (click)="showDetails(show)" [hidden]="toggle">
-                        <p> {{ show.name }}</p>
-                    </li>
-                </ul>
+                <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput"
+                    (keyup)="adjSearch(searchbar.value)" placeholder="Search Here" formControlName="search" />
+                <div class="col-md-12 list-group">
+                    <ul class="col-md-12">
+                        <li class="list-group-item" style="list-style: none; cursor: pointer;"
+                            *ngFor="let product of products; let i = index" (click)="addAdjDetail(i)">
+                            <p> {{ product.name }}</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -63,39 +83,48 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr *ngFor="let x of selectedInput; let i =index">
-                        <td>{{ x.name }}</td>
-                        <td>{{ x.code }}</td>
-                        <td>{{ x.stock }}</td>
+                    <tr *ngFor="let adjDetail of adjDetails; let i =index">
+                        <td>{{i+1}}</td>
+                        <td>{{ adjDetail.product.name }}</td>
+                        <td>{{ adjDetail.product.code }}</td>
                         <td>
-                            <div class="badge badge-pill badge-light-warning">50 pc</div>
+                            <div class="badge badge-pill badge-light-warning">{{adjDetail.product.in_stock}} pc</div>
                         </td>
                         <td>
-                            <core-touchspin [numberValue]="0"></core-touchspin>
+                            <core-touchspin [minValue]="1" [numberValue]="adjDetail.quantity"
+                                (onChange)="countChange($event,i)">
+                            </core-touchspin>
                         </td>
                         <td class="row">
                             <div class="col-md-8">
-                                <select class="form-select col-md-12 " aria-label="Default select example">
-                                    <option selected>Addition</option>
-                                    <option selected>Subtraction</option>
+                                <select #detailType (change)="changeDetailType(i,detailType.value)"
+                                    class="form-select col-md-12 " aria-label="Default select example">
+                                    <option value="Subtraction" selected>Subtraction</option>
+                                    <option value="Addition">Addition</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <button (click)="deleteSeris(i)" class="btn btn-sm btn-danger"><i data-feather="x-circle"
-                                        [size]="24"></i></button>
+
+                                <button (click)="removeAdjDetail(i)" class="btn btn-sm btn-danger">
+                                    <i data-feather="x-circle" [size]="24"></i>
+                                </button>
+
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
         <div class="form-group col-md-12 ">
             <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-            <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" formControlName="notes"></textarea>
+            <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                formControlName="notes"></textarea>
+
         </div>
         <div class="form-group col-md-12">
             <div class="col-md-4">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                <button (click)="passMe()" id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </form>

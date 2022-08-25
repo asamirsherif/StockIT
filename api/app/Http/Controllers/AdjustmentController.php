@@ -31,11 +31,18 @@ class AdjustmentController extends Controller
         if ($request->filled('search')) {
             $adjustments = $this->adjustmentRepo->multiSearch($request)
                                 ->paginate($request->perPage);
+            $adjustments->appends('search', $request->search);
 
-            $adjustments->appends(['search' => $request->search, 'perPage' => $request->perPage]);
         } else
-            $adjustments = Adjustment::paginate($request->perPage)->appends(['perPage' => $request->perPage]);
+            $adjustments = Adjustment::filter($request)->paginate($request->perPage);
 
+            $adjustments->appends([
+                'user_id'      => $request->user_id,
+                'warehouse_id' => $request->warehouse_id,
+                'ref'          => $request->ref,
+                'date'         => $request->date,
+                'perPage'      => $request->perPage
+            ]);
             return new AdjustmentCollection($adjustments);
     }
 
@@ -48,6 +55,10 @@ class AdjustmentController extends Controller
     public function store(AdjustmentRequest $request)
     {
         $adjustmentCreated = $this->adjustmentRepo->create($request);
+
+        // $this->adjustmentRepo->createAdjustmentDetails($request, $adjustmentCreated->id);
+
+        // $this->adjustmentRepo->addProductWarehouse($request);
 
         if ($adjustmentCreated)
             return $this->succWithData(new AdjustmentResource($adjustmentCreated), "Adjustment Created successfully");
@@ -88,10 +99,13 @@ class AdjustmentController extends Controller
 
         // update
         $adjustmentUpdated = $this->adjustmentRepo->update($request, $id);
+
+        $this->adjustmentRepo->updateAdjustmentDetails($request, $adjustmentUpdated->id);
+
         if ($adjustmentUpdated)
             return $this->succWithData(new AdjustmentResource($adjustmentUpdated), "Adjustment updated successfully");
         else
-            return $this->errMsg("adjustment not updated!");
+            return $this->errMsg("adjustment doesn\'t updated!");
     }
 
     /**

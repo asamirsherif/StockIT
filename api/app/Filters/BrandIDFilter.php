@@ -6,6 +6,6 @@ class BrandIDFilter
 {
     public function filter($builder, $value)
     {
-        return $builder->orWhere('brand_id', $value);
+        return $builder->Where('brand_id', $value);
     }
 }

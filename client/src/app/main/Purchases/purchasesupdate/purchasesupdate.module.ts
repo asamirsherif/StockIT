@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CoreCommonModule } from '@core/common.module';
 
+import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module';
 
 
 
@@ -19,7 +20,7 @@ const routes = [
 
 @NgModule({
   declarations: [ PurchasesupdateComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,CoreTouchspinModule],
   exports: [ PurchasesupdateComponent ]
 })
 export class PurchasesupdateModule {}

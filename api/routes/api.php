@@ -5,6 +5,7 @@ use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\invoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -14,8 +15,10 @@ use App\Http\Controllers\ProductWarehouseSearchController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SalesReturnController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +100,19 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
     //product warehouse search
     Route::get('purchaseProductSearch', [ProductWarehouseSearchController::class, 'purchaseSearch']);
 
+    // settings
+    Route::apiResource('settings', SettingController::class);
+
     // sale prodcut warehouse search
     Route::get('saleProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'saleSearch']);
+
+    // adjustment prodcut warehouse search
+    Route::get('adjProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'adjSearch']);
+
+    // invoices
+    Route::get('saleInvoice/{sale}',[invoiceController::class,'saleInvoice']);
+    Route::get('purchaseInvoice/{purchase}',[invoiceController::class,'purchaseInvoice']);
+    Route::get('saleInvoicePDF/{sale}',[invoiceController::class,'saleInvoicePDF']);
+
+
 });

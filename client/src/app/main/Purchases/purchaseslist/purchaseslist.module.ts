@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoreCommonModule } from '@core/common.module';
 
 import { PurchaseslistComponent } from './Purchaseslist.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 const routes = [
@@ -18,7 +19,7 @@ const routes = [
 
 @NgModule({
   declarations: [ PurchaseslistComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,NgxPaginationModule],
   exports: [ PurchaseslistComponent ]
 })
 export class PurchaseslistModule {}

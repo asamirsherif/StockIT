@@ -1,152 +1,239 @@
 <body>
     <h2>Create Sale</h2>
-    <hr>
-    <div class="col-md-12 row">
-       
-        <div class="form-group col-md-4">
-            <label class="col-md-4 control-label " for="category">Date</label>
-            <div class="col-md-12 ">
-                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="customer">Customer</label>
-            <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option *ngFor="let item of clientArray" [value]="item.id">
-                        {{ item.name }}
-                    </option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="category"> Warehouse</label>
-            <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option *ngFor="let item of WarehousArray" [value]="item.id">
-                        {{ item.name }}
-                    </option>                
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <label class="col-md-4 control-label" for="product">Product</label>
+    <hr />
+    <form action="" [formGroup]="createSaleForm" (ngSubmit)="storeSale()">
         <div class="col-md-12 row">
-            <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
-            <input type="text" class="form-control col-md-11 text-left" #searchbar [(ngModel)]="searchInput" (keyup)="fetchSeries(searchbar.value)" placeholder="Search Here" formControlName="search" />
-            <ul class="col-md-11">
-                <li *ngFor="let show of searchResult" (click)="showDetails(show)" [hidden]="toggle">
-                    <p> {{ show.name }}</p>
-                </li>
-            </ul>
-        </div>
-    </div><br>
-    <h4>Order items</h4>
-    <table class="table col-md-11">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Product</th>
-                <th scope="col">Net Unit Code </th>
-                <th scope="col">Stock</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Discount</th>
-                <th scope="col">Tax</th>
-                <th scope="col">Subtotal</th>
-                <th scope="col"><i data-feather="x-circle" class="btn-outline-secondary"></i></th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-                <tr *ngFor="let x of selectedInput; let i =index">
-                    <td>{{ x.name }}</td>
-                    <td>{{ x.code }}</td>
-                    <td>{{ x.stock }}</td>
-                    <td>
-                        <div class="badge badge-pill badge-light-warning">496.95 ك</div>
-                    </td>
-                    <td><core-touchspin [numberValue]="0" (onChange)="countChange($event)"></core-touchspin></td>
-                    <td>ريال 0.00	</td>
-                    <td>ريال 36.00	</td>
-                    <td >ريال 276.00</td> 
-                        
-                   <td><div class="col-md-4">
-                        <button (click)="deleteSeris(i)" class="btn btn-sm btn-danger"><i data-feather="x-circle" [size]="24"></i></button>
+            <div class="form-group col-md-4">
+                <label class="col-md-4 control-label" for="category">Date</label>
+                <div class="col-md-12">
+                    <input formControlName="date" class="form-control form-control col-md-11" type="date"
+                        placeholder="Date" aria-label="Date" />
+                    <!-- validation -->
+                    <div id="" *ngIf="
+                            (createSaleForm.controls['date'].touched &&
+                                createSaleForm.controls['date'].invalid) ||
+                            (submitted &&
+                                createSaleForm.controls['date'].invalid)
+                        " class="form-text text-danger">
+                        <small *ngIf="createSaleForm.controls['date'].errors?.['required']">
+                            This field is required
+                        </small>
                     </div>
+                    <div class="form-text text-danger">
+                        <small *ngIf="errors?.date">{{ errors?.date }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="customer">Customer</label>
+                <div class="col-md-12">
+                    <select formControlName="client" class="form-select col-md-12" aria-label="Default select example">
+                        <option *ngFor="let item of clients" [value]="item.id">
+                            {{ item.name }}
+                        </option>
+                    </select>
+                    <!-- validation -->
+                    <div id="" *ngIf="
+                            (createSaleForm.controls['client'].touched &&
+                                createSaleForm.controls['client'].invalid) ||
+                            (submitted &&
+                                createSaleForm.controls['client'].invalid)
+                        " class="form-text text-danger">
+                        <small *ngIf="createSaleForm.controls['client'].errors?.['required']">
+                            This field is required
+                        </small>
+                    </div>
+                    <div class="form-text text-danger">
+                        <small *ngIf="errors?.client">{{
+                            errors?.client
+                            }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="category">
+                    Warehouse</label>
+                <div class="col-md-12">
+                    <select formControlName="warehouse" class="form-select col-md-12"
+                        aria-label="Default select example" [(ngModel)]="warehouse_id"
+                        (ngModelChange)="getWarehous($event)">
+                        <option *ngFor="let item of warehouses" [value]="item.id">
+                            {{ item.name }}
+                        </option>
+                    </select>
+                    <!-- validation -->
+                    <div id="" *ngIf="
+                            (createSaleForm.controls['warehouse'].touched &&
+                                createSaleForm.controls['warehouse']
+                                    .invalid) ||
+                            (submitted &&
+                                createSaleForm.controls['warehouse'].invalid)
+                        " class="form-text text-danger">
+                        <small *ngIf="createSaleForm.controls['warehouse'].errors?.['required']">
+                            This field is required
+                        </small>
+                    </div>
+                    <div class="form-text text-danger">
+                        <small *ngIf="errors?.warehouse">{{
+                            errors?.warehouse
+                            }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <label class="col-md-4 control-label" for="product">Product</label>
+            <form class="col-md-12 mb-1 row panel panel-primary">
+                <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
+                <input [ngModel]="searchInput" [ngModelOptions]="{ standalone: true }"
+                    (ngModelChange)="salesSearch($event)" class="form-control col-md-11 text-left" type="text"
+                    placeholder="Search By product name or variants" aria-label="Search" />
+                <div class="col-md-12 list-group">
+                    <ul class="col-md-12">
+                        <li class="list-group-item" style="list-style: none; cursor: pointer"
+                            *ngFor="let product of products; let i = index" (click)="addSaleDetail(i)">
+                           <p>{{ product.name }}</p> 
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <h4>Order items</h4>
+        <table class="table col-md-11">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Net Unit Code</th>
+                    <th scope="col">in Stock</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Tax</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">
+                        <i data-feather="x-circle" class="btn-outline-secondary"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let saleDetail of saleDetails; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ saleDetail.product.name }}</td>
+                    <td>{{ saleDetail.product.cost }}</td>
+                    <td>{{saleDetail.product.in_stock }}</td>
+                    <td>
+                        <core-touchspin [minValue]="1" [maxValue]="saleDetail.product.in_stock"
+                            [numberValue]="saleDetail.quantity" (onChange)="countChange($event, i)">
+
+                        </core-touchspin>
+                    </td>
+                    <td>{{ countTax(saleDetail.quantity,saleDetail.product.tax_cost) }}</td>
+                    <td>{{ saleDetail.subtotal }}</td>
+
+                    <td>
+                        <div class="col-md-4">
+                            <button (click)="removeSaleDetail(i)" class="btn btn-sm btn-danger">
+                                <i data-feather="x-circle" [size]="24"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <table class="table col-md-4  tab">
-        <tbody class="table-group-divider">
-            <tr>
-                <td>Order Tax</td>
-                <td>(%0.00)ريال</td>
-            </tr>
-            <tr>
-                <td>Discount</td>
-                <td>0.00 ريال</td>
-            </tr>
-            <tr>
-                <td>Shipping</td>
-                <td>0.00 ريال</td>
-            </tr>
-            <tr>
-                <td>Grand Total</td>
-                <td>0.00 ريال</td>
-            </tr>
-        </tbody>
-    </table>
-<div class="col-md-12 row">
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
-        <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
-        </div>
-    </div>
+        <table class="table col-md-4 tab">
+            <tbody class="table-group-divider">
+                <tr>
+                    <td>Order Tax</td>
+                    <td>
+                        (%{{ createSaleForm.value.tax_rate }})
+                        {{ orderTax }} ريال
+                    </td>
+                </tr>
+                <tr>
+                    <td>Discount</td>
+                    <td>{{ discount }} ريال</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>{{ shipping }} ريال</td>
+                </tr>
+                <tr>
+                    <td>Grand Total</td>
+                    <td>{{ grandTotal }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col-md-12 row">
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
+                <div class="col-md-12">
+                    <input id="ordertax" (ngModelChange)="countOrderTax(); countGrandTotal()" formControlName="tax_rate"
+                        placeholder="0" class="form-control input-md" required="" type="number" />
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Discount</label>
-        <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
-        </div>
-    </div>
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.tax_rate">{{
+                        errors?.tax_rate
+                        }}</small>
+                </div>
+            </div>
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Shipping</label>
-        <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
-        </div>
-    </div>
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label " for="status">Status</label>
-        <div class="col-md-12 ">
-            <select class="form-select col-md-12 " aria-label="Default select example">
-                <option selected>Completed</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label " for="status">Payment Status</label>
-        <div class="col-md-12 ">
-            <select class="form-select col-md-12 " aria-label="Default select example">
-                <option selected>Pending</option>
-            </select>
-        </div>
-    </div>
-</div>
-    <div class="form-group col-md-12 ">
-        <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-        <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    <div class="form-group col-md-12">
-        <div class="col-md-4">
-            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="ordertax">Discount</label>
+                <div class="col-md-12">
+                    <input id="ordertax" (ngModelChange)="countDiscount(); countGrandTotal()" formControlName="discount"
+                        placeholder="0" class="form-control input-md" required="" type="number" />
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.discount">{{
+                        errors?.discount
+                        }}</small>
+                </div>
+            </div>
 
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="ordertax">Shipping</label>
+                <div class="col-md-12">
+                    <input id="ordertax" (ngModelChange)="countShipping(); countGrandTotal()" formControlName="shipping"
+                        placeholder="0" class="form-control input-md" required="" type="number" />
+
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.shipping">{{
+                        errors?.shipping
+                        }}</small>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="status">Status</label>
+                <div class="col-md-12">
+                    <select class="form-select col-md-12" aria-label="Default select example" formControlName="status">
+                        <option selected>Completed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="status">Payment Status</label>
+                <div class="col-md-12">
+                    <select class="form-select col-md-12" aria-label="Default select example"
+                        formControlName="payment_status">
+                        <option selected>Pending</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="exampleFormControlTextarea1" class="form-label">Note</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="notes"></textarea>
+
+        </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-4">
+                <button (click)="passMe()" id="singlebutton" name="singlebutton" class="btn btn-primary">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
 </body>
