@@ -33,7 +33,10 @@
                                         class="form-text text-danger">
                                         <small *ngIf="createwarehous.controls['name'].errors?.['required']">This field is
                                             required</small>
-                                    </div>        
+                                    </div>  
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                    </div>    
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -47,6 +50,9 @@
                                         <small *ngIf="createwarehous.controls['email'].errors?.['required']">This field is
                                             required</small>
                                     </div>      
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.email">{{errors?.email}}</small>
+                                    </div> 
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -57,9 +63,12 @@
                                         name="mobile" formControlName="mobile">
                                         <div id="mobile" *ngIf="createwarehous.controls['mobile'].touched &&createwarehous.controls['mobile'].invalid|| submitted && createwarehous.controls['mobile'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="createwarehous.controls['mobile'].errors?.['digits']">This field is
+                                        <small *ngIf="createwarehous.controls['mobile'].errors?.['required']">This field is
                                             required</small>
                                     </div>      
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.mobile">{{errors?.mobile}}</small>
+                                    </div> 
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -110,7 +119,7 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider" *ngFor="let ware of data; let i = index">
+        <tbody class="table-group-divider" *ngFor="let ware of data| paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
             <tr>
                 <td>{{ware.name}}</td>
                 <td>{{ware.mobile}}</td>
@@ -207,14 +216,8 @@
             </tr>
         </tbody>
     </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-      </ngb-pagination>
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+    </pagination-controls>
 </body>
 
 

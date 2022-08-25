@@ -52,6 +52,9 @@ export class ProductService {
     return this._http.put(`${this.host}${id}`,data,{ headers: this.header })
   } 
 
+  destroy(id:number):Observable<any>{
+    return this._http.delete(`${this.host}${id}`, {headers:this.header})
 
+  }
   
 }

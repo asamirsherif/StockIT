@@ -1,9 +1,9 @@
 // prettier-ignore
 export interface CoreMenuItem {
-    id           : string;
-    title        : string;
+    id?           : string;
+    title?        : string;
     url?         : string;
-    type         : 'section' | 'collapsible' | 'item';
+    type?         : 'section' | 'collapsible' | 'item';
     role?        : Array<string>;
     translate?   : string;
     icon?        : string;
@@ -13,6 +13,7 @@ export interface CoreMenuItem {
     exactMatch?  : boolean;
     externalUrl? : boolean;
     openInNewTab?: boolean;
+    null?        : null,
     badge?       : {
         title?    : string;
         translate?: string;

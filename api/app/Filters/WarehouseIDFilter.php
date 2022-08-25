@@ -9,6 +9,6 @@ class WarehouseIDFilter
 
     public function filter(Builder $builder, $value)
     {
-        return $value ? $builder->orWhere('warehouse_id', $value) : $builder;
+        return $builder->Where('warehouse_id', $value);
     }
 }

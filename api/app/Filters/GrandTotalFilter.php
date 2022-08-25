@@ -9,6 +9,6 @@ class GrandTotalFilter
 
     public function filter(Builder $builder, $value)
     {
-        return $value ? $builder->orWhere('GrandTotal', $value) : $builder;
+        return $builder->Where('GrandTotal', $value);
     }
 }

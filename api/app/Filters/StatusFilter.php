@@ -9,6 +9,6 @@ class StatusFilter
 
     public function filter(Builder $builder, $value)
     {
-        return $value ? $builder->orWhere('status', $value) : $builder;
+        return $builder->Where('status', $value);
     }
 }

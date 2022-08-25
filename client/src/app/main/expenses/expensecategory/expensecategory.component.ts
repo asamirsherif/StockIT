@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ExpenseCategoryService } from 'app/auth/service/expense/expense-category.service';
 import { IExpenseCategory } from 'app/interfaces/iexpense-category';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-expensecategory',
@@ -19,10 +20,15 @@ export class ExpensecategoryComponent implements OnInit {
   expenseCategoies: IExpenseCategory[];
   errors: any = {};
 
+  //for pagination 
+  p: number = 1;
+  total: number = 0;
+
 
   createCategoryForm: FormGroup;
   editCategoryForm: FormGroup;
-  constructor(private modalService: NgbModal, private fb: FormBuilder, public _router: Router, private expenseCategoryService: ExpenseCategoryService) {
+  constructor(private modalService: NgbModal, private fb: FormBuilder, public _router: Router, private expenseCategoryService: ExpenseCategoryService, private _toastr: ToastrService,
+  ) {
     this.createCategoryForm = new FormGroup({
       name: new FormControl('', Validators.required),
       description: new FormControl('', null)
@@ -72,10 +78,14 @@ export class ExpensecategoryComponent implements OnInit {
       //then
       const observer = {
         next: (result) => {
+          this._toastr.success(result.message)
+
           this.modalService.dismissAll(this.contentmodel)
           this.expenseCategoies.push(result.data)
         },
         error: (error) => {
+          this._toastr.error("Make shure for your data!", 'Error')
+
           console.log(error);
         }
       }
@@ -90,11 +100,12 @@ export class ExpensecategoryComponent implements OnInit {
       this.expenseCategoryService.store(data).subscribe(observer)
     }
   }
-  destroy(id) {
+  destroy(index) {
+    let id = this.expenseCategoies[index].id;
     //then
     const observer = {
       next: (res) => {
-        this.getall();
+        this.expenseCategoies.splice(index, 1);
       },
       error: (error) => {
         console.log(error)
@@ -116,13 +127,14 @@ export class ExpensecategoryComponent implements OnInit {
     //first
     this.expenseCategoryService.show(id).subscribe(observer)
   }
-  update(id) {
+  update(index) {
     this.submitted = true;
+    let id = this.expenseCategoies[index].id;
     if (this.editCategoryForm.valid) {
       const observer = {
         next: (res) => {
           this.modalService.dismissAll(this.contentmodel)
-          this.getall();
+          this.expenseCategoies[index] = res.data
         },
         error: (error) => {
           console.log(error);
@@ -135,6 +147,12 @@ export class ExpensecategoryComponent implements OnInit {
   search(event) {
     this.expenseCategoryService.params = this.expenseCategoryService.params.set("search", event)
     this.getall()
+  }
+
+  //for pagination
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.getall();
   }
 }
 

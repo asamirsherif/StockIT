@@ -5,7 +5,7 @@ import { FormGroup,FormControl,Validators,FormBuilder} from '@angular/forms';
 import { Isupplier } from 'app/interfaces/isupplier';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { ToastrService } from "ngx-toastr";
 @Component({
 selector: 'app-supplierlist',
 templateUrl: './supplierlist.component.html',
@@ -19,11 +19,19 @@ SupplierForShow!: Isupplier;
 
 createsupplierform: FormGroup;
 editsupplierForm: FormGroup;
+
 searchInput:any;
+searchInputcode= "";
+searchInputname = "";
+searchInputemail = "";
+searchInputphone = "";
+p: number = 1;
+total: number = 0;
+
 contentModel: any;
 submitted = false;
 errors: any = {};
-constructor(private modalService: NgbModal,private fb:FormBuilder, private supplierserv: SupplierservService, public _router: Router) {
+constructor(private modalService: NgbModal,private fb:FormBuilder,private _toastr: ToastrService, private supplierserv: SupplierservService, public _router: Router) {
 this.createsupplierform = new FormGroup({
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -78,10 +86,12 @@ AddSupplier() {
         const observer = {
             next: (res) => {
                 this.closeModel(this.contentModel);
+                this._toastr.success('New Supplier has been added');
                 this.data.push(res.data)
             },
             error: (error: HttpErrorResponse) => {
                 this.errors = error.error.errors;
+                this._toastr.error('Make sure for your data!');
                 }
             
         }
@@ -118,6 +128,7 @@ updateSupplier() {
     const observer = {
         next: (res) => {
             this.closeModel(this.contentModel);
+            this._toastr.success('Supplier updated');
             this.AllData();
         },
         error: (error: HttpErrorResponse) => {
@@ -159,6 +170,11 @@ search(event) {
 
     this.supplierserv.params = this.supplierserv.params.set("search", event);
 
+    this.AllData();
+}
+
+pageChangeEvent(event: number) {
+    this.p = event;
     this.AllData();
 }
 }

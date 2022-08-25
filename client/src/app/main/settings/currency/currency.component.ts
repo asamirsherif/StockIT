@@ -22,6 +22,9 @@ data:Array<Icurreny>=[];
   submitted = false;
   errors: any = {};
 
+  p: number = 1;
+  total: number = 0;
+  
   searchInput: string = "";
   constructor(private modalService: NgbModal ,private fb:FormBuilder,
   private _curr: CurrencyService,
@@ -63,9 +66,11 @@ data:Array<Icurreny>=[];
   const observer = {
   next: (res) => {
   this.closeModel(this.contentModel);
-  this.toaster.success(res.message);
+  this.toaster.success("Currency added successfuly");
   this.data.push(res.data);
   }, error: (error: HttpErrorResponse) => {
+    this.toaster.error("Make shure for your data!", 'Error')
+
   this.errors = error.error.errors;
   },
   };
@@ -116,4 +121,9 @@ data:Array<Icurreny>=[];
 
   this.AllData();
   }
+
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.AllData();
+  }  
   }

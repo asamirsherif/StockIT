@@ -1,36 +1,16 @@
 <h2>Update Product</h2>
 <hr />
 
-<form
-  class="row col-md-12"
-  [formGroup]="productupdateForm"
-  (ngSubmit)="updateProduct(product_id)"
->
+<form class="row col-md-12" [formGroup]="productupdateForm" (ngSubmit)="updateProduct(product_id)">
   <div class="col-md-8 row">
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="name">PRODUCT NAME</label>
       <div class="col-md-12">
-        <input
-          id="name"
-          name="name"
-          placeholder="PRODUCT NAME"
-          class="form-control input-md"
-          required
-          type="text"
-          formControlName="name"
-        />
-        <div
-          id="name"
-          *ngIf="
-            (productupdateForm.controls['name'].touched &&
-              productupdateForm.controls['name'].invalid) ||
-            (submitted && productupdateForm.controls['name'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small *ngIf="productupdateForm.controls['name'].errors?.['required']"
-            >This field is required</small
-          >
+        <input id="name" name="name" placeholder="PRODUCT NAME" class="form-control input-md" required type="text"
+          formControlName="name" />
+        <div id="name" *ngIf="(productupdateForm.controls['name'].touched && productupdateForm.controls['name'].invalid) ||
+            (submitted && productupdateForm.controls['name'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['name'].errors?.['required']">This field is required</small>
         </div>
         <div class="form-text text-danger">
           <small *ngIf="errors?.name">{{ errors?.name }}</small>
@@ -39,29 +19,13 @@
     </div>
 
     <div class="form-group col-md-6">
-      <label class="col-md-8 control-label" for="code">PRODUCT ID</label>
+      <label class="col-md-8 control-label" for="code">PRODUCT Code</label>
       <div class="col-md-12">
-        <input
-          id="code"
-          name="product_id"
-          placeholder="PRODUCT ID"
-          class="form-control input-md"
-          required=""
-          type="text"
-          formControlName="code"
-        />
-        <div
-          id="code"
-          *ngIf="
-            (productupdateForm.controls['code'].touched &&
-              productupdateForm.controls['code'].invalid) ||
-            (submitted && productupdateForm.controls['code'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small *ngIf="productupdateForm.controls['code'].errors?.['required']"
-            >This field is required</small
-          >
+        <input id="code" name="product_id" placeholder="PRODUCT Code" class="form-control input-md" required=""
+          type="text" formControlName="code" />
+        <div id="code" *ngIf="(productupdateForm.controls['code'].touched &&productupdateForm.controls['code'].invalid) ||
+            (submitted && productupdateForm.controls['code'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['code'].errors?.['required']">This field is required</small>
         </div>
 
         <div class="form-text text-danger">
@@ -73,34 +37,16 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="category">Category</label>
       <div class="col-md-12">
-        <select
-          class="form-select col-md-12"
-          aria-label="Default select example"
-          name="category_id"
-          formControlName="category_id"
-          [(ngModel)]="category_data"
-        >
-          <option
-            selected
-            *ngFor="let category of categories"
-            [value]="category.id"
-          >
+        <select class="form-select col-md-12" aria-label="Default select example" name="category_id"
+          formControlName="category_id" [(ngModel)]="category_data">
+          <option selected *ngFor="let category of categories" [value]="category.id">
             {{ category.name }}
           </option>
         </select>
-        <div
-          id="category_id"
-          *ngIf="
-            (productupdateForm.controls['category_id'].touched &&
-              productupdateForm.controls['category_id'].invalid) ||
-            (submitted && productupdateForm.controls['category_id'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small
-            *ngIf="productupdateForm.controls['category_id'].errors?.['required']"
-            >This field is required</small
-          >
+        <div id="category_id" *ngIf="
+            (productupdateForm.controls['category_id'].touched &&productupdateForm.controls['category_id'].invalid) ||
+            (submitted && productupdateForm.controls['category_id'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['category_id'].errors?.['required']">This field is required</small>
         </div>
 
         <div class="form-text text-danger">
@@ -112,48 +58,35 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="Brand">Brand</label>
       <div class="col-md-12">
-        <select
-          class="form-select col-md-12"
-          name="brand_data"
-          aria-label="Default select example"
-          formControlName="brand"
-          [(ngModel)]="brand_data"
-        >
+        <select class="form-select col-md-12" name="brand_data" aria-label="Default select example"
+          formControlName="brand" [(ngModel)]="brand_data">
           <option selected *ngFor="let brand of brands" [value]="brand.id">
             {{ brand.name }}
           </option>
         </select>
+        <div id="brand" *ngIf="(productupdateForm.controls['brand'].touched &&productupdateForm.controls['brand'].invalid) ||
+        (submitted && productupdateForm.controls['brand'].invalid)" class="form-text text-danger">
+      <small *ngIf="productupdateForm.controls['brand'].errors?.['required']">This field is required</small>
+    </div>
+
+    <div class="form-text text-danger">
+      <small *ngIf="errors?.brand">{{ errors?.brand }}</small>
+    </div>
       </div>
     </div>
 
     <div class="form-group col-md-6">
-      <label class="col-md-8 control-label" for="type_barcode"
-        >Barcode Symbology</label
-      >
+      <label class="col-md-8 control-label" for="type_barcode">Barcode Symbology</label>
       <div class="col-md-12">
-        <select
-          class="form-select col-md-12"
-          aria-label="Default select example"
-          formControlName="type_barcode"
-          [(ngModel)]="type_barcode"
-        >
+        <select class="form-select col-md-12" aria-label="Default select example" formControlName="type_barcode"
+          [(ngModel)]="type_barcode">
           <option selected *ngFor="let type of barcode_types" [value]="type">
             {{ type }}
           </option>
         </select>
-        <div
-          id="type_barcode"
-          *ngIf="
-            (productupdateForm.controls['type_barcode'].touched &&
-              productupdateForm.controls['type_barcode'].invalid) ||
-            (submitted && productupdateForm.controls['type_barcode'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small
-            *ngIf="productupdateForm.controls['type_barcode'].errors?.['required']"
-            >This field is required</small
-          >
+        <div id="type_barcode" *ngIf="(productupdateForm.controls['type_barcode'].touched &&productupdateForm.controls['type_barcode'].invalid) ||
+            (submitted && productupdateForm.controls['type_barcode'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['type_barcode'].errors?.['required']">This field is required</small>
         </div>
 
         <div class="form-text text-danger">
@@ -165,27 +98,11 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="cost">PRODUCT Cost</label>
       <div class="col-md-12">
-        <input
-          id="cost"
-          name="cost"
-          placeholder="PRODUCT COST"
-          class="form-control input-md"
-          required=""
-          type="text"
-          formControlName="cost"
-        />
-        <div
-          id="type_barcode"
-          *ngIf="
-            (productupdateForm.controls['cost'].touched &&
-              productupdateForm.controls['cost'].invalid) ||
-            (submitted && productupdateForm.controls['cost'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small *ngIf="productupdateForm.controls['cost'].errors?.['required']"
-            >This field is required</small
-          >
+        <input id="cost" name="cost" placeholder="PRODUCT COST" class="form-control input-md" required="" type="number"
+          formControlName="cost" />
+        <div id="type_barcode" *ngIf="(productupdateForm.controls['cost'].touched &&productupdateForm.controls['cost'].invalid) ||
+            (submitted && productupdateForm.controls['cost'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['cost'].errors?.['required']">This field is required number</small>
         </div>
 
         <div class="form-text text-danger">
@@ -197,28 +114,11 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="price">PRODUCT price</label>
       <div class="col-md-12">
-        <input
-          id="price"
-          name="price"
-          placeholder="PRODUCT PRICE"
-          class="form-control input-md"
-          required=""
-          type="text"
-          formControlName="price"
-        />
-        <div
-          id="price"
-          *ngIf="
-            (productupdateForm.controls['price'].touched &&
-              productupdateForm.controls['price'].invalid) ||
-            (submitted && productupdateForm.controls['price'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small
-            *ngIf="productupdateForm.controls['price'].errors?.['required']"
-            >This field is required</small
-          >
+        <input id="price" name="price" placeholder="PRODUCT PRICE" class="form-control input-md" required="" type="number"
+          formControlName="price" />
+        <div id="price" *ngIf="(productupdateForm.controls['price'].touched &&productupdateForm.controls['price'].invalid) ||
+            (submitted && productupdateForm.controls['price'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['price'].errors?.['required']">This field is required number</small>
         </div>
 
         <div class="form-text text-danger">
@@ -230,29 +130,15 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="unit_id">Product Unit</label>
       <div class="col-md-12">
-        <select
-          class="form-select col-md-12"
-          aria-label="Default select example"
-          formControlName="unit_id"
-          [(ngModel)]="product_unit"
-        >
+        <select class="form-select col-md-12" aria-label="Default select example" formControlName="unit_id"
+          [(ngModel)]="product_unit">
           <option selected *ngFor="let unit of units" [value]="unit.id">
             {{ unit.name }}
           </option>
         </select>
-        <div
-          id="unit_id"
-          *ngIf="
-            (productupdateForm.controls['unit_id'].touched &&
-              productupdateForm.controls['unit_id'].invalid) ||
-            (submitted && productupdateForm.controls['unit_id'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small
-            *ngIf="productupdateForm.controls['unit_id'].errors?.['required']"
-            >This field is required</small
-          >
+        <div id="unit_id" *ngIf="(productupdateForm.controls['unit_id'].touched &&productupdateForm.controls['unit_id'].invalid) ||
+            (submitted && productupdateForm.controls['unit_id'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['unit_id'].errors?.['required']">This field is required</small>
         </div>
 
         <div class="form-text text-danger">
@@ -263,67 +149,39 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="salesUnit">Sales Unit</label>
       <div class="col-md-12">
-        <select
-          class="form-select col-md-12"
-          aria-label="Default select example"
-          formControlName="unit_sale_id"
-          [(ngModel)]="sale_unit"
-        >
+        <select class="form-select col-md-12" aria-label="Default select example" required="" formControlName="unit_sale_id"
+          [(ngModel)]="sale_unit">
           <option selected *ngFor="let unit of units" [value]="unit.id">
             {{ unit.name }}
           </option>
         </select>
+        <div id="unit_sale_id"
+        *ngIf="productupdateForm.controls['unit_sale_id'].touched && productupdateForm.controls['unit_sale_id'].invalid || submitted && productupdateForm.controls['unit_sale_id'].invalid"
+        class="form-text text-danger">
+        <small *ngIf="productupdateForm.controls['unit_sale_id'].errors?.['required']">This field is
+            required</small>
+    </div>
 
-        <div
-          id="unit_sale_id"
-          *ngIf="
-            (productupdateForm.controls['unit_sale_id'].touched &&
-              productupdateForm.controls['unit_sale_id'].invalid) ||
-            (submitted && productupdateForm.controls['unit_sale_id'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small
-            *ngIf="productupdateForm.controls['unit_sale_id'].errors?.['required']"
-            >This field is required</small
-          >
-        </div>
-
-        <div class="form-text text-danger">
-          <small *ngIf="errors?.unit_sale_id">{{ errors?.unit_sale_id }}</small>
-        </div>
+    <div class="form-text text-danger">
+        <small *ngIf="errors?.unit_sale_id">{{errors?.unit_sale_id}}</small>
+    </div>
       </div>
     </div>
 
     <div class="form-group col-md-6">
-      <label class="col-md-8 control-label" for="ProductUnit"
-        >Purchase Unit</label
-      >
+      <label class="col-md-8 control-label" for="ProductUnit">Purchase Unit</label>
       <div class="col-md-12">
-        <select
-          class="form-select col-md-12"
-          aria-label="Default select example"
-          formControlName="unit_purchase_id"
-          [(ngModel)]="purchase_unit"
-        >
+        <select class="form-select col-md-12" aria-label="Default select example" formControlName="unit_purchase_id"
+          [(ngModel)]="purchase_unit">
           <option selected *ngFor="let unit of units" [value]="unit.id">
             {{ unit.name }}
           </option>
         </select>
 
-        <div
-          id="unit_purchase_id"
-          *ngIf="
-            (productupdateForm.controls['unit_purchase_id'].touched &&
-              productupdateForm.controls['unit_purchase_id'].invalid) ||
-            (submitted && productupdateForm.controls['unit_purchase_id'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small
-            *ngIf="productupdateForm.controls['unit_purchase_id'].errors?.['required']"
-            >This field is required</small
-          >
+        <div id="unit_purchase_id" *ngIf="(productupdateForm.controls['unit_purchase_id'].touched &&productupdateForm.controls['unit_purchase_id'].invalid) ||
+            (submitted && productupdateForm.controls['unit_purchase_id'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['unit_purchase_id'].errors?.['required']">This field is
+            required</small>
         </div>
 
         <div class="form-text text-danger">
@@ -335,45 +193,19 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="stockalert">Stock Alert</label>
       <div class="col-md-12">
-        <input
-          id="stockalert"
-          name="stockalert"
-          placeholder="0"
-          class="form-control input-md"
-          required=""
-          type="text"
-          formControlName="stockalert"
-        />
+        <input id="stockalert" name="stockalert" placeholder="0" class="form-control input-md" required="" type="text"
+          formControlName="stockalert" />
       </div>
     </div>
 
     <div class="form-group col-md-6">
-      <label class="col-md-8 control-label" for="product_tax"
-        >Product Tax</label
-      >
+      <label class="col-md-8 control-label" for="product_tax">Product Tax</label>
       <div class="col-md-12">
-        <input
-          id="product_tax"
-          name="product_tax"
-          placeholder="Product Tax"
-          class="form-control input-md"
-          required=""
-          type="text"
-          formControlName="product_tax"
-        />
-        <div
-          id="product_tax"
-          *ngIf="
-            (productupdateForm.controls['product_tax'].touched &&
-              productupdateForm.controls['product_tax'].invalid) ||
-            (submitted && productupdateForm.controls['product_tax'].invalid)
-          "
-          class="form-text text-danger"
-        >
-          <small
-            *ngIf="productupdateForm.controls['product_tax'].errors?.['required']"
-            >This field is required</small
-          >
+        <input id="product_tax" name="product_tax" placeholder="Product Tax" class="form-control input-md" required=""
+          type="number" formControlName="product_tax" />
+        <div id="product_tax" *ngIf="(productupdateForm.controls['product_tax'].touched &&productupdateForm.controls['product_tax'].invalid) ||
+            (submitted && productupdateForm.controls['product_tax'].invalid)" class="form-text text-danger">
+          <small *ngIf="productupdateForm.controls['product_tax'].errors?.['required']">This field is required number</small>
         </div>
         <div class="form-text text-danger">
           <small *ngIf="errors?.product_tax">{{ errors?.product_tax }}</small>
@@ -384,10 +216,7 @@
     <div class="form-group col-md-6">
       <label class="col-md-8 control-label" for="TaxType">Tax Type</label>
       <div class="col-md-12">
-        <select
-          formControlName="tax_method"
-          [(ngModel)]="tax_type"
-        >
+        <select class="col-md-12" formControlName="tax_method" [(ngModel)]="tax_type">
           <option selected *ngFor="let type of tax_types" [value]="type">
             {{ type }}
           </option>
@@ -398,11 +227,7 @@
     </div>
     <div class="form-group col-md-12">
       <label for="exampleFormControlTextarea1" class="form-label">Note</label>
-      <textarea
-        class="form-control"
-        id="exampleFormControlTextarea1"
-        rows="3"
-      ></textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
   </div>
 
@@ -414,10 +239,7 @@
         </div>
 
         <div class="dropzone">
-          <img
-            src="http://100dayscss.com/codepen/upload.svg"
-            class="upload-icon"
-          />
+          <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
           <input type="file" class="upload-input" formControlName="image" />
         </div>
 

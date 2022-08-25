@@ -6,6 +6,6 @@ class PhoneFilter
 {
     public function filter($builder, $value)
     {
-        return $builder->orWhere('phone', $value);
+        return $builder->Where('phone', $value);
     }
 }
