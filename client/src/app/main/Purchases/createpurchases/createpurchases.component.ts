@@ -53,7 +53,7 @@ export class CreatepurchasesComponent implements OnInit {
       shipping: new FormControl(0),
       tax_rate: new FormControl(0),
       discount: new FormControl(0),
-      status: new FormControl("PAID"),
+      status: new FormControl("Paid"),
       notes: new FormControl(""),
     })
   }
@@ -77,6 +77,7 @@ export class CreatepurchasesComponent implements OnInit {
     this._productSearchService.purchaseSearch(event).subscribe({
       next: (res) => {
         this.products = res.data;
+        console.log(this.products) 
       },
       error:(err)=>{
         this._toastr.error('Something wrong with product search!')

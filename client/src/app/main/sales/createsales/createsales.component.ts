@@ -108,8 +108,8 @@ export class CreatesalesComponent implements OnInit {
                 unit_price: this.products[i].total_price,
                 subtotal: this.countSubTotal(
                     1,
-                    this.products[i].tax_cost,
-                    this.products[i].cost
+                    this.products[i].tax_price,
+                    this.products[i].price
                 ),
                 tax_percent: this.products[i].tax_percent,
                 tax_method: this.products[i].tax_method,
@@ -130,8 +130,8 @@ export class CreatesalesComponent implements OnInit {
             saleDD.quantity++; // increase qunatity
             saleDD.subtotal = this.countSubTotal(
                 saleDD.quantity,
-                saleDD.product.tax_cost,
-                saleDD.product.cost
+                saleDD.product.tax_price,
+                saleDD.product.price
             ); //then count new total for puarchase
         }
 
@@ -159,17 +159,17 @@ export class CreatesalesComponent implements OnInit {
         this.saleDetails[i].quantity = value;
         this.saleDetails[i].subtotal = this.countSubTotal(
             this.saleDetails[i].quantity,
-            this.saleDetails[i].product.tax_cost,
-            this.saleDetails[i].product.cost
+            this.saleDetails[i].product.tax_price,
+            this.saleDetails[i].product.price
         );
         this.countTotal();
         this.countGrandTotal();
     }
-    countTax(quantity: number, tax_cost: number) {
-        return quantity * tax_cost;
+    countTax(quantity: number, tax_price: number) {
+        return quantity * tax_price;
     }
-    countSubTotal(quantity: number, tax_cost: number, cost: number) {
-        return quantity * cost + this.countTax(quantity, tax_cost);
+    countSubTotal(quantity: number, tax_price: number, price: number) {
+        return quantity * price + this.countTax(quantity, tax_price);
     }
     countOrderTax() {
         this.orderTax = (this.total / 100) * this.createSaleForm.value.tax_rate;
