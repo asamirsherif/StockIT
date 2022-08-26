@@ -27,7 +27,7 @@ trait ResponseTrait
         return response()->json([
             'success' => false,
             'message' => $msg
-        ], 401);
+        ], 500);
     }
 
     /**
@@ -57,6 +57,6 @@ trait ResponseTrait
             'success' => false,
             'message' => $msg,
             'data' => $data
-        ], 401);
+        ], 500);
     }
 }

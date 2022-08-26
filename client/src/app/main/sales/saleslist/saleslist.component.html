@@ -126,7 +126,7 @@
                 </button></td>
             </tr> -->
             <tr
-                *ngFor="let sale of sales| paginate: { itemsPerPage: 3, currentPage: p, totalItems: total} ; let i = index">
+                *ngFor="let sale of sales| paginate: { itemsPerPage: 10, currentPage: p, totalItems: total} ; let i = index">
                 <td>{{ sale.date }}</td>
                 <td>{{ sale.Ref }}</td>
                 <td>{{ sale.client.name }}</td>
@@ -137,17 +137,14 @@
               <td>{{ sale.due }}</td>
               <td>  <button type="button" class="btn btn-outline-success ">{{ sale.payment_status }}</button></td> -->
                 <td>
-                    <button class="btn btn-sm btn-success" routerLink='../salesupdate/{{sale.id}}'>
-                        <i data-feather="edit" [size]="15"> </i>
-                    </button>
-                    <button (click)="delete(i)" class="btn btn-sm btn-danger">
-                        <i data-feather="x-circle" [size]="15"></i>
-                    </button>
                     <button class="btn btn-sm btn-primary" (click)="createInvoice(i);modalOpenAD(modalAD)">
                         <i data-feather="file-text" [size]="15"> </i>
                     </button>
                     <button (click)="createPDFInvoice(i)" class="btn btn-sm btn-secondary"><i data-feather="download"
                             [size]="15"></i>
+                    </button>
+                    <button (click)="delete(i)" class="btn btn-sm btn-danger">
+                        <i data-feather="x-circle" [size]="15"></i>
                     </button>
                 </td>
             </tr>
