@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Sale;
+use App\Models\Adjustment;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SalePolicy
+class AdjustmentPolicy
 {
     use HandlesAuthorization;
 
@@ -26,12 +26,12 @@ class SalePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sale  $sale
+     * @param \App\Models\Adjustment $Adjustment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Sale $sale)
+    public function view(User $user, Adjustment $post)
     {
-        $permission = Permission::where('name', 'sale_view')->first();
+        $permission = Permission::where('name', 'adjustment_veiw')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -43,7 +43,7 @@ class SalePolicy
      */
     public function create(User $user)
     {
-        $permission = Permission::where('name', 'sale_add')->first();
+        $permission = Permission::where('name', 'adjustment_add')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -51,12 +51,12 @@ class SalePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sale  $sale
+     * @param \App\Models\Adjustment $Adjustment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Sale $sale)
+    public function update(User $user, Adjustment $post)
     {
-        $permission = Permission::where('name', 'sale_edit')->first();
+        $permission = Permission::where('name', 'adjustment_edit')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -64,12 +64,12 @@ class SalePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sale  $sale
+     * @param \App\Models\Adjustment $Adjustment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Sale $sale)
+    public function delete(User $user, Adjustment $post)
     {
-        $permission = Permission::where('name', 'sale_delete')->first();
+        $permission = Permission::where('name', 'adjustment_delete')->first();
         return $user->hasRole($permission->roles);
     }
 
@@ -77,10 +77,10 @@ class SalePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sale  $sale
+     * @param \App\Models\Adjustment $Adjustment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Sale $sale)
+    public function restore(User $user, Adjustment $post)
     {
         //
     }
@@ -89,10 +89,10 @@ class SalePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Sale  $sale
+     * @param \App\Models\Adjustment $Adjustment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Sale $sale)
+    public function forceDelete(User $user, Adjustment $post)
     {
         //
     }
