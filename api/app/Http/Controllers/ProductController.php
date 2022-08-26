@@ -29,6 +29,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Product::class);
         if ($request->filled('search')) {
             $products = $this->proRepo->multiSearch($request)
                 ->paginate($request->perPage);
@@ -56,6 +57,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'add', Product::class);
+
         $created = $this->proRepo->create($request);
         if ($request->is_variant == 'true')
             $this->proRepo->createVariants($request, $created->id);
@@ -71,8 +74,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Product::class);
         $product = Product::find($id);
         if ($product)
             return $this->succWithData(new ShowProductResource($product), 'Product found');
@@ -89,6 +93,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'edit', Product::class);
         $product = Product::find($id);
         if (!$product)
             return $this->errMsg("Product dose not exist!");
@@ -110,8 +115,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'delete', Product::class);
         $product = Product::find($id);
         if (!$product)
             return $this->errMsg("Product dose not exist!");

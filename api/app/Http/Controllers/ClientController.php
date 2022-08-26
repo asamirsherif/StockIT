@@ -32,7 +32,7 @@ class ClientController extends Controller
     public function index(Request $request)
     {
 
-        //$this->authorizeForUser($request->user('api'), 'customers_view', Client::class);
+        $this->authorizeForUser($request->user('api'), 'view', Client::class);
 
         if ($request->filled('search')) {
             $clients = $this->clientRepo->multiSearch($request)
@@ -54,7 +54,7 @@ class ClientController extends Controller
     public function store(ClientRequest $request)
     {
 
-       // $this->authorizeForUser($request->user('api'), 'create', Client::class);
+       $this->authorizeForUser($request->user('api'), 'add', Client::class);
 
         $clientCreated = $this->clientRepo->create($request);
 
@@ -78,8 +78,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Client::class);
         $client = Client::find($id);
 
         if(!$client)
@@ -99,7 +100,7 @@ class ClientController extends Controller
      */
     public function update(UpdatedClientRequest $request, $id)
     {
-        //$this->authorizeForUser($request->user('api'), 'update', Client::class);
+        $this->authorizeForUser($request->user('api'), 'edit', Client::class);
 
         $client = Client::find($id);
         if(!$client)
@@ -122,7 +123,7 @@ class ClientController extends Controller
      */
     public function destroy($id,Request $request)
     {
-        //$this->authorizeForUser($request->user('api'), 'delete', Client::class);
+        $this->authorizeForUser($request->user('api'), 'delete', Client::class);
 
         $client = Client::find($id);
         if(!$client)

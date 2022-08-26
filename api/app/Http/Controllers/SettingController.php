@@ -25,8 +25,9 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Setting::class);
         $setting = Setting::latest()->first();
         return $setting ? new SettingResource($setting) : null;
     }
@@ -39,6 +40,7 @@ class SettingController extends Controller
      */
     public function store(SettingRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Setting::class);
         $settingCreated = $this->settingRepo->create($request);
         if ($settingCreated)
             return $this->succWithData(new SettingResource($settingCreated), "setting Created successfully");
@@ -52,8 +54,9 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Setting::class);
         $setting = Setting::find($id);
 
         if (!$setting)
@@ -71,6 +74,7 @@ class SettingController extends Controller
      */
     public function update(SettingRequest $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Setting::class);
         $setting = Setting::find($id);
         if (!$setting)
             return $this->errMsg('This setting doesn\'t exist');
@@ -89,8 +93,9 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Setting::class);
         $setting = Setting::find($id);
 
         if (!$setting)

@@ -26,7 +26,7 @@ class ExpenseController extends Controller
      */
     public function index(Request $request)
     {
-      //  $this->authorizeForUser($request->user('api'), 'view', Expense::class);
+       $this->authorizeForUser($request->user('api'), 'view', Expense::class);
 
         if ($request->filled('search')) {
             $expenses = $this->expRepo->multiSearch($request)
@@ -53,8 +53,8 @@ class ExpenseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ExpenseRequest $request)
-    {   
-       // $this->authorizeForUser($request->user('api'), 'create', Expense::class);
+    {
+       $this->authorizeForUser($request->user('api'), 'add', Expense::class);
 
         $created = $this->expRepo->create($request);
         if ($created)
@@ -74,8 +74,8 @@ class ExpenseController extends Controller
 
     {
 
-       // $this->authorizeForUser($request->user('api'), 'view', Expense::class);
-        
+       $this->authorizeForUser($request->user('api'), 'view', Expense::class);
+
         $expense = Expense::find($id);
         if ($expense)
             return $this->succWithData(new ExpenseResource($expense), "Expense found");
@@ -91,9 +91,9 @@ class ExpenseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(ExpenseRequest $request, int $id)
-    {    
+    {
 
-       // $this->authorizeForUser($request->user('api'), 'update', Expense::class);
+       $this->authorizeForUser($request->user('api'), 'edit', Expense::class);
 
         $expense = Expense::find($id);
         if (!$expense)
@@ -112,8 +112,8 @@ class ExpenseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id,Request $request)
-    {   
-      //  $this->authorizeForUser($request->user('api'), 'delete', Expense::class);
+    {
+       $this->authorizeForUser($request->user('api'), 'delete', Expense::class);
 
         $expense = Expense::find($id);
         if (!$expense)

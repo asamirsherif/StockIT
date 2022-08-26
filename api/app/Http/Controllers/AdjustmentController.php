@@ -28,6 +28,8 @@ class AdjustmentController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Adjustment::class);
+
         if ($request->filled('search')) {
             $adjustments = $this->adjustmentRepo->multiSearch($request)
                                 ->paginate($request->perPage);
@@ -54,6 +56,8 @@ class AdjustmentController extends Controller
      */
     public function store(AdjustmentRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'add', Adjustment::class);
+
         $adjustmentCreated = $this->adjustmentRepo->create($request);
 
         // $this->adjustmentRepo->createAdjustmentDetails($request, $adjustmentCreated->id);
@@ -72,8 +76,10 @@ class AdjustmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Adjustment::class);
+
         $adjustment = Adjustment::find($id);
 
         if($adjustment)
@@ -91,6 +97,7 @@ class AdjustmentController extends Controller
      */
     public function update(AdjustmentRequest $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'edit', Adjustment::class);
         $adjustment = Adjustment::find($id);
 
         // check if it found or not
@@ -114,8 +121,9 @@ class AdjustmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'delete', Adjustment::class);
         $adjustment = Adjustment::find($id);
 
         if(!$adjustment)

@@ -27,6 +27,7 @@ class ProviderController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Provider::class);
         if ($request->filled('search')) {
             $providers = $this->provideRepo->multiSearch($request)
                 ->paginate($request->perPage);
@@ -53,6 +54,7 @@ class ProviderController extends Controller
      */
     public function store(ProviderRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'add', Provider::class);
         $created = $this->provideRepo->create($request);
         if ($created)
             return $this->succWithData(new ProviderResource($created), "a new Provider/supplaier has been added");
@@ -66,8 +68,9 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Provider::class);
         $provider = Provider::find($id);
         if ($provider)
             return $this->succWithData(new ProviderResource($provider), 'Provider data');
@@ -84,6 +87,7 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'edit', Provider::class);
         $provider = Provider::find($id);
         if (!$provider)
             return $this->errMsg("this provider/supplier not exist!");
@@ -101,8 +105,9 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'delete', Provider::class);
         $provider = Provider::find($id);
         if (!$provider)
             return $this->errMsg("this provider/supplier not exist!");

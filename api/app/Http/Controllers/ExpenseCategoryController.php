@@ -49,7 +49,7 @@ class ExpenseCategoryController extends Controller
      */
     public function store(ExpenseCategoryRequest $request)
     {
-        $this->authorizeForUser($request->user('api'), 'create', ExpenseCategory::class);
+        $this->authorizeForUser($request->user('api'), 'add', ExpenseCategory::class);
 
         $created = $this->expCatRepo->create($request);
         if ($created)
@@ -85,7 +85,7 @@ class ExpenseCategoryController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $this->authorizeForUser($request->user('api'), 'update', ExpenseCategory::class);
+        $this->authorizeForUser($request->user('api'), 'edit', ExpenseCategory::class);
 
         if (!$this->expCatRepo->read($id))
             return $this->errMsg("this Expense category does not exist!");

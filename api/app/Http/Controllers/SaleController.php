@@ -45,7 +45,7 @@ class SaleController extends Controller
     public function index(Request $request)
     {
 
-        // $this->authorizeForUser($request->user('api'), 'view', Sale::class);
+        $this->authorizeForUser($request->user('api'), 'view', Sale::class);
 
         if ($request->filled('search')) {
             $sales = $this->SaleRepo->multiSearch($request)
@@ -74,7 +74,7 @@ class SaleController extends Controller
      */
     public function store(SaleRequest $request)
     {
-        //$this->authorizeForUser($request->user('api'), 'create', Sale::class);
+        $this->authorizeForUser($request->user('api'), 'add', Sale::class);
 
         $created = $this->saleRepo->create($request);
         if ($created)
@@ -86,7 +86,7 @@ class SaleController extends Controller
 
     public function update(SaleRequest $request, $id)
     {
-        // $this->authorizeForUser($request->user('api'), 'update', Sale::class);
+        $this->authorizeForUser($request->user('api'), 'edit', Sale::class);
 
         $sale = Sale::find($id);
         if (!$sale)
@@ -101,7 +101,7 @@ class SaleController extends Controller
 
     public function show(Request $request, $id)
     {
-        // $this->authorizeForUser($request->user('api'), 'update', Sale::class);
+        $this->authorizeForUser($request->user('api'), 'view', Sale::class);
 
         $sale = Sale::find($id);
         if ($sale)
@@ -113,7 +113,7 @@ class SaleController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        // $this->authorizeForUser($request->user('api'), 'delete', Sale::class);
+        $this->authorizeForUser($request->user('api'), 'delete', Sale::class);
 
         $sale = Sale::find($id);
 
@@ -122,7 +122,7 @@ class SaleController extends Controller
         $deleted = $this->saleRepo->delete($id);
         if ($deleted)
             return $this->succWithData(new SaleResource($sale), "sale deleted");
-            
+
     }
 
 

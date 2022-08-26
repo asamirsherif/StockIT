@@ -28,6 +28,7 @@ class WarehouseController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Warehouse::class);
         //we have 2 request .. perPage & search
         if ($request->filled('search')) {
             $brands = $this->warehouseRepo->multiSearch($request)
@@ -48,6 +49,7 @@ class WarehouseController extends Controller
      */
     public function store(WarehouseRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Warehouse::class);
         $created = $this->warehouseRepo->create($request);
         if ($created)
             return $this->succWithData(new WarehouseResource($created), "warehouse created");
@@ -61,8 +63,9 @@ class WarehouseController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show(int $id, Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Warehouse::class);
         $warehouse = Warehouse::find($id);
         if ($warehouse)
             return $this->succWithData(new WarehouseResource($warehouse));
@@ -79,6 +82,7 @@ class WarehouseController extends Controller
      */
     public function update(UpdateWarehouseRequest $request, int $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Warehouse::class);
         $updated = $this->warehouseRepo->update($request, $id);
         if ($updated)
             return $this->succWithData(new WarehouseResource($updated), "warehouse updated");
@@ -92,8 +96,9 @@ class WarehouseController extends Controller
      * @param  \App\Models\Warehouse  $warehouse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy(int $id, Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Warehouse::class);
         $warehouse = Warehouse::find($id);
         if (!$warehouse)
             return $this->errMsg("The warehouse doesnt exist!");

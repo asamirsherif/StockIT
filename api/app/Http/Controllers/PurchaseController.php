@@ -28,6 +28,7 @@ class PurchaseController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Purchase::class);
         if ($request->filled('search')) {
             $purchases = $this->purchaseRepo->multiSearch($request)
                 ->paginate($request->perPage);
@@ -58,6 +59,7 @@ class PurchaseController extends Controller
      */
     public function store(PurchaseRequest $request)
     {
+        $this->authorizeForUser($request->user('api'), 'add', Purchase::class);
         $purchaseCreated = $this->purchaseRepo->create($request);
 
         // $this->purchaseRepo->createPurchaseDateails($request, $purchaseCreated->id);
@@ -75,8 +77,9 @@ class PurchaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'view', Purchase::class);
         $purchase = Purchase::find($id);
 
         if (!$purchase)
@@ -94,6 +97,7 @@ class PurchaseController extends Controller
      */
     public function update(PurchaseRequest $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'edit', Purchase::class);
         $purchase = Purchase::find($id);
 
         if(!$purchase)
@@ -115,8 +119,9 @@ class PurchaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $this->authorizeForUser($request->user('api'), 'delete', Purchase::class);
         $purchase = Purchase::find($id);
 
         if (!$purchase)

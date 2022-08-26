@@ -57,7 +57,7 @@ class PermissionController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorizeForUser($request->user('api'), 'create', Role::class);
+        $this->authorizeForUser($request->user('api'), 'add', Role::class);
 
         try {
             request()->validate([
@@ -112,7 +112,7 @@ class PermissionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->authorizeForUser($request->user('api'), 'update', Role::class);
+        $this->authorizeForUser($request->user('api'), 'edit', Role::class);
 
         try {
             request()->validate([
@@ -184,7 +184,7 @@ class PermissionController extends Controller
     //----------- Check Create Page --------------\\
     public function Check_Create_Page(Request $request)
     {
-        $this->authorizeForUser($request->user('api'), 'create', Role::class);
+        $this->authorizeForUser($request->user('api'), 'add', Role::class);
     }
 
     //----------- GET ALL Roles without paginate --------------\\
@@ -200,7 +200,7 @@ class PermissionController extends Controller
     public function edit(Request $request, $id)
     {
 
-        $this->authorizeForUser($request->user('api'), 'update', Role::class);
+        $this->authorizeForUser($request->user('api'), 'edit', Role::class);
 
         $Role = Role::with('permissions')->where('deleted_at', '=', null)->findOrFail($id);
         if ($Role) {
