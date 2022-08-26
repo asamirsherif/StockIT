@@ -43,6 +43,9 @@ export class SaleslistComponent implements OnInit {
   public filterForm: FormGroup;
   value;
 
+  //for model;
+  private invoiceModel;
+
 
   constructor(
     private _toastr: ToastrService,
@@ -125,20 +128,24 @@ export class SaleslistComponent implements OnInit {
   //////////////////////////////////// Invoices ///////////////
   //create invoice
   createInvoice(i) {
-    if (i) {
-      const observer = {
-        next: (res) => {
-          console.log(res);
 
-          this.invoiceSale = res.data.sale;
-          this.invoiceSetting = res.data.setting;
-          console.log(this.invoiceSale)
-          this.value = this.invoiceSale.Ref;
-        },
-        error: (err) => { this._toastr.error(err.error.message) }
-      }
-      this._invoiceService.sale(this.sales[i].id).subscribe(observer);
+    const observer = {
+      next: (res) => {
+
+        this.invoiceSale = res.data.sale;
+        this.invoiceSetting = res.data.setting;
+        this.value = this.invoiceSale.Ref;
+
+        //for modal
+        this.modalService.open(this.invoiceModel, {
+          centered: true,
+          size: 'sm'
+        });
+      },
+      error: (err) => { this._toastr.error(err.error.message) }
     }
+    this._invoiceService.sale(this.sales[i].id).subscribe(observer);
+
   }
 
   createPDFInvoice(i) {
@@ -192,10 +199,7 @@ export class SaleslistComponent implements OnInit {
   }
 
   modalOpenAD(modalAD) {
-    this.modalService.open(modalAD, {
-      centered: true,
-      size: 'sm'
-    });
+    this.invoiceModel = modalAD;
   }
 
 

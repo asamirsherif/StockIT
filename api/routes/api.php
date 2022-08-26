@@ -109,11 +109,12 @@ Route::middleware(['auth:api', 'Is_Active', 'cors'])->group(function () {
     // adjustment prodcut warehouse search
     Route::get('adjProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'adjSearch']);
 
-    // invoices
-    Route::get('saleInvoice/{sale}',[invoiceController::class,'saleInvoice']);
-    Route::get('purchaseInvoice/{purchase}',[invoiceController::class,'purchaseInvoice']);
-    Route::get('saleInvoicePDF/{sale}',[invoiceController::class,'saleInvoicePDF']);
-    Route::get('purchaseInvoicePDF/{purchase}',[invoiceController::class,'purchaseInvoicePDF']);
+   
 
 
 });
+ // invoices
+ Route::get('saleInvoice/{sale}',[invoiceController::class,'saleInvoice']);
+ Route::get('purchaseInvoice/{purchase}',[invoiceController::class,'purchaseInvoice']);
+ Route::get('saleInvoicePDF/{sale}',[invoiceController::class,'saleInvoicePDF']);
+ Route::get('purchaseInvoicePDF/{purchase}',[invoiceController::class,'purchaseInvoicePDF']);
