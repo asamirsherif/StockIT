@@ -15,8 +15,8 @@ import { basename } from "path";
 })
 export class UnitComponent implements OnInit {
   public pageBasicText = 3;
-  Op: any = ["/", "+", "*"];
-  Base: any = ['80','89'];
+  Base:any = [];
+  Op: any = ["/", "*"];
   data: Array<Unit> = [];
   
   // if(data){
@@ -47,15 +47,15 @@ export class UnitComponent implements OnInit {
       name: new FormControl("", Validators.required),
       ShortName: new FormControl("", Validators.required),
       base_unit: new FormControl(null),
-      operator: new FormControl(null),
-      operator_value: new FormControl(null),
+      operator: new FormControl("*"),
+      operator_value: new FormControl("1"),
     });
     this.editUnitForm = new FormGroup({
       name: new FormControl("", Validators.required),
       ShortName: new FormControl("", Validators.required),
-      base_unit: new FormControl(null),
-      operator: new FormControl("", Validators.required),
-      operator_value: new FormControl("", Validators.required),
+      base_unit: new FormControl(""),
+      operator: new FormControl("*", Validators.required),
+      operator_value: new FormControl("1", Validators.required),
     });
   }
 
@@ -82,6 +82,7 @@ export class UnitComponent implements OnInit {
 
   closeModel(contentModal) {
     this.modalService.dismissAll(contentModal);
+    this.AllData();
   }
 
 
@@ -105,7 +106,7 @@ export class UnitComponent implements OnInit {
 
   popData(data){
     for(let i in data){
-      this.Base.push(data[i].name)
+    this.Base.push(data[i].name)
     }
   }
 
