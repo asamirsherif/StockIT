@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Filters\Permission\RoleFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
 class Role extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
+
 
     protected $guarded = ['id'];
     protected $fillable = array('name','status', 'label', 'description');

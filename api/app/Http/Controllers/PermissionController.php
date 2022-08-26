@@ -83,6 +83,7 @@ class PermissionController extends Controller
                     $perm = Permission::firstOrCreate(['name' => $permission_slug]);
                     $data[] = $perm->id;
                 }
+               // dd($data);
 
                 $role->permissions()->attach($data);
 
@@ -159,9 +160,7 @@ class PermissionController extends Controller
     {
         $this->authorizeForUser($request->user('api'), 'delete', Role::class);
 
-        Role::whereId($id)->update([
-            'deleted_at' => Carbon::now(),
-        ]);
+        Role::find($id)->delete();
         return response()->json(['success' => true]);
     }
 
