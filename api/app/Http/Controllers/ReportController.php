@@ -481,7 +481,7 @@ class ReportController extends Controller
 
     //----------------- Providers Report -----------------------\\
 
-    public function Providers_Report(request $request)
+    public function ProvidersReport(request $request)
     {
 
         //$this->authorizeForUser($request->user('api'), 'Reports_suppliers', Provider::class);
