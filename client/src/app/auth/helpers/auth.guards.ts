@@ -39,7 +39,7 @@ export class AuthGuard implements CanActivate {
             return true;
         }
 
-        if(!currentUser.firstname || !currentUser.permissions ){
+        if(!currentUser.firstname && !currentUser.permissions ){
             location.reload();
         }
 

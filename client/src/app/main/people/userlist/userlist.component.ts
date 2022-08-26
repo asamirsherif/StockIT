@@ -6,6 +6,8 @@ import { Iuser } from 'app/interfaces/iuser';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from "ngx-toastr";
+import { Irole } from 'app/interfaces/irole';
+import { GrouppermissionservService } from 'app/auth/service/permission/grouppermissionserv.service';
 @Component({
     selector: 'app-userlist',
     templateUrl: './userlist.component.html',
@@ -20,10 +22,10 @@ export class UserlistComponent implements OnInit {
     contentModel: any;
     submitted = false;
     errors: any = {};
-
+    RoleArray:Irole[]
     p: number = 1;
     total: number = 0;
-    constructor(private modalService: NgbModal, private fb: FormBuilder, private _toastr: ToastrService, private userserv: UserservService, public _router: Router) {
+    constructor(private modalService: NgbModal, private fb: FormBuilder,private roleserv:GrouppermissionservService ,private _toastr: ToastrService, private userserv: UserservService, public _router: Router) {
         this.createuserForm = new FormGroup({
             firstname: new FormControl('', Validators.required),
             lastname: new FormControl('', Validators.required),
@@ -58,6 +60,23 @@ export class UserlistComponent implements OnInit {
     }
     ngOnInit(): void {
         this.AllData();
+
+        this.roleserv.allRole().subscribe(
+
+            (res) => {
+      
+              this.RoleArray = res.data;
+      
+              console.log(this.RoleArray);
+            },
+      
+            (err: any) => {
+      
+              console.log(err);
+      
+            }
+      
+          );
     }
 
     AllData() {
