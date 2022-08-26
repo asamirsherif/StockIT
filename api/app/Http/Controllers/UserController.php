@@ -111,7 +111,11 @@ class UserController extends BaseController
     }
 
     public function show($id){
-        //
+        $user = User::find($id);
+        if(!$user)
+             return $this->errMsg('no user Found!');
+        else
+            return $this->succWithData(new UserResource($user),'User found successfully');
 
     }
 
