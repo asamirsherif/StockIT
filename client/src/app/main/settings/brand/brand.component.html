@@ -28,7 +28,7 @@
             <div class="form-group col-md-12">
               <label class="col-md-12 control-label " for="Brand Name">Brand Name</label>
               <div class="col-md-12 ">
-                <input class="form-control form-control col-md-12" type="text" placeholder="Brand Name"
+                <input class="form-control form-control col-md-12" type="text" placeholder="Enter Brand Name"
                   aria-label="Date" id="name" name="name" formControlName="name">
                 <div id="BrandName"
                   *ngIf="createbrand.controls['name'].touched && createbrand.controls['name'].invalid || submitted && createbrand.controls['name'].invalid"
@@ -46,7 +46,7 @@
               <label for="exampleFormControlTextarea1" class="form-label col-md-12 ">Brand Description</label>
               <div class="col-md-12">
                 <textarea class="form-control " id="description" name="description" rows="3"
-                  formControlName="description"></textarea>
+                  formControlName="description" placeholder="Enter Description Brand"></textarea>
               </div>
             </div>
             <div class="form-group col-md-12">
