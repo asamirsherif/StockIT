@@ -219,7 +219,7 @@
                 <th scope="col">User Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">phone</th>
-                <th scope="col">status</th>
+                <!-- <th scope="col">status</th> -->
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -230,13 +230,21 @@
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.phone}}</td>
-                <td>
-                    <div class="custom-control custom-switch custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1" />
+                <!-- <td>
+                    <div *ngIf="user.status;else uncheck" class="custom-control custom-switch custom-control-primary ">
+                        <input value="{{user.status}}" type="checkbox" class="custom-control-input" id="customSwitch1"
+                            checked="user.status">
                         <label class="custom-control-label" for="customSwitch1"></label>
                     </div>
+                    <ng-template #uncheck>
+                        <div class="custom-control custom-switch custom-control-primary ">
+                            <input value="{{user.status}}" type="checkbox" class="custom-control-input"
+                                id="customSwitch1">
+                            <label class="custom-control-label" for="customSwitch1"></label>
+                        </div>
+                    </ng-template>
 
-                </td>
+                </td> -->
                 <td><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2);editUser(user.id)"><i
                             data-feather="edit" [size]="24">
                         </i></button></td>
