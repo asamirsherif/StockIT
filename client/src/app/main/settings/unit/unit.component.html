@@ -128,12 +128,12 @@
                                     formControlName="base_unit"
                                     
                                 >
-                                    <option
-                                        *ngFor="let base of Base"
-                                        [ngValue]="base.id"
-                                    >
-                                        {{ base }}
-                                    </option>
+                                <option
+                                *ngFor="let base of Base;"
+                                [ngValue]="base.id"
+                            >
+                                {{ base.name }}
+                            </option>
                                 </select>
                             </div>
                         </div>
@@ -255,7 +255,7 @@
             <tr>
                 <td>{{ unit.name }}</td>
                 <td>{{ unit.ShortName }}</td>
-                <td>{{ unit.base_unit }}</td>
+                <td>{{ unit.base_unit.name }}</td>
                 <td>{{ unit.operator }}</td>
                 <td>{{ unit.operator_value }}</td>
                 <td>
@@ -375,11 +375,14 @@
                                     class="form-select col-md-12"
                                     aria-label="Default select example"
                                     formControlName="base_unit"
+                                    [(ngModel)]="base_unit_id"
                                 >
-                                    <option selected>Choose base unit</option>
-                                    <option>كجم</option>
-                                    <option>شيكارة</option>
-                                    <option>متر</option>
+                                <option
+                                *ngFor="let base of Base;"
+                                [ngValue]="base.id"
+                            >
+                                {{ base.name }}
+                            </option>
                                 </select>
                             </div>
                         </div>
@@ -395,11 +398,8 @@
                                     aria-label="Default select example"
                                     formControlName="operator"
                                 >
-                                    <option selected>Choose Operator</option>
                                     <option>/</option>
                                     <option>*</option>
-                                    <option>+</option>
-                                    <option>+</option>
                                 </select>
                             </div>
                         </div>
