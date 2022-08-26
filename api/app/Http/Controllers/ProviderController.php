@@ -85,7 +85,7 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProviderRequest $request, $id)
     {
         $this->authorizeForUser($request->user('api'), 'edit', Provider::class);
         $provider = Provider::find($id);
