@@ -32,6 +32,7 @@ export class AuthGuard implements CanActivate {
                 currentUser.permissions.indexOf(route.data.permission) === -1
             ) {
                 // role not authorised so redirect to not-authorized page
+                location.reload();
                 this._router.navigate(["/pages/miscellaneous/not-authorized"]);
                 return false;
             }
