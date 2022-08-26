@@ -114,44 +114,45 @@ export class UserlistComponent implements OnInit {
     }
 
     editUser(id: number) {
-        // const observer = {
-        //     next: (res) => {
-        //         this.userForEdit = res.data;
-        //        console.log(this.userForEdit)
-        //         this.edituserForm.get("firstname").setValue(this.userForEdit.firstname);
-        //         this.edituserForm.get("email").setValue(this.userForEdit.email);
-        //         this.edituserForm.get("phone").setValue(this.userForEdit.phone);
-        //         this.edituserForm.get("lastname").setValue(this.userForEdit.lastname);
-        //         this.edituserForm.get("username").setValue(this.userForEdit.username);
-        //         this.edituserForm.get("password").setValue(this.userForEdit.password);
-        //         this.edituserForm.get("image").setValue(this.userForEdit.image);
-        //         this.edituserForm.get("role").setValue(this.userForEdit.role);
-        //     },
-        //     error: (error) => {
-        //         console.log(error);
-        //     },
-        // };
+        console.log(id)
+        const observer = {
+            next: (res) => {
+                this.userForEdit = res.data;
+               console.log(res.data)
+                this.edituserForm.get("firstname").setValue(this.userForEdit.firstname);
+                this.edituserForm.get("email").setValue(this.userForEdit.email);
+                this.edituserForm.get("phone").setValue(this.userForEdit.phone);
+                this.edituserForm.get("lastname").setValue(this.userForEdit.lastname);
+                this.edituserForm.get("username").setValue(this.userForEdit.username);
+                this.edituserForm.get("password").setValue(this.userForEdit.password);
+                this.edituserForm.get("image").setValue(this.userForEdit.image);
+                this.edituserForm.get("role").setValue(this.userForEdit.role);
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        };
 
-        // this.userserv.getUserid(id).subscribe(observer);
+        this.userserv.getUserid(id).subscribe(observer);
     }
 
 
     updateUser() {
-        // this.submitted = true;
-        // if (this.edituserForm.valid) {
-        //     const observer = {
-        //         next: (res) => {
-        //             this.closeModel(this.contentModel);
-        //             this._toastr.success('User updated');
-        //             this.AllData();
-        //         },
-        //         error: (error: HttpErrorResponse) => {
-        //             this.errors = error.error.errors;
-        //         }
-        //     };
-        //     this.userserv.updateUser(this.userForEdit?.id, this.edituserForm.value)
-        //         .subscribe(observer);
-        // }
+        this.submitted = true;
+        if (this.edituserForm.valid) {
+            const observer = {
+                next: (res) => {
+                    this.closeModel(this.contentModel);
+                    this._toastr.success('User updated');
+                    this.AllData();
+                },
+                error: (error: HttpErrorResponse) => {
+                    this.errors = error.error.errors;
+                }
+            };
+            this.userserv.updateUser(this.userForEdit?.id, this.edituserForm.value)
+                .subscribe(observer);
+        }
     }
     search(event) {
 

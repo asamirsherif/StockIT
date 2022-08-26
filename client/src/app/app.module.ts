@@ -120,47 +120,47 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/Payments/sales/sales.module').then(m => m.SalesModule)
   }, {
-    path: 'sales return',
+    path: 'sales-return',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/Payments/sales-return/sales-return.module').then(m => m.SalesReturnModule)
   }, {
-    path: 'purchases return',
+    path: 'purchases-return',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/Payments/purchases-return/purchases-return.module').then(m => m.PurchasesReturnModule)
   }, {
-    path: 'profit and loss',
+    path: 'profit-and-loss',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/profit-and-loss/profit-and-loss.module').then(m => m.ProfitAndLossModule)
   }, {
-    path: 'product quantity alerts',
+    path: 'product-quantity-alerts',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/prductquantity/productquantity.module').then(m => m.PrductquantityModule)
   }, {
-    path: 'warehouse report',
+    path: 'warehouse-report',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/warehouse-report/warehouse.module').then(m => m.WarehouseReportModule)
   }, {
-    path: 'sale report',
+    path: 'sale-report',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/sale-report/sale-report.module').then(m => m.SaleReportModule)
   }, {
-    path: 'purchase report',
+    path: 'purchase-report',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/purchase-report/purchase-report.module').then(m => m.PurchaseReportModule)
   }, {
-    path: 'customer report',
+    path: 'customer-report',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/customer-report/customer-report.module').then(m => m.CustomerReportModule)
   }, {
-    path: 'suplplier report',
+    path: 'suplplier-report',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Reports/supplier-report/supplier-report.module').then(m => m.SupplierReportModule)
   }, {
-    path: 'system setting',
+    path: 'system-setting',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/settings/systemsetting/systemsetting.module').then(m => m.SystemsettingModule)
   }, {
-    path: 'group permission',
+    path: 'group-permission',
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/settings/grouppermission/grouppermission.module').then(m => m.GrouppermissionModule)
   }, {
