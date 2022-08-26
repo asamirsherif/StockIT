@@ -105,6 +105,7 @@ export class UnitComponent implements OnInit {
   }
 
   popData(data){
+    this.Base = [];
     for(let i in data){
     this.Base.push(data[i].name)
     }
