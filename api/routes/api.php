@@ -42,7 +42,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::middleware(['auth:api', 'Is_Active'])->group(function () {
+Route::middleware(['auth:api', 'Is_Active', 'cors'])->group(function () {
 
     // -------------- USERS ---------------- \\
     Route::apiResource('users', UserController::class);
