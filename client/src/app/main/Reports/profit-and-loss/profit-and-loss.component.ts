@@ -69,6 +69,7 @@ export class ProfitAndLossComponent implements OnInit {
       return;
     } else {
       this._reportsService.params = this._reportsService.params.set('from', this.dateForm.value.from)
+        .set('to', this.dateForm.value.to)
 
       this._reportsService.pofitLoss().subscribe({
         next: res => {

@@ -24,4 +24,14 @@ export class ReportsService {
   pofitLoss(): Observable<any> {
     return this._http.get(`${this.host}/pofit-loss`, { headers: this.headers, params: this.params });
   }
+
+  warehouseStock(): Observable<any> {
+    return this._http.get(`${this.host}/warehouse-stock`, { headers: this.headers, params: this.params })
+  }
+  expenseWarehouse(): Observable<any> {
+    return this._http.get(`${this.host}/expenses-warehouse`, { headers: this.headers, params: this.params })
+  }
+  salesWarehouse(): Observable<any> {
+    return this._http.get(`${this.host}/sales-warehouse`, { headers: this.headers, params: this.params })
+  }
 }
