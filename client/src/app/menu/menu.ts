@@ -5,7 +5,7 @@ import { checkPermission } from './permission-checker';
 
 let user = JSON.parse(localStorage.getItem("currentUser"));
 let permissions = [];
-if(user){ permissions = user.permissions }
+if(user.permissions){ permissions = user.permissions }
 
 export const menu: CoreMenu[] = [
   
