@@ -76,10 +76,9 @@ class ReportController extends Controller
             ->first()->sum;
 
 
-            $item['profit'] = $item['sales']['sum'] - $item['purchases']['sum'];
+        $item['profit'] = $item['sales']['sum'] - $item['purchases']['sum'];
 
-            return response()->json(['data' => $item]);
-
+        return response()->json(['data' => $item]);
     }
 
     //----------------- Warhouse Count Stock -----------------------\\
@@ -128,7 +127,6 @@ class ReportController extends Controller
             'stock_value' => $data,
             'warehouses' => $warehouses,
         ]);
-
     }
 
 
@@ -162,7 +160,7 @@ class ReportController extends Controller
                     return $query->where('warehouse_id', $request->warehouse_id);
                 });
             })
-        //Search With Multiple Param
+            //Search With Multiple Param
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('Ref', 'LIKE', "%{$request->search}%")
@@ -177,7 +175,7 @@ class ReportController extends Controller
             });
 
         $totalRows = $Expenses->count();
-        if($perPage == "-1"){
+        if ($perPage == "-1") {
             $perPage = $totalRows;
         }
         $Expenses = $Expenses
@@ -191,7 +189,7 @@ class ReportController extends Controller
             $item['Ref'] = $Expense->Ref;
             $item['details'] = $Expense->details;
             $item['amount'] = $Expense->amount;
-            $item['category_name'] = $Expense['expense_category']->name;
+            $item['category_name'] = $Expense['category'] ? $Expense['category']->name : "";
             $data[] = $item;
         }
 
@@ -228,7 +226,7 @@ class ReportController extends Controller
                     return $query->where('warehouse_id', $request->warehouse_id);
                 });
             })
-        // Search With Multiple Param
+            // Search With Multiple Param
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('Ref', 'LIKE', "%{$request->search}%")
@@ -244,7 +242,7 @@ class ReportController extends Controller
             });
 
         $totalRows = $sales->count();
-        if($perPage == "-1"){
+        if ($perPage == "-1") {
             $perPage = $totalRows;
         }
         $sales = $sales
@@ -268,7 +266,6 @@ class ReportController extends Controller
             'totalRows' => $totalRows,
             'sales' => $data,
         ]);
-
     }
 
     //------------- Show Report SALES -----------\\
@@ -300,7 +297,7 @@ class ReportController extends Controller
         $Sales = $helpers->Show_Records($Sales);
         //Multiple Filter
         $Filtred = $helpers->filter($Sales, $columns, $param, $request)
-        // Search With Multiple Param
+            // Search With Multiple Param
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('sales.Ref', 'LIKE', "%{$request->search}%")
@@ -312,12 +309,11 @@ class ReportController extends Controller
             });
 
         $totalRows = $Filtred->count();
-        if($perPage == "-1"){
+        if ($perPage == "-1") {
             $perPage = $totalRows;
         }
         $Sales = $Filtred
-            ->limit($perPage)
-            ->orderBy('sales.' . $order, $dir)
+            ->orderBy('sales.id' , 'desc')
             ->get();
 
         foreach ($Sales as $Sale) {
@@ -430,7 +426,7 @@ class ReportController extends Controller
         $data = array();
 
         $clients = Client::where('deleted_at', '=', null)
-        // Search With Multiple Param
+            // Search With Multiple Param
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('name', 'LIKE', "%{$request->search}%")
@@ -440,7 +436,7 @@ class ReportController extends Controller
             });
 
         $totalRows = $clients->count();
-        if($perPage == "-1"){
+        if ($perPage == "-1") {
             $perPage = $totalRows;
         }
         $clients = $clients
@@ -476,7 +472,6 @@ class ReportController extends Controller
             'report' => $data,
             'totalRows' => $totalRows,
         ]);
-
     }
 
     //----------------- Providers Report -----------------------\\
@@ -495,7 +490,7 @@ class ReportController extends Controller
         $data = array();
 
         $providers = Provider::where('deleted_at', '=', null)
-        // Search With Multiple Param
+            // Search With Multiple Param
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('name', 'LIKE', "%{$request->search}%")
@@ -505,7 +500,7 @@ class ReportController extends Controller
             });
 
         $totalRows = $providers->count();
-        if($perPage == "-1"){
+        if ($perPage == "-1") {
             $perPage = $totalRows;
         }
         $providers = $providers
@@ -541,7 +536,5 @@ class ReportController extends Controller
             'report' => $data,
             'totalRows' => $totalRows,
         ]);
-
     }
-
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportsService } from 'app/auth/service/reports/reports.service';
 
 @Component({
   selector: 'app-customer-report',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerReportComponent implements OnInit {
   public pageBasicText = 3;
-  constructor() { }
+
+  //for listing
+  public customers;
+
+  constructor(
+    private _reportsService: ReportsService,
+  ) { }
 
   ngOnInit(): void {
+    this.getCustomers();
+  }
+
+
+
+  getCustomers() {
+    this._reportsService.clients().subscribe({
+      next: res => {
+        this.customers = res;
+      }
+    })
   }
 
 }
