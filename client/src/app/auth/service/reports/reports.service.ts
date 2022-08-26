@@ -34,4 +34,16 @@ export class ReportsService {
   salesWarehouse(): Observable<any> {
     return this._http.get(`${this.host}/sales-warehouse`, { headers: this.headers, params: this.params })
   }
+
+  sales() {
+    return this._http.get(`${this.host}/sales`, { headers: this.headers, params: this.params })
+  }
+
+  clients() {
+    return this._http.get(`${this.host}/client`, { headers: this.headers, params: this.params })
+  }
+
+  suppliers(){
+    return this._http.get(`${this.host}/supplier`, { headers: this.headers, params: this.params })
+  }
 }

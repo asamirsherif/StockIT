@@ -313,8 +313,7 @@ class ReportController extends Controller
             $perPage = $totalRows;
         }
         $Sales = $Filtred
-            ->limit($perPage)
-            ->orderBy('sales.' . $order, $dir)
+            ->orderBy('sales.id' , 'desc')
             ->get();
 
         foreach ($Sales as $Sale) {
