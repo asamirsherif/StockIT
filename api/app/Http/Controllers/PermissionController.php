@@ -83,6 +83,7 @@ class PermissionController extends Controller
                     $perm = Permission::firstOrCreate(['name' => $permission_slug]);
                     $data[] = $perm->id;
                 }
+               // dd($data);
 
                 $role->permissions()->attach($data);
 
