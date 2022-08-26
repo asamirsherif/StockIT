@@ -18,6 +18,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SalesReturnController;
+use App\Http\Controllers\ReprotController;
 
 
 /*
@@ -115,5 +116,7 @@ Route::middleware(['auth:api', 'Is_Active', 'cors'])->group(function () {
     Route::get('saleInvoicePDF/{sale}',[invoiceController::class,'saleInvoicePDF']);
     Route::get('purchaseInvoicePDF/{purchase}',[invoiceController::class,'purchaseInvoicePDF']);
 
+    // report controller
+    Route::get('reports/pofit-loss', [ReportController::class, 'saleSearch']);
 
 });
