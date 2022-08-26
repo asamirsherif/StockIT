@@ -178,10 +178,9 @@
                             <div class="col-md-12 ">
                                 <select class="form-select col-md-12 " aria-label="Default select example"
                                     formControlName="role">
-                                    <option selected>Pleses select menu</option>
-                                    <option>Owner</option>
-                                    <option>Manger</option>
-                                    <option>Chasier</option>
+                                    <option *ngFor="let item of RoleArray" [value]="item.id">
+                                        {{ item.name }}
+                                    </option>
                                 </select>
                                 <div id="role"
                                     *ngIf="createuserForm.controls['role'].touched && createuserForm.controls['role'].invalid|| submitted && createuserForm.controls['role'].invalid"
