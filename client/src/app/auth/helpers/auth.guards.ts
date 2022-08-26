@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         // let currentUser = this._authenticationService.currentUserValue; causes hell of unknown errors
 
-        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         if (currentUser) {
             // check if route is restricted by role
             if (

@@ -69,6 +69,7 @@ export class AuthenticationService {
 
               this._user.getLoggedUser().subscribe((res)=>{
                 user = {...user , ...res}
+                
               })
 
               this._user.getUserPermissions().subscribe((res)=>{
