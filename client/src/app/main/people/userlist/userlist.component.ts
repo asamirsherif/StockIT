@@ -34,7 +34,7 @@ export class UserlistComponent implements OnInit {
             phone: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required),
             image: new FormControl(null),
-            role: new FormControl('', Validators.required)
+            role_id: new FormControl('', Validators.required)
         });
         this.edituserForm = new FormGroup({
             firstname: new FormControl('', Validators.required),
@@ -44,7 +44,7 @@ export class UserlistComponent implements OnInit {
             phone: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required),
             image: new FormControl(null),
-            role: new FormControl('', Validators.required)
+            role_id: new FormControl('', Validators.required)
         })
     }
     openModal(contentModal) {

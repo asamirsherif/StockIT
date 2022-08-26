@@ -177,19 +177,19 @@
                             <label class="col-md-8 control-label " for="Role">Role</label>
                             <div class="col-md-12 ">
                                 <select class="form-select col-md-12 " aria-label="Default select example"
-                                    formControlName="role">
+                                    formControlName="role_id">
                                     <option *ngFor="let item of RoleArray" [value]="item.id">
                                         {{ item.name }}
                                     </option>
                                 </select>
-                                <div id="role"
-                                    *ngIf="createuserForm.controls['role'].touched && createuserForm.controls['role'].invalid|| submitted && createuserForm.controls['role'].invalid"
+                                <div id="role_id"
+                                    *ngIf="createuserForm.controls['role_id'].touched && createuserForm.controls['role_id'].invalid|| submitted && createuserForm.controls['role_id'].invalid"
                                     class="form-text text-danger">
-                                    <small *ngIf="createuserForm.controls['role'].errors?.['required']">This field
+                                    <small *ngIf="createuserForm.controls['role_id'].errors?.['required']">This field
                                         is required</small>
                                 </div>
                                 <div class="form-text text-danger">
-                                    <small *ngIf="errors?.role">{{errors?.role}}</small>
+                                    <small *ngIf="errors?.role_id">{{errors?.role_id}}</small>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +224,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let user of data | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}">
+            <tr *ngFor="let user of data | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}">
                 <td>{{user.firstname}}</td>
                 <td>{{user.lastname}}</td>
                 <td>{{user.username}}</td>

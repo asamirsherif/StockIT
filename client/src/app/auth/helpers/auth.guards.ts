@@ -36,8 +36,10 @@ export class AuthGuard implements CanActivate {
                 this._router.navigate(["/pages/miscellaneous/not-authorized"]);
                 return false;
             }
-
+            
             return true;
+        } else {
+            this._authenticationService.logout();
         }
 
         if(!currentUser.firstname && !currentUser.permissions ){

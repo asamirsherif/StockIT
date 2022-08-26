@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { User, Role } from 'app/auth/models';
 import { ToastrService } from 'ngx-toastr';
-
+import { Router } from '@angular/router';
 import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
@@ -22,7 +22,8 @@ export class AuthenticationService {
    * @param {HttpClient} _http
    * @param {ToastrService} _toastrService
    */
-  constructor(private _http: HttpClient, private _toastrService: ToastrService, private _user:UserService) {
+  constructor(private _http: HttpClient, private _toastrService: ToastrService, private _user:UserService,
+    private _router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -103,7 +104,10 @@ export class AuthenticationService {
    */
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    if(localStorage.getItem('currentUser')){
+        localStorage.removeItem('currentUser');
+    }
+    this._router.navigate(["/pages/login"]);
     // notify
     this.currentUserSubject.next(null);
   }

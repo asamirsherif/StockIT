@@ -100,10 +100,17 @@ class UserController extends BaseController
             $User->username  = $request['username'];
             $User->email     = $request['email'];
             $User->phone     = $request['phone'];
+            $User->role_id   = $request['role_id'];
             $User->password  = Hash::make($request['password']);
             $User->avatar    = $filename;
             $User->save();
 
+
+            $user_role = new role_user;
+            $user_role->user_id = $User->id;
+            $user_role->role_id = $request['role_id'];
+
+            $user_role->save();
 
         }, 10);
 
