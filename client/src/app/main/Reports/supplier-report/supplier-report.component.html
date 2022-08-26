@@ -1,47 +1,42 @@
 <body>
     <h2>Supplier Report</h2>
-            <hr>
-                <div class="col-md-6">
-                    <form class="form-inline col-md-12 mb-1">
-                        <span class="switch-icon-left"><i data-feather="search"></i></span>
-                        <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                            aria-label="Search">
-                    </form>
-                </div>
+    <hr>
+    <div class="col-md-6">
+        <!-- <form class="form-inline col-md-12 mb-1">
+            <span class="switch-icon-left"><i data-feather="search"></i></span>
+            <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                aria-label="Search">
+        </form> -->
+    </div>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Supplier Code</th>
-                        <th scope="col">Supplier Name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Purchases</th>
-                        <th scope="col">Total Amount</th>
-                        <th scope="col">Paid</th>
-                        <th scope="col">Due</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    <tr>
-                        <td>N/D</td>
-                        <td>12</td>
-                        <td>ererr</td>
-                        <td>AD-1111</td>
-                        <td>N/D</td>
-                        <td>12</td>
-                        <td> r3rrre</td>
-                        <td> <button type="button" class="btn btn-primary">Reports</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-                <ng-template ngbPaginationPrevious
-                  ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-                </ng-template>
-                <ng-template ngbPaginationNext
-                  >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-                </ng-template>
-              </ngb-pagination>
-        </body>
-        
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Supplier Code</th>
+                <th scope="col">Supplier Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Purchases</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Paid</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr *ngFor="let supplier of suppliers">
+                <td>{{supplier.code}}</td>
+                <td>{{supplier.name}}</td>
+                <td>{{supplier.phone}}</td>
+                <td>{{supplier.total_purchase}}</td>
+                <td>{{supplier.total_amount}}</td>
+                <td>{{supplier.total_amount}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
+        aria-label="Custom pagination">
+        <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
+                [class]="'font-weight-bolder'"></span>Prev
+        </ng-template>
+        <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+        </ng-template>
+    </ngb-pagination>
+</body>

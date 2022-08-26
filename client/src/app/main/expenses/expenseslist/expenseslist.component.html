@@ -96,7 +96,7 @@
         <td>{{createExpenses.ref}}</td>
         <td>{{createExpenses.details}}</td>
         <td>{{createExpenses.amount}}</td>
-        <td>{{createExpenses.expense_category.name}}</td>
+        <td>{{createExpenses.expense_category?.name}}</td>
         <td>{{createExpenses.warehouse.name}}</td>
         <td> <button class="btn btn-sm btn-success" routerLink="../expenseupdate/{{createExpenses.id}}"><i
               data-feather="edit" [size]="24">
