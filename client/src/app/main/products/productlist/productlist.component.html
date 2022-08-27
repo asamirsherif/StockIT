@@ -80,7 +80,6 @@
                 <th scope="col">Brand</th>
                 <th scope="col">Price</th>
                 <th scope="col">Unit</th>
-                <th scope="col">Quantity</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -94,7 +93,6 @@
                 <td>{{ product.brand }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.unit }}</td>
-                <td>99</td>
                 <td> <button class="btn btn-sm btn-primary" routerLink="../productdetails/{{product.id}}"><i data-feather="eye"[size]="22"></i>
                 </button><button class="btn btn-sm btn-success" routerLink="../productupdate/{{product.id}}"><i data-feather="edit" [size]="24" >
                 </i></button>  <button class="btn btn-sm btn-danger" (click)="destroy(product.id)"><i data-feather="x-circle"  [size]="24"></i>
