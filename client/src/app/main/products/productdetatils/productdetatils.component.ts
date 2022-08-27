@@ -12,7 +12,7 @@ import { IProduct } from 'app/interfaces/iproduct';
 export class ProductdetatilsComponent implements OnInit {
 
   product:IProduct;
-
+value;
   constructor(
     private _productService:ProductService,
     private _activeRouter:ActivatedRoute
@@ -26,8 +26,10 @@ export class ProductdetatilsComponent implements OnInit {
   showProductData(id:number){
     const observed = {
       next: (res) => {
+
         this.product = res.data;
         console.log(this.product)
+        this.value = this.product.code;
       }
     }
     this._productService.show(id).subscribe(observed)

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Product;
 
+use App\Http\Resources\Warehouse\WarehouseResource;
+use App\Models\Warehouse;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
-class UserResource extends JsonResource
+class ProductWarehouseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,15 +17,10 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-
             'id' => $this->id,
-            "firstname" => $this->firstname,
-            "lastname" => $this->lastname,
-            "username" => $this->username,
-            "email" => $this->email,
-            "phone" => $this->phone,
-            "status" => $this->status,
-            "role_id"=> $this->role_id,
+            'product_id' => $this->product_id,
+            'warehouse' => new WarehouseResource(Warehouse::find($this->warehouse_id)),
+            'quantity' => $this->qte
         ];
     }
 }

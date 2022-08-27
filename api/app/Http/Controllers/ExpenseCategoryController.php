@@ -28,7 +28,7 @@ class ExpenseCategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorizeForUser($request->user('api'), 'view', ExpenseCategory::class);
+        //$this->authorizeForUser($request->user('api'), 'view', ExpenseCategory::class);
 
         if ($request->filled('search')) {
             $expenseCategory = $this->expCatRepo->multiSearch($request)

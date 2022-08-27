@@ -76,6 +76,7 @@ import { SalesupdateComponent } from './main/sales/salesupdate/salesupdate.compo
 import { GrouppermissingupdateComponent } from './main/settings/grouppermissingupdate/grouppermissingupdate.component';
 import { UpdatetransferComponent } from './main/transfer/updatetransfer/updatetransfer.component';
 import { ProfileComponent } from './main/profile/profile.component';
+import { environment } from 'environments/environment';
 
 
 const appRoutes: Routes = [
@@ -86,6 +87,11 @@ const appRoutes: Routes = [
   {
     path: '',
     redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'docs',
+    redirectTo: environment.apiUrl + '/docs',
     pathMatch: 'full'
   }, {
     path: 'createproduct',
@@ -109,6 +115,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/Adjustment/createadjustment/createadjustment.module').then(m => m.CreateadjustmentModule)
   }, {
     path: 'listadjustment',
+    data: { permission: 'adjustment_veiw' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Adjustment/listadjustment/listadjustment.module').then(m => m.ListadjustmentModule)
   }, {
@@ -130,58 +137,72 @@ const appRoutes: Routes = [
   }, {
     path: 'profit-and-loss',
     canActivate: [AuthGuard],
+    data: { permission: 'Reports_profit' },
     loadChildren: () => import('./main/Reports/profit-and-loss/profit-and-loss.module').then(m => m.ProfitAndLossModule)
   }, {
     path: 'product-quantity-alerts',
     canActivate: [AuthGuard],
+    data: { permission: 'Reports_quantity_alerts' },
     loadChildren: () => import('./main/Reports/prductquantity/productquantity.module').then(m => m.PrductquantityModule)
   }, {
     path: 'warehouse-report',
     canActivate: [AuthGuard],
+    data: { permission: 'Reports_Warehouse' },
     loadChildren: () => import('./main/Reports/warehouse-report/warehouse.module').then(m => m.WarehouseReportModule)
   }, {
     path: 'sale-report',
     canActivate: [AuthGuard],
+    data: { permission: 'Reports_sales' },
     loadChildren: () => import('./main/Reports/sale-report/sale-report.module').then(m => m.SaleReportModule)
   }, {
     path: 'purchase-report',
     canActivate: [AuthGuard],
+    data: { permission: 'Reports_purchase' },
     loadChildren: () => import('./main/Reports/purchase-report/purchase-report.module').then(m => m.PurchaseReportModule)
   }, {
     path: 'customer-report',
     canActivate: [AuthGuard],
+    data: { permission: 'Reports_customers' },
     loadChildren: () => import('./main/Reports/customer-report/customer-report.module').then(m => m.CustomerReportModule)
   }, {
     path: 'suplplier-report',
     canActivate: [AuthGuard],
+    data: { permission: 'Reports_suppliers' },
     loadChildren: () => import('./main/Reports/supplier-report/supplier-report.module').then(m => m.SupplierReportModule)
   }, {
     path: 'system-setting',
     canActivate: [AuthGuard],
+    data: { permission: 'setting_system' },
     loadChildren: () => import('./main/settings/systemsetting/systemsetting.module').then(m => m.SystemsettingModule)
   }, {
     path: 'group-permission',
+    data: { permission: 'permissions_view' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/settings/grouppermission/grouppermission.module').then(m => m.GrouppermissionModule)
   }, {
     path: 'warehouse',
     canActivate: [AuthGuard],
+    data: { permission: 'warehouse' },
     loadChildren: () => import('./main/settings/warehouse/warehouse.module').then(m => m.WarehouseReportModule)
   }, {
     path: 'category',
     canActivate: [AuthGuard],
+    data: { permission: 'category' },
     loadChildren: () => import('./main/settings/category/category.module').then(m => m.CategoryModule)
   }, {
     path: 'brand',
     canActivate: [AuthGuard],
+    data: { permission: 'brand' },
     loadChildren: () => import('./main/settings/brand/brand.module').then(m => m.BrandModule)
   }, {
     path: 'currency',
     canActivate: [AuthGuard],
+    data: { permission: 'currency' },
     loadChildren: () => import('./main/settings/currency/currency.module').then(m => m.CurrencyModule)
   }, {
     path: 'unit',
     canActivate: [AuthGuard],
+    data: { permission: 'unit' },
     loadChildren: () => import('./main/settings/unit/unit.module').then(m => m.UnitModule)
   }, {
     path: 'backup',
@@ -200,17 +221,20 @@ const appRoutes: Routes = [
   },
   {
     path: 'createexpenses',
+    data: { permission: 'expense_add' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/expenses/createexpenses/createexpenses.module').then(m => m.CreateexpensesModule)
 
   },
   {
     path: 'expenseslist',
+    data: { permission: 'expense_view' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/expenses/expenseslist/expenseslist.module').then(m => m.ExpenseslistModule)
   },
   {
     path: 'expensescategory',
+    data: { permission: 'category_expense_view' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/expenses/expensecategory/expensescategory.module').then(m => m.ExpensecategoryModule)
   },
@@ -226,21 +250,25 @@ const appRoutes: Routes = [
   },
   {
     path: 'createpurchases',
+    data: { permission: 'purchases_add' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Purchases/createpurchases/createpurchases.module').then(m => m.CreatepurchasesModule)
   },
   {
     path: 'purchaseslist',
+    data: { permission: 'purchases_view' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/Purchases/purchaseslist/purchaseslist.module').then(m => m.PurchaseslistModule)
   },
   {
     path: 'createsales',
+    data: { permission: 'sales_add' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/sales/createsales/createsales.module').then(m => m.CreatesalesModule)
   },
   {
     path: 'saleslist',
+    data: { permission: 'sales_view' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/sales/saleslist/saleslist.module').then(m => m.SaleslistModule)
   },
@@ -266,42 +294,51 @@ const appRoutes: Routes = [
   },
   {
     path: 'customerlist',
+    data: { permission: 'customers_view' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/people/customerlist/customerlist.module').then(m => m.CustomerlistModule)
   },
   {
     path: 'supplierlist',
+    data: { permission: 'supplier_view' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/people/supplierlist/supplierlist.module').then(m => m.SupplierlistModule)
   },
   {
     path: 'userlist',
+    data: { permission: 'users_view' },
     canActivate: [AuthGuard],
     loadChildren: () => import('./main/people/userlist/userlist.module').then(m => m.UserlistModule)
   },
   {
     path: 'adjustupdate/:id',
     canActivate: [AuthGuard],
+    data: { permission: 'adjustment_edit' },
     loadChildren: () => import('./main/Adjustment/adjustupdate/adjustupdate.module').then(m => m.AdjustupdateModule)
   }, {
     path: 'expenseupdate/:id',
     canActivate: [AuthGuard],
+    data: { permission: 'expense_edit' },
     loadChildren: () => import('./main/expenses/expenseupdate/expensesupdate.module').then(m => m.ExpenseupdateModule)
   }, {
     path: 'createpermission',
     canActivate: [AuthGuard],
+    data: { permission: 'permissions_add' },
     loadChildren: () => import('./main/setting/permission/createpermission/createpermission.module').then(m => m.CreatepermissionModule)
   }, {
     path: 'productdetails/:id',
     canActivate: [AuthGuard],
+    data: { permission: 'products_edit' },
     loadChildren: () => import('./main/products/productdetatils/productdetails.module').then(m => m.ProductdetatilsModule)
   }, {
     path: 'productupdate/:id',
     canActivate: [AuthGuard],
+    data: { permission: 'products_edit' },
     loadChildren: () => import('./main/products/productupdate/productupdate.module').then(m => m.ProductupdateComponentModule)
   }, {
     path: 'purchasesupdate/:id',
     canActivate: [AuthGuard],
+    data: { permission: 'purchases_edit' },
     loadChildren: () => import('./main/Purchases/purchasesupdate/purchasesupdate.module').then(m => m.PurchasesupdateModule)
   }, {
     path: 'quotationupdate',
@@ -310,10 +347,12 @@ const appRoutes: Routes = [
   }, {
     path: 'salesupdate/:id',
     canActivate: [AuthGuard],
+    data: { permission: 'sales_edit' },
     loadChildren: () => import('./main/sales/salesupdate/salesupdate.module').then(m => m.SalesupdateModule)
   },
   {
     path: 'permissionupdate/:id',
+    data: { permission: 'permissions_edit' },
     loadChildren: () => import('./main/settings/grouppermissingupdate/grouppermissionupdate.module').then(m => m.GrouppermissingupdateModule)
   }, {
     path: 'ternsupdate',
