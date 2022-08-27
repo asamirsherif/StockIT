@@ -159,9 +159,7 @@ class PermissionController extends Controller
     {
         $this->authorizeForUser($request->user('api'), 'delete', Role::class);
 
-        Role::whereId($id)->update([
-            'deleted_at' => Carbon::now(),
-        ]);
+        Role::find($id)->delete();
         return response()->json(['success' => true]);
     }
 

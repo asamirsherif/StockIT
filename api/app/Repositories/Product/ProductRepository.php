@@ -30,8 +30,8 @@ class ProductRepository implements ProductRepositoryInterface
             $product->price = $request->price;
             $product->category_id = $request->category_id;
             $product->brand_id = $request->brand_id;
-            $product->TaxNet = $request->taxNet ? $request->taxNet : 0;
-            $product->tax_method = $request->tax_method;
+            $product->TaxNet = $request->order_tax ? $request->order_tax : 0;
+            $product->tax_method = $request->tax_method ? $request->tax_method : 'Exclusive' ;
             $product->note = $request->note;
             $product->cost = $request->cost;
             $product->unit_id = $request->unit_id;
@@ -64,7 +64,7 @@ class ProductRepository implements ProductRepositoryInterface
             $product->unit_id = $request->unit_id;
             $product->unit_sale_id = $request->unit_sale_id ? $request->unit_sale_id : $product->unit_sale_id;
             $product->unit_purchase_id = $request->unit_purchase_id ? $request->unit_purchase_id : $product->unit_purchase_id;
-            $product->stock_alert = $request->stock_alert ?  $request->stock_alert : $product->stock_alert;
+            $product->stock_alert = $request->stockalert ?  $request->stockalert : $product->stock_alert;
             $product->is_variant = $request->is_variant == 'true' ? 1 : 0;
             $product->image = $request->hasFile('images') ? $this->uploadMultiImage($request, '/images/products/') : $product->image;
 

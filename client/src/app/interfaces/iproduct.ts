@@ -31,5 +31,6 @@ export interface IProduct {
     total_price:number,
     tax_percent:number,
     in_stock?:number,
+    tax_price:number,
 }
 

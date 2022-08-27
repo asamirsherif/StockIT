@@ -220,7 +220,7 @@
         <div class="form-group col-md-6">
             <label class="col-md-8 control-label" for="order_tax">Order Tax</label>
             <div class="col-md-12">
-                <input id="order_tax" name="order_tax" placeholder="Order Tax" class="form-control input-md" required=""
+                <input id="order_tax" name="order_tax" placeholder="Order Tax percentage" class="form-control input-md" required=""
                     type="number" formControlName="order_tax">
                 <div id="order_tax"
                     *ngIf="createProductForm.controls['order_tax'].touched &&createProductForm.controls['order_tax'].invalid  || submitted && createProductForm.controls['order_tax'].invalid"

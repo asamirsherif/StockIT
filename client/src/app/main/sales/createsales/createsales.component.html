@@ -118,7 +118,7 @@
                 <tr *ngFor="let saleDetail of saleDetails; let i = index">
                     <td>{{ i + 1 }}</td>
                     <td>{{ saleDetail.product.name }}</td>
-                    <td>{{ saleDetail.product.cost }}</td>
+                    <td>{{ saleDetail.product.price }}</td>
                     <td>{{saleDetail.product.in_stock }}</td>
                     <td>
                         <core-touchspin [minValue]="1" [maxValue]="saleDetail.product.in_stock"
@@ -126,7 +126,7 @@
 
                         </core-touchspin>
                     </td>
-                    <td>{{ countTax(saleDetail.quantity,saleDetail.product.tax_cost) }}</td>
+                    <td>{{ countTax(saleDetail.quantity,saleDetail.product.tax_price) }}</td>
                     <td>{{ saleDetail.subtotal }}</td>
 
                     <td>

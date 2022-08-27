@@ -5,7 +5,7 @@ import { checkPermission } from './permission-checker';
 
 let user = JSON.parse(localStorage.getItem("currentUser"));
 let permissions = [];
-if(user){ permissions = user.permissions }
+if(user.permissions){ permissions = user.permissions }
 
 export const menu: CoreMenu[] = [
   
@@ -417,14 +417,14 @@ export const menu: CoreMenu[] = [
             translate: 'Sales Return',
             icon: 'credit-card',
             type: 'item',
-            url: 'sales return'
+            url: 'sales-return'
           },{
             id: 'Purchases Return',
             title: 'Purchases Return',
             translate: 'Purchases Return',
             icon: 'credit-card',
             type: 'item',
-            url: 'purchases return'
+            url: 'purchases-return'
           }
         ]
       },
@@ -434,49 +434,49 @@ export const menu: CoreMenu[] = [
         translate: 'Profit And Loss',
         icon: 'eye',
         type: 'item',
-        url: 'profit and loss'
+        url: 'profit-and-loss'
       },{
         id: 'Product Quantity Alerts',
         title: 'Product Quantity Alerts',
         translate: 'Product Quantity Alerts',
         icon: 'credit-card',
         type: 'item',
-        url: 'product quantity alerts'
+        url: 'product-quantity-alerts'
       },{
         id: 'Warehouse Report',
         title: 'Warehouse Report',
         translate: 'Warehouse Report',
         icon: 'slash',
         type: 'item',
-        url: 'warehouse report'
+        url: 'warehouse-report'
       },{
         id: 'Sale Report',
         title: 'Sale Report',
         translate: 'Sale Report',
         icon: 'trending-up',
         type: 'item',
-        url: 'sale report'
+        url: 'sale-report'
       },{
         id: 'Purchase Report',
         title: 'Purchase Report',
         translate: 'Purchase Report',
         icon: 'bar-chart',
         type: 'item',
-        url: 'purchase report'
+        url: 'purchase-report'
       },{
         id: 'Customer Report',
         title: 'Customer Report',
         translate: 'Customer Report',
         icon: 'bar-chart',
         type: 'item',
-        url: 'customer report'
+        url: 'customer-report'
       },{
         id: 'Suplplier Report',
         title: 'Suplplier Report',
         translate: 'Suplplier Report',
         icon: 'slash',
         type: 'item',
-        url: 'suplplier report'
+        url: 'suplplier-report'
       },
      
     ]

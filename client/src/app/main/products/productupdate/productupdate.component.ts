@@ -66,8 +66,8 @@ export class ProductupdateComponent implements OnInit {
       unit_sale_id: new FormControl("", Validators.required),
       unit_purchase_id: new FormControl("", Validators.required),
       tax_method: new FormControl("Exclusive", Validators.required),
-      product_tax: new FormControl(0),
-      stockalert: new FormControl(0),
+      product_tax: new FormControl(""),
+      stockalert: new FormControl(""),
       image: new FormControl([null]),
     });
   }

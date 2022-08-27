@@ -47,8 +47,9 @@ export class CreateproductComponent implements OnInit {
       unit_sale_id: new FormControl("", Validators.required),
       unit_purchase_id: new FormControl("", Validators.required),
       tax_method: new FormControl("", Validators.required),
-      order_tax: new FormControl(null),
+      order_tax: new FormControl(""),
       image: new FormControl(null),
+      stockalert: new FormControl(""),
     });
   }
 

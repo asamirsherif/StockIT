@@ -18,6 +18,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SalesReturnController;
+use App\Http\Controllers\ReportController;
 
 
 /*
@@ -109,11 +110,35 @@ Route::middleware(['auth:api', 'Is_Active', 'cors'])->group(function () {
     // adjustment prodcut warehouse search
     Route::get('adjProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'adjSearch']);
 
-    // invoices
-    Route::get('saleInvoice/{sale}',[invoiceController::class,'saleInvoice']);
-    Route::get('purchaseInvoice/{purchase}',[invoiceController::class,'purchaseInvoice']);
-    Route::get('saleInvoicePDF/{sale}',[invoiceController::class,'saleInvoicePDF']);
-    Route::get('purchaseInvoicePDF/{purchase}',[invoiceController::class,'purchaseInvoicePDF']);
 
+
+    // -------------------- report controller -------------------------- //
+
+    //Profit and loss
+    Route::get('reports/pofit-loss', [ReportController::class, 'ProfitAndLoss']);
+
+    //warehouse
+    Route::get('reports/warehouse-stock', [ReportController::class, 'WarhouseCountStock']);
+    Route::get('reports/expenses-warehouse', [ReportController::class, 'ExpensesWarehouse']);
+    Route::get('reports/sales-warehouse', [ReportController::class, 'SalesWarehouse']);
+
+    //sales
+    Route::get('reports/sales', [ReportController::class, 'ReportSales']);
+
+    //product
+    Route::get('reports/quantity-alert', [ReportController::class, 'countQuantityAlert']);
+    Route::get('reports/product-alert', [ReportController::class, 'ProductsAlert']);
+
+    //client
+    Route::get('reports/client', [ReportController::class, 'ClientReport']);
+
+    //supplier (provider)
+    Route::get('reports/supplier', [ReportController::class, 'ProvidersReport']);
 
 });
+
+ // invoices
+ Route::get('saleInvoice/{sale}',[invoiceController::class,'saleInvoice']);
+ Route::get('purchaseInvoice/{purchase}',[invoiceController::class,'purchaseInvoice']);
+ Route::get('saleInvoicePDF/{sale}',[invoiceController::class,'saleInvoicePDF']);
+ Route::get('purchaseInvoicePDF/{purchase}',[invoiceController::class,'purchaseInvoicePDF']);

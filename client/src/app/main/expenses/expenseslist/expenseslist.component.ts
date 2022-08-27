@@ -51,7 +51,7 @@ export class ExpenseslistComponent implements OnInit {
     const observer = {
       next: (res) => {
         this.expense = res.data
-        console.log(this.expense)
+        console.log(res.data)
       },
       error: (error) => {
         console.log(error);
