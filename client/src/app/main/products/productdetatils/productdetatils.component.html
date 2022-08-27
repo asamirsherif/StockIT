@@ -16,14 +16,11 @@
       </button>
     </div>
 
-    <div class="row">
-      <img
-        src="https://www.thechecker.net/hubfs/images/barcode.png"
-        width="180"
-        height="110"
-        class="mt-2"
-      />
-    </div>
+    <div>
+      <ngx-barcode [bc-value]="value" [bc-width]="1" [bc-height]="40" 
+          [bc-display-value]="false"></ngx-barcode>
+
+  </div>
     <div class="row col-md-12 d-flex justify-content-between">
       <div class="col-md-7">
         <table class="table table-hover table-bordered">
