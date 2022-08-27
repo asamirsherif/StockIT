@@ -85,7 +85,7 @@ class ShowProductResource extends JsonResource
             'tax_cost' => $tax_cost,
             'tax_price' => $tax_price,
             'in_stock' => $this->warehouseQuantity() ? $this->warehouseQuantity()->qte : 0,
-
+            'productWarehouses'=>  ProductWarehouseResource::collection($this->productWarehouse),
         ];
     }
 
