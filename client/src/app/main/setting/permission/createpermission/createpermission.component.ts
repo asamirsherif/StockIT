@@ -60,7 +60,7 @@ export class CreatepermissionComponent implements OnInit {
         next: (res) => {
           this._toastr.success('New Role permission has been added');
           console.log(res);
-          this._router.navigate(['group permission'])
+          this._router.navigate(['group-permission'])
 
         },
         error: (error: HttpErrorResponse) => {
