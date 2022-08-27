@@ -107,7 +107,7 @@
     </thead>
     <tbody class="table-group-divider">
       <tr
-        *ngFor="let purchase of purchases | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total} ; let i = index">
+        *ngFor="let purchase of purchases | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total} ; let i = index">
         <td>{{purchase.date}}</td>
         <td>{{purchase.Ref}}</td>
         <td>{{purchase.provider.name}}</td>

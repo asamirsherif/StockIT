@@ -79,7 +79,7 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider" *ngFor="let currency of data | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
+        <tbody class="table-group-divider" *ngFor="let currency of data | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}; let i = index">
             <tr>
                 <td>{{ currency.code }}</td>
                 <td>{{ currency.name }}</td>

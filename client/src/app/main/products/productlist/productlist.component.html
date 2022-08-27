@@ -84,7 +84,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}">
+            <tr *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}">
                 
                 <td>{{ product.name }}</td>
                 <td><img src="{{ product.images }}"></td>

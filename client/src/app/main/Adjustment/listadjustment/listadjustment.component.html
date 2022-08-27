@@ -77,7 +77,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let adjustment of adjustments | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
+                <tr *ngFor="let adjustment of adjustments | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}; let i = index">
                     <td>{{adjustment.date}}</td>
                     <td>{{adjustment.ref}}</td>
                     <td>{{adjustment.warehouse.name}}</td>

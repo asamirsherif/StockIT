@@ -190,7 +190,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let Supplier of data |filter:searchInputname:'name'|filter:searchInputemail:'email'|filter:searchInputphone:'phone'|filter:searchInputcode:'code' | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}">
+            <tr *ngFor="let Supplier of data |filter:searchInputname:'name'|filter:searchInputemail:'email'|filter:searchInputphone:'phone'|filter:searchInputcode:'code' | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}">
                 <td>{{Supplier.code}}</td>
                 <td>{{Supplier.name}}</td>
                 <td>{{Supplier.phone}}</td>

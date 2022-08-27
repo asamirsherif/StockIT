@@ -76,7 +76,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider" class="table-group-divider">
-            <tr *ngFor="let category of categories | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
+            <tr *ngFor="let category of categories | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}; let i = index">
                 <td>{{ category.code }}</td>
                 <td>{{ category.name }}</td>
                 <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2);editCategory(category.id)" ><i data-feather="edit" [size]="24" >
