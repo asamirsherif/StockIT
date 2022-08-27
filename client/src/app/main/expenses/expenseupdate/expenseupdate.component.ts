@@ -76,10 +76,11 @@ export class ExpenseupdateComponent implements OnInit {
     //then
     const observer = {
       next: (res) => {
-        this.editexpence.get("warehouse_id").setValue(res.data.warehouse_id)
+        console.log(res.data)
+        this.editexpence.get("warehouse_id").setValue(res.data.warehouse.id)
         this.editexpence.get("amount").setValue(res.data.amount)
         this.editexpence.get("date").setValue(res.data.date)
-        this.editexpence.get("expense_category_id").setValue(res.data.expense_category_id)
+        this.editexpence.get("expense_category_id").setValue(res.data.expense_category.id)
         this.editexpence.get("details").setValue(res.data.details)
 
       }
