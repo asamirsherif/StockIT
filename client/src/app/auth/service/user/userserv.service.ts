@@ -8,6 +8,7 @@ import { Observable } from "rxjs";
 })
 export class UserservService {
   host = environment.apiUrl + "/api/users/";
+  user_host = environment.apiUrl + "/api/user/";
 
   header: HttpHeaders;
   params: HttpParams;
@@ -25,6 +26,10 @@ export class UserservService {
 
   allUser(): Observable<any> {
     return this._http.get(`${this.host}`, { headers: this.header, params: this.params });
+  }
+
+  getAuthUser(): Observable<any> {
+    return this._http.get(`${this.user_host}`, { headers: this.header });
   }
 
   deleteUser(id: any): Observable<any> {
