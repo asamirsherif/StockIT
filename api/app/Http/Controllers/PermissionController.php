@@ -112,7 +112,7 @@ class PermissionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->authorizeForUser($request->user('api'), 'update', Role::class);
+       $this->authorizeForUser($request->user('api'), 'update', Role::class);
 
         try {
             request()->validate([

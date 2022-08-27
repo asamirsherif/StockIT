@@ -135,6 +135,9 @@ Route::middleware(['auth:api', 'Is_Active', 'cors'])->group(function () {
     //supplier (provider)
     Route::get('reports/supplier', [ReportController::class, 'ProvidersReport']);
 
+    //dashboard charts
+    Route::get('charts/dashboard', [ReportController::class, 'report_with_echart']);
+
 });
 
  // invoices
