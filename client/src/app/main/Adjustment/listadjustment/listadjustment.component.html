@@ -3,7 +3,7 @@
     <hr>
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8 ">
                 <form class="form-inline col-md-12 mb-1">
                     <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
                     <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}"
@@ -11,7 +11,7 @@
                         placeholder="Search" aria-label="Search" />
                 </form>
             </div>
-            <div class="col-md-6 ">
+            <div class="col-md-4 ">
                 <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
 
                     <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
@@ -60,8 +60,8 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
-                <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
+                <!-- <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+                <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button> -->
                 <button type="button" class="btn btn-secondary" [routerLink]="['../createadjustment']"><i
                         data-feather="plus-circle"></i>Create</button>
             </div>
