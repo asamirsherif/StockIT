@@ -2,16 +2,16 @@
     <h2>Product Quantity Alerts</h2>
     <hr>
     <div class="container row">
-        
+
         <div class="container row">
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <form class="form-inline col-md-12 mb-1">
                     <span class="switch-icon-left"><i data-feather="search"></i></span>
                     <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search this table"
                         aria-label="Search">
                 </form>
-            </div>
-            </div>
+            </div> -->
+        </div>
     </div>
     <table class="table">
         <thead>
@@ -21,36 +21,30 @@
                 <th scope="col">Warehouse</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Alert quantity</th>
-                
+
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                
-                <td>XL-12345678</td>
-                <td>Tshirt</td>
-                <td>الرئيسي</td>
-                <td>0</td>
-                <td><i data-feather="5" [size]="24" class="btn-outline-primary"></i></td>
+            <tr *ngFor="let product of productsAlert;">
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.warehouse}}</td>
+                <td>{{product.quantity}}</td>
+                <td>
+                    <i data-feather="5" [size]="24" class="btn-outline-primary">
+                        {{product.stock_alert}}
+                    </i>
+                </td>
             </tr>
         </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-                
-                <td>XL-12345678</td>
-                <td>Tshirt</td>
-                <td>الرئيسي</td>
-                <td>0</td>
-                <td><i data-feather="5" [size]="24" class="btn-outline-primary"></i></td>
-            </tr>
-        </tbody>
+
     </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+    <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
+        aria-label="Custom pagination">
+        <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
+                [class]="'font-weight-bolder'"></span>Prev
         </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+        <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
         </ng-template>
-      </ngb-pagination>
+    </ngb-pagination>
 </body>

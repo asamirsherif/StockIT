@@ -46,4 +46,11 @@ export class ReportsService {
   suppliers(): Observable<any> {
     return this._http.get(`${this.host}/supplier`, { headers: this.headers, params: this.params })
   }
+
+  quantityAlert(): Observable<any> {
+    return this._http.get(`${this.host}/quantity-alert`, { headers: this.headers, params: this.params })
+  }
+  productAlert(): Observable<any> {
+    return this._http.get(`${this.host}/product-alert`, { headers: this.headers, params: this.params })
+  }
 }
