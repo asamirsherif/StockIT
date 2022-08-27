@@ -76,6 +76,7 @@ import { SalesupdateComponent } from './main/sales/salesupdate/salesupdate.compo
 import { GrouppermissingupdateComponent } from './main/settings/grouppermissingupdate/grouppermissingupdate.component';
 import { UpdatetransferComponent } from './main/transfer/updatetransfer/updatetransfer.component';
 import { ProfileComponent } from './main/profile/profile.component';
+import { environment } from 'environments/environment';
 
 
 const appRoutes: Routes = [
@@ -86,6 +87,11 @@ const appRoutes: Routes = [
   {
     path: '',
     redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'docs',
+    redirectTo: environment.apiUrl + '/docs',
     pathMatch: 'full'
   }, {
     path: 'createproduct',

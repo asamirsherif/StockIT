@@ -1,11 +1,12 @@
 import { CoreMenu } from '@core/types'
+import { environment } from 'environments/environment';
 import { checkPermission } from './permission-checker';
 
 
-
-let user = JSON.parse(localStorage.getItem("currentUser"));
+let user:any;
+user = JSON.parse(localStorage.getItem("currentUser"));
 let permissions = [];
-if(user.permissions){ permissions = user.permissions }
+if(user){ permissions = user.permissions }
 
 export const menu: CoreMenu[] = [
   
@@ -40,16 +41,17 @@ export const menu: CoreMenu[] = [
         icon: 'file-text',
         type: 'item',
         url: 'productlist'
-      }:{},
-      checkPermission(['barcode_view'],permissions) ?{
-        id: 'Print Barcode',
-        title: 'Print Barcode',
-        translate: 'Print Barcode',
-        icon: 'code',
-        type: 'item',
-        url: 'printbarcode',
+      }:{}
+    //   ,
+    //   checkPermission(['barcode_view'],permissions) ?{
+    //     id: 'Print Barcode',
+    //     title: 'Print Barcode',
+    //     translate: 'Print Barcode',
+    //     icon: 'code',
+    //     type: 'item',
+    //     url: 'printbarcode',
       
-      }:{},
+    //   }:{},
     ]
   } : {},
   checkPermission(['adjustment_add','adjustment_veiw','adjustment_edit','adjustment_delete'],permissions) ?{
@@ -320,7 +322,7 @@ export const menu: CoreMenu[] = [
         title: 'System Settings',
         translate: 'System Settings',
         type: 'item',
-        url:'system setting',
+        url:'system-setting',
         icon: 'settings',
       }:{},
       checkPermission(["permissions_add","permissions_view"],permissions)?{
@@ -329,7 +331,7 @@ export const menu: CoreMenu[] = [
         translate: 'Group Permission',
         icon: 'key',
         type: 'item',
-        url: 'group permission'
+        url: 'group-permission'
       }:{},
       checkPermission(["warehouse"],permissions)?{
         id: 'Warehouse',
@@ -486,6 +488,8 @@ export const menu: CoreMenu[] = [
     translate: 'Documentation',
     type: 'item',
     icon: 'file-text',
-    url: 'doc'
+    url: 'https://stockit-api.smartveld.com/public/docs/',
+    externalUrl: true,
+    openInNewTab: true
   },
 ]
