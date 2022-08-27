@@ -1,7 +1,7 @@
 <body>
     <h2>Edit Permission</h2>
    <hr>
-   <form class="row col-md-12">
+   <form class="row col-md-12"[formGroup]="EditRoleForm" (ngSubmit)="editPermission(data.id)" >
     <div class="col-md-12 row mb-3">
         <div class="form-group col-md-6">
             <label class="col-md-12 control-label" for="product_name">Role</label>

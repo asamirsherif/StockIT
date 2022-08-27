@@ -73,7 +73,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let expenseCategory of expenseCategoies  | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
+            <tr *ngFor="let expenseCategory of expenseCategoies  | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}; let i = index">
                 <td>{{ expenseCategory.name }}</td>
                 <td>{{ expenseCategory.description }}</td>
                 <td><button class="btn btn-sm btn-success"
