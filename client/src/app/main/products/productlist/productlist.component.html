@@ -2,14 +2,14 @@
     <h2>Product List</h2>
     <hr>
     <div class="container row">
-        <div class="col-md-4">
+        <div class="col-md-8 ">
           <form class="form-inline col-md-12 mb-1">
             <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
             <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
               class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
           </form>
         </div>
-        <div class="col-md-8 ">
+        <div class="col-md-4 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
 
             <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i data-feather="filter"></i>Filter</button>
@@ -63,9 +63,9 @@
                 </div>
               </div>
 
-            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+            <!-- <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
             <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
-            <button type="button" class="btn btn-primary "><i data-feather="download"></i>Import Products</button>
+            <button type="button" class="btn btn-primary "><i data-feather="download"></i>Import Products</button> -->
             <button type="button" class="btn btn-secondary" [routerLink]="['../createproduct']"><i data-feather="plus-circle"></i>Create</button>
         </div>
     </div>
@@ -80,12 +80,11 @@
                 <th scope="col">Brand</th>
                 <th scope="col">Price</th>
                 <th scope="col">Unit</th>
-                <th scope="col">Quantity</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}">
+            <tr *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}">
                 
                 <td>{{ product.name }}</td>
                 <td><img src="{{ product.images }}"></td>
@@ -94,7 +93,6 @@
                 <td>{{ product.brand }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.unit }}</td>
-                <td>99</td>
                 <td> <button class="btn btn-sm btn-primary" routerLink="../productdetails/{{product.id}}"><i data-feather="eye"[size]="22"></i>
                 </button><button class="btn btn-sm btn-success" routerLink="../productupdate/{{product.id}}"><i data-feather="edit" [size]="24" >
                 </i></button>  <button class="btn btn-sm btn-danger" (click)="destroy(product.id)"><i data-feather="x-circle"  [size]="24"></i>

@@ -5,7 +5,7 @@
     <div class=" row">
         <div class="col-md-9">
             <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
+                <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
                 <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
                     class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
                     aria-label="Search" />
@@ -76,7 +76,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider" class="table-group-divider">
-            <tr *ngFor="let category of categories | paginate: { itemsPerPage: 3, currentPage: p, totalItems: total}; let i = index">
+            <tr *ngFor="let category of categories | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}; let i = index">
                 <td>{{ category.code }}</td>
                 <td>{{ category.name }}</td>
                 <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2);editCategory(category.id)" ><i data-feather="edit" [size]="24" >

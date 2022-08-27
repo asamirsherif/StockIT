@@ -8,7 +8,7 @@ export const environment = {
 
   apiUrl: "http://localhost:8000",
   client_id: 2,
-  client_secret: "9eoYBAYO2DAGLfsISCG6XfLLAWMw8kPrdpMBygum",
+  client_secret: "HZ7tDWDzZAbbsyL3aQsz4qvthoTkaMPpSFKu4GXj",
   grant_type: "password",
 
 };

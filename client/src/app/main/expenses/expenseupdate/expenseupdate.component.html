@@ -31,10 +31,8 @@
         <label class="col-md-8 control-label " for="category"> Warehouse</label>
         <div class="col-md-12 ">
           <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
-            <option *ngFor="let item of WarehousArray" [value]="item.id">
-
+            <option *ngFor="let item of WarehousArray" value="{{item.id}}">
               {{ item.name }}
-
             </option>
           </select>
 

@@ -2,7 +2,7 @@
     <h2>Sale List</h2>
     <hr>
     <div class=" row">
-        <div class="col-md-6">
+        <div class="col-md-8 justify-content-between">
             <!-- search -->
             <form class="form-inline col-md-12 mb-1">
                 <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
@@ -11,7 +11,7 @@
                     aria-label="Search" />
             </form>
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-4 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
                 <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
                         data-feather="filter"></i>Filter</button>
@@ -89,8 +89,8 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
-            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
+            <!-- <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button> -->
             <button type="button" class="btn btn-secondary" [routerLink]="['../createsales']"><i
                     data-feather="plus-circle"></i>Create</button>
         </div>
