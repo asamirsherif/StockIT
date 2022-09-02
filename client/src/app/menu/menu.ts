@@ -1,5 +1,4 @@
 import { CoreMenu } from '@core/types'
-import { environment } from 'environments/environment';
 import { checkPermission } from './permission-checker';
 
 
@@ -222,32 +221,32 @@ export const menu: CoreMenu[] = [
      
     ]
   }:{},
-  checkPermission(['sales_return_add'],permissions) ?{
-    id: 'Sales Return',
-    type: 'collapsible',
-    title: 'Sales Return',
-    translate: 'Sales Return',
-    icon: 'arrow-right',
-    children: [
-      checkPermission(['sales_return_add','sale_return_view'],permissions) ?{
-        id: 'Create Return',
-        title: 'Create Return',
-        translate: 'Create Return',
-        type: 'item',
-        url:'createreturn',
-        icon: 'file',
-      }:{},
-      checkPermission(['sales_return_view'],permissions) ?{
-        id: 'Return List',
-        title: 'Return List',
-        translate: 'Return List',
-        icon: 'align-justify',
-        type: 'item',
-        url: 'returnlist'
-      }:{},
+//   checkPermission(['sales_return_add'],permissions) ?{
+//     id: 'Sales Return',
+//     type: 'collapsible',
+//     title: 'Sales Return',
+//     translate: 'Sales Return',
+//     icon: 'arrow-right',
+//     children: [
+//       checkPermission(['sales_return_add','sale_return_view'],permissions) ?{
+//         id: 'Create Return',
+//         title: 'Create Return',
+//         translate: 'Create Return',
+//         type: 'item',
+//         url:'createreturn',
+//         icon: 'file',
+//       }:{},
+//       checkPermission(['sales_return_view'],permissions) ?{
+//         id: 'Return List',
+//         title: 'Return List',
+//         translate: 'Return List',
+//         icon: 'align-justify',
+//         type: 'item',
+//         url: 'returnlist'
+//       }:{},
      
-    ]
-  }:{},
+//     ]
+//   }:{},
   
   // {
   //   id: 'Purchases Return',
@@ -391,95 +390,62 @@ export const menu: CoreMenu[] = [
     translate: 'Reports',
     icon: 'trending-up',
     children: [
-      {
-        id: 'Payments',
-        title: 'Payments',
-        translate: 'Payments',
-        type: 'collapsible',
-        icon: 'credit-card',
-        children: [
-          {
-            id: 'Purchases',
-            title: 'Purchases',
-            translate: 'Purchases',
-            type: 'item',
-            url:'purchases',
-            icon: 'credit-card',
-          },
-          {
-            id: 'Sales',
-            title: 'Sales',
-            translate: 'Sales',
-            icon: 'credit-card',
-            type: 'item',
-            url: 'sales'
-          },{
-            id: 'Sales Return',
-            title: 'Sales Return',
-            translate: 'Sales Return',
-            icon: 'credit-card',
-            type: 'item',
-            url: 'sales-return'
-          },{
-            id: 'Purchases Return',
-            title: 'Purchases Return',
-            translate: 'Purchases Return',
-            icon: 'credit-card',
-            type: 'item',
-            url: 'purchases-return'
-          }
-        ]
-      },
-      {
+        checkPermission(["Reports_profit"],permissions)?{
         id: 'Profit And Loss',
         title: 'Profit And Loss',
         translate: 'Profit And Loss',
         icon: 'eye',
         type: 'item',
         url: 'profit-and-loss'
-      },{
+      }:{},
+      checkPermission(["Reports_quantity_alerts"],permissions)?{
         id: 'Product Quantity Alerts',
         title: 'Product Quantity Alerts',
         translate: 'Product Quantity Alerts',
         icon: 'credit-card',
         type: 'item',
         url: 'product-quantity-alerts'
-      },{
+      }:{},
+      checkPermission(["Reports_Warehouse"],permissions)?{
         id: 'Warehouse Report',
         title: 'Warehouse Report',
         translate: 'Warehouse Report',
         icon: 'slash',
         type: 'item',
         url: 'warehouse-report'
-      },{
+      }:{},
+      checkPermission(["Reports_sales"],permissions)?{
         id: 'Sale Report',
         title: 'Sale Report',
         translate: 'Sale Report',
         icon: 'trending-up',
         type: 'item',
         url: 'sale-report'
-      },{
+      }:{},
+      checkPermission(["Reports_purcahse"],permissions)?{
         id: 'Purchase Report',
         title: 'Purchase Report',
         translate: 'Purchase Report',
         icon: 'bar-chart',
         type: 'item',
         url: 'purchase-report'
-      },{
+      }:{},
+      checkPermission(["Reports_customers"],permissions)?{
         id: 'Customer Report',
         title: 'Customer Report',
         translate: 'Customer Report',
         icon: 'bar-chart',
         type: 'item',
         url: 'customer-report'
-      },{
-        id: 'Suplplier Report',
-        title: 'Suplplier Report',
-        translate: 'Suplplier Report',
+      }:{},
+      checkPermission(["Reports_suppliers"],permissions)?{
+        id: 'Supplier Report',
+        title: 'Supplier Report',
+        translate: 'Supplier Report',
         icon: 'slash',
         type: 'item',
         url: 'suplplier-report'
-      },
+      }:{},
      
     ]
   },{
