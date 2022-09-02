@@ -300,6 +300,8 @@
                             >
                             <div class="col-md-12">
                                 <input
+                                    ng-if="name"
+                                    ng-model="user.name"
                                     class="form-control form-control col-md-12"
                                     type="text"
                                     placeholder="Name Unit"
@@ -392,8 +394,8 @@
                                 for="Operator"
                                 >Operator</label
                             >
-                            <div class="col-md-12">
-                                <select
+                            <div  class=" col-md-12">
+                                <select 
                                     class="form-select col-md-12"
                                     aria-label="Default select example"
                                     formControlName="operator"

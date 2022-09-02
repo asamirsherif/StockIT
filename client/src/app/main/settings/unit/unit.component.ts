@@ -19,7 +19,7 @@ export class UnitComponent implements OnInit {
     Base: any = [];
     Op: any = ["/", "*"];
     data: Array<Unit> = [];
-
+     if
     // if(data){
     //   console.log(data)
     //   for (let value in data) {
