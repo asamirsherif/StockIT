@@ -28,7 +28,7 @@
             <div class="form-group col-md-12">
               <label class="col-md-12 control-label " for="Brand Name">Brand Name</label>
               <div class="col-md-12 ">
-                <input class="form-control form-control col-md-12" type="text" placeholder="Brand Name"
+                <input class="form-control form-control col-md-12" type="text" placeholder="Enter Brand Name"
                   aria-label="Date" id="name" name="name" formControlName="name">
                 <div id="BrandName"
                   *ngIf="createbrand.controls['name'].touched && createbrand.controls['name'].invalid || submitted && createbrand.controls['name'].invalid"
@@ -46,7 +46,7 @@
               <label for="exampleFormControlTextarea1" class="form-label col-md-12 ">Brand Description</label>
               <div class="col-md-12">
                 <textarea class="form-control " id="description" name="description" rows="3"
-                  formControlName="description"></textarea>
+                  formControlName="description" placeholder="Enter Description Brand"></textarea>
               </div>
             </div>
             <div class="form-group col-md-12">
@@ -83,7 +83,7 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody class="table-group-divider" *ngFor="let brand of data; let i = index">
+    <tbody class="table-group-divider" *ngFor="let brand of data | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}; let i = index">
       <tr>
         <td><img src="{{ brand.image }}" width="50" height="50" /></td>
         <td>{{ brand.name }}</td>
@@ -150,12 +150,6 @@
       </div>
     </ng-template>
   </table>
-  <!-- <ngb-pagination class="d-flex justify-content-end" [collectionSize]="60" [(page)]="page"></ngb-pagination> -->
-  <ngb-pagination class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText"
-    aria-label="Custom pagination">
-    <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-    </ng-template>
-    <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-    </ng-template>
-  </ngb-pagination>
+  <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+  </pagination-controls>
 </body>

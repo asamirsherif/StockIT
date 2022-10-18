@@ -83,8 +83,24 @@ class ShowProductResource extends JsonResource
             'net_cost' => $net_cost,
             'net_price' => $net_price,
             'tax_cost' => $tax_cost,
-            'tax_price' => $tax_price
-
+            'tax_price' => $tax_price,
+            'in_stock' => $this->warehouseQuantity() ? $this->warehouseQuantity()->qte : 0,
+            'productWarehouses'=>  ProductWarehouseResource::collection($this->productWarehouse),
         ];
+    }
+
+
+    //---------------------- custome collection of products which belongs to warehouse
+    private static $warehouse_id;
+
+    public static function collectionOfWarehouse($resource, int $warehouse_id)
+    {
+        self::$warehouse_id = $warehouse_id;
+        return parent::collection($resource);
+    }
+
+    private function warehouseQuantity()
+    {
+        return $this->productWarehouse()->where('warehouse_id', self::$warehouse_id)->first();
     }
 }

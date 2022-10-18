@@ -15,21 +15,23 @@ class SaleResource extends JsonResource
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
-    {   
+    {
 
         $due = number_format($this->GrandTotal - $this->paid_amount,2,'.','');
         $grandtotal = number_format($this->GrandTotal, 2, '.', '');
         $paid_amount = number_format($this->paint_amount, 2, '.', '');
 
         return [
-            
+
             'id' => $this->id,
+            'date'=> $this->date,
             'code' => $this->code ? $this->code : "-",
             'Ref' => $this->Ref,
             'created_by' => $this->user->username,
             'status' => $this->status,
             'discount' => $this->discount,
             'shipping' => $this->shipping,
+            'warehouse_id' => $this->warehouse_id,
             'warehouse_name' => new WarehouseResource($this->warehouse),
             'client' => new ClientResource($this->client),
             'GrandTotal' => $grandtotal,

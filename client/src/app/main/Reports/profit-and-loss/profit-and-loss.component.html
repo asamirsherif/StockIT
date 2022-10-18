@@ -3,21 +3,35 @@
 <br>
 <div class="conatiner" style="border-color:1px solid white;">
 
-  
-    <ul ngbNav #nav="ngbNav" class="nav nav-pills">
-      <li ngbNavItem>
-        <a ngbNavLink>Range</a>
-        <ng-template ngbNavContent>
-          <p>
-            Pastry gummi bears sweet roll candy canes topping ice cream. Candy canes fruitcake cookie carrot
-            cake pastry. Lollipop caramels sesame snaps pie tootsie roll macaroon dessert. Muffin jujubes
-            brownie dragée ice cream cheesecake icing. Danish brownie pastry cotton candy donut. Cheesecake
-            donut candy canes. Jelly beans croissant bonbon cookie toffee. Soufflé croissant lemon drops
-            tootsie roll toffee tiramisu.
-          </p>
-        </ng-template>
-      </li>
-      <li ngbNavItem>
+
+  <ul ngbNav #nav="ngbNav" class="nav nav-pills">
+    <li ngbNavItem>
+      <a ngbNavLink>Range</a>
+      <ng-template ngbNavContent>
+
+        <form [formGroup]="dateForm" (ngSubmit)="getReport()" class="row row-cols-sm-auto col-md-8 "
+          style="margin-left: 220px;">
+          <div class="col-md-6">
+            <div class="input-group ">
+              <input formControlName="from" type="date" class="form-control" placeholder="yyyy-mm-dd">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group ">
+              <input formControlName="to" type="date" class="form-control" placeholder="yyyy-mm-dd">
+            </div>
+          </div>
+          <div class=" d-flex justify-content-between  text-center col-md-7 mt-2 " style="margin-left:160px ;">
+            <button id="singleebutton" type="reset" name="singlebutton" class="btn btn-outline-primary ">Reset
+              Ranges</button>
+            <button id="singleebutton" name="singlebutton" class="btn btn-primary ">Submit</button>
+          </div>
+        </form>
+
+      </ng-template>
+
+    </li>
+    <!--<li ngbNavItem>
         <a ngbNavLink>Week</a>
         <ng-template ngbNavContent>
           <p>
@@ -65,159 +79,159 @@
             tart pudding.
           </p>
         </ng-template>
-      </li>
-    </ul>
-    <div [ngbNavOutlet]="nav" class="mt-1"></div>
-    <hr>
-    <div class="d-flex justify-content-around ">
-        <button id="singleebutton" name="singlebutton" class="btn btn-outline-primary ">Reset Ranges</button>
-        <button id="singleebutton" name="singlebutton" class="btn btn-primary ">Submit</button>
-    </div>
+      </li>-->
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-1"></div>
+  <hr>
+
 
 </div>
 <br><br>
 <div class="container">
-<div class="col-md-12 row text-center">
-    
+  <div class="col-md-12 row text-center">
+
     <div class="col-md-4">
       <div class="card mb-2 ">
         <div class="row g-0">
           <div class="col-md-12 p-2">
-            <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
           </div>
           <div class="col-md-12 ">
             <div class="card-body">
-              <h5 class="card-text ">0 Sales</h5>
-              <p class="card-title">0.00 ريال</p>
+              <h5 class="card-text ">{{reportsData?.sales?.nmbr }} Sales</h5>
+              <p class="card-title">{{reportsData?.sales?.nmbr }} جنيه</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-        <div class="card mb-2 ">
-          <div class="row g-0">
-            <div class="col-md-12 p-2">
-              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
-            </div>
-            <div class="col-md-12 ">
-              <div class="card-body">
-                <h5 class="card-text ">0 Purchases</h5>
-                <p class="card-title">0.00 ريال</p>
-              </div>
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">{{reportsData?.purcahses?.nmbr }} Purchases</h5>
+              <p class="card-title">{{reportsData?.purchases?.sum }} جنيه</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-2 ">
-          <div class="row g-0">
-            <div class="col-md-12 p-2">
-              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
-            </div>
-            <div class="col-md-12 ">
-              <div class="card-body">
-                <h5 class="card-text ">0 Sales return</h5>
-                <p class="card-title">0.00 ريال</p>
-              </div>
+    </div>
+    <!-- <div class="col-md-4">
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">0 Sales return</h5>
+              <p class="card-title">0.00 جنيه</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-2 ">
-          <div class="row g-0">
-            <div class="col-md-12 p-2">
-              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
-            </div>
-            <div class="col-md-12 ">
-              <div class="card-body">
-                <h5 class="card-text ">0 Purchases return</h5>
-                <p class="card-title">0.00 ريال</p>
-              </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">0 Purchases return</h5>
+              <p class="card-title">0.00 جنيه</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-2 ">
-          <div class="row g-0">
-            <div class="col-md-12 p-2">
-              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
-            </div>
-            <div class="col-md-12 ">
-              <div class="card-body">
-                <h5 class="card-text ">Expenses</h5>
-                <p class="card-title">0.00 ريال</p>
-              </div>
+    </div> -->
+    <div class="col-md-4">
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">Expenses</h5>
+              <p class="card-title">{{reportsData?.expenses?.sum }} جنيه</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-2 ">
-          <div class="row g-0">
-            <div class="col-md-12 p-2">
-              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
-            </div>
-            <div class="col-md-12 ">
-              <div class="card-body">
-                <h5 class="card-text ">Profit</h5>
-                <p class="card-title">0.00 ريال</p>
-              </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">Profit</h5>
+              <p class="card-title">{{reportsData?.profit }} جنيه</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-2 ">
-          <div class="row g-0">
-            <div class="col-md-12 p-2">
-              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
-            </div>
-            <div class="col-md-12 ">
-              <div class="card-body">
-                <h5 class="card-text ">Paiements Received</h5>
-                <p class="card-title">0.00 ريال</p>
-                <div class="card-footer" style="background-color: rgb(241, 239, 239);">( ريال 0.00 Payments Sales + ريال 0.00 Purchases Return)</div>
-              </div>
+    </div>
+    <!-- <div class="col-md-4">
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">Paiements Received</h5>
+              <p class="card-title">0.00 جنيه</p>
+              <div class="card-footer" style="background-color: rgb(241, 239, 239);">( جنيه 0.00 Payments Sales + جنيه
+                0.00 Purchases Return)</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-2 ">
-          <div class="row g-0">
-            <div class="col-md-12 p-2">
-              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
-            </div>
-            <div class="col-md-12 ">
-              <div class="card-body">
-                <h5 class="card-text ">Paiements Sent</h5>
-                <p class="card-title">0.00 ريال</p>
-                <div class="card-footer" style="background-color: rgb(241, 239, 239);">( ريال 0.00 Payments Purchases + ريال 0.00 Sales Return) + ريال 0.00 Expenses)</div>
-              </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">Paiements Sent</h5>
+              <p class="card-title">0.00 جنيه</p>
+              <div class="card-footer" style="background-color: rgb(241, 239, 239);">( جنيه 0.00 Payments Purchases +
+                جنيه 0.00 Sales Return) + جنيه 0.00 Expenses)</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-2 ">
-          <div class="row g-0">
-            <div class="col-md-12 p-2">
-              <i data-feather="hard-drive"  [size]="50" style="text-align: center;"></i>
-            </div>
-            <div class="col-md-12 ">
-              <div class="card-body">
-                <h5 class="card-text ">Paiements Net</h5>
-                <p class="card-title">0.00 ريال</p>
-                <div class="card-footer" style="background-color:  rgb(241, 239, 239);">( ريال 0.00 Recieved - ريال 0.00 Sent)</div>
-              </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-2 ">
+        <div class="row g-0">
+          <div class="col-md-12 p-2">
+            <i data-feather="hard-drive" [size]="50" style="text-align: center;"></i>
+          </div>
+          <div class="col-md-12 ">
+            <div class="card-body">
+              <h5 class="card-text ">Paiements Net</h5>
+              <p class="card-title">0.00 جنيه</p>
+              <div class="card-footer" style="background-color:  rgb(241, 239, 239);">( جنيه 0.00 Recieved - جنيه 0.00
+                Sent)</div>
             </div>
           </div>
         </div>
       </div>
-      
-    
+    </div> -->
+
+
   </div>
 </div>

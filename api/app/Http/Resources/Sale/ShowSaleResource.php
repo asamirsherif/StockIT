@@ -23,6 +23,7 @@ class ShowSaleResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'date'=>$this->date,
             'code' => $this->code ? $this->code : "-",
             'Ref' => $this->Ref,
             'created_by' => $this->user->username,
@@ -35,7 +36,7 @@ class ShowSaleResource extends JsonResource
             'paid_amount' => $paid_amount,
             'due' => $due,
             'payment_status' => $this->payment_status,
-            'items' => SaleDetailsResource::collection($this->details)
+            'details' => SaleDetailsResource::collection($this->details)
 
         ];
     }

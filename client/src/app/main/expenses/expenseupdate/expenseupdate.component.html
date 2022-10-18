@@ -1,36 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@asamirsherif
-asamirsherif /
-StockIT
-Public
-
-Code
-Issues
-Pull requests 2
-Actions
-Projects
-Wiki
-Security
-Insights
-
-    Settings
-
-StockIT/client/src/app/main/expenses/expenseupdate/expenseupdate.component.html
-@ammaragha
-ammaragha fix expenseupdate.html
-Latest commit fa7c51a yesterday
-History
-4 contributors
-@asmaasalah
-@ammaragha
-@SamiraElgendy
-@asamirsherif
-executable file 127 lines (106 sloc) 4.95 KB
 <body>
 
   <h2>Edit Expence
@@ -64,10 +31,8 @@ executable file 127 lines (106 sloc) 4.95 KB
         <label class="col-md-8 control-label " for="category"> Warehouse</label>
         <div class="col-md-12 ">
           <select class="form-select col-md-12 " aria-label="Default select example" formControlName="warehouse_id">
-            <option *ngFor="let item of WarehousArray" [value]="item.id" >
-
+            <option *ngFor="let item of WarehousArray" value="{{item.id}}">
               {{ item.name }}
-
             </option>
           </select>
 
@@ -86,7 +51,7 @@ executable file 127 lines (106 sloc) 4.95 KB
 
       <!-- expense category -->
       <div class="form-group col-md-4">
-        <label class="col-md-8 control-label " for="expense_category_id">Expence Warehouse</label>
+        <label class="col-md-8 control-label " for="expense_category_id">Expence Category</label>
         <div class="col-md-12 ">
           <select class="form-select col-md-12 " aria-label="Default select example"
             formControlName="expense_category_id">
@@ -112,7 +77,7 @@ executable file 127 lines (106 sloc) 4.95 KB
       <div class="form-group col-md-4">
         <label class="col-md-4 control-label " for="amount">Amount</label>
         <div class="col-md-12 ">
-          <input class="form-control col-md-11" type="text" placeholder="Amount" aria-label="Date" id="amount"
+          <input class="form-control col-md-11" type="number" placeholder="Amount" aria-label="Date" id="amount"
             name="amount" formControlName="amount" [(ngModel)]="data.amount" ngModel>
           <div id="amount"
             *ngIf="editexpence.controls['amount'].touched &&editexpence.controls['amount'].invalid || submitted && editexpence.controls['amount'].invalid"
@@ -128,22 +93,23 @@ executable file 127 lines (106 sloc) 4.95 KB
       </div>
 
       <!-- Details -->
-      <div class="form-group col-md-8 ">
-        <label for="exampleFormControlTextarea1" class="form-label ">Details</label>
-        <textarea class="form-control " id="note" rows="3" formControlName="note" name="note"
-          formControlName="details"></textarea>
+      <div class=" col-md-8">
+        <div class="form-group col-md-12 ">
+          <label for="exampleFormControlTextarea1" class="form-label ">Details</label>
+          <textarea class="form-control " id="note" rows="3" formControlName="note" name="note"
+            formControlName="details"></textarea>
 
-        <div id="details"
-          *ngIf="editexpence.controls['details'].touched &&editexpence.controls['details'].invalid || submitted && editexpence.controls['details'].invalid"
-          class="form-text text-danger">
-          <small *ngIf="editexpence.controls['details'].errors?.['required']">This field is
-            required</small>
+          <div id="details"
+            *ngIf="editexpence.controls['details'].touched &&editexpence.controls['details'].invalid || submitted && editexpence.controls['details'].invalid"
+            class="form-text text-danger">
+            <small *ngIf="editexpence.controls['details'].errors?.['required']">This field is
+              required</small>
+          </div>
+
+          <div class="form-text text-danger">
+            <small *ngIf="errors?.details">{{errors?.details}}</small>
+          </div>
         </div>
-
-        <div class="form-text text-danger">
-          <small *ngIf="errors?.details">{{errors?.details}}</small>
-        </div>
-
       </div>
     </div>
 
@@ -158,19 +124,3 @@ executable file 127 lines (106 sloc) 4.95 KB
     </div>
   </form>
 </body>
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-

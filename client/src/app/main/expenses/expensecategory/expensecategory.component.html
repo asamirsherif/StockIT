@@ -7,8 +7,9 @@
             <form class="form-inline col-md-12 mb-1">
                 <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
                 <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
-                  class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
-              </form>
+                    class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search" />
+            </form>
         </div>
         <div class="col-md-3 ">
             <button type="button" class="btn btn-secondary" (click)="openModal(contentModal)"><i
@@ -28,22 +29,26 @@
                                 <label class="col-md-4 control-label " for="name">Category Name</label>
                                 <div class="col-md-12 ">
                                     <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Category Name" aria-label="Date" id="name"
-                                        name="name" formControlName="name">
-                                        <div id="name" *ngIf="createCategoryForm.controls['name'].touched &&createCategoryForm.controls['name'].invalid || submitted && createCategoryForm.controls['name'].invalid"
+                                        placeholder="Category Name" aria-label="Date" id="name" name="name"
+                                        formControlName="name">
+                                    <div id="name"
+                                        *ngIf="createCategoryForm.controls['name'].touched &&createCategoryForm.controls['name'].invalid || submitted && createCategoryForm.controls['name'].invalid"
                                         class="form-text text-danger">
-                                        <small *ngIf="createCategoryForm.controls['name'].errors?.['required']">This field is
+                                        <small *ngIf="createCategoryForm.controls['name'].errors?.['required']">This
+                                            field is
                                             required</small>
-                                    </div>   
-                                    <div
-                                            class="form-text text-danger">
-                                            <small *ngIf="errors?.name">{{errors?.name}}</small>
-                                        </div>  
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.name">{{errors?.name}}</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-12 ">
-                                <label for="exampleFormControlTextarea1" class="form-label ">Description</label>
-                                <textarea name="description" formControlName="description" class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <div class="container">
+                                <div class="form-group col-md-12 ">
+                                    <label for="exampleFormControlTextarea1" class="form-label ">Description</label>
+                                    <textarea name="description" formControlName="description" class="form-control "
+                                        id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
                             </div>
                         </div>
 
@@ -68,56 +73,65 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let expenseCategory of expenseCategoies; let i = index">
+            <tr *ngFor="let expenseCategory of expenseCategoies  | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}; let i = index">
                 <td>{{ expenseCategory.name }}</td>
                 <td>{{ expenseCategory.description }}</td>
-                <td><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2);edit(expenseCategory.id)" ><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" (click)="destroy(i)" ><i data-feather="x-circle"  [size]="24"></i>
-                </button></td> 
+                <td><button class="btn btn-sm btn-success"
+                        (click)="openModal2(contentModal2);edit(expenseCategory.id)"><i data-feather="edit" [size]="24">
+                        </i></button> <button class="btn btn-sm btn-danger" (click)="destroy(i)"><i
+                            data-feather="x-circle" [size]="24"></i>
+                    </button></td>
                 <!-- Modal2 -->
-            <ng-template #contentModal2 let-c="close" let-d="dismiss">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-primary-title">Edit Category</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body centered">
-                    <form class="row col-md-12" [formGroup]="editCategoryForm" (ngSubmit)="update(i)" >
-                        <div class="col-md-12 row">
-                            <div class="form-group col-md-12">
-                                <label class="col-md-4 control-label " for="name">Category Name</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Category Name" aria-label="Date" id="name"
-                                        name="CategoryName" formControlName="name">
-                                        <div id="name" *ngIf="editCategoryForm.controls['name'].touched &&editCategoryForm.controls['name'].invalid || submitted && editCategoryForm.controls['name'].invalid"
-                                        class="form-text text-danger">
-                                        <small *ngIf="editCategoryForm.controls['name'].errors?.['required']">This field is
-                                            required</small>
-                                    </div>   
-                                    <div
+                <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-primary-title">Edit Category</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body centered">
+                        <form class="row col-md-12" [formGroup]="editCategoryForm" (ngSubmit)="update(i)">
+                            <div class="col-md-12 row">
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-4 control-label " for="name">Category Name</label>
+                                    <div class="col-md-12 ">
+                                        <input class="form-control form-control col-md-12" type="text"
+                                            placeholder="Category Name" aria-label="Date" id="name" name="CategoryName"
+                                            formControlName="name">
+                                        <div id="name"
+                                            *ngIf="editCategoryForm.controls['name'].touched &&editCategoryForm.controls['name'].invalid || submitted && editCategoryForm.controls['name'].invalid"
                                             class="form-text text-danger">
+                                            <small *ngIf="editCategoryForm.controls['name'].errors?.['required']">This
+                                                field is
+                                                required</small>
+                                        </div>
+                                        <div class="form-text text-danger">
                                             <small *ngIf="errors?.name">{{errors?.name}}</small>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="form-group col-md-12 ">
+                                        <label for="exampleFormControlTextarea1" class="form-label ">Description</label>
+                                        <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                                            formControlName="description"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-12 ">
-                                <label for="exampleFormControlTextarea1" class="form-label ">Description</label>
-                                <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
-                            </div>
-                        </div>
 
-                        <div class="form-group col-md-12">
-                            <div class="col-md-4">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4">
+                                    <button id="singlebutton" name="singlebutton"
+                                        class="btn btn-primary">Submit</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
 
-                </div>
-            </ng-template>
+                    </div>
+                </ng-template>
             </tr>
         </tbody>
     </table>
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+    </pagination-controls>
 </body>

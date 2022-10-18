@@ -1,606 +1,658 @@
 <body>
-    <h2>Create Permission</h2>
-   <hr>
-   <form class="row col-md-12">
+  <h2>Create Permission</h2>
+  <hr>
+  <form class="row col-md-12" [formGroup]="createRoleForm" (ngSubmit)="AddRole()">
     <div class="col-md-12 row mb-3">
-        <div class="form-group col-md-6">
-            <label class="col-md-12 control-label" for="product_name">Role</label>
-            <div class="col-md-12">
-                <input id="product_name" name="productname" placeholder="Enter Role Name" class="form-control input-md"
-                    required type="text" formControlName="productname">
-                
-            </div>       
-</div>
-<div class="form-group col-md-6">
-<label class="col-md-12 control-label" for="product_id">Role Description</label>
-<div class="col-md-12">
-    <input id="product_id" name="product_id" placeholder="Enter Role Description" class="form-control input-md"
-        required="" type="text" formControlName="productid">
-</div>
-</div>
-<div class="form-group col-md-4">
-    <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">User Management</div>
-
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckDefault">
-Edit        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-        <label class="form-check-label" for="flexCheckChecked">
-          View
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckChecked">
-        create
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckChecked">
-         delete
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckChecked">
-          View all records of all Users
-        </label>
-      </div>
-</div>
-    <div class="form-group col-md-4">
-    <div style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">User Permission</div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckDefault">
-Edit        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckChecked">
-          View
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-        <label class="form-check-label" for="flexCheckChecked">
-        create
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckChecked">
-         delete
-        </label>
-      </div>
-      
-    </div>
-    <div class="form-group col-md-4">
-    <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Products</div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckDefault">
-Edit        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-        <label class="form-check-label" for="flexCheckChecked">
-          View
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-        <label class="form-check-label" for="flexCheckChecked">
-        create
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-        <label class="form-check-label" for="flexCheckChecked">
-         delete
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-        <label class="form-check-label" for="flexCheckDefault">Barcode  </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-        <label class="form-check-label" for="flexCheckDefault">
-Import Products      </label>
-      </div>
-    </div>
-    <div class="form-group col-md-4">
-        <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Adjustment</div>
-    
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-            <label class="form-check-label" for="flexCheckDefault">
-    Edit        </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-            <label class="form-check-label" for="flexCheckChecked">
-              View
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-            <label class="form-check-label" for="flexCheckChecked">
-            create
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-            <label class="form-check-label" for="flexCheckChecked">
-             delete
-            </label>
-          </div>
-         
-    </div>
-        <div class="form-group col-md-4">
-        <div style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">Transfer</div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-            <label class="form-check-label" for="flexCheckDefault">
-    Edit        </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-            <label class="form-check-label" for="flexCheckChecked">
-              View
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-            <label class="form-check-label" for="flexCheckChecked">
-            create
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-            <label class="form-check-label" for="flexCheckChecked">
-             delete
-            </label>
-          </div>
-          
+      <div class="form-group col-md-6">
+        <label class="col-md-12 control-label" for="role_name">Role</label>
+        <div class="col-md-12">
+          <input id="role_name" name="rolename" placeholder="Enter Role Name" class="form-control input-md"
+            required type="text" formControlName="name">
+              <div id="name"
+                  *ngIf="createRoleForm.controls['name'].touched &&createRoleForm.controls['name'].invalid || submitted && createRoleForm.controls['name'].invalid"
+                  class="form-text text-danger">
+                  <small *ngIf="createRoleForm.controls['name'].errors?.['required']">This field is
+                      required</small>
+              </div>
+              <div class="form-text text-danger">
+                  <small *ngIf="errors?.name">{{errors?.name}}</small>
+              </div>    
         </div>
-        <div class="form-group col-md-4">
-        <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Expenses</div>
+      </div>
+      <div class="form-group col-md-6">
+        <label class="col-md-12 control-label" for="description">Description</label>
+        <div class="col-md-12">
+          <input id="description" name="description" placeholder="Enter Role description" class="form-control input-md"
+            required type="text" formControlName="description">
+              <div id="description"
+                  *ngIf="createRoleForm.controls['description'].touched &&createRoleForm.controls['description'].invalid || submitted && createRoleForm.controls['description'].invalid"
+                  class="form-text text-danger">
+                  <small *ngIf="createRoleForm.controls['description'].errors?.['required']">This field is
+                      required</small>
+              </div>
+              <div class="form-text text-danger">
+                  <small *ngIf="errors?.description">{{errors?.description}}</small>
+              </div>    
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          User Management</div>
+
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-            <label class="form-check-label" for="flexCheckDefault">
-    Edit        </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-            <label class="form-check-label" for="flexCheckChecked">
-              View
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-            <label class="form-check-label" for="flexCheckChecked">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="users_edit">
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="users_view">
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="users_add"> 
+          <label class="form-check-label" for="flexCheckChecked">
             create
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-            <label class="form-check-label" for="flexCheckChecked">
-             delete
-            </label>
-          </div>
-          
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="users_delete">
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="record_view">
+          <label class="form-check-label" for="flexCheckChecked">
+            View all records of all Users
+          </label>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">
+          User Permission</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="permissions_edit">
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="permissions_view">
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="permissions_add">
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="permissions_delete">
+          <label class="form-check-label" for="flexCheckChecked" >
+            delete
+          </label>
         </div>
 
-        <div class="form-group col-md-4">
-            <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Sales</div>
-        
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                <label class="form-check-label" for="flexCheckDefault">
-        Edit        </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                <label class="form-check-label" for="flexCheckChecked">
-                  View
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                <label class="form-check-label" for="flexCheckChecked">
-                create
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                <label class="form-check-label" for="flexCheckChecked">
-                 delete
-                </label>
-              </div>
-             
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Products</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="products_edit">
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
         </div>
-            <div class="form-group col-md-4">
-            <div style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">Purchases</div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                <label class="form-check-label" for="flexCheckDefault">
-        Edit        </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                <label class="form-check-label" for="flexCheckChecked">
-                  View
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                <label class="form-check-label" for="flexCheckChecked">
-                create
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                <label class="form-check-label" for="flexCheckChecked">
-                 delete
-                </label>
-              </div>
-              
-            </div>
-            <div class="form-group col-md-4">
-            <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Quotations</div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                <label class="form-check-label" for="flexCheckDefault">
-        Edit        </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                <label class="form-check-label" for="flexCheckChecked">
-                  View
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                <label class="form-check-label" for="flexCheckChecked">
-                create
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                <label class="form-check-label" for="flexCheckChecked">
-                 delete
-                </label>
-              </div>
-            </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="products_view">
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="products_add" > 
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="products_delete" >
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="barcode_view">
+          <label class="form-check-label" for="flexCheckDefault">Barcode </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="product_import">
+          <label class="form-check-label" for="flexCheckDefault">
+            Import Products </label>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Adjustment</div>
 
-            <div class="form-group col-md-4">
-                <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Sales Return</div>
-            
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                    <label class="form-check-label" for="flexCheckDefault">
-            Edit        </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                    <label class="form-check-label" for="flexCheckChecked">
-                      View
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                    <label class="form-check-label" for="flexCheckChecked">
-                    create
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                    <label class="form-check-label" for="flexCheckChecked">
-                     delete
-                    </label>
-                  </div>
-                 
-            </div>
-                <div class="form-group col-md-4">
-                <div style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">Purchases Return</div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                    <label class="form-check-label" for="flexCheckDefault">
-            Edit        </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                    <label class="form-check-label" for="flexCheckChecked">
-                      View
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                    <label class="form-check-label" for="flexCheckChecked">
-                    create
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                    <label class="form-check-label" for="flexCheckChecked">
-                     delete
-                    </label>
-                  </div>
-                  
-                </div>
-                <div class="form-group col-md-4">
-                <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Payment Sales</div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                    <label class="form-check-label" for="flexCheckDefault">
-            Edit        </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                    <label class="form-check-label" for="flexCheckChecked">
-                      View
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                    <label class="form-check-label" for="flexCheckChecked">
-                    create
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                    <label class="form-check-label" for="flexCheckChecked">
-                     delete
-                    </label>
-                  </div>
-                </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="adjustment_edit">
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="adjustment_veiw">
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="adjustment_add" >
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="adjustment_delete" >
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
 
-                <div class="form-group col-md-4">
-                    <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Payments Purchases</div>
-                
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                        <label class="form-check-label" for="flexCheckDefault">
-                Edit        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                        <label class="form-check-label" for="flexCheckChecked">
-                          View
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                        <label class="form-check-label" for="flexCheckChecked">
-                        create
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                        <label class="form-check-label" for="flexCheckChecked">
-                         delete
-                        </label>
-                      </div>
-                     
-                </div>
-                    <div class="form-group col-md-4">
-                    <div style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">Payments Returns</div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                        <label class="form-check-label" for="flexCheckDefault">
-                Edit        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                        <label class="form-check-label" for="flexCheckChecked">
-                          View
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                        <label class="form-check-label" for="flexCheckChecked">
-                        create
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                        <label class="form-check-label" for="flexCheckChecked">
-                         delete
-                        </label>
-                      </div>
-                      
-                    </div>
-                    <div class="form-group col-md-4">
-                    <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Customer List</div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                        <label class="form-check-label" for="flexCheckDefault">
-                Edit        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                        <label class="form-check-label" for="flexCheckChecked">
-                          View
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                        <label class="form-check-label" for="flexCheckChecked">
-                        create
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                        <label class="form-check-label" for="flexCheckChecked">
-                         delete
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                        <label class="form-check-label" for="flexCheckChecked">
-                        Import Customers
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Supplier List</div>
-                    
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckDefault">
-                    Edit        </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                            <label class="form-check-label" for="flexCheckChecked">
-                              View
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                            create
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             delete
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Import Suppliers
-                            </label>
-                          </div>
-                         
-                    </div>
-                        <div class="form-group col-md-4">
-                        <div style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">Reports</div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckDefault">
-                           Reports Payments Sales </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Reports Payments Purchases
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                            <label class="form-check-label" for="flexCheckChecked">
-                            Reports Sale Return Payments
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Reports Purchases Return Payments
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Sale Report
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Purchase Report
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Customer Report
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Supplier Report
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Profit and Loss
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Product Quantity Alerts
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                       Warehouse Stock Chart</label>
-                          </div>
-                          
-                        </div>
-                        <div class="form-group col-md-4">
-                        <div style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">Settings</div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck">
-                            <label class="form-check-label" for="flexCheckDefault">
-                    System Settings   </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Brand 
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                            <label class="form-check-label" for="flexCheckChecked">
-                            Warehouse
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Backup
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                            <label class="form-check-label" for="flexCheckChecked">
-                            Category
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                            <label class="form-check-label" for="flexCheckChecked">
-                            Currency
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" >
-                            <label class="form-check-label" for="flexCheckChecked">
-                             Unit
-                            </label>
-                          </div>
-                        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Transfer</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="transfer_edit" >
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="transfer_view" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="transfer_add">
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="transfer_delete">
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
 
-                        <div class="form-group col-md-12 mt-3">
-                            <div class="col-md-4">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-                            </div>
-                            </div>
-                            </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Expenses</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="expense_edit">
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="expense_view" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="expense_add">
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="expense_delete" >
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
 
-</form>
-   </body>
-    
+      </div>
+
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Sales</div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="sales_edit" >
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="sales_view" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="sales_add" >
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="sales_delete" >
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Purchases</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="purchases_edit">
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="purchases_view" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="purchases_add" >
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="purchases_delete" >
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Quotations</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="quotations_edit">
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="quotations_view" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="quotations_add" >
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="quotations_delete">
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Sales Return</div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="sales_edit" >
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="sales_view" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="sales_add" >
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="sales_delete" >
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Purchases Return</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="purchases_return_edit" >
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="purchases_return_view" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="purchases_return_add" >
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="purchases_return_delete" >
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+
+      </div>
+      <!-- <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Payment Sales</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="" >
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="" >
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="" >
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+      </div> -->
+
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Payments Purchases</div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="payment_purchases_edit">
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="payment_purchases_view" >
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="payment_purchases_add" >
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="payment_purchases_delete">
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Payments Returns</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="payment_returns_edit" >
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="payment_returns_view">
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="payment_returns_add">
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="payment_returns_delete">
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Customer List</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="customers_edit" >
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="customers_view">
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="customers_add">
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="customers_delete">
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="customers_import">
+          <label class="form-check-label" for="flexCheckChecked">
+            Import Customers
+          </label>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Supplier List</div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="supplier_edit" >
+          <label class="form-check-label" for="flexCheckDefault">
+            Edit </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="supplier_view">
+          <label class="form-check-label" for="flexCheckChecked">
+            View
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="supplier_add">
+          <label class="form-check-label" for="flexCheckChecked">
+            create
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="supplier_delete">
+          <label class="form-check-label" for="flexCheckChecked">
+            delete
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="suppliers_import">
+          <label class="form-check-label" for="flexCheckChecked">
+            Import Suppliers
+          </label>
+        </div>
+
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px;font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Reports</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_payments_Sales">
+          <label class="form-check-label" for="flexCheckDefault">
+            Reports Payments Sales </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_payments_Purchases">
+          <label class="form-check-label" for="flexCheckChecked">
+            Reports Payments Purchases
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_payments_Sale_Returns">
+          <label class="form-check-label" for="flexCheckChecked">
+            Reports Sale Return Payments
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_payments_purchase_Return">
+          <label class="form-check-label" for="flexCheckChecked">
+            Reports Purchases Return Payments
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_sales">
+          <label class="form-check-label" for="flexCheckChecked">
+            Sale Report
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_purchase">
+          <label class="form-check-label" for="flexCheckChecked">
+            Purchase Report
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_customers">
+          <label class="form-check-label" for="flexCheckChecked">
+            Customer Report
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_suppliers">
+          <label class="form-check-label" for="flexCheckChecked">
+            Supplier Report
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_profit">
+          <label class="form-check-label" for="flexCheckChecked">
+            Profit and Loss
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_quantity_alerts">
+          <label class="form-check-label" for="flexCheckChecked">
+            Product Quantity Alerts
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="Reports_Warehouse">
+          <label class="form-check-label" for="flexCheckChecked">
+            Warehouse Stock Chart</label>
+        </div>
+
+      </div>
+      <div class="form-group col-md-4">
+        <div
+          style="background-color: rgb(243, 241, 241); padding: 18px; font-weight: bold;text-align: center; margin-bottom: 8px;">
+          Settings</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="setting_system">
+          <label class="form-check-label" for="flexCheckDefault">
+            System Settings </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="brand">
+          <label class="form-check-label" for="flexCheckChecked">
+            Brand
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="warehouse">
+          <label class="form-check-label" for="flexCheckChecked">
+            Warehouse
+          </label>
+        </div>
+        <!-- <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck" formControlName="">
+          <label class="form-check-label" for="flexCheckChecked">
+            Backup
+          </label>
+        </div> -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="category">
+          <label class="form-check-label" for="flexCheckChecked">
+            Category
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="currency">
+          <label class="form-check-label" for="flexCheckChecked">
+            Currency
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="userManagement" id="flexCheck"formControlName="unit">
+          <label class="form-check-label" for="flexCheckChecked">
+            Unit
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group col-md-12 mt-3">
+        <div class="col-md-4">
+          <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</body>

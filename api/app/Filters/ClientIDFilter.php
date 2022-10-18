@@ -8,6 +8,6 @@ class ClientIDFilter
 {
     public function filter(Builder $builder, $value)
     {
-        return $builder->orWhere('client_id', "LIKe", "%" . $value . "%");
+        return $builder->Where('client_id',$value);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Env;
 
 /**
  * Trait for Upload images
@@ -28,7 +29,8 @@ trait ImageTrait
             $imageFileName = $this->noImage;
         }
 
-        return public_path($path) . "/" . $imageFileName;
+        return env('app_url') . $path . $imageFileName;
+        // return public_path($path) . "/" . $imageFileName;
     }
 
 
@@ -53,6 +55,7 @@ trait ImageTrait
 
     public function deleteImage($image, $path = null)
     {
+        // $this->setNoImage(env('app_url') . $path . $this->noImage);
         $this->setNoImage(public_path($path) . $this->noImage);
 
         if ($image != $this->noImage) {

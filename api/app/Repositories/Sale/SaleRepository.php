@@ -6,6 +6,7 @@ use App\Models\Sale;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Unit;
 use App\Models\SaleDetail;
 use App\Models\ProductVariant;
 use App\Models\ProductWarehouse;
@@ -25,13 +26,13 @@ class SaleRepository implements SaleRepositoryInterface
 
     public function create(Request $request): Model
     {
-        DB::transaction(function () use ($request) {
+        $order = new Sale();
 
-            $order = new Sale();
+        DB::transaction(function () use ($request,$order) {
 
             $order->is_pos = 0;
             $order->date = $request->date;
-            $order->Ref = /* $this->getNumberOrder(); */ 'S_1112';
+            $order->Ref = $this->makeCode();
             $order->client_id = $request->client_id;
             $order->GrandTotal = $request->GrandTotal;
             $order->warehouse_id = $request->warehouse_id;
@@ -42,7 +43,7 @@ class SaleRepository implements SaleRepositoryInterface
             $order->status = $request->status;
             $order->payment_status = 'unpaid';
             $order->notes = $request->notes;
-            $order->user_id = /* Auth::user()->id; */ 1;
+            $order->user_id = Auth::user()->id;
 
             $order->save();
 
@@ -56,23 +57,23 @@ class SaleRepository implements SaleRepositoryInterface
                     'sale_id' => $order->id,
                     'sale_unit_id' =>  $value['sale_unit_id'],
                     'quantity' => $value['quantity'],
-                    'price' => $value['Unit_price'],
+                    'price' => $value['unit_price'],
                     'TaxNet' => $value['tax_percent'],
                     'tax_method' => $value['tax_method'],
-                    'discount' => $value['discount'],
-                    'discount_method' => $value['discount_Method'],
+                    // 'discount' => $value['discount'],
+                    // 'discount_method' => $value['discount_method'],
                     'product_id' => $value['product_id'],
-                    'product_variant_id' => $value['product_variant_id'],
+                    'product_variant_id' => $value['product_variant_id'] ?? null,
                     'total' => $value['subtotal'],
                 ];
 
 
-                if ($order->status == "completed") {
-                    if ($value['product_variant_id'] !== null) {
-                        $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                if ($order->status == "Completed") {
+                    if ($value['product_id'] !== null) {
+                        $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                             ->where('warehouse_id', $order->warehouse_id)
                             ->where('product_id', $value['product_id'])
-                            ->where('product_variant_id', $value['product_variant_id'])
+                           // ->where('product_variant_id', $value['product_variant_id'])
                             ->first();
 
                         if ($unit && $product_warehouse) {
@@ -85,7 +86,7 @@ class SaleRepository implements SaleRepositoryInterface
                         }
 
                     } else {
-                        $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                        $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                             ->where('warehouse_id', $order->warehouse_id)
                             ->where('product_id', $value['product_id'])
                             ->first();
@@ -106,58 +107,58 @@ class SaleRepository implements SaleRepositoryInterface
             $role = Auth::user()->roles()->first();
             $view_records = Role::findOrFail($role->id)->inRole('record_view');
 
-            if ($request->payment['status'] != 'pending') {
-                $sale = Sale::findOrFail($order->id);
-                // Check If User Has Permission view All Records
-                if (!$view_records) {
-                    // Check If User->id === sale->id
-                    $this->authorizeForUser($request->user('api'), 'check_record', $sale);
-                }
+            // if ($request->payment['status'] !== 'Pending') {
+            //     $sale = Sale::findOrFail($order->id);
+            //     // Check If User Has Permission view All Records
+            //     if (!$view_records) {
+            //         // Check If User->id === sale->id
+            //         $this->authorizeForUser($request->user('api'), 'check_record', $sale);
+            //     }
 
 
-                try {
+            //     try {
 
-                    $total_paid = $sale->paid_amount + $request['amount'];
-                    $due = $sale->GrandTotal - $total_paid;
-                    
-                    if ($due === 0.0 || $due < 0.0) {
-                        $payment_status = 'paid';
-                    } else if ($due != $sale->GrandTotal) {
-                        $payment_status = 'partial';
-                    } else if ($due == $sale->GrandTotal) {
-                        $payment_status = 'unpaid';
-                    }
-                    
-                    if($request['amount'] > 0){
-                        if($request->payment['Reglement'] == 'credit card'){
-                            
-                            // ADD LATER ( CREDIT CARDS )
+            //         $total_paid = $sale->paid_amount + $request['amount'];
+            //         $due = $sale->GrandTotal - $total_paid;
 
-                        // Paying Method Cash
-                        }else{
+            //         if ($due === 0.0 || $due < 0.0) {
+            //             $payment_status = 'paid';
+            //         } else if ($due != $sale->GrandTotal) {
+            //             $payment_status = 'partial';
+            //         } else if ($due == $sale->GrandTotal) {
+            //             $payment_status = 'unpaid';
+            //         }
 
-                            // PaymentSale::create([
-                            //     'sale_id' => $order->id,
-                            //     'Ref' => app('App\Http\Controllers\PaymentSalesController')->getNumberOrder(),
-                            //     'date' => Carbon::now(),
-                            //     'Reglement' => $request->payment['Reglement'],
-                            //     'montant' => $request['amount'],
-                            //     'change' => $request['change'],
-                            //     'user_id' => Auth::user()->id,
-                            // ]);
+            //         if($request['amount'] > 0){
+            //             if($request->payment['Reglement'] == 'credit card'){
 
-                            $sale->update([
-                                'paid_amount' => $total_paid,
-                                'payment_status' => $payment_status,
-                            ]);
-                        }
-                    }
-                } catch (Exception $e) {
-                    
-                    return response()->json(['Error adding payment, Please try again!' => $e->getMessage()], 500);
-                }
-                
-            }
+            //                 // ADD LATER ( CREDIT CARDS )
+
+            //             // Paying Method Cash
+            //             }else{
+
+            //                 // PaymentSale::create([
+            //                 //     'sale_id' => $order->id,
+            //                 //     'Ref' => app('App\Http\Controllers\PaymentSalesController')->getNumberOrder(),
+            //                 //     'date' => Carbon::now(),
+            //                 //     'Reglement' => $request->payment['Reglement'],
+            //                 //     'montant' => $request['amount'],
+            //                 //     'change' => $request['change'],
+            //                 //     'user_id' => Auth::user()->id,
+            //                 // ]);
+
+            //                 $sale->update([
+            //                     'paid_amount' => $total_paid,
+            //                     'payment_status' => $payment_status,
+            //                 ]);
+            //             }
+            //         }
+            //     } catch (Exception $e) {
+
+            //         return response()->json(['Error adding payment, Please try again!' => $e->getMessage()], 500);
+            //     }
+
+            // }
 
         }, 5);
 
@@ -196,7 +197,7 @@ class SaleRepository implements SaleRepositoryInterface
             $old_products_id = [];
             foreach ($old_sale_details as $key => $value) {
                 $old_products_id[] = $value->id;
-                
+
                 //check if detail has sale_unit_id Or Null
                 if($value['sale_unit_id'] !== null){
                     $old_unit = Unit::where('id', $value['sale_unit_id'])->first();
@@ -227,7 +228,7 @@ class SaleRepository implements SaleRepositoryInterface
                             }
 
                         } else {
-                            $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                            $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                                 ->where('warehouse_id', $current_Sale->warehouse_id)
                                 ->where('product_id', $value['product_id'])
                                 ->first();
@@ -251,7 +252,7 @@ class SaleRepository implements SaleRepositoryInterface
 
             // Update Data with New request
             foreach ($new_sale_details as $prd => $prod_detail) {
-                
+
                 if($prod_detail['no_unit'] !== 0){
 
                     $unit_prod = Unit::where('id', $prod_detail['sale_unit_id'])->first();
@@ -259,7 +260,7 @@ class SaleRepository implements SaleRepositoryInterface
                     if ($request['status'] == "completed") {
 
                         if ($prod_detail['product_variant_id'] !== null) {
-                            $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                            $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                                 ->where('warehouse_id', $request->warehouse_id)
                                 ->where('product_id', $prod_detail['product_id'])
                                 ->where('product_variant_id', $prod_detail['product_variant_id'])
@@ -275,7 +276,7 @@ class SaleRepository implements SaleRepositoryInterface
                             }
 
                         } else {
-                            $product_warehouse = product_warehouse::where('deleted_at', '=', null)
+                            $product_warehouse = ProductWarehouse::where('deleted_at', '=', null)
                                 ->where('warehouse_id', $request->warehouse_id)
                                 ->where('product_id', $prod_detail['product_id'])
                                 ->first();
@@ -298,12 +299,12 @@ class SaleRepository implements SaleRepositoryInterface
                     $orderDetails['TaxNet'] = $prod_detail['tax_percent'];
                     $orderDetails['tax_method'] = $prod_detail['tax_method'];
                     $orderDetails['discount'] = $prod_detail['discount'];
-                    $orderDetails['discount_method'] = $prod_detail['discount_Method'];
+                    $orderDetails['discount_method'] = $prod_detail['discount_method'];
                     $orderDetails['quantity'] = $prod_detail['quantity'];
                     $orderDetails['product_id'] = $prod_detail['product_id'];
                     $orderDetails['product_variant_id'] = $prod_detail['product_variant_id'];
                     $orderDetails['total'] = $prod_detail['subtotal'];
-                    
+
                     if (!in_array($prod_detail['id'], $old_products_id)) {
                         $orderDetails['date'] = Carbon::now();
                         $orderDetails['sale_unit_id'] = $unit_prod ? $unit_prod->id : Null;
@@ -375,15 +376,15 @@ class SaleRepository implements SaleRepositoryInterface
     public function makeCode(): string
     {
         $last = Sale::latest('id')->first();
-
         if ($last) {
             $item = $last->Ref;
             $nwMsg = explode("_", $item);
             $inMsg = $nwMsg[1] + 1;
             $code = $nwMsg[0] . '_' . $inMsg;
         } else {
-            $code = 'EXP_1111';
+            $code = 'SL_1111';
         }
         return $code;
     }
+   
 }

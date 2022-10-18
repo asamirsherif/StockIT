@@ -5,7 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreCommonModule } from '@core/common.module';
 
 import { WarehouseComponent } from './warehouse.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
 
 @NgModule({
   declarations: [WarehouseComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule],
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule,NgbModule,NgxPaginationModule],
   exports: [WarehouseComponent]
 })
 export class WarehouseReportModule {}

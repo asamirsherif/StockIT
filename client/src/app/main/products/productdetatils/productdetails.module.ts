@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CoreCommonModule } from '@core/common.module';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 
 
@@ -20,7 +21,7 @@ const routes = [
 
 @NgModule({
   declarations: [ProductdetatilsComponent ],
-  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule ,
+  imports: [RouterModule.forChild(routes),TranslateModule, CoreCommonModule ,NgxBarcodeModule
   ],
   exports: [ProductdetatilsComponent ]
 })

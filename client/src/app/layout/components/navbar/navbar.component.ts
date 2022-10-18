@@ -10,7 +10,7 @@ import { AuthenticationService } from 'app/auth/service';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { CoreConfigService } from '@core/services/config.service';
 import { CoreMediaService } from '@core/services/media.service';
-
+import { environment } from 'environments/environment';
 import { User } from 'app/auth/models';
 
 import { coreConfig } from 'app/app-config';
@@ -35,6 +35,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public languageOptions: any;
   public navigation: any;
   public selectedLanguage: any;
+  public imagesrc = environment.apiUrl + "/images/users/person.png"
 
   @HostBinding('class.fixed-top')
   public isFixed = false;
@@ -62,7 +63,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   // Private
   private _unsubscribeAll: Subject<any>;
-
+  
   /**
    * Constructor
    *

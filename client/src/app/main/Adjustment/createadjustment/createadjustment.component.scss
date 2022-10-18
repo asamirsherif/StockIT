@@ -35,7 +35,8 @@ ul{
     list-style: none;
     margin: 0 auto;
     text-align: left;
-    margin-right: 10px;
+    margin-right: -82px;
+
   }
   
   ul li{
@@ -47,3 +48,10 @@ ul{
     font-weight: bold;
     padding-top: 7px;
   }
+  .list-group{
+    max-height: 100px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}

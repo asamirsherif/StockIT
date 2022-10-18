@@ -2,14 +2,14 @@
     <h2>Sale Report</h2>
     <hr>
     <div class="container row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <form class="form-inline col-md-12 mb-1">
                 <span class="switch-icon-left"><i data-feather="search"></i></span>
                 <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
                     aria-label="Search">
             </form>
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-4 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
 
                 <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
@@ -69,8 +69,9 @@
                   </form>
       
                 </div>
-            </div>            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
-            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
+            </div>       
+                 <!-- <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button> -->
             
         </div>
     </div>
@@ -82,81 +83,17 @@
                 <th scope="col">Customer</th>   
                 <th scope="col">Status</th>
                 <th scope="col">Grand Total</th>
-                <th scope="col">Paid</th>
-                <th scope="col">Due</th>
                 <th scope="col">Payment Status</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <td>2022-7-22</td>
-                <td>PR_1114</td>
-                <td>walk-in-customer</td>
+            <tr *ngFor="let sale of sales?.sales;">
+                <td>{{sale.date}}</td>
+                <td>{{sale.Ref}}</td>
+                <td>{{sale.client_name}}</td>
                 <td><button type="button" class="btn btn-outline-success">Completed</button></td>
-                <td>11000.00</td>
-                <td>0.00</td>
-                <td>11000.00</td>
-                <td><button type="button" class="btn btn-outline-success">Paid</button></td>
-            </tr>
-        </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-                <td>2022-7-22</td>
-                <td>SL_1122</td>
-                <td>walk-in-customer</td>
-                <td><button type="button" class="btn btn-outline-success">Completed</button></td>
-                <td>552.00</td>
-                <td>552.00</td>
-                <td>0.00</td>
-                <td><button type="button" class="btn btn-outline-success">Paid</button></td>
-            </tr>
-        </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-                <td>2022-7-22</td>
-                <td>SL_1122</td>
-                <td>walk-in-customer</td>
-                <td><button type="button" class="btn btn-outline-success">Completed</button></td>
-                <td>552.00</td>
-                <td>552.00</td>
-                <td>0.00</td>
-                <td><button type="button" class="btn btn-outline-success">Paid</button></td>
-            </tr>
-        </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-                <td>2022-7-22</td>
-                <td>SL_1122</td>
-                <td>walk-in-customer</td>
-                <td><button type="button" class="btn btn-outline-success">Completed</button></td>
-                <td>552.00</td>
-                <td>552.00</td>
-                <td>0.00</td>
-                <td><button type="button" class="btn btn-outline-success">Paid</button></td>
-            </tr>
-        </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-                <td>2022-7-22</td>
-                <td>SL_1122</td>
-                <td>walk-in-customer</td>
-                <td><button type="button" class="btn btn-outline-success">Completed</button></td>
-                <td>552.00</td>
-                <td>552.00</td>
-                <td>0.00</td>
-                <td><button type="button" class="btn btn-outline-success">Paid</button></td>
-            </tr>
-        </tbody>
-        <tbody class="table-group-divider">
-            <tr>
-                <td>2022-7-22</td>
-                <td>SL_1122</td>
-                <td>walk-in-customer</td>
-                <td><button type="button" class="btn btn-outline-success">Completed</button></td>
-                <td>552.00</td>
-                <td>552.00</td>
-                <td>0.00</td>
-                <td><button type="button" class="btn btn-outline-success">Paid</button></td>
+                <td>{{sale.GrandTotal}}</td>
+                <td><button type="button" class="btn btn-outline-success">Cash</button></td>
             </tr>
         </tbody>
     </table>

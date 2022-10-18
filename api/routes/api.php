@@ -5,6 +5,7 @@ use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\invoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -14,8 +15,11 @@ use App\Http\Controllers\ProductWarehouseSearchController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SalesReturnController;
+use App\Http\Controllers\ReportController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +43,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
+Route::middleware(['auth:api', 'Is_Active', 'cors'])->group(function () {
 
     // -------------- USERS ---------------- \\
     Route::apiResource('users', UserController::class);
@@ -89,7 +93,7 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
     // purchase
     Route::apiResource('purchases', PurchaseController::class);
     // sale
-    Route::apiResource('sale',SaleController::class);
+    Route::apiResource('sales',SaleController::class);
 
     //SalesReturn
     Route::apiResource('salesReturn', SalesReturnController::class);
@@ -97,6 +101,47 @@ Route::middleware(['auth:api', 'Is_Active','cors'])->group(function () {
     //product warehouse search
     Route::get('purchaseProductSearch', [ProductWarehouseSearchController::class, 'purchaseSearch']);
 
+    // settings
+    Route::apiResource('settings', SettingController::class);
+
     // sale prodcut warehouse search
     Route::get('saleProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'saleSearch']);
+
+    // adjustment prodcut warehouse search
+    Route::get('adjProdcutSearch/{warehouse}', [ProductWarehouseSearchController::class, 'adjSearch']);
+
+
+
+    // -------------------- report controller -------------------------- //
+
+    //Profit and loss
+    Route::get('reports/pofit-loss', [ReportController::class, 'ProfitAndLoss']);
+
+    //warehouse
+    Route::get('reports/warehouse-stock', [ReportController::class, 'WarhouseCountStock']);
+    Route::get('reports/expenses-warehouse', [ReportController::class, 'ExpensesWarehouse']);
+    Route::get('reports/sales-warehouse', [ReportController::class, 'SalesWarehouse']);
+
+    //sales
+    Route::get('reports/sales', [ReportController::class, 'ReportSales']);
+
+    //product
+    Route::get('reports/quantity-alert', [ReportController::class, 'countQuantityAlert']);
+    Route::get('reports/product-alert', [ReportController::class, 'ProductsAlert']);
+
+    //client
+    Route::get('reports/client', [ReportController::class, 'ClientReport']);
+
+    //supplier (provider)
+    Route::get('reports/supplier', [ReportController::class, 'ProvidersReport']);
+
+    //dashboard charts
+    Route::get('charts/dashboard', [ReportController::class, 'report_with_echart']);
+
 });
+
+ // invoices
+ Route::get('saleInvoice/{sale}',[invoiceController::class,'saleInvoice']);
+ Route::get('purchaseInvoice/{purchase}',[invoiceController::class,'purchaseInvoice']);
+ Route::get('saleInvoicePDF/{sale}',[invoiceController::class,'saleInvoicePDF']);
+ Route::get('purchaseInvoicePDF/{purchase}',[invoiceController::class,'purchaseInvoicePDF']);

@@ -1,9 +1,6 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
+import { FormGroup, FormControl,Validators,FormBuilder,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AddbrandService } from "app/auth/service/addbrand.service";
@@ -14,6 +11,8 @@ import { IBrand } from "app/interfaces/ibrand";
 import { ICategory } from "app/interfaces/icategory";
 import { IProduct } from "app/interfaces/iproduct";
 import { Unit } from "app/interfaces/unit";
+import { ToastrService } from 'ngx-toastr';
+
 AddbrandService;
 
 @Component({
@@ -52,7 +51,8 @@ export class ProductupdateComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _brandService: AddbrandService,
     private _categorytService: CategorytService,
-    private _unitservService: UnitservService
+    private _unitservService: UnitservService,
+    private _toastr: ToastrService
   ) {
     this.productupdateForm = new FormGroup({
       name: new FormControl("", Validators.required),
@@ -66,8 +66,8 @@ export class ProductupdateComponent implements OnInit {
       unit_sale_id: new FormControl("", Validators.required),
       unit_purchase_id: new FormControl("", Validators.required),
       tax_method: new FormControl("Exclusive", Validators.required),
-      product_tax: new FormControl(0),
-      stockalert: new FormControl(0),
+      product_tax: new FormControl(""),
+      stockalert: new FormControl(""),
       image: new FormControl([null]),
     });
   }
@@ -182,7 +182,14 @@ export class ProductupdateComponent implements OnInit {
         
         const observed = {
           next: (res) => {
+            this._toastr.success(' product has been updated');
+
             this._router.navigate(['productlist'])
+          },
+          error: (error: HttpErrorResponse) => {
+            this._toastr.error('Make sure for your data!');
+
+            this.errors = error.error.errors;
           },
         };
 

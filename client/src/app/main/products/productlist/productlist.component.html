@@ -2,61 +2,59 @@
     <h2>Product List</h2>
     <hr>
     <div class="container row">
-        <div class="col-md-4">
-            <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
-            </form>
-        </div>
         <div class="col-md-8 ">
+          <form class="form-inline col-md-12 mb-1">
+            <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+            <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+              class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search" aria-label="Search" />
+          </form>
+        </div>
+        <div class="col-md-4 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
 
             <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i data-feather="filter"></i>Filter</button>
 
             <div ngbDropdownMenu style="width:400px;height: 460px;">
-                <form class="px-2 py-2">
+                <form class="px-2 py-2" [formGroup]="filterForm">
                     <h3 style="font-weight:bold ;">Filter</h3>
 
                   <div class="form-group mb-1 ">
-                    <label  for="exampleDropdownFormReferenc1">Referenc</label>
-                    <input  type="text" class="form-control" id="exampleDropdownFormReferenc1"  placeholder="Referenc" />
+                    <label  for="Referenc">Referenc</label>
+                    <input  type="text" class="form-control" id="Referenc"  placeholder="Referenc"  formControlName="ref"/>
                   </div>
 
                   <div class="form-group mb-1">
-                    <label for="exampleDropdownFormWarehouse1">From Warehouse</label>
-                    <select class="form-control" aria-label="Default select example" id="exampleDropdownFormCategory1" >
+                    <label for="from-warehouse">From Warehouse</label>
+                    <select class="form-control" aria-label="Default select example" id="from-warehouse" formControlName="FromWarehouse_id" >
                     <option selected>Choose Warehouse</option>
-                    <option >الرئيسي </option>
-                    <option>officic annim </option>
+                    <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>
                     </select>
                     </div>
 
                     <div class="form-group mb-1">
-                        <label for="exampleDropdownFormWarehouse1">To Warehouse</label>
-                        <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1" >
+                        <label for="ToWarehouse">To Warehouse</label>
+                        <select class="form-control" aria-label="Default select example" id="ToWarehouse" formControlName="ToWarehouse_id" >
                         <option selected>Choose Warehouse</option>
-                        <option>الرئيسي </option>
-                    <option>officic annim </option>
+                        <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>
                         </select>
                         </div>
                         <div class="form-group mb-2">
-                            <label for="exampleDropdownFormBrand1">Brand</label>
-                            <select class="form-control" aria-label="Default select example" id="exampleDropdownFormBrand1" >
+                            <label for="Brand">Brand</label>
+                            <select class="form-control" aria-label="Default select example" id="Brand" formControlName="brand" >
                             <option selected>Choose Brand</option>
-                            <option>test </option>
-                            <option>test </option>
+                            <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+
                             </select>
                             </div>
                         <div class="row">
                         <div class="col-lg-6 col-md-12 ">
                             <div class="form-group">
-                              <button type="button" class="btn btn-primary btn-block" rippleEffect><i data-feather="filter"></i>Filter</button>
+                              <button (click)="filter()" type="button" class="btn btn-primary btn-block" rippleEffect><i data-feather="filter"></i>Filter</button>
                             </div>
                           </div>
                           <div class="col-lg-6 col-md-12">
                             <div class="form-group">
-                              <button type="button" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i> Reset</button>
+                              <button type="reset" class="btn btn-danger btn-block" rippleEffect><i data-feather="alert-circle"></i> Reset</button>
                             </div>
                          </div> 
                         </div>
@@ -65,49 +63,43 @@
                 </div>
               </div>
 
-            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+            <!-- <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
             <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
-            <button type="button" class="btn btn-primary "><i data-feather="download"></i>Import Products</button>
+            <button type="button" class="btn btn-primary "><i data-feather="download"></i>Import Products</button> -->
             <button type="button" class="btn btn-secondary" [routerLink]="['../createproduct']"><i data-feather="plus-circle"></i>Create</button>
         </div>
     </div>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Image</th>
+                
                 <th scope="col">Name</th>
+                <th scope="col">Image</th>
                 <th scope="col">Code</th>
                 <th scope="col">Category</th>
                 <th scope="col">Brand</th>
                 <th scope="col">Price</th>
                 <th scope="col">Unit</th>
-                <th scope="col">Quantity</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr *ngFor="let product of products; let i = index">
-                <td><img src="{{ product.images }}"></td>
+            <tr *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}">
+                
                 <td>{{ product.name }}</td>
+                <td><img src="{{ product.images }}"></td>
                 <td>{{ product.code }}</td>
                 <td>{{ product.category }}</td>
                 <td>{{ product.brand }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.unit }}</td>
-                <td>99</td>
                 <td> <button class="btn btn-sm btn-primary" routerLink="../productdetails/{{product.id}}"><i data-feather="eye"[size]="22"></i>
                 </button><button class="btn btn-sm btn-success" routerLink="../productupdate/{{product.id}}"><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" ><i data-feather="x-circle"  [size]="24"></i>
+                </i></button>  <button class="btn btn-sm btn-danger" (click)="destroy(product.id)"><i data-feather="x-circle"  [size]="24"></i>
                 </button></td>    
             </tr>
         </tbody>
     </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-      </ngb-pagination>  
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+    </pagination-controls>  
 </body>

@@ -1,1 +1,3 @@
 node_modules
+client/yarn.lock
+client/src/environments/environment.ts

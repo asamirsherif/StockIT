@@ -21,10 +21,10 @@ abstract class FilterAbstract
     public function filter(Builder $builder)
     {
         //loop for each filter
-        foreach($this->getFilters() as $filter => $value)
-        {
+        foreach ($this->getFilters() as $filter => $value) {
             //resolveFilter (create instance of filter class)
-            $this->resolveFilter($filter)->filter($builder, $value);
+            if ($value)
+                $this->resolveFilter($filter)->filter($builder, $value);
         }
         return $builder;
     }

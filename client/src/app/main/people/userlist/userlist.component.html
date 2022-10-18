@@ -3,63 +3,68 @@
     </h2>
     <hr>
     <div class="container row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search">
+                <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
+                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
+                    class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
+                    aria-label="Search" />
             </form>
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-4 ">
             <div ngbDropdown [placement]="'right-down'" class="btn-group dropup">
 
                 <button ngbDropdownToggle type="button" class="btn btn-outline-primary " rippleEffect><i
-                    data-feather="filter"></i>Filter</button>
+                        data-feather="filter"></i>Filter</button>
                 <div ngbDropdownMenu style="width:400px;height: 450px;">
-                  <form class="px-2 py-2">
-                    <h3 style="font-weight:bold ;">Filter</h3>
-      
-                    <div class="form-group mb-1">
-                      <label for="exampleDropdownFormReference1">Username</label>
-                      <input type="text" class="form-control" id="exampleDropdownFormReference1" placeholder="Search by Username" />
-                    </div>
-                    <div class="form-group mb-1">
-                        <label for="exampleDropdownFormReference1">Phone</label>
-                        <input type="number" class="form-control" id="exampleDropdownFormReference1" placeholder="Search by phone" />
-                      </div>
-                      <div class="form-group mb-1">
-                        <label for="exampleDropdownFormReference1">Email</label>
-                        <input type="email" class="form-control" id="exampleDropdownFormReference1" placeholder="Search by email" />
-                      </div>
-                      <div class="form-group mb-2">
-                        <label for="exampleDropdownFormReference1">Stautus</label>
-                        <select class="form-control" aria-label="Default select example" id="exampleDropdownFormWarehouse1"
-                          placeholder="Choose Warehouse">
-                          <option selected>Choose Status</option>
-                          <option>Actif</option>
-                          <option>inactif </option>
-                        </select>
-                      </div>
-                    <div class="row">
-                      <div class="col-lg-6 col-md-12 ">
-                        <div class="form-group">
-                          <button type="button" class="btn btn-primary btn-block" rippleEffect><i
-                              data-feather="filter"></i>Filter</button>
+                    <form class="px-2 py-2">
+                        <h3 style="font-weight:bold ;">Filter</h3>
+
+                        <div class="form-group mb-1">
+                            <label for="exampleDropdownFormReference1">Username</label>
+                            <input type="text" class="form-control" id="exampleDropdownFormReference1"
+                                placeholder="Search by Username" />
                         </div>
-                      </div>
-                      <div class="col-lg-6 col-md-12">
-                        <div class="form-group">
-                          <button type="button" class="btn btn-danger btn-block" rippleEffect><i
-                              data-feather="alert-circle"></i>
-                            Reset</button>
+                        <div class="form-group mb-1">
+                            <label for="exampleDropdownFormReference1">Phone</label>
+                            <input type="number" class="form-control" id="exampleDropdownFormReference1"
+                                placeholder="Search by phone" />
                         </div>
-                      </div>
-                    </div>
-                  </form>
-      
+                        <div class="form-group mb-1">
+                            <label for="exampleDropdownFormReference1">Email</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormReference1"
+                                placeholder="Search by email" />
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="exampleDropdownFormReference1">Stautus</label>
+                            <select class="form-control" aria-label="Default select example"
+                                id="exampleDropdownFormWarehouse1" placeholder="Choose Warehouse">
+                                <option selected>Choose Status</option>
+                                <option>Actif</option>
+                                <option>inactif </option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 ">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary btn-block" rippleEffect><i
+                                            data-feather="filter"></i>Filter</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-danger btn-block" rippleEffect><i
+                                            data-feather="alert-circle"></i>
+                                        Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
-            </div>            <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
-            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button>
+            </div>
+             <!-- <button type="button" class="btn btn-outline-success "><i data-feather="file-text"></i>PDF</button>
+            <button type="button" class="btn btn-outline-danger "><i data-feather="file-text"></i>EXCEL</button> -->
             <button type="button" class="btn btn-secondary" (click)="openModal(contentModal)"><i
                     data-feather="plus-circle"></i>Create</button>
             <!-- Modal -->
@@ -71,18 +76,20 @@
                     </button>
                 </div>
                 <div class="modal-body centered">
-                    <form class="row col-md-12" [formGroup]="createuser" (ngSubmit)="formSubmit()">
+                    <form class="row col-md-12" [formGroup]="createuserForm" (ngSubmit)="AddUser()">
                         <div class="form-group col-md-6">
                             <label class="col-md-12 control-label " for="firstName">First Name</label>
                             <div class="col-md-12 ">
                                 <input class="form-control form-control col-md-12" type="text" placeholder="first Name"
-                                    aria-label="Date" id="firstName" name="firstName" formControlName="firstName">
-                                <div id="firstName"
-                                    *ngIf="createuser.controls['firstName'].touched &&createuser.controls['firstName'].invalid"
+                                    aria-label="Date" id="firstname" name="firstname" formControlName="firstname">
+                                <div id="firstname"
+                                    *ngIf="createuserForm.controls['firstname'].touched && createuserForm.controls['firstname'].invalid|| submitted && createuserForm.controls['firstname'].invalid"
                                     class="form-text text-danger">
-                                    <small *ngIf="createuser.controls['firstName'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                    <small *ngIf="createuserForm.controls['firstname'].errors?.['required']">This field
+                                        is required</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.firstname">{{errors?.firstname}}</small>
                                 </div>
                             </div>
                         </div>
@@ -90,13 +97,15 @@
                             <label class="col-md-12 control-label " for="LastName">Last Name</label>
                             <div class="col-md-12 ">
                                 <input class="form-control form-control col-md-12" type="text" placeholder="last Name"
-                                    aria-label="Date" id="lastName" name="lastName" formControlName="lastName">
-                                <div id="lastName"
-                                    *ngIf="createuser.controls['lastName'].touched &&createuser.controls['lastName'].invalid"
+                                    aria-label="Date" id="lastName" name="lastName" formControlName="lastname">
+                                <div id="lastname"
+                                    *ngIf="createuserForm.controls['lastname'].touched && createuserForm.controls['lastname'].invalid|| submitted && createuserForm.controls['lastname'].invalid"
                                     class="form-text text-danger">
-                                    <small *ngIf="createuser.controls['lastName'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                    <small *ngIf="createuserForm.controls['lastname'].errors?.['required']">This field
+                                        is required</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.lastname">{{errors?.lastname}}</small>
                                 </div>
                             </div>
                         </div>
@@ -104,13 +113,15 @@
                             <label class="col-md-12 control-label " for="userName">User Name</label>
                             <div class="col-md-12 ">
                                 <input class="form-control form-control col-md-12" type="text" placeholder="user Name"
-                                    aria-label="Date" id="userName" name="userName" formControlName="userName">
-                                <div id="userName"
-                                    *ngIf="createuser.controls['userName'].touched &&createuser.controls['userName'].invalid"
+                                    aria-label="Date" id="userName" name="userName" formControlName="username">
+                                <div id="username"
+                                    *ngIf="createuserForm.controls['username'].touched && createuserForm.controls['username'].invalid|| submitted && createuserForm.controls['username'].invalid"
                                     class="form-text text-danger">
-                                    <small *ngIf="createuser.controls['userName'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                    <small *ngIf="createuserForm.controls['username'].errors?.['required']">This field
+                                        is required</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.username">{{errors?.username}}</small>
                                 </div>
                             </div>
                         </div>
@@ -120,11 +131,13 @@
                                 <input class="form-control form-control col-md-12" type="email" placeholder="email"
                                     aria-label="Date" id="email" name="email" formControlName="email">
                                 <div id="email"
-                                    *ngIf="createuser.controls['email'].touched &&createuser.controls['email'].invalid"
+                                    *ngIf="createuserForm.controls['email'].touched && createuserForm.controls['email'].invalid|| submitted && createuserForm.controls['email'].invalid"
                                     class="form-text text-danger">
-                                    <small *ngIf="createuser.controls['email'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                    <small *ngIf="createuserForm.controls['email'].errors?.['required']">This field
+                                        is required</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.email">{{errors?.email}}</small>
                                 </div>
                             </div>
                         </div>
@@ -134,11 +147,13 @@
                                 <input class="form-control form-control col-md-12" type="text" placeholder="phone"
                                     aria-label="Date" id="phone" name="phone" formControlName="phone">
                                 <div id="phone"
-                                    *ngIf="createuser.controls['phone'].touched &&createuser.controls['phone'].invalid"
+                                    *ngIf="createuserForm.controls['phone'].touched && createuserForm.controls['phone'].invalid|| submitted && createuserForm.controls['phone'].invalid"
                                     class="form-text text-danger">
-                                    <small *ngIf="createuser.controls['phone'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                    <small *ngIf="createuserForm.controls['phone'].errors?.['required']">This field
+                                        is required</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.phone">{{errors?.phone}}</small>
                                 </div>
                             </div>
                         </div>
@@ -149,23 +164,34 @@
                                     placeholder="password" aria-label="Date" id="password" name="password"
                                     formControlName="password">
                                 <div id="password"
-                                    *ngIf="createuser.controls['password'].touched &&createuser.controls['password'].invalid"
+                                    *ngIf="createuserForm.controls['password'].touched && createuserForm.controls['password'].invalid|| submitted && createuserForm.controls['password'].invalid"
                                     class="form-text text-danger">
-                                    <small *ngIf="createuser.controls['password'].errors?.['required']">This field
-                                        is
-                                        required</small>
+                                    <small *ngIf="createuserForm.controls['password'].errors?.['required']">This field
+                                        is required</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.password">{{errors?.password}}</small>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-md-8 control-label " for="Role">Role</label>
                             <div class="col-md-12 ">
-                                <select class="form-select col-md-12 " aria-label="Default select example">
-                                    <option selected>Pleses select menu</option>
-                                    <option>Owner</option>
-                                    <option>Manger</option>
-                                    <option>Chasier</option>
+                                <select class="form-select col-md-12 " aria-label="Default select example"
+                                    formControlName="role_id">
+                                    <option *ngFor="let item of RoleArray" [value]="item.id">
+                                        {{ item.name }}
+                                    </option>
                                 </select>
+                                <div id="role_id"
+                                    *ngIf="createuserForm.controls['role_id'].touched && createuserForm.controls['role_id'].invalid|| submitted && createuserForm.controls['role_id'].invalid"
+                                    class="form-text text-danger">
+                                    <small *ngIf="createuserForm.controls['role_id'].errors?.['required']">This field
+                                        is required</small>
+                                </div>
+                                <div class="form-text text-danger">
+                                    <small *ngIf="errors?.role_id">{{errors?.role_id}}</small>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
@@ -194,116 +220,186 @@
                 <th scope="col">User Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">phone</th>
-                <th scope="col">status</th>
+                <!-- <th scope="col">status</th> -->
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <td>kjdlk</td>
-                <td>jkkkfr</td>
-                <td>019393</td>
-                <td>s@s.com</td>
-                <td>12dff</td>
-                <td>
-                    <div class="custom-control custom-switch custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1" />
+            <tr *ngFor="let user of data | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}">
+                <td>{{user.firstname}}</td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
+                <!-- <td>
+                    <div *ngIf="user.status;else uncheck" class="custom-control custom-switch custom-control-primary ">
+                        <input value="{{user.status}}" type="checkbox" class="custom-control-input" id="customSwitch1"
+                            checked="user.status">
                         <label class="custom-control-label" for="customSwitch1"></label>
                     </div>
+                    <ng-template #uncheck>
+                        <div class="custom-control custom-switch custom-control-primary ">
+                            <input value="{{user.status}}" type="checkbox" class="custom-control-input"
+                                id="customSwitch1">
+                            <label class="custom-control-label" for="customSwitch1"></label>
+                        </div>
+                    </ng-template>
 
-                </td>
-                <td><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
-                </i></button></td>  
-                  <!-- Modal2 -->
-              <ng-template #contentModal2 let-c="close" let-d="dismiss">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-primary-title">Edit</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body centered">
-                    <form class="row col-md-12">
-                        <div class="form-group col-md-6">
-                            <label class="col-md-12 control-label " for="firstName">First Name</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text" placeholder="first Name"
-                                    aria-label="Date" id="firstName" name="firstName" formControlName="firstName">
+                </td> -->
+                <td><button class="btn btn-sm btn-success" (click)="openModal2(contentModal2);editUser(user.id)"><i
+                            data-feather="edit" [size]="24">
+                        </i></button></td>
+                <!-- Modal2 -->
+                <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body centered">
+                        <form class="row col-md-12" [formGroup]="edituserForm" (ngSubmit)="updateUser()">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label " for="firstName">First Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="first Name" aria-label="Date" id="firstname" name="firstname"
+                                        formControlName="firstname">
+                                    <div id="firstname"
+                                        *ngIf="edituserForm.controls['firstname'].touched && edituserForm.controls['firstname'].invalid|| submitted && edituserForm.controls['firstname'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="edituserForm.controls['firstname'].errors?.['required']">This
+                                            field
+                                            is required</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.firstname">{{errors?.firstname}}</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-12 control-label " for="LastName">Last Name</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text" placeholder="last Name"
-                                    aria-label="Date" id="lastName" name="lastName" formControlName="lastName">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label " for="LastName">Last Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="last Name" aria-label="Date" id="lastName" name="lastName"
+                                        formControlName="lastname">
+                                    <div id="lastname"
+                                        *ngIf="edituserForm.controls['lastname'].touched && edituserForm.controls['lastname'].invalid|| submitted && edituserForm.controls['lastname'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="edituserForm.controls['lastname'].errors?.['required']">This field
+                                            is required</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.lastname">{{errors?.lastname}}</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-12 control-label " for="userName">User Name</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text" placeholder="user Name"
-                                    aria-label="Date" id="userName" name="userName" formControlName="userName">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label " for="userName">User Name</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text"
+                                        placeholder="user Name" aria-label="Date" id="userName" name="userName"
+                                        formControlName="username">
+                                    <div id="username"
+                                        *ngIf="edituserForm.controls['username'].touched && edituserForm.controls['username'].invalid|| submitted && edituserForm.controls['username'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="edituserForm.controls['username'].errors?.['required']">This field
+                                            is required</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.username">{{errors?.username}}</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label " for="Email">Email</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="email" placeholder="email"
-                                    aria-label="Date" id="email" name="email" formControlName="email">
-                               
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="Email">Email</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="email" placeholder="email"
+                                        aria-label="Date" id="email" name="email" formControlName="email">
+                                    <div id="email"
+                                        *ngIf="edituserForm.controls['email'].touched && edituserForm.controls['email'].invalid|| submitted && edituserForm.controls['email'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="edituserForm.controls['email'].errors?.['required']">This field
+                                            is required</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.email">{{errors?.email}}</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label " for="phone">Phone</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="text" placeholder="phone"
-                                    aria-label="Date" id="phone" name="phone" formControlName="phone">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="phone">Phone</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="text" placeholder="phone"
+                                        aria-label="Date" id="phone" name="phone" formControlName="phone">
+                                    <div id="phone"
+                                        *ngIf="edituserForm.controls['phone'].touched && edituserForm.controls['phone'].invalid|| submitted && edituserForm.controls['phone'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="edituserForm.controls['phone'].errors?.['required']">This field
+                                            is required</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.phone">{{errors?.phone}}</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label " for="password">Password</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="password"
-                                    placeholder="password" aria-label="Date" id="password" name="password"
-                                    formControlName="password">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-4 control-label " for="password">Password</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="password"
+                                        placeholder="password" aria-label="Date" id="password" name="password"
+                                        formControlName="password">
+                                    <div id="password"
+                                        *ngIf="edituserForm.controls['password'].touched && edituserForm.controls['password'].invalid|| submitted && edituserForm.controls['password'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="edituserForm.controls['password'].errors?.['required']">This field
+                                            is required</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.password">{{errors?.password}}</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-8 control-label " for="Role">Role</label>
-                            <div class="col-md-12 ">
-                                <select class="form-select col-md-12 " aria-label="Default select example">
-                                    <option selected>Pleses select menu</option>
-                                    <option>Owner</option>
-                                    <option>Manger</option>
-                                    <option>Chasier</option>
-                                </select>
+                            <div class="form-group col-md-6">
+                                <label class="col-md-8 control-label " for="Role">Role</label>
+                                <div class="col-md-12 ">
+                                    <select class="form-select col-md-12 " aria-label="Default select example"
+                                        formControlName="role">
+                                        <option *ngFor="let item of RoleArray" [value]="item.id">
+                                            {{ item.name }}
+                                        </option>
+                                    </select>
+                                    <div id="role"
+                                        *ngIf="edituserForm.controls['role'].touched && edituserForm.controls['role'].invalid|| submitted && edituserForm.controls['role'].invalid"
+                                        class="form-text text-danger">
+                                        <small *ngIf="edituserForm.controls['role'].errors?.['required']">This field
+                                            is required</small>
+                                    </div>
+                                    <div class="form-text text-danger">
+                                        <small *ngIf="errors?.role">{{errors?.role}}</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-12 control-label " for="image">User Image</label>
-                            <div class="col-md-12 ">
-                                <input class="form-control form-control col-md-12" type="file" placeholder="image"
-                                    aria-label="Date" id="image" name="image" formControlName="image">
+                            <div class="form-group col-md-6">
+                                <label class="col-md-12 control-label " for="image">User Image</label>
+                                <div class="col-md-12 ">
+                                    <input class="form-control form-control col-md-12" type="file" placeholder="image"
+                                        aria-label="Date" id="image" name="image" formControlName="image">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <div class="col-md-4">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                            <div class="form-group col-md-12">
+                                <div class="col-md-4">
+                                    <button id="singlebutton" name="singlebutton"
+                                        class="btn btn-primary">Submit</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            </ng-template>
+                        </form>
+                    </div>
+                </ng-template>
 
             </tr>
         </tbody>
     </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-      </ngb-pagination>
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+    </pagination-controls>
 </body>

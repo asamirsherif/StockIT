@@ -1,213 +1,466 @@
 <body>
-    <h2>Unit
-    </h2>
-    <hr>
-    <div class=" row">
+    <h2>Unit</h2>
+    <hr />
+    <div class="row">
         <div class="col-md-9">
             <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
-                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
-                    class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
-                    aria-label="Search" />
+                <span class="switch-icon-left"
+                    ><i data-feather="search" [size]="30"></i
+                ></span>
+                <input
+                    [ngModel]="searchInput"
+                    [ngModelOptions]="{ standalone: true }"
+                    (ngModelChange)="search($event)"
+                    class="form-control form-control ml-1 fs-5 w-75"
+                    type="text"
+                    placeholder="Search"
+                    aria-label="Search"
+                />
             </form>
         </div>
-        <div class="col-md-3 ">
-            <button type="button" class="btn btn-primary" (click)="openModal(contentModal)"><i data-feather="plus-circle"></i>Create</button>
-                <!-- Modal -->
-                <ng-template #contentModal let-c="close" let-d="dismiss">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="modal-primary-title">Create</h4>
-                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body centered">
-                        <form class=" col-md-12" [formGroup]="createunit" (ngSubmit)="AddUnit()">
-                                <div class="form-group col-md-12">
-                                    <label class="col-md-12 control-label " for="Name Unit">Name Unit</label>
-                                    <div class="col-md-12 ">
-                                        <input class="form-control form-control col-md-12" type="text"
-                                            placeholder="Name Unit" aria-label="Date" id="NameUnit"
-                                            name="name" formControlName="name">
-                                            <div id="name" *ngIf="createunit.controls['name'].touched && createunit.controls['name'].invalid || submitted && createunit.controls['name'].invalid" class="form-text text-danger">
-                                                <small *ngIf="createunit.controls['name'].errors?.['required']">This field is
-                                                    required</small>
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label class="col-md-12 control-label " for="Short Name">Short Name</label>
-                                    <div class="col-md-12 ">
-                                        <input class="form-control form-control col-md-12" type="text"
-                                            placeholder="Short Name" aria-label="Date" id="ShortName"
-                                            name="ShortName" formControlName="ShortName">
-                                            <div id="ShortName" *ngIf="createunit.controls['ShortName'].touched && createunit.controls['ShortName'].invalid || submitted && createunit.controls['ShortName'].invalid" class="form-text text-danger">
-                                                <small *ngIf="createunit.controls['ShortName'].errors?.['required']">This field is
-                                                    required</small>
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label class="col-md-12 control-label " for="Base Unit">Base Unit</label>
-                                    <div class="col-md-12 ">
-                                        <select class="form-select col-md-12 " aria-label="Default select example"formControlName="base_unit"(change)="changeBase($event)" >
-                                            <option selected>Choose base unit</option>
-                                            <option *ngFor="let base of Base" [ngValue]="base">
-                                                {{ base }}
-                                              </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label class="col-md-12 control-label " for="Operator">Operator</label>
-                                    <div class="col-md-12 ">
-                                        <select class="form-select col-md-12 " aria-label="Default select example"formControlName="operator"(change)="changeOp($event)" >
-                                            <option selected>Choose Operator</option>
-                                            <option *ngFor="let op of Op" [ngValue]="op">
-                                                {{ op }}
-                                              </option>
-                                        </select>
-                                        <div id="operator" *ngIf="createunit.controls['operator'].touched && createunit.controls['operator'].invalid || submitted && createunit.controls['operator'].invalid" class="form-text text-danger">
-                                            <small *ngIf="createunit.controls['operator'].errors?.['required']">This field is
-                                                required</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label class="col-md-12 control-label " for="value">opertation value </label>
-                                    <div class="col-md-12 ">
-                                        <input class="form-control form-control col-md-12" type="text"
-                                            placeholder="Name Unit" aria-label="Date" id="value"
-                                            name="value" formControlName="operator_value">
-                                            <div id="operator_value" *ngIf="createunit.controls['operator_value'].touched && createunit.controls['operator_value'].invalid || submitted && createunit.controls['operator_value'].invalid" class="form-text text-danger">
-                                                <small *ngIf="createunit.controls['operator_value'].errors?.['required']">This field is
-                                                    required</small>
-                                            </div>   
-                                    </div>
-                                </div>
-                           
-                            <div class="form-group col-md-12">
-                                <div class="col-md-4">
-                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+        <div class="col-md-3">
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="openModal(contentModal)"
+            >
+                <i data-feather="plus-circle"></i>Create
+            </button>
+            <!-- Modal -->
+            <ng-template #contentModal let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Create</h4>
+                    <button
+                        type="button"
+                        class="close"
+                        aria-label="Close"
+                        (click)="d('Cross click')"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form
+                        class="col-md-12"
+                        [formGroup]="createunit"
+                        (ngSubmit)="AddUnit()"
+                    >
+                        <div class="form-group col-md-12">
+                            <label
+                                class="col-md-12 control-label"
+                                for="Name Unit"
+                                >Name Unit</label
+                            >
+                            <div class="col-md-12">
+                                <input
+                                    class="form-control form-control col-md-12"
+                                    type="text"
+                                    placeholder="Name Unit"
+                                    aria-label="Date"
+                                    id="NameUnit"
+                                    name="name"
+                                    formControlName="name"
+                                />
+                                <div
+                                    id="name"
+                                    *ngIf="
+                                        (createunit.controls['name'].touched &&
+                                            createunit.controls['name']
+                                                .invalid) ||
+                                        (submitted &&
+                                            createunit.controls['name'].invalid)
+                                    "
+                                    class="form-text text-danger"
+                                >
+                                    <small
+                                        *ngIf="createunit.controls['name'].errors?.['required']"
+                                        >This field is required</small
+                                    >
                                 </div>
                             </div>
-                        </form>
-    
-                    </div>
-                </ng-template>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label
+                                class="col-md-12 control-label"
+                                for="Short Name"
+                                >Short Name</label
+                            >
+                            <div class="col-md-12">
+                                <input
+                                    class="form-control form-control col-md-12"
+                                    type="text"
+                                    placeholder="Short Name"
+                                    aria-label="Date"
+                                    id="ShortName"
+                                    name="ShortName"
+                                    formControlName="ShortName"
+                                />
+                                <div
+                                    id="ShortName"
+                                    *ngIf="
+                                        (createunit.controls['ShortName']
+                                            .touched &&
+                                            createunit.controls['ShortName']
+                                                .invalid) ||
+                                        (submitted &&
+                                            createunit.controls['ShortName']
+                                                .invalid)
+                                    "
+                                    class="form-text text-danger"
+                                >
+                                    <small
+                                        *ngIf="createunit.controls['ShortName'].errors?.['required']"
+                                        >This field is required</small
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label
+                                class="col-md-12 control-label"
+                                for="Base Unit"
+                                >Base Unit</label
+                            >
+                            <div class="col-md-12">
+                                <select
+                                    class="form-select col-md-12"
+                                    aria-label="Default select example"
+                                    formControlName="base_unit"
+                                    
+                                >
+                                <option
+                                *ngFor="let base of Base;"
+                                [ngValue]="base.id"
+                            >
+                                {{ base.name }}
+                            </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label
+                                class="col-md-12 control-label"
+                                for="Operator"
+                                >Operator</label
+                            >
+                            <div class="col-md-12">
+                                <select
+                                    class="form-select col-md-12"
+                                    aria-label="Default select example"
+                                    formControlName="operator"
+                                    
+                                    aria-placeholder="Choose a Operator"
+                                >
+                                    <option *ngFor="let op of Op" [value]="op">
+                                        {{ op }}
+                                    </option>
+                                </select>
+                                <div
+                                    id="operator"
+                                    *ngIf="
+                                        (createunit.controls['operator']
+                                            .touched &&
+                                            createunit.controls['operator']
+                                                .invalid) ||
+                                        (submitted &&
+                                            createunit.controls['operator']
+                                                .invalid)
+                                    "
+                                    class="form-text text-danger"
+                                >
+                                    <small
+                                        *ngIf="createunit.controls['operator'].errors?.['required']"
+                                        >This field is required</small
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label" for="value"
+                                >opertation value
+                            </label>
+                            <div class="col-md-12">
+                                <input
+                                    class="form-control form-control col-md-12"
+                                    type="text"
+                                    placeholder="Name Unit"
+                                    aria-label="Date"
+                                    id="value"
+                                    name="value"
+                                    formControlName="operator_value"
+                                />
+                                <div
+                                    id="operator_value"
+                                    *ngIf="
+                                        (createunit.controls['operator_value']
+                                            .touched &&
+                                            createunit.controls[
+                                                'operator_value'
+                                            ].invalid) ||
+                                        (submitted &&
+                                            createunit.controls[
+                                                'operator_value'
+                                            ].invalid)
+                                    "
+                                    class="form-text text-danger"
+                                >
+                                    <small
+                                        *ngIf="createunit.controls['operator_value'].errors?.['required']"
+                                        >This field is required</small
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4">
+                                <button
+                                    id="singlebutton"
+                                    name="singlebutton"
+                                    class="btn btn-primary"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </ng-template>
         </div>
     </div>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Short Name </th>
+                <th scope="col">Short Name</th>
                 <th scope="col">Base Unit</th>
-                <th scope="col">Operator </th>
+                <th scope="col">Operator</th>
                 <th scope="col">Operation Value</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider" *ngFor="let unit of data; let i = index">
+        <tbody
+            class="table-group-divider"
+            *ngFor="
+                let unit of data
+                    | paginate
+                        : {
+                              itemsPerPage: 10,
+                              currentPage: p,
+                              totalItems: total
+                          };
+                let i = index
+            "
+        >
             <tr>
                 <td>{{ unit.name }}</td>
                 <td>{{ unit.ShortName }}</td>
-                <td>{{ unit.base_unit }}</td>
+                <td>{{ unit.base_unit.name }}</td>
                 <td>{{ unit.operator }}</td>
                 <td>{{ unit.operator_value }}</td>
-                <td> <button class="btn btn-sm btn-success" (click)="editUnit(unit.id);openModal2(contentModal2)" ><i data-feather="edit" [size]="24" >
-                </i></button>  <button class="btn btn-sm btn-danger" (click)="deleteUnit(unit.id)" ><i data-feather="x-circle"  [size]="24"></i>
-                </button></td>
-            </tr>   
-                    <!-- Modal -->
-                <ng-template #contentModal2 let-c="close" let-d="dismiss">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="modal-primary-title">Edit</h4>
-                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body centered">
-                        <form class=" col-md-12" [formGroup]="editUnitForm" (ngSubmit)="updateUnit()">
-                            <div class="form-group col-md-12">
-                                <label class="col-md-12 control-label " for="Name Unit">Name Unit</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Name Unit" aria-label="Date" id="NameUnit"
-                                        name="name" formControlName="name">
-                                        <div id="name" *ngIf="editUnitForm.controls['name'].touched && editUnitForm.controls['name'].invalid || submitted && editUnitForm.controls['name'].invalid" class="form-text text-danger">
-                                            <small *ngIf="editUnitForm.controls['name'].errors?.['required']">This field is
-                                                required</small>
-                                        </div>
+                <td>
+                    <button
+                        class="btn btn-sm btn-success"
+                        (click)="editUnit(unit.id); openModal2(contentModal2)"
+                    >
+                        <i data-feather="edit" [size]="24"> </i>
+                    </button>
+                    <button
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteUnit(unit.id)"
+                    >
+                        <i data-feather="x-circle" [size]="24"></i>
+                    </button>
+                </td>
+            </tr>
+            <!-- Modal -->
+            <ng-template #contentModal2 let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-primary-title">Edit</h4>
+                    <button
+                        type="button"
+                        class="close"
+                        aria-label="Close"
+                        (click)="d('Cross click')"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centered">
+                    <form
+                        class="col-md-12"
+                        [formGroup]="editUnitForm"
+                        (ngSubmit)="updateUnit()"
+                    >
+                        <div class="form-group col-md-12">
+                            <label
+                                class="col-md-12 control-label"
+                                for="Name Unit"
+                                >Name Unit</label
+                            >
+                            <div class="col-md-12">
+                                <input
+                                    ng-if="name"
+                                    ng-model="user.name"
+                                    class="form-control form-control col-md-12"
+                                    type="text"
+                                    placeholder="Name Unit"
+                                    aria-label="Date"
+                                    id="NameUnit"
+                                    name="name"
+                                    formControlName="name"
+                                />
+                                <div
+                                    id="name"
+                                    *ngIf="
+                                        (editUnitForm.controls['name']
+                                            .touched &&
+                                            editUnitForm.controls['name']
+                                                .invalid) ||
+                                        (submitted &&
+                                            editUnitForm.controls['name']
+                                                .invalid)
+                                    "
+                                    class="form-text text-danger"
+                                >
+                                    <small
+                                        *ngIf="editUnitForm.controls['name'].errors?.['required']"
+                                        >This field is required</small
+                                    >
                                 </div>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label class="col-md-12 control-label " for="Short Name">Short Name</label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Short Name" aria-label="Date" id="ShortName"
-                                        name="ShortName" formControlName="ShortName">
-                                        <div id="ShortName" *ngIf="editUnitForm.controls['ShortName'].touched && editUnitForm.controls['ShortName'].invalid || submitted && editUnitForm.controls['ShortName'].invalid" class="form-text text-danger">
-                                            <small *ngIf="editUnitForm.controls['ShortName'].errors?.['required']">This field is
-                                                required</small>
-                                        </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label
+                                class="col-md-12 control-label"
+                                for="Short Name"
+                                >Short Name</label
+                            >
+                            <div class="col-md-12">
+                                <input
+                                    class="form-control form-control col-md-12"
+                                    type="text"
+                                    placeholder="Short Name"
+                                    aria-label="Date"
+                                    id="ShortName"
+                                    name="ShortName"
+                                    formControlName="ShortName"
+                                />
+                                <div
+                                    id="ShortName"
+                                    *ngIf="
+                                        (editUnitForm.controls['ShortName']
+                                            .touched &&
+                                            editUnitForm.controls['ShortName']
+                                                .invalid) ||
+                                        (submitted &&
+                                            editUnitForm.controls['ShortName']
+                                                .invalid)
+                                    "
+                                    class="form-text text-danger"
+                                >
+                                    <small
+                                        *ngIf="editUnitForm.controls['ShortName'].errors?.['required']"
+                                        >This field is required</small
+                                    >
                                 </div>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label class="col-md-12 control-label " for="Base Unit">Base Unit</label>
-                                <div class="col-md-12 ">
-                                    <select class="form-select col-md-12 " aria-label="Default select example"formControlName="base_unit">
-                                        <option selected>Choose base unit</option>
-                                        <option>كجم</option>
-                                        <option>شيكارة</option>
-                                        <option>متر</option>
-                                    </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label
+                                class="col-md-12 control-label"
+                                for="Base Unit"
+                                >Base Unit</label
+                            >
+                            <div class="col-md-12">
+                                <select
+                                    class="form-select col-md-12"
+                                    aria-label="Default select example"
+                                    formControlName="base_unit"
+                                    [(ngModel)]="base_unit_id"
+                                >
+                                <option
+                                *ngFor="let base of Base;"
+                                [ngValue]="base.id"
+                            >
+                                {{ base.name }}
+                            </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label
+                                class="col-md-12 control-label"
+                                for="Operator"
+                                >Operator</label
+                            >
+                            <div  class=" col-md-12">
+                                <select 
+                                    class="form-select col-md-12"
+                                    aria-label="Default select example"
+                                    formControlName="operator"
+                                >
+                                    <option>/</option>
+                                    <option>*</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12 control-label" for="value"
+                                >opertation value
+                            </label>
+                            <div class="col-md-12">
+                                <input
+                                    class="form-control form-control col-md-12"
+                                    type="text"
+                                    placeholder="Name Unit"
+                                    aria-label="Date"
+                                    id="value"
+                                    name="value"
+                                    formControlName="operator_value"
+                                />
+                                <div
+                                    id="operator_value"
+                                    *ngIf="
+                                        (editUnitForm.controls['operator_value']
+                                            .touched &&
+                                            editUnitForm.controls[
+                                                'operator_value'
+                                            ].invalid) ||
+                                        (submitted &&
+                                            editUnitForm.controls[
+                                                'operator_value'
+                                            ].invalid)
+                                    "
+                                    class="form-text text-danger"
+                                >
+                                    <small
+                                        *ngIf="editUnitForm.controls['operator_value'].errors?.['required']"
+                                        >This field is required</small
+                                    >
                                 </div>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label class="col-md-12 control-label " for="Operator">Operator</label>
-                                <div class="col-md-12 ">
-                                    <select class="form-select col-md-12 " aria-label="Default select example"formControlName="operator">
-                                        <option selected>Choose Operator</option>
-                                        <option>/</option>
-                                        <option>*</option>
-                                        <option>+</option>
-                                        <option>+</option>
-                                    </select>
-                                   
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="col-md-12 control-label " for="value">opertation value </label>
-                                <div class="col-md-12 ">
-                                    <input class="form-control form-control col-md-12" type="text"
-                                        placeholder="Name Unit" aria-label="Date" id="value"
-                                        name="value" formControlName="operator_value">
-                                        <div id="operator_value" *ngIf="editUnitForm.controls['operator_value'].touched && editUnitForm.controls['operator_value'].invalid || submitted && editUnitForm.controls['operator_value'].invalid" class="form-text text-danger">
-                                            <small *ngIf="editUnitForm.controls['operator_value'].errors?.['required']">This field is
-                                                required</small>
-                                        </div>   
-                                </div>
-                            </div>
-                       
+                        </div>
+
                         <div class="form-group col-md-12">
                             <div class="col-md-4">
-                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                                <button
+                                    id="singlebutton"
+                                    name="singlebutton"
+                                    class="btn btn-primary"
+                                >
+                                    Submit
+                                </button>
                             </div>
                         </div>
                     </form>
-    
-                    </div>
-                </ng-template>
-               
+                </div>
+            </ng-template>
         </tbody>
     </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-      </ngb-pagination>
-
+    <pagination-controls
+        (pageChange)="pageChangeEvent($event)"
+        class="d-flex justify-content-end"
+    >
+    </pagination-controls>
+</body>

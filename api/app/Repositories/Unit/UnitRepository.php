@@ -23,8 +23,8 @@ class UnitRepository implements UnitRepositoryInterface
             $unit->name            = $request->name;
             $unit->ShortName       = $request->ShortName;
             $unit->base_unit       = $request->base_unit;
-            $unit->operator        = $request->operator;
-            $unit->operator_value  = $request->operator_value;
+            $unit->operator        = $request->operator ? $request->operator : '*';
+            $unit->operator_value  = $request->operator_value ? $request->operator_value : 1 ;
 
             $unit->save();
         }, 3);

@@ -16,14 +16,11 @@
       </button>
     </div>
 
-    <div class="row">
-      <img
-        src="https://www.thechecker.net/hubfs/images/barcode.png"
-        width="180"
-        height="110"
-        class="mt-2"
-      />
-    </div>
+    <div>
+      <ngx-barcode [bc-value]="value" [bc-width]="1" [bc-height]="40" 
+          [bc-display-value]="false"></ngx-barcode>
+
+  </div>
     <div class="row col-md-12 d-flex justify-content-between">
       <div class="col-md-7">
         <table class="table table-hover table-bordered">
@@ -39,11 +36,11 @@
               </tr>
               <tr>
                 <td>Category</td>
-                <td>{{ product.category }}</td>
+                <td>{{ product.category?.name }}</td>
               </tr>
               <tr>
                 <td>Brand</td>
-                <td>{{ product.brand }}</td>
+                <td>{{ product.brand?.name }}</td>
               </tr>
               <tr>
                 <td>Cost</td>
@@ -85,15 +82,15 @@
           </thead>
           <ng-container *ngIf="product">
             <tbody class="table-group-divider">
-              <tr>
-                <td>الرئيسي</td>
-                <td>  -  </td>
+              <tr *ngFor="let warehouse of product.productWarehouses">
+                <td>{{warehouse.warehouse.name}}</td>
+                <td>{{warehouse.quantity}}</td>
               </tr>
             </tbody>
           </ng-container>
         </table>
       </div>
-      <div class="col-md-6">
+      <!-- <div class="col-md-6">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -120,7 +117,7 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> -->
     </div>
   </body>
 </html>

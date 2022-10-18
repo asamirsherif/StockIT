@@ -18,6 +18,9 @@ export class ExpenseslistComponent implements OnInit {
   searchInputExp = [];
   WarehousArray: any[] = [];
   expenseCategories: any[] = [];
+
+  p: number = 1;
+  total: number = 0;
   constructor(private expenseService: ExpenseService, public wareser: WarehousservService, private expenseCategoryService: ExpenseCategoryService) { }
 
   ngOnInit(): void {
@@ -48,7 +51,7 @@ export class ExpenseslistComponent implements OnInit {
     const observer = {
       next: (res) => {
         this.expense = res.data
-        console.log(this.expense)
+        console.log(res.data)
       },
       error: (error) => {
         console.log(error);
@@ -60,7 +63,7 @@ export class ExpenseslistComponent implements OnInit {
     this.expenseService.getall().subscribe(observer)
   }
 
-  
+
   destroy(id: number) {
     //then
     const observer = {
@@ -79,5 +82,9 @@ export class ExpenseslistComponent implements OnInit {
   search(event) {
     this.expenseService.params = this.expenseService.params.set("search", event)
     this.getall()
+  }
+  pageChangeEvent(event: number) {
+    this.p = event;
+    this.getall();
   }
 }

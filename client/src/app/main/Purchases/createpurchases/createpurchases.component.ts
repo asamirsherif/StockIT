@@ -53,7 +53,7 @@ export class CreatepurchasesComponent implements OnInit {
       shipping: new FormControl(0),
       tax_rate: new FormControl(0),
       discount: new FormControl(0),
-      status: new FormControl("PAID"),
+      status: new FormControl("Paid"),
       notes: new FormControl(""),
     })
   }
@@ -77,6 +77,10 @@ export class CreatepurchasesComponent implements OnInit {
     this._productSearchService.purchaseSearch(event).subscribe({
       next: (res) => {
         this.products = res.data;
+        console.log(this.products) 
+      },
+      error:(err)=>{
+        this._toastr.error('Something wrong with product search!')
       }
     });
 
@@ -192,16 +196,20 @@ export class CreatepurchasesComponent implements OnInit {
       const data: IPurchase = {
         date: formData.date,
         discount: formData.discount,
+        tax_rate: formData.tax_rate,
         notes: formData.notes,
         shipping: formData.shipping,
         status: formData.status,
         GrandTotal: this.grandTotal,
-        paid_amount: 313,
+        paid_amount: 0,
         warehouse_id: formData.warehouse_id,
         provider_id: formData.supplier_id,
         user_id: user.id,
         purchaseDetails: this.purchDetails,
       }
+
+      console.log(data);
+
 
       const observer = {
         next: (res) => {

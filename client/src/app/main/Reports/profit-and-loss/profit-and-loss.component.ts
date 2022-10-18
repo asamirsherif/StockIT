@@ -1,5 +1,9 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { Chart,registerables } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
+import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ReportsService } from 'app/auth/service/reports/reports.service';
 Chart.register(...registerables)
 @Component({
   selector: 'app-profit-and-loss',
@@ -9,12 +13,29 @@ Chart.register(...registerables)
 
 export class ProfitAndLossComponent implements OnInit {
 
-  constructor(private _elementRef: ElementRef) { }
+
+  public dateForm: FormGroup;
+  public reportsData;
+
+  constructor(
+    private _elementRef: ElementRef,
+    private calendar: NgbCalendar,
+    public formatter: NgbDateParserFormatter,
+    private _toastr: ToastrService,
+    private _reportsService: ReportsService
+  ) {
+
+    this.dateForm = new FormGroup({
+      from: new FormControl(null, Validators.required),
+      to: new FormControl(null, Validators.required)
+    })
+  }
 
   ngOnInit(): void {
     let chartDiv = this._elementRef.nativeElement.querySelector('#pieChart')
     this.initCharts(chartDiv)
   }
+
   private initCharts = (ctx: any): void => {
 
     const MyChart = new Chart(ctx, {
@@ -39,5 +60,24 @@ export class ProfitAndLossComponent implements OnInit {
         },
       }
     });
+  }
+
+
+  getReport() {
+    if (!this.dateForm.valid) {
+      this._toastr.error('Chouse range please');
+      return;
+    } else {
+      this._reportsService.params = this._reportsService.params.set('from', this.dateForm.value.from)
+        .set('to', this.dateForm.value.to)
+
+      this._reportsService.pofitLoss().subscribe({
+        next: res => {
+          this.reportsData = res.data;
+          console.log(this.reportsData)
+        }
+      })
+
+    }
   }
 }

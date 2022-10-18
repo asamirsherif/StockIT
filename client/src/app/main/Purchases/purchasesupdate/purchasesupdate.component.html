@@ -3,75 +3,214 @@
 
     </h2>
     <hr>
-    <div class="col-md-12 row">
-       
-        <div class="form-group col-md-4">
-            <label class="col-md-4 control-label " for="category">Date</label>
-            <div class="col-md-12 ">
-                <input class="form-control form-control col-md-11" type="date" placeholder="Date" aria-label="Date">
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="supplier">Supplier</label>
-            <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Supplier</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label class="col-md-8 control-label " for="category"> Warehouse</label>
-            <div class="col-md-12 ">
-                <select class="form-select col-md-12 " aria-label="Default select example">
-                    <option selected>Choose Warehouse</option>
-                </select>
-            </div>
-        </div>
-    </div> 
-<div class="col-md-12 row">
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
-        <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
-        </div>
-    </div>
+    <form action="" [formGroup]="editPurchForm" (ngSubmit)="updatePurch()">
+        <div class="col-md-12 row">
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Discount</label>
-        <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
-        </div>
-    </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-4 control-label " for="category">Date</label>
+                <div class="col-md-12 ">
+                    <input formControlName="date" class="form-control form-control col-md-11" type="date"
+                        placeholder="Date" aria-label="Date">
 
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label" for="ordertax">Shipping</label>
+                    <!-- validation -->
+                    <div id="" *ngIf="editPurchForm.controls['date'].touched && editPurchForm.controls['date'].invalid 
+                        ||
+                        submitted && editPurchForm.controls['date'].invalid" class="form-text text-danger">
+
+                        <small *ngIf="editPurchForm.controls['date'].errors?.['required']">
+                            This field is required
+                        </small>
+                    </div>
+                    <div class="form-text text-danger">
+                        <small *ngIf="errors?.date">{{errors?.date}}</small>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label " for="supplier">Supplier</label>
+                <div class="col-md-12 ">
+                    <select class="form-select col-md-12 " aria-label="Default select example"
+                        formControlName="supplier_id">
+                        <option selected>Choose Supplier</option>
+                        <option *ngFor="let supplier of suppliers; let i =index" [value]="supplier.id">
+                            {{supplier.name}}
+                        </option>
+                    </select>
+
+                    <!-- validation -->
+                    <div id="" *ngIf="editPurchForm.controls['supplier_id'].touched && editPurchForm.controls['supplier_id'].invalid 
+                     ||
+                     submitted && editPurchForm.controls['supplier_id'].invalid" class="form-text text-danger">
+
+                        <small *ngIf="editPurchForm.controls['supplier_id'].errors?.['required']">
+                            This field is required
+                        </small>
+
+                    </div>
+                    <div class="form-text text-danger">
+                        <small *ngIf="errors?.supplier_id">{{errors?.supplier_id}}</small>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label " for="category"> Warehouse</label>
+                <div class="col-md-12 ">
+                    <select class="form-select col-md-12 " aria-label="Default select example"
+                        formControlName="warehouse_id">
+                        <option selected>Choose Warehouse</option>
+                        <option *ngFor="let warehouse of warehouses; let i =index" [value]="warehouse.id">
+                            {{warehouse.name}}
+                        </option>
+                    </select>
+
+                    <!-- validation -->
+                    <div id=""
+                        *ngIf="editPurchForm.controls['warehouse_id'].touched && editPurchForm.controls['warehouse_id'].invalid || submitted && editPurchForm.controls['warehouse_id'].invalid"
+                        class="form-text text-danger">
+                        <small *ngIf="editPurchForm.controls['warehouse_id'].errors?.['required']">
+                            This field is required
+                        </small>
+
+                    </div>
+                    <div class="form-text text-danger">
+                        <small *ngIf="errors?.warehouse_id">{{errors?.warehouse_id}}</small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div class="col-md-12">
-            <input id="ordertax" name="ordertax" placeholder="0" class="form-control input-md" required=""
-                type="text">
+            <label class="col-md-4 control-label" for="product">Product</label>
+            <form class=" col-md-12 mb-1  row panel panel-primary">
+                <span class="switch-icon-left col-md-1"><i data-feather="search" [size]="30"></i></span>
+                <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="purchaseSearch($event)" class=" form-control col-md-11 text-left" type="text"
+                    placeholder="Search By product name or variants" aria-label="Search" />
+                <div class="col-md-12 list-group">
+                    <ul class="col-md-12">
+                        <li class="list-group-item" style="list-style: none; cursor: pointer;"
+                            *ngFor="let product of products; let i = index" (click)="addPurchDetail(i)">
+                            {{product.name}}
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
-    </div>
-    <div class="form-group col-md-4">
-        <label class="col-md-8 control-label " for="status">Status</label>
-        <div class="col-md-12 ">
-            <select class="form-select col-md-12 " aria-label="Default select example">
-                <option selected>Completed</option>
-            </select>
+        <h4>Order items</h4>
+        <table class="table col-md-11">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Net Unit Cost </th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Tax</th>
+                    <th scope="col">SubTotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let purchDetail of purchDetails; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{purchDetail.product.name}}</td>
+                    <td>{{purchDetail.product.cost}}</td>
+                    <td>
+                        <core-touchspin [minValue]="1" [numberValue]="purchDetail.quantity"
+                            (onChange)="countChange($event,i)">
+                        </core-touchspin>
+                    </td>
+                    <td>{{ countTax(purchDetail.quantity,purchDetail.product.tax_cost) }}</td>
+                    <td>{{ purchDetail.total }}</td>
+
+                    <td>
+                        <div class="col-md-4">
+                            <button (click)="removePurchDetail(i)" class="btn btn-sm btn-danger"><i
+                                    data-feather="x-circle" [size]="24"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table col-md-4  tab">
+            <tbody class="table-group-divider">
+                <tr>
+                    <td>Order Tax</td>
+                    <td>(%{{editPurchForm.value.tax_rate}}) {{orderTax}} جنيه</td>
+                </tr>
+                <tr>
+                    <td>Discount</td>
+                    <td>{{discount}} جنيه</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>{{shipping}} جنيه</td>
+                </tr>
+                <tr>
+                    <td>Grand Total</td>
+                    <td>{{grandTotal}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="col-md-12 row">
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="ordertax">Order Tax</label>
+                <div class="col-md-12">
+                    <input id="ordertax" (ngModelChange)="countOrderTax();countGrandTotal()" formControlName="tax_rate"
+                        placeholder="0" class="form-control input-md" required="" type="number">
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.tax_rate">{{errors?.tax_rate}}</small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="ordertax">Discount</label>
+                <div class="col-md-12">
+                    <input id="ordertax" (ngModelChange)="countDiscount();countGrandTotal()" formControlName="discount"
+                        placeholder="0" class="form-control input-md" required="" type="number">
+                </div>
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.discount">{{errors?.discount}}</small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label" for="ordertax">Shipping</label>
+                <div class="col-md-12">
+                    <input id="ordertax" (ngModelChange)="countShipping();countGrandTotal()" formControlName="shipping"
+                        placeholder="0" class="form-control input-md" required="" type="number">
+                </div>
+
+                <div class="form-text text-danger">
+                    <small *ngIf="errors?.shipping">{{errors?.shipping}}</small>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-md-8 control-label " for="status">Status</label>
+                <div class="col-md-12 ">
+                    <select class="form-select col-md-12 " aria-label="Default select example" formControlName="status">
+                        <option selected>Completed</option>
+                    </select>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-    <div class="form-group col-md-12 ">
-        <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
-        <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    <div class="form-group col-md-12">
-        <div class="col-md-4">
-            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+        <div class="container">
+            <div class="form-group col-md-12 ">
+                <label for="exampleFormControlTextarea1" class="form-label ">Note</label>
+                <textarea class="form-control " id="exampleFormControlTextarea1" rows="3"
+                    formControlName="notes"></textarea>
+            </div>
         </div>
-    </div>
+        <div class="form-group col-md-12">
+            <div class="col-md-4">
+                <button (click)="passMe()" id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
 
 </body>
-
-
-

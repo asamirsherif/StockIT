@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportsService } from 'app/auth/service/reports/reports.service';
 
 @Component({
   selector: 'app-supplier-report',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SupplierReportComponent implements OnInit {
   public pageBasicText = 3;
-  constructor() { }
+
+  //for listing 
+  public suppliers;
+  constructor(
+    private _reportsService:ReportsService
+  ) { }
 
   ngOnInit(): void {
+    this.getSuppliers();
+  }
+
+  getSuppliers(){
+    this._reportsService.suppliers().subscribe({
+      next:res=>{
+        this.suppliers = res.report;
+        console.log(res)
+      }
+    })
   }
 
 }

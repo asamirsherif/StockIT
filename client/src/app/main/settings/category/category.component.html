@@ -5,7 +5,7 @@
     <div class=" row">
         <div class="col-md-9">
             <form class="form-inline col-md-12 mb-1">
-                <span class="switch-icon-left"><i data-feather="search"></i></span>
+                <span class="switch-icon-left"><i data-feather="search" [size]="30"></i></span>
                 <input [ngModel]="searchInput" [ngModelOptions]="{standalone: true}" (ngModelChange)="search($event)"
                     class="form-control form-control ml-1 fs-5 w-75" type="text" placeholder="Search"
                     aria-label="Search" />
@@ -76,7 +76,7 @@
             </tr>
         </thead>
         <tbody class="table-group-divider" class="table-group-divider">
-            <tr *ngFor="let category of categories; let i = index">
+            <tr *ngFor="let category of categories | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total}; let i = index">
                 <td>{{ category.code }}</td>
                 <td>{{ category.name }}</td>
                 <td> <button class="btn btn-sm btn-success" (click)="openModal2(contentModal2);editCategory(category.id)" ><i data-feather="edit" [size]="24" >
@@ -140,14 +140,8 @@
             </tr>
         </tbody>
     </table>
-    <ngb-pagination  class="d-flex justify-content-end" [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
-        <ng-template ngbPaginationPrevious
-          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-        </ng-template>
-        <ng-template ngbPaginationNext
-          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-        </ng-template>
-      </ngb-pagination>
+    <pagination-controls (pageChange)="pageChangeEvent($event)" class="d-flex justify-content-end">
+    </pagination-controls>
 </body>
 
 
