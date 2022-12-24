@@ -19,7 +19,7 @@ cd api
 composer install
 npm install
 php artisan migrate --seed
-php aritsan passport:install
+php artisan passport:install
 
 ```
 
